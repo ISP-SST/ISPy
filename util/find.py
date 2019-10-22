@@ -2,7 +2,7 @@
 Convenience wrappers around glob.glob() for common file types.
 """
 
-import os.path as path
+import os.path 
 import glob
 
 def files(extension, path='./', pattern='', verbose=True):
@@ -34,7 +34,7 @@ def files(extension, path='./', pattern='', verbose=True):
         if len(lsfiles) > 0:
             print("Searched "+path)
             for nn in range(len(lsfiles)):
-                print("{0} {1}".format(nn,path.basename(lsfiles[nn])))
+                print("{0} {1}".format(nn,os.path.basename(lsfiles[nn])))
         else:
             print("files: No files found with pattern {0}*{1} in {2}".format(pattern, extension, path))
     
