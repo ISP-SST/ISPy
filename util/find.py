@@ -28,19 +28,22 @@ def files(extension, path='./', pattern='', verbose=True):
         Gregal Vissers (ISP/SU 2019)
     """
 
-    if len(path) == 0: path = './'
-    if path[-1] != '/': path += '/'
+    if extension:
+        if len(path) == 0: path = './'
+        if path[-1] != '/': path += '/'
 
-    lsfiles = glob.glob(path+'*'+pattern+'*'+extension)
+        lsfiles = glob.glob(path+'*'+pattern+'*'+extension)
 
-    if verbose is True:
-        if len(lsfiles) > 0:
-            print("Searched "+path)
-            for nn in range(len(lsfiles)):
-                print("{0} {1}".format(nn,os.path.basename(lsfiles[nn])))
-        else:
-            print("files: No files found with pattern {0}*{1} in {2}".format(pattern, extension, path))
-    
+        if verbose is True:
+            if len(lsfiles) > 0:
+                print("Searched "+path)
+                for nn in range(len(lsfiles)):
+                    print("{0} {1}".format(nn,os.path.basename(lsfiles[nn])))
+            else:
+                print("files: No files found with pattern {0}*{1} in {2}".format(pattern, extension, path))
+    else:
+        raise ValueError("files: extension cannot be an empty string.")
+        
     return lsfiles
 
 def nc(path='./', pattern='', verbose=True):
