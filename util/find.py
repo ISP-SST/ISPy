@@ -42,21 +42,25 @@ def files(extension, path='./', pattern='', verbose=True):
     return lsfiles
 
 def nc(path='./', pattern='', verbose=True):
+    """ Find *.nc files """
     lsfiles = files('nc', path=path, pattern=pattern, verbose=verbose)
 
     return lsfiles
 
 def fits(path='./', pattern='', verbose=True):
+    """ Find *.fits files """
     lsfiles = files('fits', path=path, pattern=pattern, verbose=verbose)
 
     return lsfiles
 
 def cube(path='./', pattern='', verbose=True):
+    """ Find *.cube files """
     lsfiles = files('cube', path=path, pattern=pattern, verbose=verbose)
 
     return lsfiles
 
 def idlsave(path='./', pattern='', verbose=True):
+    """ Find *.idlsave files """
     lsfiles = files('idlsave', path=path, pattern=pattern, verbose=verbose)
 
     return lsfiles
