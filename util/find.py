@@ -28,6 +28,9 @@ def files(extension, path='./', pattern='', verbose=True):
         Gregal Vissers (ISP/SU 2019)
     """
 
+    if len(path) == 0: path = './'
+    if path[-1] != '/': path += '/'
+
     lsfiles = glob.glob(path+'*'+pattern+'*'+extension)
 
     if verbose is True:
