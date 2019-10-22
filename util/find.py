@@ -40,3 +40,23 @@ def files(extension, path='./', pattern='', verbose=True):
             print("files: No files found with pattern {0}*{1} in {2}".format(pattern, extension, path))
     
     return lsfiles
+
+def nc(path='./', pattern='', verbose=True):
+    lsfiles = files('nc', path=path, pattern=pattern, verbose=verbose)
+
+    return lsfiles
+
+def fits(path='./', pattern='', verbose=True):
+    lsfiles = files('fits', path=path, pattern=pattern, verbose=verbose)
+
+    return lsfiles
+
+def cube(path='./', pattern='', verbose=True):
+    lsfiles = files('cube', path=path, pattern=pattern, verbose=verbose)
+
+    return lsfiles
+
+def idlsave(path='./', pattern='', verbose=True):
+    lsfiles = files('idlsave', path=path, pattern=pattern, verbose=verbose)
+
+    return lsfiles
