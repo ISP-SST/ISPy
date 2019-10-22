@@ -4,7 +4,6 @@ Convenience wrappers around glob.glob() for common file types.
 
 import os.path as path
 import glob
-from ipdb import set_trace as stop
 
 def files(extension, path='./', pattern='', verbose=True):
     """
@@ -43,24 +42,16 @@ def files(extension, path='./', pattern='', verbose=True):
 
 def nc(path='./', pattern='', verbose=True):
     """ Find *.nc files """
-    lsfiles = files('nc', path=path, pattern=pattern, verbose=verbose)
-
-    return lsfiles
+    return files('nc', path=path, pattern=pattern, verbose=verbose)
 
 def fits(path='./', pattern='', verbose=True):
     """ Find *.fits files """
-    lsfiles = files('fits', path=path, pattern=pattern, verbose=verbose)
-
-    return lsfiles
+    return files('fits', path=path, pattern=pattern, verbose=verbose)
 
 def cube(path='./', pattern='', verbose=True):
     """ Find *.cube files """
-    lsfiles = files('cube', path=path, pattern=pattern, verbose=verbose)
-
-    return lsfiles
+    return files('cube', path=path, pattern=pattern, verbose=verbose)
 
 def idlsave(path='./', pattern='', verbose=True):
     """ Find *.idlsave files """
-    lsfiles = files('idlsave', path=path, pattern=pattern, verbose=verbose)
-
-    return lsfiles
+    return files('idlsave', path=path, pattern=pattern, verbose=verbose)
