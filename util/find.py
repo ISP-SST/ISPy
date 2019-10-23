@@ -1,5 +1,5 @@
 """
-Convenience wrappers around glob.glob() for common file types.
+Convenience wrappers around glob.glob() to list common file types.
 """
 
 import os.path 
@@ -33,6 +33,8 @@ def files(extension, path='./', pattern='', verbose=True):
         if path[-1] != '/': path += '/'
 
         lsfiles = glob.glob(path+'*'+pattern+'*'+extension)
+        # glob.glob() will give you a list with an arbitrary order
+        lsfiles = sorted(lsfiles)
 
         if verbose is True:
             if len(lsfiles) > 0:
