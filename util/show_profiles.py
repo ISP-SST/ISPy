@@ -8,7 +8,7 @@ from ipdb import set_trace as stop
 '''
 program to show the observed and best fitted profiles interactively.
 Click on the inverted maps to see the observed and synthetic profiles.
-Inputs: observed and synthetic profiles, inverted maps, and wavelength range file
+Inputs: observed and synthetic profiles, inverted maps, and wavelength file
 '''
 def xyplot(ix,iy):
 	pl.close(2)
