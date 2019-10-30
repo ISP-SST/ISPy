@@ -87,13 +87,14 @@ def get_time(filename, fulltime=False, timeformat=False):
     Arguments:
         filename: name of the data cube
         fulltime: information at each wavelength point (Default value = False)
+        timeformat: the output is given in 'HH:MM:SS' format (Default value = False)
 
     Returns:
         fulltime=False : 1D array with time information at middle wavelength point.
         fulltime=True : 2D array with time information at each wavelength point.
 
     Example:
-        get_time(filename, fulltime=False, timeformat=False)
+        data_time = get_time(filename, fulltime=False, timeformat=True)
 
     Authors: Carlos Diaz (ISP/SU 2019)
     """
@@ -144,6 +145,7 @@ def get_coord(filename, pix_x,pix_y,timeFrame=0):
 
     Arguments:
         filename: name of the data cube
+        pix_x, pix_y : location to convert
         timeFrame: information at a given time frame (Default value = 0)
 
     Returns:
