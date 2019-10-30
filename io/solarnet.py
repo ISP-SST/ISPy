@@ -9,7 +9,6 @@ import numpy as np
 import os
 import sys
 
-
 # ========================================================================
 def read(filename):
     return fits.getdata(filename, ext=0)
@@ -96,3 +95,56 @@ def get_time(filename, fulltime=False, timeformat=False):
         time_output = time_output_.reshape(time_output.shape)
 
     return time_output
+
+
+# ========================================================================
+def get_extent(filename, timeFrame=0):
+    """Reads the coordinates of the corners to use them with imshow/extent
+
+    Arguments:
+        filename: name of the data cube
+        timeFrame: information at a given time frame (Default value = 0)
+
+    Returns:
+        1D array with solar coordinates in arcsec of the corners.
+
+    Example:
+        extent = get_extent(filename)
+        imshow(data, extent=extent)
+
+    Authors: Carlos Diaz (ISP/SU 2019)
+    """
+    io = fits.open(filename)
+    extent_output = [io[1].data[0][0][0,0,0,0,0],io[1].data[0][0][0,0,1,1,0],
+            io[1].data[0][0][0,0,0,0,1],io[1].data[0][0][0,0,1,1,1]]
+
+    return extent_output
+
+# ========================================================================
+def get_coord(filename, pix_x,pix_y,timeFrame=0):
+    """Converts pixels values to solar coordinates
+
+    Arguments:
+        filename: name of the data cube
+        timeFrame: information at a given time frame (Default value = 0)
+
+    Returns:
+        Solar coordinates in arcsec
+
+    Example:
+        [x_output, y_output] = get_coord(filename, pix_x,pix_y)
+
+    Authors: Carlos Diaz (ISP/SU 2019)
+    """
+    io = fits.open(filename)
+
+    yp = [0, io[0].data.shape[3]]
+    xp = [0, io[0].data.shape[4]]
+
+    fxp = [io[1].data[0][0][0,0,0,0,0], io[1].data[0][0][0,0,1,1,0]]
+    fyp = [io[1].data[0][0][0,0,0,0,1], io[1].data[0][0][0,0,1,1,1]]
+
+    x_output = np.interp(pix_x, xp, fxp)
+    y_output = np.interp(pix_y, yp, fyp) 
+
+    return [x_output, y_output]
