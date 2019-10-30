@@ -3,13 +3,7 @@ import matplotlib.pyplot as pl
 import h5py
 import time
 from readout_fn import *
-from ipdb import set_trace as stop
 
-'''
-program to show the observed and best fitted profiles interactively.
-Click on the inverted maps to see the observed and synthetic profiles.
-Inputs: observed and synthetic profiles, inverted maps, and wavelength file
-'''
 def xyplot(ix,iy):
 	pl.close(2)
 	fig, ax = pl.subplots(figsize=(10,6), nrows=2, ncols=2,num = 'OBSERVED & SYNTHETIC PROFILES')
@@ -18,9 +12,7 @@ def xyplot(ix,iy):
 	iy = int(np.ceil(iy))
 	for i in range(0,4):
 		ax[i].plot(wav-10830.,obspro[ix,iy,:,i])
-		#ax[i].plot(wav-10830.,synpro[ix,iy,i,:])
 		ax[i].plot(wav-10830.,synpro1[ix,iy,i,:])
-		#ax[i].plot(wav-10830.,synpro2[ix,iy,i,:])
 		if i ==0:ax[0].text(-6.5, 0.5, 'pixels: ('+str(iy)+','+str(ix)+')')
 
 	pl.tight_layout()		
@@ -41,20 +33,36 @@ def onclick(event):
 ##########################	
 
 if __name__ == "__main__":
-	global obspro,synpro,synpro1,synpro2
+	'''
+	program to show the observed and best fitted profiles interactively.
+	Click on the inverted maps to see the observed and the synthetic profiles.
 	
+	Inputs: 
+		obsf: observed Stokes profiles file
+		invf: synthetic profiles and inverted maps file, 
+		wavf: wavelength file [*txt]
+		nx & ny: size of observed data
+	Outputs:
+		Inverted maps, observed and synthetic Stokes profiles
+		
+	External library (optional):
+		readout_fn.py
+	'''
+	global obspro,synpro1
+	
+	obsf = 'observations/spatially_binned_2pix.h5'		#observed Stokes profiles
 	invf = 'outputs/comp1/xybin_0403_00.h5'			#inverted maps
 	wavf = 'wavelength_2bin_trim.txt'			#wavelenght scale	
-	obsf = 'observations/spatially_binned_2pix.h5'		#observed Stokes profiles
-
+	nx = 125						#xsize
+	ny = 226						#ysize
+	
+	
 	wav = np.loadtxt(wavf)					#read wavelength file
 	f1 = h5py.File(obsf,'r')				#read observed profiles
 	prof = f1['stokes']
 
 	npix,nlambda,stks = f1['stokes'].shape
-	#inv_ch,inv_ph, synpro = readout_1c(obsf,invf)
-	#inv_ch,inv_ph, synpro1, tau, fa,chi = readout_1c(obsf,125,226,invf)
-	inv_ch, synpro1,chi = readout_1c_ch(obsf,125,226,invf)	#get synthetic profiles and inverted maps
+	inv_ch, synpro1,chi = readout_1c_ch(obsf,nx,ny,invf)	#get synthetic profiles and inverted maps
 
 	nx,ny,stk,lmb = synpro1.shape
 	
@@ -80,3 +88,4 @@ if __name__ == "__main__":
 	pl.tight_layout()	
 	pl.show()
 	#fig.canvas.mpl_disconnect(cid)
+
