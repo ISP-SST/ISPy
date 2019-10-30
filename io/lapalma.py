@@ -11,7 +11,7 @@ import sys
 
 
 # ========================================================================
-def lphead(name, verbose=True, appendFormat=False):
+def head(name, verbose=True, appendFormat=False):
     """
 
     Args:
@@ -22,7 +22,7 @@ def lphead(name, verbose=True, appendFormat=False):
     Returns:
         header
     """
-    inam = 'lphead:'
+    inam = 'head:'
 
     # Open file
     datfil = open(name, 'rb')
@@ -143,7 +143,7 @@ def lphead(name, verbose=True, appendFormat=False):
 
 
 # ========================================================================
-def lp_read(cube, spnw=True, ns=4, spformat='_sp', mode='r', dtype='float32', verb=False):
+def read(cube, spnw=True, ns=4, spformat='_sp', mode='r', dtype='float32', verb=False):
     """Reads a cube with La Palma format cube.
 
     Arguments:
@@ -159,21 +159,22 @@ def lp_read(cube, spnw=True, ns=4, spformat='_sp', mode='r', dtype='float32', ve
         5D cube of shape [nt,ns,nw,nx,ny]
 
     Examples:
-        A) cube = lp_read('filename.fcube') # It will find also 'filename_sp.fcube' in the same path
-        B) cube = lp_read('filename.fcube' , 8)
-        C) cube = lp_read('filename.fcube' , 'filename_sp.fcube')
+        import ISPy.io.lapalma as lp
+        A) cube = lp.read('filename.fcube') # It will find also 'filename_sp.fcube' in the same path
+        B) cube = lp.read('filename.fcube' , 8)
+        C) cube = lp.read('filename.fcube' , 'filename_sp.fcube')
 
     Authors: Alex Pietrow (ISP/SU 2019), Carlos Diaz (ISP/SU 2019)
     """
     if type(spnw) is str:
         if ns == 4:
-            nx, ny, dum, ns, dtype, ndim = lphead(cube)
-            nw, nt, dum, ns, dtype, ndim = lphead(spnw)
+            nx, ny, dum, ns, dtype, ndim = head(cube)
+            nw, nt, dum, ns, dtype, ndim = head(spnw)
             cube_array = np.memmap(cube, shape=(
                 nt, ns, nw, ny, nx), offset=512, dtype=dtype, mode=mode)
         elif ns == 1:
-            nx, ny, dum, dtype, ndim = lphead(fil0)
-            nw, nt, dum, dtype, ndim = lphead(fil1)
+            nx, ny, dum, dtype, ndim = head(fil0)
+            nw, nt, dum, dtype, ndim = head(fil1)
             cube_array = np.memmap(cube, shape=(
                 nt, nw, ny, nx), offset=512, dtype=dtype, mode=mode)
         else:
@@ -188,21 +189,21 @@ def lp_read(cube, spnw=True, ns=4, spformat='_sp', mode='r', dtype='float32', ve
                 +'include the name of spectral file or wavelength steps.')
 
         if ns == 4:
-            nx, ny, ndum, nstokes, dtype, dum1 = lphead(f1, verb)
-            nw, nt, ndum, nstokes, dtype, dum1 = lphead(f2, verb)
+            nx, ny, ndum, nstokes, dtype, dum1 = head(f1, verb)
+            nw, nt, ndum, nstokes, dtype, dum1 = head(f2, verb)
             cube_array = np.memmap(f1, shape=(
                 nt, ns, nw, ny, nx), offset=512, dtype=dtype, mode=mode)
 
     elif type(spnw) is int:
         if ns == 4:
-            hheader = lphead(cube, verb)
+            hheader = head(cube, verb)
             nt = int(hheader[2]/spnw/ns)
             nx = hheader[0]
             ny = hheader[1]
             cube_array = np.memmap(cube, shape=(
                 nt, ns, spnw, ny, nx), offset=512, dtype=dtype, mode=mode)
         elif ns == 1:
-            hheader = lphead(cube, verb)
+            hheader = head(cube, verb)
             nt = int(hheader[2]/spnw)
             nx = hheader[0]
             ny = hheader[1]
@@ -215,7 +216,7 @@ def lp_read(cube, spnw=True, ns=4, spformat='_sp', mode='r', dtype='float32', ve
 
 
 # ========================================================================
-def mk_lpheader(image):
+def mk_header(image):
     """Creates header for La Palma images.
 
     Args:
@@ -251,7 +252,7 @@ def mk_lpheader(image):
 # ========================================================================
 def writeto(filename, image, extraheader='', dtype=None, verbose=False,
             append=False):
-    """Writes on disk a cube using LaPalma format. Backend of "lp_write"
+    """Writes on disk a cube using LaPalma format. Backend of "write"
     From https://github.com/ITA-Solar/helita/blob/master/helita/io/lp.py
 
     Args:
@@ -272,7 +273,7 @@ def writeto(filename, image, extraheader='', dtype=None, verbose=False,
     image = image.astype(dtype)
     if append:
         # check if image sizes/types are consistent with file
-        sin, t, h = lphead(filename, verbose=verbose,
+        sin, t, h = head(filename, verbose=verbose,
                            appendFormat=True)  # getheader(filename)
         if sin[:2] != image.shape[:2]:
             raise IOError('writeto: trying to write' +
@@ -287,7 +288,7 @@ def writeto(filename, image, extraheader='', dtype=None, verbose=False,
         new_nt = str(sin[-1] + image.shape[-1])
         header = h[:hloc + 3] + new_nt + h[hloc + 3 + len(str(sin[-1])):]
     else:
-        header = mk_lpheader(image)
+        header = mk_header(image)
     if extraheader:
         header += ' : ' + extraheader
     # convert string to [unsigned] byte array
@@ -319,7 +320,7 @@ def writeto(filename, image, extraheader='', dtype=None, verbose=False,
 
 
 # ========================================================================
-def lp_write(cube_array, name, stokes=True, sp=False, path=''):
+def write(cube_array, name, stokes=True, sp=False, path=''):
     """Saves cube as La Palma format cube.
 
     Arguments:
@@ -330,7 +331,7 @@ def lp_write(cube_array, name, stokes=True, sp=False, path=''):
         path: Filepath where file needs to be saved.(Default value = '')
 
     Examples:
-        lp_write(cube_array, 'cube.fcube', path='fits/')
+        write(cube_array, 'cube.fcube', path='fits/')
 
     Authors: Alex Pietrow (ISP/SU 2019), Carlos Diaz (ISP/SU 2019)
     """
@@ -365,7 +366,7 @@ def lp_write(cube_array, name, stokes=True, sp=False, path=''):
 
 
 # ========================================================================
-def lp_get(filename, index, verb=False):
+def get(filename, index, verb=False):
     """Reads a 2D image (slice) given a known index from a La Palma cube.
 
     Arguments:
@@ -384,7 +385,7 @@ def lp_get(filename, index, verb=False):
 
     Authors: G. Vissers (ITA UiO, 2016), A.G.M. Pietrow (2018), Carlos Diaz (ISP/SU 2019)
     """
-    nx, ny, ndum, nstokes, dt, dum1 = lphead(filename, verb)
+    nx, ny, ndum, nstokes, dt, dum1 = head(filename, verb)
     # header offset + stepping through cube
     offset = 512 + index * nx * ny * np.dtype(dt).itemsize
     image = np.memmap(filename, dtype=dt, mode='r', shape=(nx, ny), offset=offset,
@@ -393,7 +394,7 @@ def lp_get(filename, index, verb=False):
 
 
 # ========================================================================
-def lp_put(filename, image, append=True, verbose=False, stokes=True):
+def put(filename, image, append=True, verbose=False, stokes=True):
     """Append a new cube/slice to a pre-existent La Palma cube.
 
     Arguments:

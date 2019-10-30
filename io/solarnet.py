@@ -11,11 +11,29 @@ import sys
 
 # ========================================================================
 def read(filename):
+    """Reads the data of a 'SOLARNET' cube.
+
+    Arguments:
+        filename: name of the data cube
+
+    Returns:
+        1D wavelength array in nm.
+
+    Authors: Carlos Diaz (ISP/SU 2019)
+    """
     return fits.getdata(filename, ext=0)
 
 
 # ========================================================================
 def write(filename, d):
+    """Reads the data as a normal fits (without proper SOLARNET header)
+
+    Arguments:
+        filename: name of the data cube
+        d: data on memory
+
+    Authors: Carlos Diaz (ISP/SU 2019)
+    """
     io = fits.PrimaryHDU(d)
     io.writeto(filename, overwrite=True)
     return
