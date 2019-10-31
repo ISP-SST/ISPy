@@ -29,6 +29,9 @@ def viewangle(xy, date=None):
 
     r_sun = sun.angular_radius(date).value
     rho = np.sqrt(xy[0]**2 + xy[1]**2)
+    if (rho > r_sun):
+        raise ValueError("viewangle: coordinates ({0},{1}) are not on the solar "
+                + "disc.".format(xy[0],xy[1]))
     mu = np.sqrt(1 - (rho/r_sun)**2)
     theta = np.degrees(np.arccos(mu))
 
