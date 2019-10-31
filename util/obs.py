@@ -25,7 +25,7 @@ def viewangle(xy, date=None, heliographic=False):
 
     Example:
         result = viewangle([240,-380], date='2017-08-02')
-        result = viewnagle([30,-50], date='2019-01-12', heliographic=True) # S50 W30
+        result = viewangle([30,-50], date='2019-01-12', heliographic=True) # S50 W30
 
     Author:
         Gregal Vissers (ISP/SU 2019)
