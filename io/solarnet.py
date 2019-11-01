@@ -51,7 +51,7 @@ def get_wav(filename):
         1D wavelength array in nm.
 
     Example:
-        get_wav(filename, fulltime=False, timeformat=False)
+        wav_array = get_wav(filename)
 
     Authors: Carlos Diaz (ISP/SU 2019)
     """
@@ -81,20 +81,20 @@ def seconds2string(number):
 
 
 # ========================================================================
-def get_time(filename, fulltime=False, timeformat=False):
+def get_time(filename, fulltime=False, utc=False):
     """Reads the time information of a 'SOLARNET' cube.
 
     Arguments:
         filename: name of the data cube
         fulltime: information at each wavelength point (Default value = False)
-        timeformat: the output is given in 'HH:MM:SS' format (Default value = False)
+        utc: the output is given in 'HH:MM:SS' format (Default value = False)
 
     Returns:
         fulltime=False : 1D array with time information at middle wavelength point.
         fulltime=True : 2D array with time information at each wavelength point.
 
     Example:
-        data_time = get_time(filename, fulltime=False, timeformat=True)
+        data_time = get_time(filename, fulltime=False, utc=True)
 
     Authors: Carlos Diaz (ISP/SU 2019)
     """
@@ -109,7 +109,7 @@ def get_time(filename, fulltime=False, timeformat=False):
     else:
         time_output = io[1].data[0][0][:,middle_wav,0,0,3]
 
-    if timeformat is True:
+    if utc is True:
         time_output_ = np.array([seconds2string(number) for number in time_output.reshape(time_output.size)])
         time_output = time_output_.reshape(time_output.shape)
 
@@ -134,8 +134,8 @@ def get_extent(filename, timeFrame=0):
     Authors: Carlos Diaz (ISP/SU 2019)
     """
     io = fits.open(filename)
-    extent_output = [io[1].data[0][0][0,0,0,0,0],io[1].data[0][0][0,0,1,1,0],
-            io[1].data[0][0][0,0,0,0,1],io[1].data[0][0][0,0,1,1,1]]
+    extent_output = [io[1].data[0][0][timeFrame,0,0,0,0],io[1].data[0][0][timeFrame,0,1,1,0],
+            io[1].data[0][0][timeFrame,0,0,0,1],io[1].data[0][0][timeFrame,0,1,1,1]]
 
     return extent_output
 
@@ -161,8 +161,8 @@ def get_coord(filename, pix_x,pix_y,timeFrame=0):
     yp = [0, io[0].data.shape[3]]
     xp = [0, io[0].data.shape[4]]
 
-    fxp = [io[1].data[0][0][0,0,0,0,0], io[1].data[0][0][0,0,1,1,0]]
-    fyp = [io[1].data[0][0][0,0,0,0,1], io[1].data[0][0][0,0,1,1,1]]
+    fxp = [io[1].data[0][0][timeFrame,0,0,0,0], io[1].data[0][0][timeFrame,0,1,1,0]]
+    fyp = [io[1].data[0][0][timeFrame,0,0,0,1], io[1].data[0][0][timeFrame,0,1,1,1]]
 
     x_output = np.interp(pix_x, xp, fxp)
     y_output = np.interp(pix_y, yp, fyp) 
