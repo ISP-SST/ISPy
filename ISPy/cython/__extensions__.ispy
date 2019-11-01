@@ -1,0 +1,29 @@
+#!/bin/env python
+# -*- coding:utf-8 -*-
+
+from distutils.core import Extension
+import numpy
+
+# Documentation:
+# https://docs.python.org/3/distutils/apiref.html#distutils.core.Extension
+
+_vacuumtoair_mod = Extension(
+    '_vacuumtoair',
+    sources              = ['_vacuumtoair.c'],
+    define_macros        = [], # each macro is defined using a 2-tuple
+    undef_macros         = [],
+    include_dirs         = [numpy.get_include()],
+    library_dirs         = [],
+    libraries            = [],
+    runtime_library_dirs = [],
+    extra_objects        = [], # extra files to link with
+    extra_compile_args   = [], # e.g. '-ggdb -O0'
+    extra_link_args      = [],
+    export_symbols       = [], # symbols to be exported from a shared extension
+    depends              = [], # files that the extension depends on
+    language             = '', # 'c', 'c++' or 'objc', normally auto-detected
+    optional             = False
+    # Optional extensions allow the build to continue even when they fail
+    )
+
+ext_modules = [_vacuumtoair_mod]
