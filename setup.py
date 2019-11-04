@@ -9,6 +9,7 @@ from glob import glob
 import shlex
 
 from bin.generate_module_list import generate_module_list
+from bin.version import *
 
 # This directory
 dir_setup = os.path.dirname(os.path.realpath(__file__))
@@ -51,9 +52,12 @@ class clean(Command):
                 for pat in patterns:
                     for f in glob(os.path.join(root, dir, pat)):
                         os.remove(f)
+            for pat in patterns:
+                for f in glob(os.path.join(root, pat)):
+                    os.remove(f)
 
         os.chdir(dir_setup)
-        names = ["build"]
+        names = ["MANIFEST", "build", "dist", "cythonize.dat", "ISPy/version.py"]
 
         for f in names:
             if os.path.isfile(f):
@@ -64,7 +68,11 @@ class clean(Command):
         os.chdir(curr_dir)
 
 def setup_package():
-    if not 'sdist' in sys.argv and not 'clean' in sys.argv:
+    # Rewrite the version file everytime
+    write_version_py()
+
+    if "--cythonize" in sys.argv:
+        sys.argv.remove("--cythonize")
         # Generate Cython sources, unless we're generating an sdist
         generate_cython()
 
@@ -98,7 +106,7 @@ def setup_package():
 
     setup(
         name                          = "ISPy",
-        version                       = "0.0.1",
+        version                       = get_version_info()[0],
         author                        = "ISP-SST",
         author_email                  = "hillberg@astro.su.se",
         description                   = "Commonly used tools at the ISP",

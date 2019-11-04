@@ -1,3 +1,7 @@
+#!/bin/env python
+# -*- cofing: utf-8 -*-
+
+
 """
 Execute like this:
 
@@ -62,10 +66,10 @@ def generate_module_list(with_cython=False, with_ext=False):
                 g.extend([y])
     g = [".".join(x.split(sep)[:-1]) for x in g]
     g = [i for i in g if not i.endswith('.tests')]
-    try:
-        g.remove('ISPy')
-    except:
-        pass
+#    try:
+#        g.remove('ISPy')
+#    except:
+#        pass
     g = list(set(g))
     g.sort()
     return g

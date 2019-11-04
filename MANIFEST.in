@@ -1,0 +1,3 @@
+include README.md LICENSE
+recursive-include ISPy *.py *.ispy *.pyx *.pxi *.pxd *.pyd *.c *.h *.cpp *.f *.f90
+graft bin
