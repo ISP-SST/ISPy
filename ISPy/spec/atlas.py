@@ -33,7 +33,7 @@ class atlas:
         s *= (wav*aa_to_m)**2 / clight # to Watt/(s m2 Hz ster)
         return s
     
-    def getatlas(self, w0, w1, cgs = False, si = False, nograv = False):
+    def get(self, w0, w1, cgs = False, si = False, nograv = False):
         idx = (np.where((self.wav >= w0) & (self.wav <= w1)))[0]
 
         wav =  np.copy(self.wav[idx[0]:idx[-1]])
