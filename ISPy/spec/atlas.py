@@ -25,7 +25,7 @@ class atlas:
     def __init__(self):
         # Check dir where this class is stored
         this_dir, this_filename = os.path.split(__file__)
-        DATA_PATH = os.path.join(this_dir, "fts_disk_center.idlsave")
+        DATA_PATH = os.path.join(this_dir, "../data/fts_disk_center.idlsave")
 
         # Load data file
         fts = idl.readsav(DATA_PATH)
