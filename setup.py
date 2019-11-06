@@ -40,7 +40,7 @@ class clean(Command):
     def run(self):
         curr_dir = os.getcwd()
 
-        patterns = ["*~", ".*~"]
+        patterns = ["*~", ".*~", "*.so"]
         for root, dirs, files in os.walk(dir_setup):
             for file in files:
                 if file.endswith('.pyc'):
@@ -61,7 +61,7 @@ class clean(Command):
                     os.remove(f)
 
         os.chdir(dir_setup)
-        names = ["MANIFEST", "build", "dist", "cythonize.dat", "ISPy/version.py"]
+        names = ["MANIFEST", "ISPy.egg-info", "build", "dist", "cythonize.dat", "ISPy/version.py"]
 
         for f in names:
             if os.path.isfile(f):
