@@ -1,3 +1,11 @@
+/* Wavelength conversion vacuum-air
+ *
+ * This file was extracted from the rh code and adapted to be self-
+ * contained. It is used here as an example for the wrapping of C
+ * code with Cython inside the ISPy package.
+ *
+ */
+
 /* ------- file: -------------------------- vacuumtoair.c -----------
 
        Version:       rh2.0

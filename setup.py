@@ -3,7 +3,8 @@ import sys
 import subprocess
 import numpy
 #from setuptools import find_packages
-from distutils.core import setup, Extension, Command
+from numpy.distutils.core import setup
+from distutils.core import Command
 import shutil
 from glob import glob
 import shlex
@@ -48,6 +49,9 @@ class clean(Command):
                     cfile = os.path.join(root, os.path.splitext(file)[0]+'.c')
                     if os.path.isfile(cfile):
                         os.remove(cfile)
+                    cxxfile = os.path.join(root, os.path.splitext(file)[0]+'.cxx')
+                    if os.path.isfile(cxxfile):
+                        os.remove(cxxfile)
             for dir in dirs:
                 for pat in patterns:
                     for f in glob(os.path.join(root, dir, pat)):
@@ -71,10 +75,14 @@ def setup_package():
     # Rewrite the version file everytime
     write_version_py()
 
-    if "--cythonize" in sys.argv:
-        sys.argv.remove("--cythonize")
-        # Generate Cython sources, unless we're generating an sdist
-        generate_cython()
+    if not "--nocython" in sys.argv:
+        if "--cythonize" in sys.argv or os.path.exists(".git"):
+            if not "clean" in sys.argv:
+                generate_cython()
+        if "--cythonize" in sys.argv:
+            sys.argv.remove("--cythonize")
+    else:
+            sys.argv.remove("--nocython")
 
     with open("README.md", "r") as fh:
         long_description = fh.read()

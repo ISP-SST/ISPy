@@ -6,6 +6,15 @@ cdef extern from "vacuumtoair.c":
     void air_to_vacuum(int Nlambda, double *lambda_air, double *lambda_vac)
 
 def toair(wl):
+    """
+    Convert wavelengths from vacuum to air.
+
+    Arguments:
+        wl:     wavelength in nm
+
+    Returns:
+        A value (or array) with the converted wavelength, in nm
+    """
     cdef int Nlambda;
     cdef np.ndarray[np.double_t, mode = 'c'] lambda_vacuum = np.ascontiguousarray(wl,dtype=np.double);
     Nlambda = lambda_vacuum.size
@@ -17,6 +26,15 @@ def toair(wl):
     return wl_air.reshape(shp)
 
 def tovacuum(wl):
+    """
+    Convert wavelengths from air to vacuum.
+
+    Arguments:
+        wl:     wavelength in nm
+
+    Returns:
+        A value (or array) with the converted wavelength, in nm
+    """
     cdef int Nlambda;
     cdef np.ndarray[np.double_t, mode = 'c'] lambda_air = np.ascontiguousarray(wl,dtype=np.double);
     Nlambda = lambda_air.size

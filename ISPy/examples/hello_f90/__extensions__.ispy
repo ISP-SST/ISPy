@@ -1,0 +1,30 @@
+#!/bin/env python
+# -*- coding:utf-8 -*-
+
+from numpy.distutils.core import Extension
+
+# Documentation:
+# https://docs.python.org/3/distutils/apiref.html#distutils.core.Extension
+
+_helloworld_mod = Extension(
+    name                   = '_helloworld',
+    sources                = ['hello.f90'],
+    define_macros          = [], # each macro is defined using a 2-tuple
+    undef_macros           = [],
+    include_dirs           = [],
+    library_dirs           = [],
+    libraries              = [],
+    runtime_library_dirs   = [],
+    extra_objects          = [], # extra files to link with
+    extra_compile_args     = [], # e.g. '-ggdb -O0'
+    extra_link_args        = [],
+    export_symbols         = [], # symbols to be exported from a shared exten.
+    depends                = [], # files that the extension depends on
+    language               = '', # 'c', 'c++' or 'objc', normally auto-detected
+    f2py_options           = [],
+    module_dirs            = [],
+    extra_f77_compile_args = [],
+    extra_f90_compile_args = [],
+    )
+
+ext_modules = [_helloworld_mod]
