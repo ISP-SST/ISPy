@@ -1,6 +1,8 @@
 import numpy as np
 import os
 import scipy.io.idl as idl
+import astropy.units as u
+import astropy.constants as const
 
 class atlas:
     def __init__(self):
@@ -16,17 +18,17 @@ class atlas:
 
 
     def tocgs(self, w, s):
-        clight=2.99792458e10         #speed of light [cm/s]
-        joule_2_erg=1e7
-        aa_to_cm=1e-8
-        s *=joule_2_erg/aa_to_cm # from Watt /(cm2 ster AA) to erg/(s cm2 ster cm)
-        s *=(w*aa_to_cm)**2/clight   # to erg/
+        clight = const.c.to('cm/s').value #speed of light [cm/s]
+        joule_2_erg = u.J.to('erg')
+        aa_to_cm = u.Angstrom.to('cm')
+        s *= joule_2_erg/aa_to_cm # from Watt /(cm2 ster AA) to erg/(s cm2 ster cm)
+        s *= (w*aa_to_cm)**2/clight   # to erg/
         return s
 
     def tosi(self, wav, s):
-        clight=2.99792458e8      #speed of light [m/s]                                  
-        aa_to_m=1e-10                                                                        
-        cm_to_m=1e-2                       
+        clight = const.c.value #speed of light [m/s]                                  
+        aa_to_m = u.Angstrom.to('m')
+        cm_to_m = u.cm.to('m')
         s /= cm_to_m**2 * aa_to_m # from from Watt /(s cm2 ster AA) to Watt/(s m2 ster m) 
         s *= (wav*aa_to_m)**2 / clight # to Watt/(s m2 Hz ster)
         return s
@@ -39,7 +41,7 @@ class atlas:
         cont = np.copy(self.cont[idx[0]:idx[-1]])
 
         if(not nograv):
-            wav *=  (1.0-633.0/2.99792458e8) # grav reddening
+            wav *=  (1.0-633.0/const.c.value) # grav reddening
 
         # convert to CGS units
         if(cgs):
