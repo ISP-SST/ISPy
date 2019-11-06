@@ -30,8 +30,8 @@ class atlas:
         # Load data file
         fts = idl.readsav(DATA_PATH)
         self.cont = fts["ftscnt"]
-        self.sp   = fts["ftsint"]
-        self.wav  = fts["ftswav"]
+        self.spec = fts["ftsint"]
+        self.wave = fts["ftswav"]
 
 
     def tocgs(self, w, s):
@@ -53,26 +53,26 @@ class atlas:
     def get(self, w0, w1, cgs = False, si = False, nograv = False):
         idx = (np.where((self.wav >= w0) & (self.wav <= w1)))[0]
 
-        wav =  np.copy(self.wav[idx[0]:idx[-1]])
-        sp =   np.copy(self.sp[idx[0]:idx[-1]])
+        wave = np.copy(self.wave[idx[0]:idx[-1]])
+        spec = np.copy(self.spec[idx[0]:idx[-1]])
         cont = np.copy(self.cont[idx[0]:idx[-1]])
 
         if(not nograv):
-            wav *=  (1.0-633.0/const.c.value) # grav reddening
+            wave *=  (1.0-633.0/const.c.value) # grav reddening
 
         # convert to CGS units
         if(cgs):
-            sp =   self.tocgs(wav, sp)
-            cont = self.tocgs(wav, cont)
+            spec = self.tocgs(wave, spec)
+            cont = self.tocgs(wave, cont)
 
         # convert to IS units
         elif(si):
-            sp =   self.tosi(wav, sp)
-            cont = self.tosi(wav, cont)
+            spec = self.tosi(wave, spec)
+            cont = self.tosi(wave, cont)
 
         # Normalize by the continuum (default)
         else:
-            sp /= cont
+            spec /= cont
             cont[:] = 1.0
             
-        return wav, sp, cont
+        return wave, spec, cont
