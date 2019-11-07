@@ -74,6 +74,11 @@ class atlas:
 
     def get(self, w0, w1, cgs = False, si = False, nograv = False, perHz=True):
         idx = (np.where((self.wave >= w0) & (self.wave <= w1)))[0]
+        
+        if(cgs):
+            self.to('cgs', perHz=perHz)
+        elif(si):
+            self.to('si', perHz=perHz)
 
         wave = np.copy(self.wave[idx[0]:idx[-1]])
         spec = np.copy(self.spec[idx[0]:idx[-1]])
@@ -82,16 +87,8 @@ class atlas:
         if(not nograv):
             wave *=  (1.0-633.0/const.c.value) # grav reddening
 
-        # convert to CGS units
-        if(cgs):
-            self.to('cgs', perHz=perHz)
-
-        # convert to IS units
-        elif(si):
-            self.to('si', perHz=perHz)
-
-        # Normalize by the continuum (default)
-        else:
+        # Normalize by the continuum if cgs=False and si=False (default)
+        if (not cgs and not si):
             spec /= cont
             cont[:] = 1.0
             
