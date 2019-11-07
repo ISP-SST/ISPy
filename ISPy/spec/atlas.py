@@ -10,14 +10,13 @@ class atlas:
 
     Methods:
         __init__()
-        tocgs(w, s)
-        tosi(w, s)
+        to(usys_to, perHz=True)
         get(w0, w1, cgs=False, si=False, nograv=False)
 
     Example:
         import atlas as S
         fts = S.atlas()
-        wav, sp, cont = fts.get(6562.,6564., cgs=True)
+        wav, sp, cont = fts.get(6562.,6564., cgs=True, perHz=False)
 
     Author:
         Jaime de la Cruz Rodriguez (ISP/SU 2019)
