@@ -3,12 +3,13 @@ import astropy.table
 from scipy.interpolate import interp1d
 
 import matplotlib.pyplot as plt
+from ipdb import set_trace as stop
 
 import atlas 
 
 def spectrum(wave, spec, spec_avg=None, cgs=True,
         si=False, perHz=True, calib_wave=False, wave_ref=None,
-        wave_idx=None):
+        wave_idx=None, verbose=False):
     """
     Calibrate spectrum intensity in SI or cgs units
 
@@ -63,7 +64,7 @@ def spectrum(wave, spec, spec_avg=None, cgs=True,
 
     # Calibrate wavelength
     if calib_wave is True:
-        wave = wavelength(profile, wave, spec_fts, wave_fts, wave_ref=wave_ref) 
+        wave = wavelength(wave, profile, wave_fts, spec_fts, wave_ref=wave_ref) 
 
     spec_fts_sel = []
     for ww in range(wave.size):
@@ -73,6 +74,12 @@ def spectrum(wave, spec, spec_avg=None, cgs=True,
     factor = offset_factors[wave_idx].mean()
 
     spec *= factor
+
+    if verbose is True:
+        plt.plot(wave, spec, '.')
+        plt.plot(wave[wave_idx], spec[wave_idx], '+')
+        plt.plot(wave_fts, spec_fts)
+        plt.show()
 
     return wave, spec, factor, spec_fts_sel, fts.sunit
 
@@ -117,7 +124,7 @@ def wavelength(wave, spec, wave_fts, spec_fts, wave_ref=None, dwave_ref=0.2):
     widx = np.where((wave_fine >= wave_ref-dwave_ref) & \
             (wave_fine <= wave_ref+dwave_ref))[0]
     wave_min = wave_fine[widx[np.argmin(spec_fine[widx])]]
-    
+
     widx = np.where((wave_fts >= wave_ref-dwave_ref) & \
             (wave_fts <= wave_ref+dwave_ref))[0]
     wave_fts_min = wave_fts[widx[np.argmin(spec_fts[widx])]]
