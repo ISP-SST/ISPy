@@ -64,7 +64,8 @@ def spectrum(wave, spec, spec_avg=None, cgs=True,
 
     # Calibrate wavelength
     if calib_wave is True:
-        wave = wavelength(wave, profile, wave_fts, spec_fts, wave_ref=wave_ref) 
+        wave = wavelength(wave, profile, wave_fts, spec_fts, wave_ref=wave_ref,
+                verbose=verbose)
 
     spec_fts_sel = []
     for ww in range(wave.size):
@@ -76,16 +77,20 @@ def spectrum(wave, spec, spec_avg=None, cgs=True,
     spec *= factor
 
     if verbose is True:
-        plt.plot(wave, spec, '.')
-        plt.plot(wave[wave_idx], spec[wave_idx], '+')
-        plt.plot(wave_fts, spec_fts)
+        fig, ax = plt.subplots()
+        ax.plot(wave, spec, '.')
+        ax.plot(wave[wave_idx], spec[wave_idx], '+')
+        ax.plot(wave_fts, spec_fts)
+        ax.legend(('observed profile', 'selected points', 'atlas profile'))
         plt.show()
+        print("spectrum: intensity calibration offset factor: {0}".format(factor))
 
     return wave, spec, factor, spec_fts_sel, fts.sunit
 
 
 
-def wavelength(wave, spec, wave_fts, spec_fts, wave_ref=None, dwave_ref=0.2):
+def wavelength(wave, spec, wave_fts, spec_fts, wave_ref=None, dwave_ref=0.2,
+        verbose=False):
     """
     Calibrate spectrum in SI or cgs units
 
@@ -112,6 +117,7 @@ def wavelength(wave, spec, wave_fts, spec_fts, wave_ref=None, dwave_ref=0.2):
     Author:
         Gregal Vissers (ISP/SU 2019)
     """
+    inam = 'wavelength'
   
     wave_spacing = np.diff(wave).mean()
 
@@ -129,7 +135,13 @@ def wavelength(wave, spec, wave_fts, spec_fts, wave_ref=None, dwave_ref=0.2):
             (wave_fts <= wave_ref+dwave_ref))[0]
     wave_fts_min = wave_fts[widx[np.argmin(spec_fts[widx])]]
 
-    wave += (wave_fts_min - wave_min)
+    wave_offset = wave_fts_min - wave_min
+    if verbose is True:
+        print("{0}: input profile minimum at: {1}".format(inam, wave_min))
+        print("{0}: atlas profile minimum at: {1}".format(inam, wave_fts_min))
+        print("{0}: calibrated offset: {1} (added to input wavelengths)".format(inam, wave_offset))
+
+    wave += wave_offset
 
     return wave
     
