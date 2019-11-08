@@ -2,7 +2,6 @@ import numpy as np
 import astropy.table 
 from scipy.interpolate import interp1d
 
-from ipdb import set_trace as stop
 import matplotlib.pyplot as plt
 
 import atlas 
