@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 import atlas 
 
-def spectrum(spec, wave, average_profile=None, cgs=True,
+def spectrum(wave, spec, average_profile=None, cgs=True,
         si=False, perHz=True, calib_wave=False, wave_ref=None,
         wave_idx=None):
     """
@@ -79,7 +79,7 @@ def spectrum(spec, wave, average_profile=None, cgs=True,
 
 
 
-def wavelength(spec, wave, spec_fts, wave_fts, wave_ref=None, dwave_ref=0.2):
+def wavelength(wave, spec, wave_fts, spec_fts, wave_ref=None, dwave_ref=0.2):
     """
     Calibrate spectrum in SI or cgs units
 
