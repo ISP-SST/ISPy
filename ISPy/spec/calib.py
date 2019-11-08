@@ -7,20 +7,20 @@ import matplotlib.pyplot as plt
 
 import atlas 
 
-def spectrum(wave, spec, average_profile=None, cgs=True,
+def spectrum(wave, spec, spec_avg=None, cgs=True,
         si=False, perHz=True, calib_wave=False, wave_ref=None,
         wave_idx=None):
     """
     Calibrate spectrum intensity in SI or cgs units
 
     Arguments:
+        wave: 1D array with wavelengths. Must be of same size as `spec`.
         spec: 1D array with intensity profile in data counts to calibrate. If
-            keyword argument `average_profile` is None, then `spec` will be used for
+            keyword argument `spec_avg` is None, then `spec` will be used for
             the intensity (and wavelength) calibration.
-        wave: 1D array with wavelengths. Must be of same size as spec.
 
     Keyword arguments:
-        average_profile: averaged intensity profile to use for calibration
+        spec_avg: averaged intensity profile to use for calibration
             (default None -> use `spec` to calibrate on)
         cgs: output calibration in cgs units (default True)
         si: output calibration in SI units (default False)
@@ -50,8 +50,8 @@ def spectrum(wave, spec, average_profile=None, cgs=True,
 
     wave = np.copy(wave)
     spec = np.copy(spec)
-    if average_profile is not None:
-        profile = average_profile
+    if spec_avg is not None:
+        profile = spec_avg
     else:
         profile = spec
     
@@ -84,11 +84,11 @@ def wavelength(wave, spec, wave_fts, spec_fts, wave_ref=None, dwave_ref=0.2):
     Calibrate spectrum in SI or cgs units
 
     Arguments:
+        wave: 1D array with wavelengths. Must be of same size as `spec`.
         spec: 1D array with intensity profile.
-        wave: 1D array with wavelengths. Must be of same size as spec.
-        spec_fts: 1D array with atlas profile
         wave_fts: 1D array with atlas profile wavelengths. Must be of same size
-            as spec_fts.
+            as `spec_fts`.
+        spec_fts: 1D array with atlas profile
 
     Keyword arguments:
         wave_ref: reference wavelength to clip around in determining line centre
