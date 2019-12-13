@@ -77,11 +77,15 @@ def spectrum(wave, spec, spec_avg=None, cgs=True,
     spec *= factor
 
     if verbose is True:
+        plot_scale_factor = 1.e-5
         fig, ax = plt.subplots()
-        ax.plot(wave, spec, '.')
-        ax.plot(wave[wave_idx], spec[wave_idx], '+')
-        ax.plot(wave_fts, spec_fts)
+        ax.plot(wave, spec/plot_scale_factor, '.')
+        ax.plot(wave[wave_idx], spec[wave_idx]/plot_scale_factor, '+')
+        ax.plot(wave_fts, spec_fts/plot_scale_factor)
+        ax.set_ylabel('intensity ['+r'$\times10^{-5}$'+' {0}]'.format(fts.sunit.to_string()))
+        ax.set_xlabel('wavelength [{0}]'.format(fts.wunit.to_string()))
         ax.legend(('observed profile', 'selected points', 'atlas profile'))
+        ax.set_title('ISPy: calib.spectrum() results')
         plt.show()
         print("spectrum: intensity calibration offset factor: {0}".format(factor))
 
