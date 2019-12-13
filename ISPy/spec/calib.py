@@ -96,7 +96,7 @@ def spectrum(wave, spec, spec_avg=None, cgs=True,
 def wavelength(wave, spec, wave_fts, spec_fts, wave_ref=None, dwave_ref=0.2,
         verbose=False):
     """
-    Calibrate spectrum in SI or cgs units
+    Calibrate wavelength 
 
     Arguments:
         wave: 1D array with wavelengths. Must be of same size as `spec`.
