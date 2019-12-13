@@ -46,7 +46,7 @@ def spectrum(wave, spec, spec_avg=None, cgs=True,
 
     Example:
         wave_cal, spec_cal, factor, spec_fts, units = calib.spectrum(ispec,
-            wave, cgs=True, calib_wave=True, wave_idx=[0,1,-2,-1]
+            wave, cgs=True, calib_wave=True, wave_idx=[0,1,-2,-1])
 
     Author:
         Gregal Vissers (ISP/SU 2019)
@@ -138,7 +138,7 @@ def wavelength(wave, spec, wave_fts, spec_fts, wave_ref=None, dwave_ref=0.2,
         wave: calibrated wavelength array
 
     Example:
-        wave_cal = wavelength(spec, wave, spec_fts, wave_fts)j
+        wave_cal = wavelength(spec, wave, spec_fts, wave_fts)
 
     Author:
         Gregal Vissers (ISP/SU 2019)
