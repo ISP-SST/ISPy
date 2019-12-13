@@ -1,6 +1,7 @@
 import numpy as np
 import astropy.table 
 from scipy.interpolate import interp1d
+from scipy.ndimage import convolve
 
 import matplotlib.pyplot as plt
 from ipdb import set_trace as stop
@@ -9,7 +10,7 @@ import atlas
 
 def spectrum(wave, spec, spec_avg=None, cgs=True,
         si=False, perHz=True, calib_wave=False, wave_ref=None,
-        wave_idx=None, verbose=False):
+        wave_idx=None, instrument_profile=None, verbose=False):
     """
     Calibrate spectrum intensity in SI or cgs units
 
@@ -32,12 +33,15 @@ def spectrum(wave, spec, spec_avg=None, cgs=True,
             from profile)
         wave_idx: wavelength indices to determine the average calibration offset
             over (default None -> use all wavelengths)
+        instrument_profile: 2D array with wavelength spacing (starting at 0) and
+            instrumental profile to convolve the atlas profile with
 
     Returns:
         wave: calibrated wavelength array
         spec: calibrated intensity profile array
         factor: offset factor converting data counts to absolute intensity
-        spec_fts: atlas profile at wavelengths given by `wave`
+        spec_fts: atlas profile at wavelengths given by `wave`. Convolved with
+            instrument profile if instrument_profile is not None.
         unit: intensity units
 
     Example:
@@ -60,7 +64,21 @@ def spectrum(wave, spec, spec_avg=None, cgs=True,
 
     # Get atlas profile for range +/- 0.3
     fts = atlas.atlas()
-    wave_fts, spec_fts, cont_fts = fts.get(wave[0]-0.3, wave[-1]+0.3, cgs=cgs, si=si, perHz=perHz)
+    wave_fts, spec_fts_orig, cont_fts = fts.get(wave[0]-0.3, wave[-1]+0.3, cgs=cgs, si=si, perHz=perHz)
+
+    # Apply instrument profile if provided
+    if instrument_profile is not None:
+        wave_ipr_spacing = np.diff(instrument_profile[:,0]).mean()
+        wave_fts_spacing = np.diff(wave_fts).mean()
+        nw_ipr = instrument_profile.shape[0]
+        wave_ipr_fine = np.arange((nw_ipr-1) * wave_ipr_spacing / wave_fts_spacing + 1) \
+                * wave_fts_spacing
+        kernel = np.interp(wave_ipr_fine, instrument_profile[:,0],
+                instrument_profile[:,1])
+        kernel /= np.sum(kernel)
+        spec_fts = convolve(spec_fts_orig, kernel, mode='nearest')
+    else:
+        spec_fts = spec_fts_orig
 
     # Calibrate wavelength
     if calib_wave is True:
@@ -79,12 +97,16 @@ def spectrum(wave, spec, spec_avg=None, cgs=True,
     if verbose is True:
         plot_scale_factor = 1.e-5
         fig, ax = plt.subplots()
+        legend_items = ('observed profile', 'selected points', 'atlas profile')
         ax.plot(wave, spec/plot_scale_factor, '.')
         ax.plot(wave[wave_idx], spec[wave_idx]/plot_scale_factor, '+')
-        ax.plot(wave_fts, spec_fts/plot_scale_factor)
+        ax.plot(wave_fts, spec_fts_orig/plot_scale_factor)
+        if instrument_profile is not None:
+            ax.plot(wave_fts, spec_fts/plot_scale_factor,'--')
+            legend_items += ('atlas convolved with instrument profile',)
         ax.set_ylabel('intensity ['+r'$\times10^{-5}$'+' {0}]'.format(fts.sunit.to_string()))
         ax.set_xlabel('wavelength [{0}]'.format(fts.wunit.to_string()))
-        ax.legend(('observed profile', 'selected points', 'atlas profile'))
+        ax.legend(legend_items)
         ax.set_title('ISPy: calib.spectrum() results')
         plt.show()
         print("spectrum: intensity calibration offset factor: {0}".format(factor))
