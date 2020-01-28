@@ -25,6 +25,8 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, cgs=True,
             the intensity (and wavelength) calibration.
 
     Keyword arguments:
+        mu: cosine of heliocentric viewing angle of the observations (defaults
+            1.0 -> disc centre)
         spec_avg: averaged intensity profile to use for calibration
             (default None -> use `spec` to calibrate on)
         cgs: output calibration in cgs units (default True)
@@ -71,7 +73,7 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, cgs=True,
     wave_fts, spec_fts_orig, cont_fts = fts.get(wave[0]-0.3, wave[-1]+0.3, cgs=cgs, si=si, perHz=perHz)
 
     # Correct for limb-darkening
-    limbdarkening = limbdarkening(wave_fts, mu=mu, nm=nm)
+    limbdarkening = limbdarkening(wave_fts, mu=mu)
     spec_fts_orig *= limbdarkening
     cont_fts *= limbdarkening
 
