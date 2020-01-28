@@ -1,7 +1,11 @@
+import os
+
 import numpy as np
 import astropy.table 
 from scipy.interpolate import interp1d
 from scipy.ndimage import convolve
+from astropy.io import fits
+from astropy.table import Table
 
 import matplotlib.pyplot as plt
 from ipdb import set_trace as stop
@@ -170,4 +174,33 @@ def wavelength(wave, spec, wave_fts, spec_fts, wave_ref=None, dwave_ref=0.2,
     wave += wave_offset
 
     return wave
+
+
+def limbdarkening(wave, mu=1.0, si=False):
+    """
+    Return limb-darkening factor given wavelength and viewing angle
+    mu=cos(theta)
+
+    Author:
+        Gregal Vissers (ISP/SU 2020)
+    """
+    this_dir, this_filename = os.path.split(__file__)
+    DATA_PATH = os.path.join(this_dir, "../data/limbdarkening_Neckel_Labs_1994.fits")
+
+    wave = np.atleast_1d(wave)  # Ensure input is iterable
+
+    table = Table(fits.getdata(DATA_PATH))
+    wavetable = np.array(table['wavelength'])
+    if si is False:
+        wavetable *= 10.
+
+    # Get table into 2D numpy array
+    Atable = np.array([ table['A0'], table['A1'], table['A2'],
+        table['A3'], table['A4'], table['A5'] ])
     
+    factor = np.zeros((wave.size), dtype='float64')
+    for ii in range(6):
+      Aint = np.interp(wave, wavetable, Atable[ii,:])
+      factor += Aint * mu**ii
+
+    return factor
