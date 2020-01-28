@@ -12,7 +12,7 @@ from ipdb import set_trace as stop
 
 import atlas 
 
-def spectrum(wave, spec, spec_avg=None, cgs=True,
+def spectrum(wave, spec, mu=1.0, spec_avg=None, cgs=True,
         si=False, perHz=True, calib_wave=False, wave_ref=None,
         wave_idx=None, instrument_profile=None, verbose=False):
     """
@@ -69,6 +69,11 @@ def spectrum(wave, spec, spec_avg=None, cgs=True,
     # Get atlas profile for range +/- 0.3
     fts = atlas.atlas()
     wave_fts, spec_fts_orig, cont_fts = fts.get(wave[0]-0.3, wave[-1]+0.3, cgs=cgs, si=si, perHz=perHz)
+
+    # Correct for limb-darkening
+    limbdarkening = limbdarkening(wave_fts, mu=mu, nm=nm)
+    spec_fts_orig *= limbdarkening
+    cont_fts *= limbdarkening
 
     # Apply instrument profile if provided
     if instrument_profile is not None:
