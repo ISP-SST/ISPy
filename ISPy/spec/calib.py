@@ -176,14 +176,29 @@ def wavelength(wave, spec, wave_fts, spec_fts, wave_ref=None, dwave_ref=0.2,
     return wave
 
 
-def limbdarkening(wave, mu=1.0, si=False):
+def limbdarkening(wave, mu=1.0, nm=False):
     """
     Return limb-darkening factor given wavelength and viewing angle
     mu=cos(theta)
 
+    Arguments:
+        wave: scalar or 1D array with wavelength(s).
+
+    Keyword arguments:
+        mu: cosine of heliocentric viewing angle (default 1.0 -> disc centre)
+        nm: input wavelength units are nanometers (default False)
+
+    Returns:
+        factor: scaling factor(s) to be applied for given input wavelengths. Has
+        as many elements as `wave`.
+
+    Example:
+        factor = limbdarkening(630.25, mu=0.7, nm=True)
+
     Author:
         Gregal Vissers (ISP/SU 2020)
     """
+
     this_dir, this_filename = os.path.split(__file__)
     DATA_PATH = os.path.join(this_dir, "../data/limbdarkening_Neckel_Labs_1994.fits")
 
@@ -191,7 +206,7 @@ def limbdarkening(wave, mu=1.0, si=False):
 
     table = Table(fits.getdata(DATA_PATH))
     wavetable = np.array(table['wavelength'])
-    if si is False:
+    if nm is False:
         wavetable *= 10.
 
     # Get table into 2D numpy array
