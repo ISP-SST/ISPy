@@ -1,0 +1,535 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ISPy.io package &mdash; ISPy 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ISPy
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">ISPy.io package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-ISPy.io.lapalma">ISPy.io.lapalma module</a></li>
+<li><a class="reference internal" href="#module-ISPy.io.pyio">ISPy.io.pyio module</a></li>
+<li><a class="reference internal" href="#module-ISPy.io.solarnet">ISPy.io.solarnet module</a></li>
+<li><a class="reference internal" href="#module-ISPy.io">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ISPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>ISPy.io package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/ISPy.io.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ispy-io-package">
+<h1>ISPy.io package<a class="headerlink" href="#ispy-io-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-ISPy.io.lapalma">
+<span id="ispy-io-lapalma-module"></span><h2>ISPy.io.lapalma module<a class="headerlink" href="#module-ISPy.io.lapalma" title="Permalink to this headline">¶</a></h2>
+<p>Python tools to read and write ‘La Palma’ cubes</p>
+<p>Merge of some routines written by Tiago Pereira (github:helita), J. de la Cruz Rodriguez,
+Alex Pietrow (github:crispy), Carlos Diaz and G. Vissers (ISP/SU 2019)</p>
+<dl class="function">
+<dt id="ISPy.io.lapalma.get">
+<code class="sig-prename descclassname">ISPy.io.lapalma.</code><code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">index</em>, <em class="sig-param">verb=False</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.lapalma.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a 2D image (slice) given a known index from a La Palma cube.</p>
+<dl>
+<dt>Arguments:</dt><dd><p>filename : file to be opened. Has to be .icube or .fcube
+index    : chosen frame, where frame is t*nw*ns + s*nw + w</p>
+<blockquote>
+<div><p>t: time or scan number
+s: stokes parameter
+w: wavelength step</p>
+</div></blockquote>
+<p>verbose : Verbose model. (Default value = False)</p>
+</dd>
+<dt>Returns:</dt><dd><p>2D image</p>
+</dd>
+<dt>Example:</dt><dd><p>data = lp_get(‘cube.fcube’, 0)</p>
+</dd>
+</dl>
+<p>Authors: G. Vissers (ITA UiO, 2016), A.G.M. Pietrow (2018), Carlos Diaz (ISP/SU 2019)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ISPy.io.lapalma.head">
+<code class="sig-prename descclassname">ISPy.io.lapalma.</code><code class="sig-name descname">head</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">verbose=True</em>, <em class="sig-param">appendFormat=False</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.lapalma.head" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Args:</dt><dd><p>name: Name of the file we want to know the header properties.
+verbose: (Default value = True)
+appendFormat: different format to ensure append operation (Default =False)</p>
+</dd>
+<dt>Returns:</dt><dd><p>header</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="ISPy.io.lapalma.mk_header">
+<code class="sig-prename descclassname">ISPy.io.lapalma.</code><code class="sig-name descname">mk_header</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.lapalma.mk_header" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates header for La Palma images.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>image: La Palma cube</p>
+</dd>
+<dt>Returns:</dt><dd><p>header of the cube</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="ISPy.io.lapalma.put">
+<code class="sig-prename descclassname">ISPy.io.lapalma.</code><code class="sig-name descname">put</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">image</em>, <em class="sig-param">append=True</em>, <em class="sig-param">verbose=False</em>, <em class="sig-param">stokes=True</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.lapalma.put" title="Permalink to this definition">¶</a></dt>
+<dd><p>Append a new cube/slice to a pre-existent La Palma cube.</p>
+<dl class="simple">
+<dt>Arguments:</dt><dd><p>filename: name of file with .icube/fcube extention
+image: datacube in form of [t,s,w,x,y]
+append: (Default value = True)</p>
+</dd>
+<dt>Examples:</dt><dd><p>lp_put(‘cube.fcube’, cube2)</p>
+</dd>
+<dt>To do:</dt><dd><p>Insert a slice in a La Palma cube</p>
+</dd>
+</dl>
+<p>Authors: Carlos Diaz,  G. Vissers, A.G.M. Pietrow (ISP/SU 2019)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ISPy.io.lapalma.read">
+<code class="sig-prename descclassname">ISPy.io.lapalma.</code><code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param">cube</em>, <em class="sig-param">spnw=True</em>, <em class="sig-param">ns=4</em>, <em class="sig-param">spformat='_sp'</em>, <em class="sig-param">mode='r'</em>, <em class="sig-param">dtype='float32'</em>, <em class="sig-param">verb=False</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.lapalma.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a cube with La Palma format cube.</p>
+<dl class="simple">
+<dt>Arguments:</dt><dd><p>cube: filename, has to be .icube or .fcube
+spnw: Optional. Specific filename of spectral cube  OR number of wavelength steps (Default value = True)
+ns: number of stokes parameters. (Default value = 4)
+spformat: (Default value = ‘_sp’)
+mode: (Default value = ‘r’)
+dtype: Type of data. Should be ‘float32’ for .fcubes and ‘int16’ for icubes. (Default value = ‘float32’)
+verb: Verbose mode. (Default value = False)</p>
+</dd>
+<dt>Returns:</dt><dd><p>5D cube of shape [nt,ns,nw,nx,ny]</p>
+</dd>
+<dt>Examples:</dt><dd><p>import ISPy.io.lapalma as lp
+A) cube = lp.read(‘filename.fcube’) # It will find also ‘filename_sp.fcube’ in the same path
+B) cube = lp.read(‘filename.fcube’ , 8)
+C) cube = lp.read(‘filename.fcube’ , ‘filename_sp.fcube’)</p>
+</dd>
+</dl>
+<p>Authors: Alex Pietrow (ISP/SU 2019), Carlos Diaz (ISP/SU 2019)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ISPy.io.lapalma.write">
+<code class="sig-prename descclassname">ISPy.io.lapalma.</code><code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param">cube_array</em>, <em class="sig-param">name</em>, <em class="sig-param">stokes=True</em>, <em class="sig-param">sp=False</em>, <em class="sig-param">path=''</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.lapalma.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves cube as La Palma format cube.</p>
+<dl class="simple">
+<dt>Arguments:</dt><dd><p>cube_array: datacube in form of [t,s,w,x,y]
+name: name of file with .icube/fcube extention
+stokes: flag for if data has stokes or not. (Default value = True)
+sp: Save spectral cube of shape. (Default value = False)
+path: Filepath where file needs to be saved.(Default value = ‘’)</p>
+</dd>
+<dt>Examples:</dt><dd><p>write(cube_array, ‘cube.fcube’, path=’fits/’)</p>
+</dd>
+</dl>
+<p>Authors: Alex Pietrow (ISP/SU 2019), Carlos Diaz (ISP/SU 2019)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ISPy.io.lapalma.writeto">
+<code class="sig-prename descclassname">ISPy.io.lapalma.</code><code class="sig-name descname">writeto</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">image</em>, <em class="sig-param">extraheader=''</em>, <em class="sig-param">dtype=None</em>, <em class="sig-param">verbose=False</em>, <em class="sig-param">append=False</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.lapalma.writeto" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes on disk a cube using LaPalma format. Backend of “write”
+From <a class="reference external" href="https://github.com/ITA-Solar/helita/blob/master/helita/io/lp.py">https://github.com/ITA-Solar/helita/blob/master/helita/io/lp.py</a></p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>filename: name of the file
+image: data allocated in memory
+extraheader: (Default value = ‘’)
+dtype: (Default value = None)
+verbose: (Default value = False)
+append: (Default value = False)</p>
+</dd>
+<dt>Returns</dt><dd><p>file on disk</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-ISPy.io.pyio">
+<span id="ispy-io-pyio-module"></span><h2>ISPy.io.pyio module<a class="headerlink" href="#module-ISPy.io.pyio" title="Permalink to this headline">¶</a></h2>
+<p>Python tools for I/O to binary files with named variables
+Written by J. de la Cruz Rodriguez (ISP-SU 2019)</p>
+<p>The idea is to write variables, one after the other in a binary file.
+The file has a 5 byte header at the beginning. Then variables are written as follow:</p>
+<p>Variable header:
+1 int32 tell the routines the size of the header,
+50 bytes contain the variable name, 1 int32 contain the number of dimensions,
+1 int32 contains the dataype, ndim*int64 contain the dimensions of the variable,
+and then comes the raw data.</p>
+<dl class="class">
+<dt id="ISPy.io.pyio.bio">
+<em class="property">class </em><code class="sig-prename descclassname">ISPy.io.pyio.</code><code class="sig-name descname">bio</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">mode='r'</em>, <em class="sig-param">verbose=True</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.pyio.bio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="ISPy.io.pyio.bio.create_empty_variable">
+<code class="sig-name descname">create_empty_variable</code><span class="sig-paren">(</span><em class="sig-param">vname</em>, <em class="sig-param">dim</em>, <em class="sig-param">dtype</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.pyio.bio.create_empty_variable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ISPy.io.pyio.bio.get_data_tree">
+<code class="sig-name descname">get_data_tree</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.pyio.bio.get_data_tree" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ISPy.io.pyio.bio.map_variable">
+<code class="sig-name descname">map_variable</code><span class="sig-paren">(</span><em class="sig-param">vname</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.pyio.bio.map_variable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ISPy.io.pyio.bio.read_variable">
+<code class="sig-name descname">read_variable</code><span class="sig-paren">(</span><em class="sig-param">vname</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.pyio.bio.read_variable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ISPy.io.pyio.bio.variable_exists">
+<code class="sig-name descname">variable_exists</code><span class="sig-paren">(</span><em class="sig-param">vname</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.pyio.bio.variable_exists" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ISPy.io.pyio.bio.write_variable">
+<code class="sig-name descname">write_variable</code><span class="sig-paren">(</span><em class="sig-param">vname</em>, <em class="sig-param">d</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.pyio.bio.write_variable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="ISPy.io.pyio.container">
+<em class="property">class </em><code class="sig-prename descclassname">ISPy.io.pyio.</code><code class="sig-name descname">container</code><a class="headerlink" href="#ISPy.io.pyio.container" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ISPy.io.pyio.create_header">
+<code class="sig-prename descclassname">ISPy.io.pyio.</code><code class="sig-name descname">create_header</code><span class="sig-paren">(</span><em class="sig-param">vname</em>, <em class="sig-param">dim</em>, <em class="sig-param">dtype='float32'</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.pyio.create_header" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ISPy.io.pyio.file_exists">
+<code class="sig-prename descclassname">ISPy.io.pyio.</code><code class="sig-name descname">file_exists</code><span class="sig-paren">(</span><em class="sig-param">fname</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.pyio.file_exists" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ISPy.io.pyio.get_header_size">
+<code class="sig-prename descclassname">ISPy.io.pyio.</code><code class="sig-name descname">get_header_size</code><span class="sig-paren">(</span><em class="sig-param">ndim</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.pyio.get_header_size" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ISPy.io.pyio.number2dtype">
+<code class="sig-prename descclassname">ISPy.io.pyio.</code><code class="sig-name descname">number2dtype</code><span class="sig-paren">(</span><em class="sig-param">num</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.pyio.number2dtype" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ISPy.io.pyio.number2size">
+<code class="sig-prename descclassname">ISPy.io.pyio.</code><code class="sig-name descname">number2size</code><span class="sig-paren">(</span><em class="sig-param">num</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.pyio.number2size" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ISPy.io.pyio.type2number">
+<code class="sig-prename descclassname">ISPy.io.pyio.</code><code class="sig-name descname">type2number</code><span class="sig-paren">(</span><em class="sig-param">dtype</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.pyio.type2number" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ISPy.io.pyio.unpack_header">
+<code class="sig-prename descclassname">ISPy.io.pyio.</code><code class="sig-name descname">unpack_header</code><span class="sig-paren">(</span><em class="sig-param">head</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.pyio.unpack_header" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-ISPy.io.solarnet">
+<span id="ispy-io-solarnet-module"></span><h2>ISPy.io.solarnet module<a class="headerlink" href="#module-ISPy.io.solarnet" title="Permalink to this headline">¶</a></h2>
+<p>Python tools to read and write ‘SOLARNET’ cubes</p>
+<p>Written by Carlos Diaz (ISP/SU 2019)</p>
+<dl class="function">
+<dt id="ISPy.io.solarnet.get_coord">
+<code class="sig-prename descclassname">ISPy.io.solarnet.</code><code class="sig-name descname">get_coord</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">pix_x</em>, <em class="sig-param">pix_y</em>, <em class="sig-param">timeFrame=0</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.solarnet.get_coord" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts pixels values to solar coordinates</p>
+<dl class="simple">
+<dt>Arguments:</dt><dd><p>filename: name of the data cube
+pix_x, pix_y : location to convert
+timeFrame: information at a given time frame (Default value = 0)</p>
+</dd>
+<dt>Returns:</dt><dd><p>Solar coordinates in arcsec</p>
+</dd>
+<dt>Example:</dt><dd><p>[x_output, y_output] = get_coord(filename, pix_x,pix_y)</p>
+</dd>
+</dl>
+<p>Authors: Carlos Diaz (ISP/SU 2019)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ISPy.io.solarnet.get_extent">
+<code class="sig-prename descclassname">ISPy.io.solarnet.</code><code class="sig-name descname">get_extent</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">timeFrame=0</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.solarnet.get_extent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the coordinates of the corners to use them with imshow/extent</p>
+<dl class="simple">
+<dt>Arguments:</dt><dd><p>filename: name of the data cube
+timeFrame: information at a given time frame (Default value = 0)</p>
+</dd>
+<dt>Returns:</dt><dd><p>1D array with solar coordinates in arcsec of the corners.</p>
+</dd>
+<dt>Example:</dt><dd><p>extent = get_extent(filename)
+imshow(data, extent=extent)</p>
+</dd>
+</dl>
+<p>Authors: Carlos Diaz (ISP/SU 2019)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ISPy.io.solarnet.get_time">
+<code class="sig-prename descclassname">ISPy.io.solarnet.</code><code class="sig-name descname">get_time</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">fulltime=False</em>, <em class="sig-param">utc=False</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.solarnet.get_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the time information of a ‘SOLARNET’ cube.</p>
+<dl class="simple">
+<dt>Arguments:</dt><dd><p>filename: name of the data cube
+fulltime: information at each wavelength point (Default value = False)
+utc: the output is given in ‘HH:MM:SS’ format (Default value = False)</p>
+</dd>
+<dt>Returns:</dt><dd><p>fulltime=False : 1D array with time information at middle wavelength point.
+fulltime=True : 2D array with time information at each wavelength point.</p>
+</dd>
+<dt>Example:</dt><dd><p>data_time = get_time(filename, fulltime=False, utc=True)</p>
+</dd>
+</dl>
+<p>Authors: Carlos Diaz (ISP/SU 2019)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ISPy.io.solarnet.get_wav">
+<code class="sig-prename descclassname">ISPy.io.solarnet.</code><code class="sig-name descname">get_wav</code><span class="sig-paren">(</span><em class="sig-param">filename</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.solarnet.get_wav" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the wavelength information of a ‘SOLARNET’ cube.</p>
+<dl class="simple">
+<dt>Arguments:</dt><dd><p>filename: name of the data cube
+- It is assumed that spectral sampling does not change over time</p>
+</dd>
+<dt>Returns:</dt><dd><p>1D wavelength array in nm.</p>
+</dd>
+<dt>Example:</dt><dd><p>wav_array = get_wav(filename)</p>
+</dd>
+</dl>
+<p>Authors: Carlos Diaz (ISP/SU 2019)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ISPy.io.solarnet.read">
+<code class="sig-prename descclassname">ISPy.io.solarnet.</code><code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param">filename</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.solarnet.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the data of a ‘SOLARNET’ cube.</p>
+<dl class="simple">
+<dt>Arguments:</dt><dd><p>filename: name of the data cube</p>
+</dd>
+<dt>Returns:</dt><dd><p>1D wavelength array in nm.</p>
+</dd>
+</dl>
+<p>Authors: Carlos Diaz (ISP/SU 2019)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ISPy.io.solarnet.seconds2string">
+<code class="sig-prename descclassname">ISPy.io.solarnet.</code><code class="sig-name descname">seconds2string</code><span class="sig-paren">(</span><em class="sig-param">number</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.solarnet.seconds2string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts time in seconds to ‘HH:MM:SS’ format</p>
+<dl class="simple">
+<dt>Arguments:</dt><dd><p>number: value in seconds</p>
+</dd>
+<dt>Returns:</dt><dd><p>Time in ‘HH:MM:SS’ format</p>
+</dd>
+</dl>
+<p>Authors: Carlos Diaz (ISP/SU 2019)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ISPy.io.solarnet.write">
+<code class="sig-prename descclassname">ISPy.io.solarnet.</code><code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">d</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.solarnet.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the data as a normal fits (without proper SOLARNET header)</p>
+<dl class="simple">
+<dt>Arguments:</dt><dd><p>filename: name of the data cube
+d: data on memory</p>
+</dd>
+</dl>
+<p>Authors: Carlos Diaz (ISP/SU 2019)</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-ISPy.io">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-ISPy.io" title="Permalink to this headline">¶</a></h2>
+<p>Tools and scripts for (synthetic) data I/O.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, ISP
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

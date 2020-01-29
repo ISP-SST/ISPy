@@ -1,0 +1,311 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ISPy.spec package &mdash; ISPy 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ISPy
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">ISPy.spec package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-ISPy.spec.atlas">ISPy.spec.atlas module</a></li>
+<li><a class="reference internal" href="#module-ISPy.spec.wfa">ISPy.spec.wfa module</a></li>
+<li><a class="reference internal" href="#module-ISPy.spec">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ISPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>ISPy.spec package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/ISPy.spec.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ispy-spec-package">
+<h1>ISPy.spec package<a class="headerlink" href="#ispy-spec-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-ISPy.spec.atlas">
+<span id="ispy-spec-atlas-module"></span><h2>ISPy.spec.atlas module<a class="headerlink" href="#module-ISPy.spec.atlas" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ISPy.spec.atlas.atlas">
+<em class="property">class </em><code class="sig-prename descclassname">ISPy.spec.atlas.</code><code class="sig-name descname">atlas</code><a class="headerlink" href="#ISPy.spec.atlas.atlas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class to load (FTS) spectral atlas</p>
+<dl class="simple">
+<dt>Methods:</dt><dd><p>__init__()
+to(usys_to, perHz=True)
+get(w0, w1, cgs=False, si=False, nograv=False)</p>
+</dd>
+<dt>Example:</dt><dd><p>import atlas as S
+fts = S.atlas()
+wav, sp, cont = fts.get(6562.,6564., cgs=True, perHz=False)</p>
+</dd>
+<dt>Author:</dt><dd><p>Jaime de la Cruz Rodriguez (ISP/SU 2019)</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="ISPy.spec.atlas.atlas.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">w0</em>, <em class="sig-param">w1</em>, <em class="sig-param">cgs=False</em>, <em class="sig-param">si=False</em>, <em class="sig-param">nograv=False</em>, <em class="sig-param">perHz=True</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.atlas.atlas.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ISPy.spec.atlas.atlas.to">
+<code class="sig-name descname">to</code><span class="sig-paren">(</span><em class="sig-param">usys_to</em>, <em class="sig-param">perHz=True</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.atlas.atlas.to" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-ISPy.spec.wfa">
+<span id="ispy-spec-wfa-module"></span><h2>ISPy.spec.wfa module<a class="headerlink" href="#module-ISPy.spec.wfa" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="ISPy.spec.wfa.cder">
+<code class="sig-prename descclassname">ISPy.spec.wfa.</code><code class="sig-name descname">cder</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.wfa.cder" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ISPy.spec.wfa.getBhor">
+<code class="sig-prename descclassname">ISPy.spec.wfa.</code><code class="sig-name descname">getBhor</code><span class="sig-paren">(</span><em class="sig-param">w</em>, <em class="sig-param">d</em>, <em class="sig-param">lin</em>, <em class="sig-param">beta=0.0</em>, <em class="sig-param">vdop=0.05</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.wfa.getBhor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the horizontal component of the magnetic field vector
+Arguments:</p>
+<blockquote>
+<div><p>w: 1D numpy array with the wavelength offsets on the observation (can be relative to line-center)
+d: 4D numpy array (ny, nx, nstokes, nwav) with the observations
+line: object from line class (also included) with the atomic data of the transition
+beta: (optional) a regularization factor that selects low-norm solutions. Use wisely.
+vdep: (optional) typical Doppler width of the line. Wavelength points inside +- vdop from line center will be excluded</p>
+</div></blockquote>
+<p>Coded by J. de la Cruz Rodriguez (ISP-SU 2018)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ISPy.spec.wfa.getBlos">
+<code class="sig-prename descclassname">ISPy.spec.wfa.</code><code class="sig-name descname">getBlos</code><span class="sig-paren">(</span><em class="sig-param">w</em>, <em class="sig-param">d</em>, <em class="sig-param">line</em>, <em class="sig-param">beta=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.wfa.getBlos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the line of sight component of the magnetic field vector
+Arguments:</p>
+<blockquote>
+<div><p>w: 1D numpy array with the wavelength offsets on the observation (can be relative to line-center)
+d: 4D numpy array (ny, nx, nstokes, nwav) with the observations
+line: object from line class (also included) with the atomic data of the transition
+beta: (optional) a regularization factor that selects low-norm solutions. Use wisely.</p>
+</div></blockquote>
+<p>Coded by J. de la Cruz Rodriguez (ISP-SU 2018)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ISPy.spec.wfa.getBlosMask">
+<code class="sig-prename descclassname">ISPy.spec.wfa.</code><code class="sig-name descname">getBlosMask</code><span class="sig-paren">(</span><em class="sig-param">w</em>, <em class="sig-param">d</em>, <em class="sig-param">line</em>, <em class="sig-param">mask</em>, <em class="sig-param">beta=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.wfa.getBlosMask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the line of sight component of the magnetic field vector, using selected wavelength points of the observation
+Arguments:</p>
+<blockquote>
+<div><p>w: 1D numpy array with the wavelength offsets on the observation (can be relative to line-center)
+d: 4D numpy array (ny, nx, nstokes, nwav) with the observations
+line: object from line class (also included) with the atomic data of the transition
+mask: a tuple/numpy array with the wavlength indexes that should be used to compute Blong
+beta: (optional) a regularization factor that selects low-norm solutions. Use wisely.</p>
+</div></blockquote>
+<p>Coded by J. de la Cruz Rodriguez (ISP-SU 2018)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ISPy.spec.wfa.getBlosProf">
+<code class="sig-prename descclassname">ISPy.spec.wfa.</code><code class="sig-name descname">getBlosProf</code><span class="sig-paren">(</span><em class="sig-param">w</em>, <em class="sig-param">d</em>, <em class="sig-param">line</em>, <em class="sig-param">beta=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.wfa.getBlosProf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="ISPy.spec.wfa.line">
+<em class="property">class </em><code class="sig-prename descclassname">ISPy.spec.wfa.</code><code class="sig-name descname">line</code><span class="sig-paren">(</span><em class="sig-param">cw=0</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.wfa.line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="ISPy.spec.wfa.line.update">
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param">j2</em>, <em class="sig-param">g1</em>, <em class="sig-param">g2</em>, <em class="sig-param">cw</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.wfa.line.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method updates the atomic data, useful for lines that are not defined in the constructor
+Example:</p>
+<blockquote>
+<div><p>lin = line(cw=0)
+lin.update(2.5, 1.5, 1.2, 1.33, 8542.091)</p>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-ISPy.spec">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-ISPy.spec" title="Permalink to this headline">¶</a></h2>
+<p>Tools and scripts for spectral calibration, cleaning and fitting.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, ISP
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

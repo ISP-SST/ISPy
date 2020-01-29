@@ -1,0 +1,313 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ISPy.util package &mdash; ISPy 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ISPy
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">ISPy.util package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-ISPy.util.find">ISPy.util.find module</a></li>
+<li><a class="reference internal" href="#module-ISPy.util.obs">ISPy.util.obs module</a></li>
+<li><a class="reference internal" href="#module-ISPy.util.rebin">ISPy.util.rebin module</a></li>
+<li><a class="reference internal" href="#module-ISPy.util">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ISPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>ISPy.util package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/ISPy.util.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ispy-util-package">
+<h1>ISPy.util package<a class="headerlink" href="#ispy-util-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-ISPy.util.find">
+<span id="ispy-util-find-module"></span><h2>ISPy.util.find module<a class="headerlink" href="#module-ISPy.util.find" title="Permalink to this headline">¶</a></h2>
+<p>Convenience wrappers around glob.glob() to list common file types.</p>
+<dl class="function">
+<dt id="ISPy.util.find.cube">
+<code class="sig-prename descclassname">ISPy.util.find.</code><code class="sig-name descname">cube</code><span class="sig-paren">(</span><em class="sig-param">path='./'</em>, <em class="sig-param">pattern=''</em>, <em class="sig-param">verbose=True</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.find.cube" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find <a href="#id1"><span class="problematic" id="id2">*</span></a>.cube files</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ISPy.util.find.files">
+<code class="sig-prename descclassname">ISPy.util.find.</code><code class="sig-name descname">files</code><span class="sig-paren">(</span><em class="sig-param">extension</em>, <em class="sig-param">path='./'</em>, <em class="sig-param">pattern=''</em>, <em class="sig-param">verbose=True</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.find.files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find files with certain pattern and extension in specified path.</p>
+<dl>
+<dt>Arguments:</dt><dd><p>extension:  extension of the files to list, excluding ‘.’ marker.</p>
+</dd>
+<dt>Keyword arguments:</dt><dd><p>path: path to directory to search in (default ‘./’)
+pattern: pattern in filenames to filter on (default ‘’)
+verbose: verbosity switch controlling printout of search results</p>
+<blockquote>
+<div><p>(default True)</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><p>A list with absolute paths to the files found.</p>
+</dd>
+<dt>Example:</dt><dd><p>f = find.files(‘fits’, path=’~/Desktop’, pattern=’aia304’)</p>
+</dd>
+<dt>Author:</dt><dd><p>Gregal Vissers (ISP/SU 2019)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="ISPy.util.find.fits">
+<code class="sig-prename descclassname">ISPy.util.find.</code><code class="sig-name descname">fits</code><span class="sig-paren">(</span><em class="sig-param">path='./'</em>, <em class="sig-param">pattern=''</em>, <em class="sig-param">verbose=True</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.find.fits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find <a href="#id3"><span class="problematic" id="id4">*</span></a>.fits files</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ISPy.util.find.idlsave">
+<code class="sig-prename descclassname">ISPy.util.find.</code><code class="sig-name descname">idlsave</code><span class="sig-paren">(</span><em class="sig-param">path='./'</em>, <em class="sig-param">pattern=''</em>, <em class="sig-param">verbose=True</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.find.idlsave" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find <a href="#id5"><span class="problematic" id="id6">*</span></a>.idlsave files</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ISPy.util.find.nc">
+<code class="sig-prename descclassname">ISPy.util.find.</code><code class="sig-name descname">nc</code><span class="sig-paren">(</span><em class="sig-param">path='./'</em>, <em class="sig-param">pattern=''</em>, <em class="sig-param">verbose=True</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.find.nc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find <a href="#id7"><span class="problematic" id="id8">*</span></a>.nc files</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-ISPy.util.obs">
+<span id="ispy-util-obs-module"></span><h2>ISPy.util.obs module<a class="headerlink" href="#module-ISPy.util.obs" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="ISPy.util.obs.viewangle">
+<code class="sig-prename descclassname">ISPy.util.obs.</code><code class="sig-name descname">viewangle</code><span class="sig-paren">(</span><em class="sig-param">xy</em>, <em class="sig-param">date=None</em>, <em class="sig-param">heliographic=False</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.obs.viewangle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the viewing angle theta (and mu=cos(theta)) given a set of solar
+coordinates in the helioprojective or heliographic Stonyhurst system</p>
+<dl>
+<dt>Arguments:</dt><dd><p>xy: 2-element list or array with the coordinate values (in arcsec if
+helioprojective, in degrees if heliographic)</p>
+</dd>
+<dt>Keyword arguments:</dt><dd><p>date: date for which to get the viewing angle (default: today’s date)
+heliographic: switch to indicate input coordinates are heliographic</p>
+<blockquote>
+<div><p>Stonyhurst (default False, i.e. coordinates are helioprojective)</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><p>2-element list with [theta, mu]. Theta is given in degrees.</p>
+</dd>
+<dt>Example:</dt><dd><p>result = viewangle([240,-380], date=‘2017-08-02’)
+result = viewangle([30,-50], date=‘2019-01-12’, heliographic=True) # S50 W30</p>
+</dd>
+<dt>Author:</dt><dd><p>Gregal Vissers (ISP/SU 2019)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-ISPy.util.rebin">
+<span id="ispy-util-rebin-module"></span><h2>ISPy.util.rebin module<a class="headerlink" href="#module-ISPy.util.rebin" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="ISPy.util.rebin.avg1D">
+<code class="sig-prename descclassname">ISPy.util.rebin.</code><code class="sig-name descname">avg1D</code><span class="sig-paren">(</span><em class="sig-param">xdata</em>, <em class="sig-param">ydata</em>, <em class="sig-param">nbin</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.rebin.avg1D" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Inputs:</dt><dd><p>xdata: 1D arrray
+ydata: 1D array
+nbin: number of bins</p>
+</dd>
+<dt>returns:</dt><dd><p>xbin, ybin: rebinned 1D arrays (x &amp; y)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="ISPy.util.rebin.avg2D">
+<code class="sig-prename descclassname">ISPy.util.rebin.</code><code class="sig-name descname">avg2D</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">nbin</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.rebin.avg2D" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Inputs:</dt><dd><p>data: 2D arrray
+nbin: number of bins</p>
+</dd>
+<dt>returns:</dt><dd><p>rebin: rebinned 2D array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-ISPy.util">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-ISPy.util" title="Permalink to this headline">¶</a></h2>
+<p>Tools and scripts for miscellaneous utilities (e.g., math, file crawler).</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, ISP
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
