@@ -55,9 +55,6 @@
           </a>
 
           
-            
-            
-          
 
           
 <div role="search">
@@ -175,6 +172,21 @@ wav, sp, cont = fts.get(6562.,6564., cgs=True, perHz=False)</p>
 <dt>Author:</dt><dd><p>Jaime de la Cruz Rodriguez (ISP/SU 2019)</p>
 </dd>
 </dl>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 41%" />
+<col style="width: 59%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>get</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>to</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="ISPy.spec.atlas.atlas.get">
 <code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">w0</em>, <em class="sig-param">w1</em>, <em class="sig-param">cgs=False</em>, <em class="sig-param">si=False</em>, <em class="sig-param">nograv=False</em>, <em class="sig-param">perHz=True</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.atlas.atlas.get" title="Permalink to this definition">¶</a></dt>
@@ -248,6 +260,18 @@ beta: (optional) a regularization factor that selects low-norm solutions. Use wi
 <dt id="ISPy.spec.wfa.line">
 <em class="property">class </em><code class="sig-prename descclassname">ISPy.spec.wfa.</code><code class="sig-name descname">line</code><span class="sig-paren">(</span><em class="sig-param">cw=0</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.wfa.line" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ISPy.spec.wfa.line.update" title="ISPy.spec.wfa.line.update"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update</span></code></a>(j2, g1, g2, cw)</p></td>
+<td><p>This method updates the atomic data, useful for lines that are not defined in the constructor Example:     lin = line(cw=0)     lin.update(2.5, 1.5, 1.2, 1.33, 8542.091)</p></td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="ISPy.spec.wfa.line.update">
 <code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param">j2</em>, <em class="sig-param">g1</em>, <em class="sig-param">g2</em>, <em class="sig-param">cw</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.wfa.line.update" title="Permalink to this definition">¶</a></dt>
