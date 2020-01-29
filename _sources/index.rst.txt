@@ -1,13 +1,15 @@
-.. ISPy documentation master file, created by
-   sphinx-quickstart on Wed Jan 29 11:38:38 2020.
+.. ISPy documentation master file
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
 Welcome to ISPy's documentation!
 ================================
 
+.. include:: ../../README.md
+
+
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Contents:
 
 
