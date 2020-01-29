@@ -34,7 +34,7 @@ release = '0.1'
 extensions = [
     'sphinx.ext.autodoc','sphinx.ext.napoleon',"sphinx_rtd_theme",
     'sphinx.ext.mathjax','sphinx.ext.autosummary','sphinx.ext.mathjax',
-    'sphinx.ext.doctest','numpydoc','nbsphinx',
+    'sphinx.ext.doctest','numpydoc',
 ]
 
 napoleon_google_docstring = False
@@ -58,6 +58,11 @@ exclude_patterns = ['ISPy.examples*','modules.rst','bin*','setup*']
 # html_theme = 'alabaster'
 html_theme = 'sphinx_rtd_theme'
 html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+
+html_theme_options = {
+    'display_version': False,
+    'navigation_depth': 2,
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
