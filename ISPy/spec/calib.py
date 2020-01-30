@@ -34,10 +34,11 @@ def chi2(profile1, profile2, weights=None):
 
 
 def spectrum(wave, spec, mu=1.0, spec_avg=None, cgs=True, si=False, perHz=True,
-    calib_wave=False, wave_idx=None, extra_weight=20., instrument_profile=None,
-    verbose=False):
+    calib_wave=False, wave_idx=None, extra_weight=20., bounds=None,
+    instrument_profile=None, verbose=False):
     """
-    Calibrate spectrum intensity in SI or cgs units, as well as wavelength
+    Calibrate spectrum intensity (in SI or cgs units) and wavelength by
+    simultaneously fitting offsets given an atlas profile
 
     Arguments:
         wave: 1D array with wavelengths. Must be of same size as `spec`.
@@ -60,6 +61,9 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, cgs=True, si=False, perHz=True,
             equal weight)
         extra_weight: amount of extra weight to give selected wavelength
             positions as specified by `wave_idx` (default 20)
+        bounds: list of tuples [(ifact_low, ifact_upp), (woff_low, woff_upp)]
+            suggesting lower and upper bounds for fitting the intensity factor
+            and wavelength offset (defaults None)
         instrument_profile: 2D array with wavelength spacing (starting at 0) and
             instrumental profile to convolve the atlas profile with
 
@@ -118,7 +122,7 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, cgs=True, si=False, perHz=True,
     if wave_idx.size is not wave.size:
         weights[wave_idx] = extra_weight
 
-    calibration = fitobs(wave, profile, wave_fts, spec_fts, weights=weights)
+    calibration = fitobs(wave, profile, wave_fts, spec_fts, bounds=bounds, weights=weights)
 
     # Apply calibration and prepare output
     if calib_wave is True:
