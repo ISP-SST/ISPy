@@ -4,6 +4,7 @@ import numpy as np
 import astropy.table 
 from scipy.interpolate import interp1d
 from scipy.ndimage import convolve
+from scipy.optimize import differential_evolution
 from astropy.io import fits
 from astropy.table import Table
 
@@ -11,6 +12,29 @@ import matplotlib.pyplot as plt
 from ipdb import set_trace as stop
 
 import atlas 
+
+def fitobs(wave_obs, spec_obs, wave_fts, spec_fts, bounds=None):
+    def func_to_optimise(x):
+      x0 = x[0]
+      x1 = x[1]
+      ospec = spec_obs * x0
+      atlas = np.interp(wave_obs, wave_fts-x1, spec_fts)
+      nchi2 = chi2(atlas, ospec)
+      return nchi2
+
+    if bounds is None:
+        bounds = [(spec_fts[0]/spec_obs[0]*0.02, spec_fts[0]/spec_obs[0]*50.), (-0.3, 0.3)]
+    optim = differential_evolution(func_to_optimise, bounds)
+
+    return optim.x
+
+def chi2(profile1, profile2, weights=None):
+    if weights is None:
+        weights = np.ones_like(profile1)
+        weights[:3] = 20.
+        weights[-3:] = 20.
+    return np.sum( (profile1-profile2)**2 * weights)
+
 
 def spectrum(wave, spec, mu=1.0, spec_avg=None, cgs=True,
         si=False, perHz=True, calib_wave=False, wave_ref=None,
@@ -73,9 +97,9 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, cgs=True,
     wave_fts, spec_fts_orig, cont_fts = fts.get(wave[0]-0.3, wave[-1]+0.3, cgs=cgs, si=si, perHz=perHz)
 
     # Correct for limb-darkening
-    limbdarkening = limbdarkening(wave_fts, mu=mu)
-    spec_fts_orig *= limbdarkening
-    cont_fts *= limbdarkening
+    limbdark_factor = limbdarkening(wave_fts, mu=mu)
+    spec_fts_orig *= limbdark_factor
+    cont_fts *= limbdark_factor
 
     # Apply instrument profile if provided
     if instrument_profile is not None:
@@ -91,19 +115,18 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, cgs=True,
     else:
         spec_fts = spec_fts_orig
 
+    calibration = fitobs(wave, profile, wave_fts, spec_fts)
+
     # Calibrate wavelength
     if calib_wave is True:
-        wave = wavelength(wave, profile, wave_fts, spec_fts, wave_ref=wave_ref,
-                verbose=verbose)
+        wave += calibration[1]
 
     spec_fts_sel = []
     for ww in range(wave.size):
         widx = np.argmin(np.abs(wave_fts - wave[ww]))
         spec_fts_sel.append(spec_fts[widx])
-    offset_factors = 1. / (profile / spec_fts_sel)
-    factor = offset_factors[wave_idx].mean()
 
-    spec *= factor
+    spec *= calibration[0]
 
     if verbose is True:
         plot_scale_factor = 1.e-5
@@ -120,9 +143,9 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, cgs=True,
         ax.legend(legend_items)
         ax.set_title('ISPy: calib.spectrum() results')
         plt.show()
-        print("spectrum: intensity calibration offset factor: {0}".format(factor))
+        print("spectrum: intensity calibration offset factor: {0}".format(calibration[0]))
 
-    return wave, spec, factor, spec_fts_sel, fts.sunit
+    return wave, spec, calibration, spec_fts_sel, fts.sunit
 
 
 
