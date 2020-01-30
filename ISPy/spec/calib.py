@@ -143,68 +143,11 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, cgs=True,
         ax.legend(legend_items)
         ax.set_title('ISPy: calib.spectrum() results')
         plt.show()
+        if calib_wave is True:
+            print("spectrum: wavelength calibration offset: {0} (added to input wavelengths)".format(calibration[1]))
         print("spectrum: intensity calibration offset factor: {0}".format(calibration[0]))
 
     return wave, spec, calibration, spec_fts_sel, fts.sunit
-
-
-
-def wavelength(wave, spec, wave_fts, spec_fts, wave_ref=None, dwave_ref=0.2,
-        verbose=False):
-    """
-    Calibrate wavelength 
-
-    Arguments:
-        wave: 1D array with wavelengths. Must be of same size as `spec`.
-        spec: 1D array with intensity profile.
-        wave_fts: 1D array with atlas profile wavelengths. Must be of same size
-            as `spec_fts`.
-        spec_fts: 1D array with atlas profile
-
-    Keyword arguments:
-        wave_ref: reference wavelength to clip around in determining line centre
-            wavelength for the wavelength calibration (default None -> determine
-            from profile)
-        dwave_ref: clipping range around reference wavelength to determine line
-            centre minimum from (default 0.2)
-
-    Returns:
-        wave: calibrated wavelength array
-
-    Example:
-        wave_cal = wavelength(spec, wave, spec_fts, wave_fts)
-
-    Author:
-        Gregal Vissers (ISP/SU 2019)
-    """
-    inam = 'wavelength'
-  
-    wave_spacing = np.diff(wave).mean()
-
-    if wave_ref is None:
-        wave_ref = wave[wave.size//2]
-
-    wave_fine = np.arange((wave.size-1)*100.+1)*wave_spacing/100. + wave[0]
-    spline = interp1d(wave, spec, kind='cubic')
-    spec_fine = spline(wave_fine)
-    widx = np.where((wave_fine >= wave_ref-dwave_ref) & \
-            (wave_fine <= wave_ref+dwave_ref))[0]
-    wave_min = wave_fine[widx[np.argmin(spec_fine[widx])]]
-
-    widx = np.where((wave_fts >= wave_ref-dwave_ref) & \
-            (wave_fts <= wave_ref+dwave_ref))[0]
-    wave_fts_min = wave_fts[widx[np.argmin(spec_fts[widx])]]
-
-    wave_offset = wave_fts_min - wave_min
-    if verbose is True:
-        print("{0}: input profile minimum at: {1}".format(inam, wave_min))
-        print("{0}: atlas profile minimum at: {1}".format(inam, wave_fts_min))
-        print("{0}: calibrated offset: {1} (added to input wavelengths)".format(inam, wave_offset))
-
-    wave += wave_offset
-
-    return wave
-
 
 def limbdarkening(wave, mu=1.0, nm=False):
     """
