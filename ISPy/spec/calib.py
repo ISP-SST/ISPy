@@ -13,13 +13,13 @@ from ipdb import set_trace as stop
 
 import atlas 
 
-def fitobs(wave_obs, spec_obs, wave_fts, spec_fts, bounds=None):
+def fitobs(wave_obs, spec_obs, wave_fts, spec_fts, bounds=None, weights=None):
     def func_to_optimise(x):
       x0 = x[0]
       x1 = x[1]
       ospec = spec_obs * x0
       atlas = np.interp(wave_obs, wave_fts-x1, spec_fts)
-      nchi2 = chi2(atlas, ospec)
+      nchi2 = chi2(atlas, ospec, weights=weights)
       return nchi2
 
     if bounds is None:
@@ -29,16 +29,12 @@ def fitobs(wave_obs, spec_obs, wave_fts, spec_fts, bounds=None):
     return optim.x
 
 def chi2(profile1, profile2, weights=None):
-    if weights is None:
-        weights = np.ones_like(profile1)
-        weights[:3] = 20.
-        weights[-3:] = 20.
     return np.sum( (profile1-profile2)**2 * weights)
 
 
 def spectrum(wave, spec, mu=1.0, spec_avg=None, cgs=True,
         si=False, perHz=True, calib_wave=False, wave_ref=None,
-        wave_idx=None, instrument_profile=None, verbose=False):
+        wave_idx=None, extra_weight=20., instrument_profile=None, verbose=False):
     """
     Calibrate spectrum intensity in SI or cgs units
 
@@ -91,6 +87,8 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, cgs=True,
     
     if wave_idx is None:
         wave_idx = np.arange(wave.size)
+    else:
+        wave_idx = np.atleast_1d(wave_idx)
 
     # Get atlas profile for range +/- 0.3
     fts = atlas.atlas()
@@ -115,7 +113,11 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, cgs=True,
     else:
         spec_fts = spec_fts_orig
 
-    calibration = fitobs(wave, profile, wave_fts, spec_fts)
+    weights = np.ones_like(wave)
+    if wave_idx.size is not wave.size:
+        weights[wave_idx] = extra_weight
+
+    calibration = fitobs(wave, profile, wave_fts, spec_fts, weights=weights)
 
     # Calibrate wavelength
     if calib_wave is True:
