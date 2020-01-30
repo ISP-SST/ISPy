@@ -28,15 +28,16 @@ def fitobs(wave_obs, spec_obs, wave_fts, spec_fts, bounds=None, weights=None):
 
     return optim.x
 
+
 def chi2(profile1, profile2, weights=None):
     return np.sum( (profile1-profile2)**2 * weights)
 
 
-def spectrum(wave, spec, mu=1.0, spec_avg=None, cgs=True,
-        si=False, perHz=True, calib_wave=False, wave_ref=None,
-        wave_idx=None, extra_weight=20., instrument_profile=None, verbose=False):
+def spectrum(wave, spec, mu=1.0, spec_avg=None, cgs=True, si=False, perHz=True,
+    calib_wave=False, wave_idx=None, extra_weight=20., instrument_profile=None,
+    verbose=False):
     """
-    Calibrate spectrum intensity in SI or cgs units
+    Calibrate spectrum intensity in SI or cgs units, as well as wavelength
 
     Arguments:
         wave: 1D array with wavelengths. Must be of same size as `spec`.
@@ -54,11 +55,11 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, cgs=True,
         perHz: output calibration per frequency unit (default True)
         calib_wave: perform wavelength calibration prior to intensity
             calibration (default False)
-        wave_ref: reference wavelength to clip around in determining line centre
-            wavelength for the wavelength calibration (default None -> determine
-            from profile)
-        wave_idx: wavelength indices to determine the average calibration offset
-            over (default None -> use all wavelengths)
+        wave_idx: wavelength indices that will get `extra_weight` during while
+            fitting the intensity profile (default None -> all wavelengths get
+            equal weight)
+        extra_weight: amount of extra weight to give selected wavelength
+            positions as specified by `wave_idx` (default 20)
         instrument_profile: 2D array with wavelength spacing (starting at 0) and
             instrumental profile to convolve the atlas profile with
 
@@ -75,7 +76,7 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, cgs=True,
             wave, cgs=True, calib_wave=True, wave_idx=[0,1,-2,-1])
 
     Author:
-        Gregal Vissers (ISP/SU 2019)
+        Gregal Vissers, Carlos Diaz Baso (ISP/SU 2019-2020)
     """
 
     wave = np.copy(wave)
@@ -119,16 +120,15 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, cgs=True,
 
     calibration = fitobs(wave, profile, wave_fts, spec_fts, weights=weights)
 
-    # Calibrate wavelength
+    # Apply calibration and prepare output
     if calib_wave is True:
         wave += calibration[1]
+    spec *= calibration[0]
 
     spec_fts_sel = []
     for ww in range(wave.size):
         widx = np.argmin(np.abs(wave_fts - wave[ww]))
         spec_fts_sel.append(spec_fts[widx])
-
-    spec *= calibration[0]
 
     if verbose is True:
         plot_scale_factor = 1.e-5
@@ -150,6 +150,7 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, cgs=True,
         print("spectrum: intensity calibration offset factor: {0}".format(calibration[0]))
 
     return wave, spec, calibration, spec_fts_sel, fts.sunit
+
 
 def limbdarkening(wave, mu=1.0, nm=False):
     """
