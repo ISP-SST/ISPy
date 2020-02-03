@@ -62,7 +62,7 @@ def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas, bounds=None, wei
 
 def spectrum(wave, spec, mu=1.0, spec_avg=None, cgs=True, si=False, perHz=True,
     calib_wave=False, wave_idx=None, extra_weight=20., bounds=None,
-    instrument_profile=None, verbose=False):
+    instrument_profile=None, atlas_range=0.5, verbose=False):
     """
     Calibrate spectrum intensity (in SI or cgs units) and wavelength by
     simultaneously fitting offsets given an atlas profile
@@ -93,6 +93,10 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, cgs=True, si=False, perHz=True,
             and wavelength offset (defaults None)
         instrument_profile: 2D array with wavelength spacing (starting at 0) and
             instrumental profile to convolve the atlas profile with
+        atlas_range: get atlas profile with for the range +/- this value
+            (defaults 0.5)
+        verbose: output calibration plot and offset values to command line
+            (defaults False)
 
     Returns:
         wave: calibrated wavelength array
@@ -124,7 +128,9 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, cgs=True, si=False, perHz=True,
 
     # Get atlas profile for range +/- 0.3
     fts = atlas.atlas()
-    wave_fts, spec_fts_orig, cont_fts = fts.get(wave[0]-0.3, wave[-1]+0.3, cgs=cgs, si=si, perHz=perHz)
+    atlas_range = np.abs(atlas_range)
+    wave_fts, spec_fts_orig, cont_fts = fts.get(wave[0]-atlas_range,
+            wave[-1]+atlas_range, cgs=cgs, si=si, perHz=perHz)
 
     # Correct for limb-darkening
     limbdark_factor = limbdarkening(wave_fts, mu=mu)
