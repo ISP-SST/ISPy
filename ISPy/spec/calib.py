@@ -42,6 +42,8 @@ def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas, bounds=None, wei
     Author: Gregal Vissers, Carlos Diaz Baso (ISP/SU 2020)
     """
 
+    if weights is None: weights = np.ones_like(wave_obs)
+
     def func_to_optimise(x):
       x0 = x[0]
       x1 = x[1]
