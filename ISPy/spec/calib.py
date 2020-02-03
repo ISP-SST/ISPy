@@ -151,7 +151,7 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, cgs=True, si=False, perHz=True,
     if wave_idx.size is not wave.size:
         weights[wave_idx] = extra_weight
 
-    calibration = fitobs(wave, profile, wave_fts, spec_fts, bounds=bounds, weights=weights)
+    calibration = get_calibration(wave, profile, wave_fts, spec_fts, bounds=bounds, weights=weights)
 
     # Apply calibration and prepare output
     if calib_wave is True:
