@@ -7,6 +7,7 @@ from scipy.ndimage import convolve
 from scipy.optimize import differential_evolution
 from astropy.io import fits
 from astropy.table import Table
+from astropy import units as u
 
 import matplotlib.pyplot as plt
 from ipdb import set_trace as stop
@@ -62,7 +63,7 @@ def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas, bounds=None, wei
 
 def spectrum(wave, spec, mu=1.0, spec_avg=None, atlas_range=0.5, wave_idx=None,
         extra_weight=20., bounds=None, instrument_profile=None,
-        calib_wave=False, cgs=True, si=False, perHz=True, verbose=False):
+        calib_wave=False, cgs=True, si=False, perHz=True, qsdc_calib=False, verbose=False):
     """
     Calibrate spectrum intensity (in SI or cgs units) and wavelength by
     simultaneously fitting offsets given an atlas profile
@@ -98,6 +99,9 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, atlas_range=0.5, wave_idx=None,
         cgs: output calibration in cgs units (default True)
         si: output calibration in SI units (default False)
         perHz: output calibration per frequency unit (default True)
+        qsdc_calib: output calibration as fraction of quiet Sun disc centre
+            continuum intensity (default False). If set, overrides `cgs`, `si`
+            and `perHz`
         verbose: output calibration plot and offset values to command line
             (defaults False)
 
@@ -138,7 +142,6 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, atlas_range=0.5, wave_idx=None,
     # Correct for limb-darkening
     limbdark_factor = limbdarkening(wave_fts, mu=mu)
     spec_fts_orig *= limbdark_factor
-    cont_fts *= limbdark_factor
 
     # Apply instrument profile if provided
     if instrument_profile is not None:
@@ -152,7 +155,7 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, atlas_range=0.5, wave_idx=None,
         kernel /= np.sum(kernel)
         spec_fts = convolve(spec_fts_orig, kernel, mode='nearest')
     else:
-        spec_fts = spec_fts_orig
+        spec_fts = np.copy(spec_fts_orig)
 
     weights = np.ones_like(wave)
     if wave_idx.size is not wave.size:
@@ -170,8 +173,20 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, atlas_range=0.5, wave_idx=None,
         widx = np.argmin(np.abs(wave_fts - wave[ww]))
         spec_fts_sel.append(spec_fts[widx])
 
+    if qsdc_calib is True:
+        spec /= cont_fts[0]
+        spec_fts /= cont_fts[0]
+        spec_fts_orig /= cont_fts[0]
+        spec_fts_sel /= cont_fts[0]
+        sunit = u.dimensionless_unscaled
+    else:
+        sunit = fts.sunit
+
     if verbose is True:
-        plot_scale_factor = 1.e-5
+        if qsdc_calib is True:
+            plot_scale_factor = 1.0
+        else:
+            plot_scale_factor = 1.e-5
         fig, ax = plt.subplots()
         legend_items = ('observed profile', 'selected points', 'atlas profile')
         ax.plot(wave, spec/plot_scale_factor, '.')
@@ -180,7 +195,10 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, atlas_range=0.5, wave_idx=None,
         if instrument_profile is not None:
             ax.plot(wave_fts, spec_fts/plot_scale_factor,'--')
             legend_items += ('atlas convolved with instrument profile',)
-        ax.set_ylabel('intensity ['+r'$\times10^{-5}$'+' {0}]'.format(fts.sunit.to_string()))
+        if qsdc_calib is True:
+            ax.set_ylabel('intensity relative to disc centre continuum [dimensionless]')
+        else:
+            ax.set_ylabel('intensity ['+r'$\times10^{-5}$'+' {0}]'.format(sunit.to_string()))
         ax.set_xlabel('wavelength [{0}]'.format(fts.wunit.to_string()))
         ax.legend(legend_items)
         ax.set_title('ISPy: calib.spectrum() results')
@@ -188,8 +206,10 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, atlas_range=0.5, wave_idx=None,
         if calib_wave is True:
             print("spectrum: wavelength calibration offset: {0} (added to input wavelengths)".format(calibration[1]))
         print("spectrum: intensity calibration offset factor: {0}".format(calibration[0]))
+        if qsdc_calib is True:
+            print("spectrum: STiC calibration offset factor: {0}".format(cont_fts[0]))
 
-    return wave, spec, calibration, spec_fts_sel, fts.sunit
+    return wave, spec, calibration, spec_fts_sel, sunit
 
 
 def limbdarkening(wave, mu=1.0, nm=False):
