@@ -124,10 +124,10 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, atlas_range=0.5, wave_idx=None,
     wave = np.copy(wave)
     spec = np.copy(spec)
     if spec_avg is not None:
-        profile = spec_avg
+        profile = np.copy(spec_avg)
     else:
         if spec.ndim == 1:
-            profile = spec
+            profile = np.copy(spec)
         else:
             raise ValueError("`spec` must be a 1D array when `spec_avg` is not set")
     
@@ -195,10 +195,11 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, atlas_range=0.5, wave_idx=None,
             plot_scale_factor = 1.0
         else:
             plot_scale_factor = 1.e-5
+        profile *= calibration[0]
         fig, ax = plt.subplots()
         legend_items = ('observed profile', 'selected points', 'atlas profile')
-        ax.plot(wave, spec/plot_scale_factor, '.')
-        ax.plot(wave[wave_idx], spec[wave_idx]/plot_scale_factor, '+')
+        ax.plot(wave, profile/plot_scale_factor, '.')
+        ax.plot(wave[wave_idx], profile[wave_idx]/plot_scale_factor, '+')
         ax.plot(wave_fts, spec_fts_orig/plot_scale_factor)
         if instrument_profile is not None:
             ax.plot(wave_fts, spec_fts/plot_scale_factor,'--')
