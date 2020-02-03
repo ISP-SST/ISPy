@@ -13,17 +13,17 @@ from ipdb import set_trace as stop
 
 import atlas 
 
-def fitobs(wave_obs, spec_obs, wave_fts, spec_fts, bounds=None, weights=None):
+def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas, bounds=None, weights=None):
     def func_to_optimise(x):
       x0 = x[0]
       x1 = x[1]
       ospec = spec_obs * x0
-      atlas = np.interp(wave_obs, wave_fts-x1, spec_fts)
+      atlas = np.interp(wave_obs, wave_atlas-x1, spec_atlas)
       nchi2 = chi2(atlas, ospec, weights=weights)
       return nchi2
 
     if bounds is None:
-        bounds = [(spec_fts[0]/spec_obs[0]*0.02, spec_fts[0]/spec_obs[0]*50.), (-0.3, 0.3)]
+        bounds = [(spec_atlas[0]/spec_obs[0]*0.02, spec_atlas[0]/spec_obs[0]*50.), (-0.3, 0.3)]
     optim = differential_evolution(func_to_optimise, bounds)
 
     return optim.x
