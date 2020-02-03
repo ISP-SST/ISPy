@@ -126,7 +126,10 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, atlas_range=0.5, wave_idx=None,
     if spec_avg is not None:
         profile = spec_avg
     else:
-        profile = spec
+        if spec.ndim == 1:
+            profile = spec
+        else:
+            raise ValueError("`spec` must be a 1D array when `spec_avg` is not set")
     
     if wave_idx is None:
         wave_idx = np.arange(wave.size)
