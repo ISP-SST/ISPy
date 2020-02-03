@@ -178,12 +178,17 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, atlas_range=0.5, wave_idx=None,
         spec_fts /= cont_fts[0]
         spec_fts_orig /= cont_fts[0]
         spec_fts_sel /= cont_fts[0]
+        calibration[0] /= cont_fts[0]
         sunit = u.dimensionless_unscaled
     else:
         sunit = fts.sunit
 
     if verbose is True:
+        if calib_wave is True:
+            print("spectrum: wavelength calibration offset: {0} (added to input wavelengths)".format(calibration[1]))
+        print("spectrum: intensity calibration offset factor: {0}".format(calibration[0]))
         if qsdc_calib is True:
+            print("spectrum: STiC calibration offset factor: {0}".format(cont_fts[0]))
             plot_scale_factor = 1.0
         else:
             plot_scale_factor = 1.e-5
@@ -203,11 +208,6 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, atlas_range=0.5, wave_idx=None,
         ax.legend(legend_items)
         ax.set_title('ISPy: calib.spectrum() results')
         plt.show()
-        if calib_wave is True:
-            print("spectrum: wavelength calibration offset: {0} (added to input wavelengths)".format(calibration[1]))
-        print("spectrum: intensity calibration offset factor: {0}".format(calibration[0]))
-        if qsdc_calib is True:
-            print("spectrum: STiC calibration offset factor: {0}".format(cont_fts[0]))
 
     return wave, spec, calibration, spec_fts_sel, sunit
 
