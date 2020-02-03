@@ -14,6 +14,34 @@ from ipdb import set_trace as stop
 import atlas 
 
 def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas, bounds=None, weights=None):
+    """
+    Get calibration offsets from fitting `spec_obs` to `spec_atlas`, assuming
+    wavelength grids `wave_obs` and `wave_atlas`
+
+    Arguments:
+        wave_obs: 1D array with observed wavelengths. Must be of same size as
+            `spec_obs`.
+        spec_obs: 1D array with observed intensities.
+        wave_atlas: 1D array with wavelengths corresponding to `spec_atlas`.
+        spec_atlas: 1D array with atlas intensity profile (e.g. from
+            `ISpy.spec.atlas`)
+
+    Keyword arguments:
+        bounds: list of tuples [(ifact_low, ifact_upp), (woff_low, woff_upp)]
+            suggesting lower and upper bounds for fitting the intensity factor
+            and wavelength offset (defaults to 1/50th and 50 times the fraction
+            of `spec_atlas` to `spec_obs` for ifact, and ±0.3 for woff)
+        weights: array of weights of same size as `wave_obs` used in determining
+            chi-square (defaults to 1 for every wavelenght position)
+
+    Returns:
+        calibration: 2-element array [ifact, woff] with multiplication factor
+        and wavelength offset to be applied to `spec_obs` and `wave_obs`
+        respectively
+
+    Author: Gregal Vissers, Carlos Diaz Baso (ISP/SU 2020)
+    """
+
     def func_to_optimise(x):
       x0 = x[0]
       x1 = x[1]
@@ -25,8 +53,9 @@ def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas, bounds=None, wei
     if bounds is None:
         bounds = [(spec_atlas[0]/spec_obs[0]*0.02, spec_atlas[0]/spec_obs[0]*50.), (-0.3, 0.3)]
     optim = differential_evolution(func_to_optimise, bounds)
+    calibration = optim.x
 
-    return optim.x
+    return calibration
 
 
 def chi2(profile1, profile2, weights=None):
