@@ -47,8 +47,8 @@ def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas, bounds=None, wei
       x1 = x[1]
       ospec = spec_obs * x0
       atlas = np.interp(wave_obs, wave_atlas-x1, spec_atlas)
-      nchi2 = chi2(atlas, ospec, weights=weights)
-      return nchi2
+      chi2 = np.sum( (atlas-ospec)**2 * weights)
+      return chi2
 
     if bounds is None:
         bounds = [(spec_atlas[0]/spec_obs[0]*0.02, spec_atlas[0]/spec_obs[0]*50.), (-0.3, 0.3)]
@@ -56,10 +56,6 @@ def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas, bounds=None, wei
     calibration = optim.x
 
     return calibration
-
-
-def chi2(profile1, profile2, weights=None):
-    return np.sum( (profile1-profile2)**2 * weights)
 
 
 def spectrum(wave, spec, mu=1.0, spec_avg=None, cgs=True, si=False, perHz=True,
