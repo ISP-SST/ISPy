@@ -39,7 +39,7 @@ def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas, bounds=None, wei
         and wavelength offset to be applied to `spec_obs` and `wave_obs`
         respectively
 
-    Author: Gregal Vissers, Carlos Diaz Baso (ISP/SU 2020)
+    Author: Carlos Diaz Baso, Gregal Vissers (ISP/SU 2020)
     """
 
     if weights is None: weights = np.ones_like(wave_obs)
@@ -60,29 +60,29 @@ def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas, bounds=None, wei
     return calibration
 
 
-def spectrum(wave, spec, mu=1.0, spec_avg=None, cgs=True, si=False, perHz=True,
-    calib_wave=False, wave_idx=None, extra_weight=20., bounds=None,
-    instrument_profile=None, atlas_range=0.5, verbose=False):
+def spectrum(wave, spec, mu=1.0, spec_avg=None, atlas_range=0.5, wave_idx=None,
+        extra_weight=20., bounds=None, instrument_profile=None,
+        calib_wave=False, cgs=True, si=False, perHz=True, verbose=False):
     """
     Calibrate spectrum intensity (in SI or cgs units) and wavelength by
     simultaneously fitting offsets given an atlas profile
 
     Arguments:
-        wave: 1D array with wavelengths. Must be of same size as `spec`.
-        spec: 1D array with intensity profile in data counts to calibrate. If
-            keyword argument `spec_avg` is None, then `spec` will be used for
-            the intensity (and wavelength) calibration.
+        wave: 1D array with wavelengths.
+        spec: data (cube) with intensity profile(s) in counts to
+            apply calibration to. May be higher dimension cube (e.g. [nt, ny,
+            nx, nwave, nstokes]). If keyword argument `spec_avg` is None, then
+            `spec` is assumed to be a 1D array of Stokes I intesities of same
+            size as `wave` and will be used to determine the intensity
+            calibration offset factor.
 
     Keyword arguments:
         mu: cosine of heliocentric viewing angle of the observations (defaults
             1.0 -> disc centre)
         spec_avg: averaged intensity profile to use for calibration
             (default None -> use `spec` to calibrate on)
-        cgs: output calibration in cgs units (default True)
-        si: output calibration in SI units (default False)
-        perHz: output calibration per frequency unit (default True)
-        calib_wave: perform wavelength calibration prior to intensity
-            calibration (default False)
+        atlas_range: get atlas profile with for the range +/- this value
+            (defaults 0.5)
         wave_idx: wavelength indices that will get `extra_weight` during while
             fitting the intensity profile (default None -> all wavelengths get
             equal weight)
@@ -93,8 +93,11 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, cgs=True, si=False, perHz=True,
             and wavelength offset (defaults None)
         instrument_profile: 2D array with wavelength spacing (starting at 0) and
             instrumental profile to convolve the atlas profile with
-        atlas_range: get atlas profile with for the range +/- this value
-            (defaults 0.5)
+        calib_wave: perform wavelength calibration prior to intensity
+            calibration (default False)
+        cgs: output calibration in cgs units (default True)
+        si: output calibration in SI units (default False)
+        perHz: output calibration per frequency unit (default True)
         verbose: output calibration plot and offset values to command line
             (defaults False)
 
