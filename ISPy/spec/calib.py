@@ -14,7 +14,9 @@ from ipdb import set_trace as stop
 
 import atlas 
 
-def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas, bounds=None, weights=None):
+def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas,
+        calib_at_dc=False, mu=1.0, instrument_profile=None, bounds=None,
+        wave_idx=None, extra_weight=20.):
     """
     Get calibration offsets from fitting `spec_obs` to `spec_atlas`, assuming
     wavelength grids `wave_obs` and `wave_atlas`
@@ -43,7 +45,31 @@ def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas, bounds=None, wei
     Author: Carlos Diaz Baso, Gregal Vissers (ISP/SU 2020)
     """
 
-    if weights is None: weights = np.ones_like(wave_obs)
+    if wave_idx is None:
+        wave_idx = np.arange(wave.size)
+    else:
+        wave_idx = np.atleast_1d(wave_idx)
+
+    # Correct for limb-darkening if profile to calibrate on is not from
+    # disc centre (and presumably at same mu as observations)
+    if calib_at_dc is False:
+        spec_atlas = spec_atlas * limbdarkening(wave_atlas, mu=mu)
+
+    # Apply instrument profile if provided
+    if instrument_profile is not None:
+        wave_ipr_spacing = np.diff(instrument_profile[:,0]).mean()
+        wave_atlas_spacing = np.diff(wave_atlas).mean()
+        nw_ipr = instrument_profile.shape[0]
+        wave_ipr_fine = np.arange((nw_ipr-1) * wave_ipr_spacing / wave_atlas_spacing + 1) \
+                * wave_atlas_spacing
+        kernel = np.interp(wave_ipr_fine, instrument_profile[:,0],
+                instrument_profile[:,1])
+        kernel /= np.sum(kernel)
+        spec_atlas = convolve(spec_atlas, kernel, mode='nearest')
+
+    weights = np.ones_like(wave_obs)
+    if wave_idx.size is not wave_obs.size:
+        weights[wave_idx] = extra_weight
 
     def func_to_optimise(x):
       x0 = x[0]
@@ -57,6 +83,12 @@ def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas, bounds=None, wei
         bounds = [(spec_atlas[0]/spec_obs[0]*0.02, spec_atlas[0]/spec_obs[0]*50.), (-0.3, 0.3)]
     optim = differential_evolution(func_to_optimise, bounds)
     calibration = optim.x
+
+    # Apply limb-darkening correction if calibration was on profile from disc
+    # centre and data was not; for calib_at_dc is False, limb-darkening is already in
+    # optimised offset
+    if (calib_at_dc is True) and (mu != 1.0):
+        calibration[0] *= np.mean(limbdarkening(wave_atlas, mu=mu))
 
     return calibration
 
@@ -133,11 +165,6 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, calib_at_dc=False,
             profile = np.copy(spec)
         else:
             raise ValueError("`spec` must be a 1D array when `spec_avg` is not set")
-    
-    if wave_idx is None:
-        wave_idx = np.arange(wave.size)
-    else:
-        wave_idx = np.atleast_1d(wave_idx)
 
     # Get atlas profile for range +/- 0.3
     fts = atlas.atlas()
@@ -145,41 +172,21 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, calib_at_dc=False,
     wave_fts, spec_fts_orig, cont_fts = fts.get(wave[0]-atlas_range,
             wave[-1]+atlas_range, cgs=cgs, si=si, perHz=perHz)
 
-    # Correct for limb-darkening if profile to calibrate on is not from
-    # disc centre (and presumably at same mu as observations)
-    if calib_at_dc is False:
-        spec_fts_orig *= limbdarkening(wave_fts, mu=mu)
-
-    # Apply instrument profile if provided
-    if instrument_profile is not None:
-        wave_ipr_spacing = np.diff(instrument_profile[:,0]).mean()
-        wave_fts_spacing = np.diff(wave_fts).mean()
-        nw_ipr = instrument_profile.shape[0]
-        wave_ipr_fine = np.arange((nw_ipr-1) * wave_ipr_spacing / wave_fts_spacing + 1) \
-                * wave_fts_spacing
-        kernel = np.interp(wave_ipr_fine, instrument_profile[:,0],
-                instrument_profile[:,1])
-        kernel /= np.sum(kernel)
-        spec_fts = convolve(spec_fts_orig, kernel, mode='nearest')
-    else:
-        spec_fts = np.copy(spec_fts_orig)
-
-    weights = np.ones_like(wave)
-    if wave_idx.size is not wave.size:
-        weights[wave_idx] = extra_weight
-
-    calibration = get_calibration(wave, profile, wave_fts, spec_fts, bounds=bounds, weights=weights)
-
-    # Apply limb-darkening correction if calibration was on profile from disc
-    # centre and data was not; for calib_at_dc is False, limb-darkening is already in
-    # get_calibration() output
-    if (calib_at_dc is True) and (spec_avg is not None):
-        calibration[0] *= np.mean(limbdarkening(wave_fts, mu=mu))
+    # Get calibration offset factor and shift
+    calibration = get_calibration(wave, profile, wave_fts, spec_fts_orig,
+            instrument_profile=instrument_profile,
+            bounds=bounds, calib_at_dc=calib_at_dc, mu=mu, wave_idx=wave_idx,
+            extra_weight=extra_weight)
 
     # Apply calibration and prepare output
     if calib_wave is True:
         wave += calibration[1]
     spec *= calibration[0]
+
+    # Apply limb-darkening correction on atlas if need be
+    if (mu != 1.0):
+        spec_fts_orig = spec_fts_orig * np.mean(limbdarkening(wave_fts, mu=mu))
+    spec_fts = np.copy(spec_fts_orig)
 
     spec_fts_sel = []
     for ww in range(wave.size):
