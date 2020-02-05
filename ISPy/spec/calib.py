@@ -15,8 +15,8 @@ from ipdb import set_trace as stop
 import atlas 
 
 def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas,
-        calib_at_dc=False, mu=1.0, instrument_profile=None, bounds=None,
-        wave_idx=None, extra_weight=20.):
+        calib_at_dc=False, mu=1.0, bounds=None, wave_idx=None,
+        extra_weight=20.):
     """
     Get calibration offsets from fitting `spec_obs` to `spec_atlas`, assuming
     wavelength grids `wave_obs` and `wave_atlas`
@@ -54,10 +54,6 @@ def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas,
     # disc centre (and presumably at same mu as observations)
     if calib_at_dc is False:
         spec_atlas = spec_atlas * limbdarkening(wave_atlas, mu=mu)
-
-    # Apply instrument profile if provided
-    if instrument_profile is not None:
-        spec_atlas = convolve_atlas(wave_atlas, spec_atlas, instrument_profile)
 
     weights = np.ones_like(wave_obs)
     if wave_idx.size is not wave_obs.size:
@@ -182,8 +178,7 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, calib_at_dc=False,
     else:
         spec_fts = np.copy(spec_fts_dc)
 
-    # Get calibration offset factor and shift (if provided, instrument profile
-    # applied implicitly in spec_fts)
+    # Get calibration offset factor and shift
     calibration = get_calibration(wave, profile, wave_fts, spec_fts,
             bounds=bounds, calib_at_dc=calib_at_dc, mu=mu, wave_idx=wave_idx,
             extra_weight=extra_weight)
