@@ -61,9 +61,10 @@ def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas, bounds=None, wei
     return calibration
 
 
-def spectrum(wave, spec, mu=1.0, spec_avg=None, atlas_range=0.5, wave_idx=None,
-        extra_weight=20., bounds=None, instrument_profile=None,
-        calib_wave=False, cgs=True, si=False, perHz=True, qsdc_calib=False, verbose=False):
+def spectrum(wave, spec, mu=1.0, spec_avg=None, calib_at_dc=False,
+        atlas_range=0.5, wave_idx=None, extra_weight=20., bounds=None,
+        instrument_profile=None, calib_wave=False, cgs=True, si=False,
+        perHz=True, qsdc_calib=False, verbose=False):
     """
     Calibrate spectrum intensity (in SI or cgs units) and wavelength by
     simultaneously fitting offsets given an atlas profile
@@ -82,6 +83,8 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, atlas_range=0.5, wave_idx=None,
             1.0 -> disc centre)
         spec_avg: averaged intensity profile to use for calibration
             (default None -> use `spec` to calibrate on)
+        calib_at_dc: calibrate assuming `spec_avg` (or `spec`, if `spec_avg` is
+            None) was taken at disc centre (defaults False).
         atlas_range: get atlas profile with for the range +/- this value
             (defaults 0.5)
         wave_idx: wavelength indices that will get `extra_weight` during while
@@ -142,9 +145,10 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, atlas_range=0.5, wave_idx=None,
     wave_fts, spec_fts_orig, cont_fts = fts.get(wave[0]-atlas_range,
             wave[-1]+atlas_range, cgs=cgs, si=si, perHz=perHz)
 
-    # Correct for limb-darkening
-    limbdark_factor = limbdarkening(wave_fts, mu=mu)
-    spec_fts_orig *= limbdark_factor
+    # Correct for limb-darkening if profile to calibrate on is not from
+    # disc centre (and presumably at same mu as observations)
+    if calib_at_dc is False:
+        spec_fts_orig *= limbdarkening(wave_fts, mu=mu)
 
     # Apply instrument profile if provided
     if instrument_profile is not None:
@@ -165,6 +169,12 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, atlas_range=0.5, wave_idx=None,
         weights[wave_idx] = extra_weight
 
     calibration = get_calibration(wave, profile, wave_fts, spec_fts, bounds=bounds, weights=weights)
+
+    # Apply limb-darkening correction if calibration was on profile from disc
+    # centre and data was not; for calib_at_dc is False, limb-darkening is already in
+    # get_calibration() output
+    if (calib_at_dc is True) and (spec_avg is not None):
+        calibration[0] *= np.mean(limbdarkening(wave_fts, mu=mu))
 
     # Apply calibration and prepare output
     if calib_wave is True:
