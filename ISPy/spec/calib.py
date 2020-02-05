@@ -1,3 +1,4 @@
+ # -*- coding: utf-8 -*-
 import os
 
 import numpy as np
@@ -214,7 +215,9 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, calib_at_dc=False,
 
     # Apply limb-darkening correction on atlas if need be
     if (mu != 1.0):
-        spec_fts *= np.mean(limbdarkening(wave_fts, mu=mu))
+        limbdark_factor = np.mean(limbdarkening(wave_fts, mu=mu))
+        spec_fts *= limbdark_factor
+        spec_fts_dc *= limbdark_factor
 
     spec_fts_sel = []
     for ww in range(wave.size):
@@ -242,7 +245,8 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, calib_at_dc=False,
             plot_scale_factor = 1.e-5
         profile *= calibration[0]
         fig, ax = plt.subplots()
-        legend_items = ('observed profile', 'selected points', 'atlas profile')
+        legend_items = ('observed profile', 'selected points', 
+            'atlas profile at '+u'μ={0}'.format(mu))
         ax.plot(wave, profile/plot_scale_factor, '.')
         ax.plot(wave[wave_idx], profile[wave_idx]/plot_scale_factor, '+')
         ax.plot(wave_fts, spec_fts_dc/plot_scale_factor)
