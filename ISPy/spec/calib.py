@@ -173,14 +173,14 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, calib_at_dc=False,
     # Get atlas profile for range +/- 0.3
     fts = atlas.atlas()
     atlas_range = np.abs(atlas_range)
-    wave_fts, spec_fts_orig, cont_fts = fts.get(wave[0]-atlas_range,
+    wave_fts, spec_fts_dc, cont_fts = fts.get(wave[0]-atlas_range,
             wave[-1]+atlas_range, cgs=cgs, si=si, perHz=perHz)
 
     # Apply instrument profile if provided
     if instrument_profile is not None:
-        spec_fts = convolve_atlas(wave_fts, spec_fts_orig, instrument_profile)
+        spec_fts = convolve_atlas(wave_fts, spec_fts_dc, instrument_profile)
     else:
-        spec_fts = np.copy(spec_fts_orig)
+        spec_fts = np.copy(spec_fts_dc)
 
     # Get calibration offset factor and shift (if provided, instrument profile
     # applied implicitly in spec_fts)
@@ -205,7 +205,7 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, calib_at_dc=False,
     if qsdc_calib is True:
         spec /= cont_fts[0]
         spec_fts /= cont_fts[0]
-        spec_fts_orig /= cont_fts[0]
+        spec_fts_dc /= cont_fts[0]
         spec_fts_sel /= cont_fts[0]
         calibration[0] /= cont_fts[0]
         sunit = u.dimensionless_unscaled
@@ -226,7 +226,7 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, calib_at_dc=False,
         legend_items = ('observed profile', 'selected points', 'atlas profile')
         ax.plot(wave, profile/plot_scale_factor, '.')
         ax.plot(wave[wave_idx], profile[wave_idx]/plot_scale_factor, '+')
-        ax.plot(wave_fts, spec_fts_orig/plot_scale_factor)
+        ax.plot(wave_fts, spec_fts_dc/plot_scale_factor)
         if instrument_profile is not None:
             ax.plot(wave_fts, spec_fts/plot_scale_factor,'--')
             legend_items += ('atlas convolved with instrument profile',)
