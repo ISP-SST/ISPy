@@ -14,9 +14,8 @@ from ipdb import set_trace as stop
 
 import atlas 
 
-def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas,
-        calib_at_dc=False, mu=1.0, bounds=None, wave_idx=None,
-        extra_weight=20.):
+def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas, mu=1.0,
+        calib_at_dc=False, wave_idx=None, extra_weight=20., bounds=None):
     """
     Get calibration offsets from fitting `spec_obs` to `spec_atlas`, assuming
     wavelength grids `wave_obs` and `wave_atlas`
@@ -30,12 +29,19 @@ def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas,
             `ISpy.spec.atlas`)
 
     Keyword arguments:
+        mu: cosine of heliocentric viewing angle of the observations (defaults
+            1.0 -> disc centre)
+        calib_at_dc: calibrate assuming `spec_avg` (or `spec`, if `spec_avg` is
+            None) was taken at disc centre (defaults False).
+        wave_idx: wavelength indices that will get `extra_weight` during while
+            fitting the intensity profile (default None -> all wavelengths get
+            equal weight)
+        extra_weight: amount of extra weight to give selected wavelength
+            positions as specified by `wave_idx` (default 20)
         bounds: list of tuples [(ifact_low, ifact_upp), (woff_low, woff_upp)]
             suggesting lower and upper bounds for fitting the intensity factor
             and wavelength offset (defaults to 1/50th and 50 times the fraction
             of `spec_atlas` to `spec_obs` for ifact, and ±0.3 for woff)
-        weights: array of weights of same size as `wave_obs` used in determining
-            chi-square (defaults to 1 for every wavelenght position)
 
     Returns:
         calibration: 2-element array [ifact, woff] with multiplication factor
@@ -82,6 +88,23 @@ def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas,
 
 
 def convolve_atlas(wave_atlas, spec_atlas, instrument_profile):
+    """
+    Convolve spectral profile with instrument profile
+
+    Arguments:
+        wave_atlas: 1D array with wavelengths corresponding to `spec_atlas`.
+        spec_atlas: 1D array with atlas intensity profile (e.g. from
+            `ISpy.spec.atlas`)
+        instrument_profile: 2D array [wave, profile] with wavelength spacing
+            (starting at 0) and instrumental profile to convolve the atlas
+            profile with
+
+    Returns:
+        spec_convolved: 1D array with convolved profile
+
+    Author: Gregal Vissers (ISP/SU 2020)
+    """
+
     wave_ipr_spacing = np.diff(instrument_profile[:,0]).mean()
     wave_atlas_spacing = np.diff(wave_atlas).mean()
     nw_ipr = instrument_profile.shape[0]
@@ -129,8 +152,9 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, calib_at_dc=False,
         bounds: list of tuples [(ifact_low, ifact_upp), (woff_low, woff_upp)]
             suggesting lower and upper bounds for fitting the intensity factor
             and wavelength offset (defaults None)
-        instrument_profile: 2D array with wavelength spacing (starting at 0) and
-            instrumental profile to convolve the atlas profile with
+        instrument_profile: 2D array [wave, profile] with wavelength spacing
+            (starting at 0) and instrumental profile to convolve the atlas
+            profile with
         calib_wave: perform wavelength calibration prior to intensity
             calibration (default False)
         cgs: output calibration in cgs units (default True)
