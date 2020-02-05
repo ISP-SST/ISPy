@@ -156,8 +156,8 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, calib_at_dc=False,
         Gregal Vissers, Carlos Diaz Baso (ISP/SU 2019-2020)
     """
 
-    wave = np.copy(wave)
-    spec = np.copy(spec)
+#    wave = np.copy(wave)
+#    spec = np.copy(spec)
     if spec_avg is not None:
         profile = np.copy(spec_avg)
     else:
@@ -180,8 +180,8 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, calib_at_dc=False,
 
     # Apply calibration and prepare output
     if calib_wave is True:
-        wave += calibration[1]
-    spec *= calibration[0]
+        wave = wave + calibration[1]
+    spec = spec * calibration[0]
 
     # Apply limb-darkening correction on atlas if need be
     if (mu != 1.0):
