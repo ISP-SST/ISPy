@@ -57,15 +57,7 @@ def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas,
 
     # Apply instrument profile if provided
     if instrument_profile is not None:
-        wave_ipr_spacing = np.diff(instrument_profile[:,0]).mean()
-        wave_atlas_spacing = np.diff(wave_atlas).mean()
-        nw_ipr = instrument_profile.shape[0]
-        wave_ipr_fine = np.arange((nw_ipr-1) * wave_ipr_spacing / wave_atlas_spacing + 1) \
-                * wave_atlas_spacing
-        kernel = np.interp(wave_ipr_fine, instrument_profile[:,0],
-                instrument_profile[:,1])
-        kernel /= np.sum(kernel)
-        spec_atlas = convolve(spec_atlas, kernel, mode='nearest')
+        spec_atlas = convolve_atlas(wave_atlas, spec_atlas, instrument_profile)
 
     weights = np.ones_like(wave_obs)
     if wave_idx.size is not wave_obs.size:
@@ -91,6 +83,20 @@ def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas,
         calibration[0] *= np.mean(limbdarkening(wave_atlas, mu=mu))
 
     return calibration
+
+
+def convolve_atlas(wave_atlas, spec_atlas, instrument_profile):
+    wave_ipr_spacing = np.diff(instrument_profile[:,0]).mean()
+    wave_atlas_spacing = np.diff(wave_atlas).mean()
+    nw_ipr = instrument_profile.shape[0]
+    wave_ipr_fine = np.arange((nw_ipr-1) * wave_ipr_spacing / wave_atlas_spacing + 1) \
+            * wave_atlas_spacing
+    kernel = np.interp(wave_ipr_fine, instrument_profile[:,0],
+            instrument_profile[:,1])
+    kernel /= np.sum(kernel)
+    spec_convolved = convolve(spec_atlas, kernel, mode='nearest')
+
+    return spec_convolved
 
 
 def spectrum(wave, spec, mu=1.0, spec_avg=None, calib_at_dc=False,
@@ -156,8 +162,6 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, calib_at_dc=False,
         Gregal Vissers, Carlos Diaz Baso (ISP/SU 2019-2020)
     """
 
-#    wave = np.copy(wave)
-#    spec = np.copy(spec)
     if spec_avg is not None:
         profile = np.copy(spec_avg)
     else:
@@ -172,9 +176,15 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, calib_at_dc=False,
     wave_fts, spec_fts_orig, cont_fts = fts.get(wave[0]-atlas_range,
             wave[-1]+atlas_range, cgs=cgs, si=si, perHz=perHz)
 
-    # Get calibration offset factor and shift
-    calibration = get_calibration(wave, profile, wave_fts, spec_fts_orig,
-            instrument_profile=instrument_profile,
+    # Apply instrument profile if provided
+    if instrument_profile is not None:
+        spec_fts = convolve_atlas(wave_fts, spec_fts_orig, instrument_profile)
+    else:
+        spec_fts = np.copy(spec_fts_orig)
+
+    # Get calibration offset factor and shift (if provided, instrument profile
+    # applied implicitly in spec_fts)
+    calibration = get_calibration(wave, profile, wave_fts, spec_fts,
             bounds=bounds, calib_at_dc=calib_at_dc, mu=mu, wave_idx=wave_idx,
             extra_weight=extra_weight)
 
@@ -185,8 +195,7 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, calib_at_dc=False,
 
     # Apply limb-darkening correction on atlas if need be
     if (mu != 1.0):
-        spec_fts_orig = spec_fts_orig * np.mean(limbdarkening(wave_fts, mu=mu))
-    spec_fts = np.copy(spec_fts_orig)
+        spec_fts *= np.mean(limbdarkening(wave_fts, mu=mu))
 
     spec_fts_sel = []
     for ww in range(wave.size):
