@@ -12,6 +12,14 @@ ISPy.spec.atlas module
    :undoc-members:
    :show-inheritance:
 
+ISPy.spec.calib module
+----------------------
+
+.. automodule:: ISPy.spec.calib
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ISPy.spec.wfa module
 --------------------
 
