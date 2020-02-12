@@ -9,11 +9,9 @@ from scipy.optimize import differential_evolution
 from astropy.io import fits
 from astropy.table import Table
 from astropy import units as u
-
 import matplotlib.pyplot as plt
-from ipdb import set_trace as stop
 
-import atlas 
+from ISPy.spec import atlas
 
 def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas, mu=1.0,
         calib_at_dc=False, wave_idx=None, extra_weight=20., bounds=None):
