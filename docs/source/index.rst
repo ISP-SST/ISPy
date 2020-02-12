@@ -5,18 +5,18 @@
 Welcome to ISPy's documentation!
 ================================
 
-.. include:: ../../README.md
+.. include:: README.rst
 
 
 .. toctree::
    :maxdepth: 3
    :caption: Contents:
 
+Documentation
+=========================
 
-
-Indices and tables
-==================
+Here you will find an index and the list of all the modules with their descriptions. You can also search for words/keywords using the upper left panel.
 
 * :ref:`genindex`
 * :ref:`modindex`
-* :ref:`search`
+.. * :ref:`search`

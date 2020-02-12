@@ -20,7 +20,7 @@ sys.path.insert(0, os.path.abspath('../..'))
 
 project = 'ISPy'
 copyright = '2020, ISP'
-author = 'ISP'
+author = 'Institute for Solar Physics - Stockholm University'
 
 # The full version, including alpha/beta/rc tags
 release = '0.1'
