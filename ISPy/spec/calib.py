@@ -86,7 +86,7 @@ def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas, mu=1.0,
     return calibration
 
 
-def convolve_atlas(wave_atlas, spec_atlas, instrument_profile):
+def convolve_atlas(wave_atlas, spec_atlas, instrument_profile, mode='nearest'):
     """
     Convolve spectral atlas profile with instrument profile (after interpolation
     to the atlas wavelength grid)
@@ -98,6 +98,9 @@ def convolve_atlas(wave_atlas, spec_atlas, instrument_profile):
         instrument_profile: 2D array [wave, profile] with wavelength spacing
             (starting at 0) and instrumental profile to convolve the atlas
             profile with
+
+    Keyword arguments:
+      mode: set interpolation in call to `np.interp` (defaults 'nearest')
 
     Returns:
         spec_convolved: 1D array with convolved profile
@@ -113,7 +116,7 @@ def convolve_atlas(wave_atlas, spec_atlas, instrument_profile):
     kernel = np.interp(wave_ipr_fine, instrument_profile[:,0],
             instrument_profile[:,1])
     kernel /= np.sum(kernel)
-    spec_convolved = convolve(spec_atlas, kernel, mode='nearest')
+    spec_convolved = convolve(spec_atlas, kernel, mode=mode)
 
     return spec_convolved
 
