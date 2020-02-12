@@ -88,7 +88,8 @@ def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas, mu=1.0,
 
 def convolve_atlas(wave_atlas, spec_atlas, instrument_profile):
     """
-    Convolve spectral profile with instrument profile
+    Convolve spectral atlas profile with instrument profile (after interpolation
+    to the atlas wavelength grid)
 
     Arguments:
         wave_atlas: 1D array with wavelengths corresponding to `spec_atlas`.
