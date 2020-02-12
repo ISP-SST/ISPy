@@ -1,5 +1,7 @@
- __pycache__/
+__pycache__/
  *.py[cod]
 
+# sphinx build folder
+docs/build
 
 .DS_Store
