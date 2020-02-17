@@ -92,7 +92,8 @@ def setup_package():
     for m in generate_module_list(with_ext=True):
         modpath = os.path.join(*m.split('.'))
         loc = {}
-        execfile(os.path.join(modpath, '__extensions__.ispy'), loc)
+        with open(os.path.join(modpath, '__extensions__.ispy')) as extfile:
+            exec(extfile.read(), loc)
         extmods = loc['ext_modules']
         for e in extmods:
             e.name = m+'.'+e.name
