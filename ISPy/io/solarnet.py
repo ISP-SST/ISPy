@@ -76,7 +76,7 @@ def seconds2string(number):
     hour = number//3600.
     minute = (number%3600.)//60.
     seconds = (number-(hour*3600.+minute*60))/1.
-    string_output = '{0.02}:{1.02}:{2:09.6f}'.format(int(hour),int(minute),seconds)
+    string_output = '{0:02}:{1:02}:{2:09.6f}'.format(int(hour),int(minute),seconds)
     return string_output
 
 
@@ -85,7 +85,7 @@ def get_time(filename, fulltime=False, utc=False):
     """Reads the time information of a 'SOLARNET' cube.
 
     Arguments:
-        filename: name of the data cube
+        filename: name of the data cube (*im.fits only)
         fulltime: information at each wavelength point (Default value = False)
         utc: the output is given in 'HH:MM:SS' format (Default value = False)
 
