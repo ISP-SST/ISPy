@@ -76,7 +76,7 @@ def seconds2string(number):
     hour = number//3600.
     minute = (number%3600.)//60.
     seconds = (number-(hour*3600.+minute*60))/1.
-    string_output = '{0}:{1}:{2:09.6f}'.format(int(hour),int(minute),seconds)
+    string_output = '{0.02}:{1.02}:{2:09.6f}'.format(int(hour),int(minute),seconds)
     return string_output
 
 
