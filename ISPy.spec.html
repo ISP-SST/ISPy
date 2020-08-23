@@ -208,24 +208,32 @@ wav, sp, cont = fts.get(6562.,6564., cgs=True, perHz=False)</p>
 <code class="sig-prename descclassname">ISPy.spec.calib.</code><code class="sig-name descname">convolve_atlas</code><span class="sig-paren">(</span><em class="sig-param">wave_atlas</em>, <em class="sig-param">spec_atlas</em>, <em class="sig-param">instrument_profile</em>, <em class="sig-param">mode='nearest'</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.calib.convolve_atlas" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convolve spectral atlas profile with instrument profile (after interpolation
 to the atlas wavelength grid)</p>
-<dl>
-<dt>Arguments:</dt><dd><p>wave_atlas: 1D array with wavelengths corresponding to <cite>spec_atlas</cite>.
-spec_atlas: 1D array with atlas intensity profile (e.g. from</p>
-<blockquote>
-<div><p><cite>ISpy.spec.atlas</cite>)</p>
-</div></blockquote>
-<dl class="simple">
-<dt>instrument_profile: 2D array [wave, profile] with wavelength spacing</dt><dd><p>(starting at 0) and instrumental profile to convolve the atlas
-profile with</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wave_atlas</strong> (<em>array_like</em>) – 1D array with wavelengths corresponding to <cite>spec_atlas</cite>.</p></li>
+<li><p><strong>spec_atlas</strong> (<em>array_like</em>) – 1D array with atlas intensity profile (e.g. from <cite>ISpy.spec.atlas</cite>)</p></li>
+<li><p><strong>instrument_profile</strong> (<em>ndarray</em>) – 2D array [wave, profile] with wavelength spacing (starting at 0) and
+instrumental profile to convolve the atlas profile with</p></li>
+<li><p><strong>mode</strong> (<em>str, optional</em>) – set interpolation in call to <cite>np.interp</cite> (defaults ‘nearest’)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>spec_convolved</strong> – 1D array with convolved profile</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array_like</p>
 </dd>
 </dl>
-</dd>
-<dt>Keyword arguments:</dt><dd><p>mode: set interpolation in call to <cite>np.interp</cite> (defaults ‘nearest’)</p>
-</dd>
-<dt>Returns:</dt><dd><p>spec_convolved: 1D array with convolved profile</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">convolved</span> <span class="o">=</span> <span class="n">calib</span><span class="o">.</span><span class="n">convolve_atlas</span><span class="p">(</span><span class="n">wave_atlas</span><span class="p">,</span> <span class="n">spec_atlas</span><span class="p">,</span> <span class="n">ipr</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;cubic&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Gregal Vissers (ISP/SU 2020)</p>
 </dd>
 </dl>
-<p>Author: Gregal Vissers (ISP/SU 2020)</p>
 </dd></dl>
 
 <dl class="function">
@@ -233,40 +241,45 @@ profile with</p>
 <code class="sig-prename descclassname">ISPy.spec.calib.</code><code class="sig-name descname">get_calibration</code><span class="sig-paren">(</span><em class="sig-param">wave_obs</em>, <em class="sig-param">spec_obs</em>, <em class="sig-param">wave_atlas</em>, <em class="sig-param">spec_atlas</em>, <em class="sig-param">mu=1.0</em>, <em class="sig-param">calib_at_dc=False</em>, <em class="sig-param">wave_idx=None</em>, <em class="sig-param">extra_weight=20.0</em>, <em class="sig-param">bounds=None</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.calib.get_calibration" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get calibration offsets from fitting <cite>spec_obs</cite> to <cite>spec_atlas</cite>, assuming
 wavelength grids <cite>wave_obs</cite> and <cite>wave_atlas</cite></p>
-<dl>
-<dt>Arguments:</dt><dd><dl class="simple">
-<dt>wave_obs: 1D array with observed wavelengths. Must be of same size as</dt><dd><p><cite>spec_obs</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wave_obs</strong> (<em>array_like</em>) –  1D array with observed wavelengths. Must be of same size as
+<cite>spec_obs</cite>.</p></li>
+<li><p><strong>spec_obs</strong> (<em>array_like</em>) – 1D array with observed intensities.</p></li>
+<li><p><strong>wave_atlas</strong> (<em>array_like</em>) – 1D array with wavelengths corresponding to <cite>spec_atlas</cite>.</p></li>
+<li><p><strong>spec_atlas</strong> (<em>array_like</em>) – 1D array with atlas intensity profile (e.g. from <cite>ISpy.spec.atlas</cite>)</p></li>
+<li><p><strong>mu</strong> (<em>float, optional</em>) – cosine of heliocentric viewing angle of the observations (defaults 1.0
+-&gt; disc centre)</p></li>
+<li><p><strong>calib_at_dc</strong> (<em>bool, optional</em>) – calibrate assuming <cite>spec_avg</cite> (or <cite>spec</cite>, if <cite>spec_avg</cite> is
+None) was taken at disc centre (defaults False).</p></li>
+<li><p><strong>wave_idx</strong> (<em>array_like, optional</em>) – wavelength indices that will get <cite>extra_weight</cite> during while fitting the
+intensity profile (default None -&gt; all wavelengths get equal weight)</p></li>
+<li><p><strong>extra_weight</strong> (<em>float, optional</em>) – amount of extra weight to give selected wavelength positions as
+specified by <cite>wave_idx</cite> (default 20)</p></li>
+<li><p><strong>bounds</strong> (<em>list of tuples, optional</em>) – list of tuples [(ifact_low, ifact_upp), (woff_low, woff_upp)] suggesting
+lower and upper bounds for fitting the intensity factor and wavelength
+offset (defaults to 1/50th and 50 times the fraction of <cite>spec_atlas</cite> to
+<cite>spec_obs</cite> for ifact, and ±0.3 for woff)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>calibration</strong> – multiplication factor and wavelength offset [ifact, woff] to be applied
+to <cite>spec_obs</cite> and <cite>wave_obs</cite> respectively.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>2-element array</p>
 </dd>
 </dl>
-<p>spec_obs: 1D array with observed intensities.
-wave_atlas: 1D array with wavelengths corresponding to <cite>spec_atlas</cite>.
-spec_atlas: 1D array with atlas intensity profile (e.g. from</p>
-<blockquote>
-<div><p><cite>ISpy.spec.atlas</cite>)</p>
-</div></blockquote>
-</dd>
-<dt>Keyword arguments:</dt><dd><dl class="simple">
-<dt>mu: cosine of heliocentric viewing angle of the observations (defaults</dt><dd><p>1.0 -&gt; disc centre)</p>
-</dd>
-<dt>calib_at_dc: calibrate assuming <cite>spec_avg</cite> (or <cite>spec</cite>, if <cite>spec_avg</cite> is</dt><dd><p>None) was taken at disc centre (defaults False).</p>
-</dd>
-<dt>wave_idx: wavelength indices that will get <cite>extra_weight</cite> during while</dt><dd><p>fitting the intensity profile (default None -&gt; all wavelengths get
-equal weight)</p>
-</dd>
-<dt>extra_weight: amount of extra weight to give selected wavelength</dt><dd><p>positions as specified by <cite>wave_idx</cite> (default 20)</p>
-</dd>
-<dt>bounds: list of tuples [(ifact_low, ifact_upp), (woff_low, woff_upp)]</dt><dd><p>suggesting lower and upper bounds for fitting the intensity factor
-and wavelength offset (defaults to 1/50th and 50 times the fraction
-of <cite>spec_atlas</cite> to <cite>spec_obs</cite> for ifact, and ±0.3 for woff)</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">calibration</span> <span class="o">=</span> <span class="n">get_calibration</span><span class="p">(</span><span class="n">wave</span><span class="p">,</span> <span class="n">spec</span><span class="p">,</span> <span class="n">wave_atlas</span><span class="p">,</span> <span class="n">spec_atlas</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">calib_at_dc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Authors</dt>
+<dd class="field-odd"><p>Carlos Diaz Baso, Gregal Vissers (ISP/SU 2020)</p>
 </dd>
 </dl>
-</dd>
-<dt>Returns:</dt><dd><p>calibration: 2-element array [ifact, woff] with multiplication factor
-and wavelength offset to be applied to <cite>spec_obs</cite> and <cite>wave_obs</cite>
-respectively</p>
-</dd>
-</dl>
-<p>Author: Carlos Diaz Baso, Gregal Vissers (ISP/SU 2020)</p>
 </dd></dl>
 
 <dl class="function">
@@ -274,18 +287,29 @@ respectively</p>
 <code class="sig-prename descclassname">ISPy.spec.calib.</code><code class="sig-name descname">limbdarkening</code><span class="sig-paren">(</span><em class="sig-param">wave</em>, <em class="sig-param">mu=1.0</em>, <em class="sig-param">nm=False</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.calib.limbdarkening" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return limb-darkening factor given wavelength and viewing angle
 mu=cos(theta)</p>
-<dl class="simple">
-<dt>Arguments:</dt><dd><p>wave: scalar or 1D array with wavelength(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wave</strong> (<em>float or array_like</em>) – scalar or 1D array with wavelength(s).</p></li>
+<li><p><strong>mu</strong> (<em>float, optional</em>) – cosine of heliocentric viewing angle (default 1.0 -&gt; disc centre)</p></li>
+<li><p><strong>nm</strong> (<em>bool, optional</em>) – input wavelength units are nanometers (default False)</p></li>
+</ul>
 </dd>
-<dt>Keyword arguments:</dt><dd><p>mu: cosine of heliocentric viewing angle (default 1.0 -&gt; disc centre)
-nm: input wavelength units are nanometers (default False)</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>factor</strong> – scaling factor(s) to be applied for given input wavelengths. Has as many
+elements as <cite>wave</cite>.</p>
 </dd>
-<dt>Returns:</dt><dd><p>factor: scaling factor(s) to be applied for given input wavelengths. Has
-as many elements as <cite>wave</cite>.</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float or array_like</p>
 </dd>
-<dt>Example:</dt><dd><p>factor = limbdarkening(630.25, mu=0.7, nm=True)</p>
-</dd>
-<dt>Author:</dt><dd><p>Gregal Vissers (ISP/SU 2020)</p>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">factor</span> <span class="o">=</span> <span class="n">limbdarkening</span><span class="p">(</span><span class="mf">630.25</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">nm</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Gregal Vissers (ISP/SU 2020)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -295,68 +319,62 @@ as many elements as <cite>wave</cite>.</p>
 <code class="sig-prename descclassname">ISPy.spec.calib.</code><code class="sig-name descname">spectrum</code><span class="sig-paren">(</span><em class="sig-param">wave</em>, <em class="sig-param">spec</em>, <em class="sig-param">mu=1.0</em>, <em class="sig-param">spec_avg=None</em>, <em class="sig-param">calib_at_dc=False</em>, <em class="sig-param">atlas_range=0.5</em>, <em class="sig-param">wave_idx=None</em>, <em class="sig-param">extra_weight=20.0</em>, <em class="sig-param">bounds=None</em>, <em class="sig-param">instrument_profile=None</em>, <em class="sig-param">calib_wave=False</em>, <em class="sig-param">cgs=True</em>, <em class="sig-param">si=False</em>, <em class="sig-param">perHz=True</em>, <em class="sig-param">qsdc_calib=False</em>, <em class="sig-param">verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.calib.spectrum" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calibrate spectrum intensity (in SI or cgs units) and wavelength by
 simultaneously fitting offsets given an atlas profile</p>
-<dl>
-<dt>Arguments:</dt><dd><p>wave: 1D array with wavelengths.
-spec: data (cube) with intensity profile(s) in counts to</p>
-<blockquote>
-<div><p>apply calibration to. May be higher dimension cube (e.g. [nt, ny,
-nx, nwave, nstokes]). If keyword argument <cite>spec_avg</cite> is None, then
-<cite>spec</cite> is assumed to be a 1D array of Stokes I intesities of same
-size as <cite>wave</cite> and will be used to determine the intensity
-calibration offset factor.</p>
-</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wave</strong> (<em>array_like</em>) – 1D array with wavelengths.</p></li>
+<li><p><strong>spec</strong> (<em>ndarray</em>) – data (cube) with intensity profile(s) in counts to apply calibration to.
+May be higher dimension cube (e.g. [nt, ny, nx, nwave, nstokes]). If
+keyword argument <cite>spec_avg</cite> is None, then <cite>spec</cite> is assumed to be a 1D
+array of Stokes I intesities of same size as <cite>wave</cite> and will be used to
+determine the intensity calibration offset factor.</p></li>
+<li><p><strong>mu</strong> (<em>float, optional</em>) – cosine of heliocentric viewing angle of the observations (defaults 1.0
+-&gt; disc centre)</p></li>
+<li><p><strong>spec_avg</strong> (<em>array_like, optional</em>) – averaged intensity profile to use for calibration
+(default None -&gt; use <cite>spec</cite> to calibrate on)</p></li>
+<li><p><strong>calib_at_dc</strong> (<em>bool, optional</em>) – calibrate assuming <cite>spec_avg</cite> (or <cite>spec</cite>, if <cite>spec_avg</cite> is None) was
+taken at disc centre (defaults False).</p></li>
+<li><p><strong>atlas_range</strong> (<em>float, optional</em>) – get atlas profile with for the range +/- this value (defaults 0.5)</p></li>
+<li><p><strong>wave_idx</strong> (<em>array_like, optional</em>) – wavelength indices that will get <cite>extra_weight</cite> during while fitting the
+intensity profile (default None -&gt; all wavelengths get equal weight)</p></li>
+<li><p><strong>extra_weight</strong> (<em>float, optional</em>) – amount of extra weight to give selected wavelength positions as
+specified by <cite>wave_idx</cite> (default 20)</p></li>
+<li><p><strong>bounds</strong> (<em>list of tuples, optional</em>) – [(ifact_low, ifact_upp), (woff_low, woff_upp)] suggesting lower and
+upper bounds for fitting the intensity factor and wavelength offset
+(defaults None)</p></li>
+<li><p><strong>instrument_profile</strong> (<em>ndarray, optional</em>) – 2D array [wave, profile] with wavelength spacing (starting at 0) and
+instrumental profile to convolve the atlas profile with</p></li>
+<li><p><strong>calib_wave</strong> (<em>bool, optional</em>) – perform wavelength calibration prior to intensity calibration (default
+False)</p></li>
+<li><p><strong>cgs</strong> (<em>bool, optional</em>) – output calibration in cgs units (default True)</p></li>
+<li><p><strong>si</strong> (<em>bool, optional</em>) – output calibration in SI units (default False)</p></li>
+<li><p><strong>perHz</strong> (<em>bool, optional</em>) – output calibration per frequency unit (default True)</p></li>
+<li><p><strong>qsdc_calib</strong> (<em>bool, optional</em>) – output calibration as fraction of quiet Sun disc centre continuum
+intensity (default False). If set, overrides <cite>cgs</cite>, <cite>si</cite> and <cite>perHz</cite></p></li>
+<li><p><strong>verbose</strong> (<em>bool, optional</em>) – output calibration plot and offset values to command line (defaults
+False)</p></li>
+</ul>
 </dd>
-<dt>Keyword arguments:</dt><dd><dl class="simple">
-<dt>mu: cosine of heliocentric viewing angle of the observations (defaults</dt><dd><p>1.0 -&gt; disc centre)</p>
-</dd>
-<dt>spec_avg: averaged intensity profile to use for calibration</dt><dd><p>(default None -&gt; use <cite>spec</cite> to calibrate on)</p>
-</dd>
-<dt>calib_at_dc: calibrate assuming <cite>spec_avg</cite> (or <cite>spec</cite>, if <cite>spec_avg</cite> is</dt><dd><p>None) was taken at disc centre (defaults False).</p>
-</dd>
-<dt>atlas_range: get atlas profile with for the range +/- this value</dt><dd><p>(defaults 0.5)</p>
-</dd>
-<dt>wave_idx: wavelength indices that will get <cite>extra_weight</cite> during while</dt><dd><p>fitting the intensity profile (default None -&gt; all wavelengths get
-equal weight)</p>
-</dd>
-<dt>extra_weight: amount of extra weight to give selected wavelength</dt><dd><p>positions as specified by <cite>wave_idx</cite> (default 20)</p>
-</dd>
-<dt>bounds: list of tuples [(ifact_low, ifact_upp), (woff_low, woff_upp)]</dt><dd><p>suggesting lower and upper bounds for fitting the intensity factor
-and wavelength offset (defaults None)</p>
-</dd>
-<dt>instrument_profile: 2D array [wave, profile] with wavelength spacing</dt><dd><p>(starting at 0) and instrumental profile to convolve the atlas
-profile with</p>
-</dd>
-<dt>calib_wave: perform wavelength calibration prior to intensity</dt><dd><p>calibration (default False)</p>
-</dd>
-</dl>
-<p>cgs: output calibration in cgs units (default True)
-si: output calibration in SI units (default False)
-perHz: output calibration per frequency unit (default True)
-qsdc_calib: output calibration as fraction of quiet Sun disc centre</p>
-<blockquote>
-<div><p>continuum intensity (default False). If set, overrides <cite>cgs</cite>, <cite>si</cite>
-and <cite>perHz</cite></p>
-</div></blockquote>
-<dl class="simple">
-<dt>verbose: output calibration plot and offset values to command line</dt><dd><p>(defaults False)</p>
-</dd>
-</dl>
-</dd>
-<dt>Returns:</dt><dd><p>wave: calibrated wavelength array
-spec: calibrated intensity profile array
-factor: offset factor converting data counts to absolute intensity
-spec_fts: atlas profile at wavelengths given by <cite>wave</cite>. Convolved with</p>
-<blockquote>
-<div><p>instrument profile if instrument_profile is not None.</p>
-</div></blockquote>
-<p>unit: intensity units</p>
-</dd>
-<dt>Example:</dt><dd><dl class="simple">
-<dt>wave_cal, spec_cal, factor, spec_fts, units = calib.spectrum(ispec,</dt><dd><p>wave, cgs=True, calib_wave=True, wave_idx=[0,1,-2,-1])</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>wave</strong> (<em>array_like</em>) – calibrated wavelength array</p></li>
+<li><p><strong>spec</strong> (<em>array_like</em>) – calibrated intensity profile array</p></li>
+<li><p><strong>factor</strong> (<em>float</em>) – offset factor converting data counts to absolute intensity</p></li>
+<li><p><strong>spec_fts</strong> (<em>array_like</em>) – atlas profile at wavelengths given by <cite>wave</cite>. Convolved with
+instrument profile if instrument_profile is not None.</p></li>
+<li><p><strong>unit</strong> (<em>object</em>) – intensity units</p></li>
+</ul>
+</p>
 </dd>
 </dl>
-</dd>
-<dt>Author:</dt><dd><p>Gregal Vissers, Carlos Diaz Baso (ISP/SU 2019-2020)</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">wave_cal</span><span class="p">,</span> <span class="n">spec_cal</span><span class="p">,</span> <span class="n">factor</span><span class="p">,</span> <span class="n">spec_fts</span><span class="p">,</span> <span class="n">units</span> <span class="o">=</span> <span class="n">calib</span><span class="o">.</span><span class="n">spectrum</span><span class="p">(</span><span class="n">ispec</span><span class="p">,</span>
+<span class="go">        wave, cgs=True, calib_wave=True, wave_idx=[0,1,-2,-1])</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Gregal Vissers, Carlos Diaz Baso (ISP/SU 2019-2020)</p>
 </dd>
 </dl>
 </dd></dl>
