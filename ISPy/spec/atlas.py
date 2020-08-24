@@ -108,7 +108,7 @@ class atlas:
         self.cont *= conversion
         self.usys = usys_to + ext
 
-    def get(self, w0, w1, cgs = False, si = False, nograv = False, perHz=True):
+    def get(self, w0, w1, cgs=False, nograv=False, perHz=True):
         """
         Extract a subset of the atlas profile
 
@@ -119,8 +119,6 @@ class atlas:
             extract the atlas profile
         cgs : bool, optional
             return the intensities in cgs units (defaults False, i.e. use SI)
-        si : bool, optional
-            return the intensities in SI units (defaults False)
         nograv : bool, optional
             account for gravitationl reddening (defaults False)
         perHz : bool, optional
@@ -137,9 +135,9 @@ class atlas:
 
         idx = (np.where((self.wave >= w0) & (self.wave <= w1)))[0]
         
-        if(cgs):
+        if cgs is True:
             self.to('cgs', perHz=perHz)
-        elif(si):
+        else:
             self.to('si', perHz=perHz)
 
         wave = np.copy(self.wave[idx[0]:idx[-1]])
