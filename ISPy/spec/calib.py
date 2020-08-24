@@ -22,10 +22,9 @@ def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas, mu=1.0,
     Parameters
     ----------
     wave_obs : array_like
-              1D array with observed wavelengths. Must be of same size as
-             `spec_obs`.
+        1D array with observed wavelengths. Must be of same size as `spec_obs`.
     spec_obs : array_like
-              1D array with observed intensities.
+        1D array with observed intensities.
     wave_atlas : array_like
         1D array with wavelengths corresponding to `spec_atlas`.
     spec_atlas : array_like
