@@ -11,23 +11,28 @@ def viewangle(xy, date=None, heliographic=False):
     Return the viewing angle theta (and mu=cos(theta)) given a set of solar
     coordinates in the helioprojective or heliographic Stonyhurst system
 
-    Arguments:
-        xy: 2-element list or array with the coordinate values (in arcsec if
+    Parameters
+    ----------
+    xy : array_like
+        2-element list or array with the coordinate values (in arcsec if
         helioprojective, in degrees if heliographic)
+    date : str, optional
+        date for which to get the viewing angle (default: today's date)
+    heliographic : bool, optional
+        switch to indicate input coordinates are heliographic Stonyhurst
+        (default False, i.e. coordinates are helioprojective)
 
-    Keyword arguments:
-        date: date for which to get the viewing angle (default: today's date)
-        heliographic: switch to indicate input coordinates are heliographic
-            Stonyhurst (default False, i.e. coordinates are helioprojective)
-
-    Returns:
+    Returns
+    -------
+    viewangle : list
         2-element list with [theta, mu]. Theta is given in degrees.
 
-    Example:
-        result = viewangle([240,-380], date='2017-08-02')
-        result = viewangle([30,-50], date='2019-01-12', heliographic=True) # S50 W30
+    Example
+    -------
+    >>> result = viewangle([240,-380], date='2017-08-02')
+    >>> result = viewangle([30,-50], date='2019-01-12', heliographic=True) # S50 W30
 
-    Author:
+    :Author:
         Gregal Vissers (ISP/SU 2019)
     """
 
