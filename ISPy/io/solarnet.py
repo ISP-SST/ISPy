@@ -94,7 +94,7 @@ def seconds2string(number):
     """
     Convert time in seconds to 'HH:MM:SS' format
 
-    Parammeters
+    Parameters
     -----------
     number : float
         value in seconds
