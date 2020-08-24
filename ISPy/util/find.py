@@ -9,22 +9,26 @@ def files(extension, path='./', pattern='', verbose=True):
     """
     Find files with certain pattern and extension in specified path.
 
-    Arguments:
-        extension:  extension of the files to list, excluding '.' marker.
+    Parameters
+    ----------
+    extension : str
+        extension of the files to list, excluding '.' marker.
+    path : str, optional
+        path to directory to search in (default './')
+    pattern: str, optional
+        pattern in filenames to filter on (default '')
+    verbose: bool, optional
+        verbosity switch controlling printout of search results (default True)
 
-    Keyword arguments:
-        path: path to directory to search in (default './')
-        pattern: pattern in filenames to filter on (default '')
-        verbose: verbosity switch controlling printout of search results
-            (default True)
-
-    Returns:
+    Returns
+    -------
+    lsfiles : list
         A list with absolute paths to the files found.
 
     Example:
-        f = find.files('fits', path='~/Desktop', pattern='aia304')
+    >>> f = find.files('fits', path='~/Desktop', pattern='aia304')
 
-    Author:
+    :Author:
         Gregal Vissers (ISP/SU 2019)
     """
 
@@ -49,17 +53,17 @@ def files(extension, path='./', pattern='', verbose=True):
     return lsfiles
 
 def nc(path='./', pattern='', verbose=True):
-    """ Find *.nc files """
+    """ Convenience wrapper around find.files to get *.nc files """
     return files('nc', path=path, pattern=pattern, verbose=verbose)
 
 def fits(path='./', pattern='', verbose=True):
-    """ Find *.fits files """
+    """ Convenience wrapper around find.files to get *.fits files """
     return files('fits', path=path, pattern=pattern, verbose=verbose)
 
 def cube(path='./', pattern='', verbose=True):
-    """ Find *.cube files """
+    """ Convenience wrapper around find.files to get *.cube files """
     return files('cube', path=path, pattern=pattern, verbose=verbose)
 
 def idlsave(path='./', pattern='', verbose=True):
-    """ Find *.idlsave files """
+    """ Convenience wrapper around find.files to get *.idlsave files """
     return files('idlsave', path=path, pattern=pattern, verbose=verbose)
