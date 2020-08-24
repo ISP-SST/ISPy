@@ -25,7 +25,8 @@ def files(extension, path='./', pattern='', verbose=True):
     lsfiles : list
         A list with absolute paths to the files found.
 
-    Example:
+    Example
+    -------
     >>> f = find.files('fits', path='~/Desktop', pattern='aia304')
 
     :Author:
