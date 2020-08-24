@@ -13,15 +13,31 @@ import sys
 # ========================================================================
 def head(name, verbose=True, appendFormat=False):
     """
+    Get the header of a legacy 'La Palma' cube
 
-    Args:
-      name: Name of the file we want to know the header properties.
-      verbose: (Default value = True)
-      appendFormat: different format to ensure append operation (Default =False)
+    Parameters
+    ----------
+    name : str
+        name of the file 
+    verbose : bool, optional
+        print out the header information (Default value = True)
+    appendFormat : bool, optional
+        different format to ensure append operation (Default =False)
 
-    Returns:
-        header
+    Returns
+    -------
+    header : tuple
+        header information in order (nx, ny, nt, nstokes, dtype, ndims)
+
+    Example
+    -------
+    >>> h = head('crispex_3950_2016-09-19T09:28:36_scans=11-117_time-corrected_im.fcube')
+    ('head:', '[dtype=float32, ndims=3, nx=1734, ny=1240, nt=3317, nstokes=1] -> crispex_3950_2016-09-19T09:28:36_scans=11-117_time-corrected_im.fcube')
+    >>> nx, ny, nt, ns, dtype, ndims = head('crispex_3950_2016-09-19T09:28:36_scans=11-117_time-corrected_im.fcube', verbose=False)
+    >>> nx, ny, ns
+    (1734, 1240, 1)
     """
+
     inam = 'head:'
 
     # Open file
@@ -144,27 +160,39 @@ def head(name, verbose=True, appendFormat=False):
 
 # ========================================================================
 def read(cube, spnw=True, ns=4, spformat='_sp', mode='r', dtype='float32', verb=False):
-    """Reads a cube with La Palma format cube.
+    """
+    Read the full cube from a La Palma format file
 
-    Arguments:
-        cube: filename, has to be .icube or .fcube
-        spnw: Optional. Specific filename of spectral cube  OR number of wavelength steps (Default value = True)
-        ns: number of stokes parameters. (Default value = 4)
-        spformat: (Default value = '_sp')
-        mode: (Default value = 'r')
-        dtype: Type of data. Should be 'float32' for .fcubes and 'int16' for icubes. (Default value = 'float32')
-        verb: Verbose mode. (Default value = False)
+    Parameters
+    ----------
+    cube : str
+        filename, has to be .icube or .fcube
+    spnw : bool, optional 
+        Specific filename of spectral cube  OR number of wavelength steps (Default value = True)
+    ns : int, optional
+        number of stokes parameters. (Default value = 4)
+    spformat : str, optional
+        filename identifier for the spectral cube (Default value = '_sp')
+    mode : str, optional
+        read mode to be passed on to np.memmap (Default value = 'r')
+    dtype : str, optional
+        Type of data. Should be 'float32' for .fcubes and 'int16' for icubes. (Default value = 'float32')
+    verb : bool, optional
+        Verbose mode. (Default value = False)
 
-    Returns:
+    Returns
+    -------
+    cube_array: ndarray
         5D cube of shape [nt,ns,nw,nx,ny]
 
-    Examples:
-        import ISPy.io.lapalma as lp
-        A) cube = lp.read('filename.fcube') # It will find also 'filename_sp.fcube' in the same path
-        B) cube = lp.read('filename.fcube' , 8)
-        C) cube = lp.read('filename.fcube' , 'filename_sp.fcube')
+    Examples
+    --------
+    >>> cube_a = lp.read('filename.fcube') # It will find also 'filename_sp.fcube' in the same path
+    >>> cube_b = lp.read('filename.fcube' , 8)
+    >>> cube_c = lp.read('filename.fcube' , 'filename_sp.fcube')
 
-    Authors: Alex Pietrow (ISP/SU 2019), Carlos Diaz (ISP/SU 2019)
+    :Authors: 
+        Alex Pietrow (ISP/SU 2019), Carlos Diaz (ISP/SU 2019)
     """
     if type(spnw) is str:
         if ns == 4:
@@ -217,12 +245,17 @@ def read(cube, spnw=True, ns=4, spformat='_sp', mode='r', dtype='float32', verb=
 
 # ========================================================================
 def mk_header(image):
-    """Creates header for La Palma images.
+    """
+    Create a La Palma format header of an image array 
 
-    Args:
-        image: La Palma cube
+    Parameters
+    ----------
+    image : ndarray
+        2D or 3D image array in La Palma ordering (nx, ny, nt)
 
-    Returns:
+    Returns
+    -------
+    header : str
         header of the cube
     """
     from struct import pack
@@ -252,19 +285,34 @@ def mk_header(image):
 # ========================================================================
 def writeto(filename, image, extraheader='', dtype=None, verbose=False,
             append=False):
-    """Writes on disk a cube using LaPalma format. Backend of "write"
+    """
+    Write a cube to disk in LaPalma format. Backend of "write"
     From https://github.com/ITA-Solar/helita/blob/master/helita/io/lp.py
 
-    Args:
-        filename: name of the file
-        image: data allocated in memory
-        extraheader: (Default value = '')
-        dtype: (Default value = None)
-        verbose: (Default value = False)
-        append: (Default value = False)
+    Parameters
+    ----------
+    filename : str
+        name of the file
+    image : ndarray
+        data allocated in memory
+    extraheader : str, optional
+        extra header information to append to standard header (Default value = '')
+    dtype : str, optional
+        data type of the image (Default value = None)
+    verbose : bool, optional
+        verbose mode (Default value = False)
+    append : bool, optional
+        append `image` to existing file (Default value = False)
+
     Returns
-        file on disk
+    -------
+    NoneType
+
+    Examples
+    --------
+    >>> writeto('path/cube.fcube', image, append=True)
     """
+    
     if not os.path.isfile(filename):
         append = False
     # use dtype from array, if none is specified
@@ -321,19 +369,28 @@ def writeto(filename, image, extraheader='', dtype=None, verbose=False,
 
 # ========================================================================
 def write(cube_array, name, stokes=True, sp=False, path=''):
-    """Saves cube as La Palma format cube.
+    """
+    Write a data cube in La Palma format to disc 
 
-    Arguments:
-        cube_array: datacube in form of [t,s,w,x,y]
-        name: name of file with .icube/fcube extention
-        stokes: flag for if data has stokes or not. (Default value = True)
-        sp: Save spectral cube of shape. (Default value = False)
-        path: Filepath where file needs to be saved.(Default value = '')
+    Parameters
+    ----------
+    cube_array : ndarray
+        datacube in form of [t,s,w,x,y]
+    name : str
+        name of file with .icube/fcube extention
+    stokes : bool, optional
+        flag for if data has stokes or not. (Default value = True)
+    sp : bool, optional
+        Save spectral cube of shape. (Default value = False)
+    path : str, optional
+        Filepath where file needs to be saved.(Default value = '')
 
-    Examples:
-        write(cube_array, 'cube.fcube', path='fits/')
+    Examples
+    --------
+    >>> write(cube_array, 'cube.fcube', path='fits/')
 
-    Authors: Alex Pietrow (ISP/SU 2019), Carlos Diaz (ISP/SU 2019)
+    :Authors: 
+        Alex Pietrow (ISP/SU 2019), Carlos Diaz (ISP/SU 2019)
     """
 
     # Reshaping to save it in the right format:
@@ -367,23 +424,32 @@ def write(cube_array, name, stokes=True, sp=False, path=''):
 
 # ========================================================================
 def get(filename, index, verb=False):
-    """Reads a 2D image (slice) given a known index from a La Palma cube.
+    """
+    Read a 2D image (slice) given a known index from a La Palma cube.
 
-    Arguments:
-        filename : file to be opened. Has to be .icube or .fcube
-        index    : chosen frame, where frame is t*nw*ns + s*nw + w
-            t: time or scan number
-            s: stokes parameter
-            w: wavelength step
-        verbose : Verbose model. (Default value = False)
+    Parameters
+    ----------
+    filename : str
+        file to be opened. Has to be .icube or .fcube
+    index : int
+        chosen frame, where frame is t*nw*ns + s*nw + w
+        t: time or scan number
+        s: stokes parameter
+        w: wavelength step
+    verbose : bool, optional
+        Verbose model. (Default value = False)
 
-    Returns:
-        2D image
+    Returns
+    -------
+    image : ndarray
+        2D image slice
 
-    Example:
-        data = lp_get('cube.fcube', 0)
+    Examples
+    --------
+    >>> image = lp_get('cube.fcube', 0)
 
-    Authors: G. Vissers (ITA UiO, 2016), A.G.M. Pietrow (2018), Carlos Diaz (ISP/SU 2019)
+    :Authors:
+        G. Vissers (ITA UiO, 2016), A.G.M. Pietrow (2018), Carlos Diaz (ISP/SU 2019)
     """
     nx, ny, ndum, nstokes, dt, dum1 = head(filename, verb)
     # header offset + stepping through cube
@@ -395,20 +461,31 @@ def get(filename, index, verb=False):
 
 # ========================================================================
 def put(filename, image, append=True, verbose=False, stokes=True):
-    """Append a new cube/slice to a pre-existent La Palma cube.
+    """
+    Append a new cube/slice to a pre-existent La Palma cube.
 
-    Arguments:
-        filename: name of file with .icube/fcube extention
-        image: datacube in form of [t,s,w,x,y]
-        append: (Default value = True)
+    Parameters
+    ----------
+    filename : str
+        name of file with .icube/fcube extention
+    image : ndarray
+        datacube in form of [t,s,w,x,y]
+    append : bool, optional
+        append `image` to an existing file (Default value = True)
+    verbose : bool, optional
+        verbose mode (default False)
+    stokes : bool, optional
+        data has Stokes parameters (default True)
 
-    Examples:
-        lp_put('cube.fcube', cube2)
+    Examples
+    --------
+    >>> lp_put('cube.fcube', cube2)
 
     To do:
         Insert a slice in a La Palma cube
 
-    Authors: Carlos Diaz,  G. Vissers, A.G.M. Pietrow (ISP/SU 2019)
+    :Authors: 
+        Carlos Diaz,  G. Vissers, A.G.M. Pietrow (ISP/SU 2019)
     """
 
     # Reshaping to save it in the right format:
