@@ -1,14 +1,30 @@
 import numpy as np
 
 def avg1D(xdata,ydata,nbin):
-	'''
-	Inputs:
-		xdata: 1D arrray
-		ydata: 1D array
-		nbin: number of bins
-	returns: 
-		xbin, ybin: rebinned 1D arrays (x & y) 	
-	'''
+	"""
+        Rebin 1D arrays into `nbin` bins by averaging
+
+        Parameters
+        ----------
+        xdata : array_like
+            1D array with abcissa
+        ydata : array_like
+            1D array with ordinate
+        nbin : int
+            number of bins
+
+	Returns
+        -------
+        xbin, ybin : array_like
+            rebinned 1D arrays
+
+        Example
+        -------
+        >>> xbin, ybin = avg1D(xdata, ydata, 5)
+
+        :Author:
+            Rahul Yadav (ISP/SU 2019)
+        """
 	nx = len(ydata)
 	binv = int((nx)/nbin)
 
@@ -25,13 +41,29 @@ def avg1D(xdata,ydata,nbin):
 
 
 def avg2D(data,nbin):
-	'''
-	Inputs:
-		data: 2D arrray
-		nbin: number of bins
-	returns: 
-		rebin: rebinned 2D array
-	'''
+	"""
+        Rebin a 2D array into `nbin` bins by averaging
+
+        Parameters
+        ----------
+        data : ndarray
+            a 2D array
+        nbin : int
+            number of bins
+	
+        Returns
+        -------
+        rebin : ndarray
+            rebinned 2D array
+
+        Example
+        -------
+        >>> databin = avg2D(data, 10)
+
+        :Author:
+            Rahul Yadav (ISP/SU 2019)
+        """
+
 	nx,ny = data.shape
 	npx = int(nx/nbin)
 	npy = int(ny/nbin)

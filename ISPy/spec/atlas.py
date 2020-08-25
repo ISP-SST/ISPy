@@ -8,17 +8,32 @@ class atlas:
     """
     Class to load (FTS) spectral atlas
 
-    Methods:
-        __init__()
-        to(usys_to, perHz=True)
-        get(w0, w1, cgs=False, si=False, nograv=False)
+    Parameters
+    ----------
+    None
 
-    Example:
-        import atlas as S
-        fts = S.atlas()
-        wav, sp, cont = fts.get(6562.,6564., cgs=True, perHz=False)
+    Attributes
+    ----------
+    cont : array_like
+        full atlas continuum intensities in units `sunit`
+    spec : array_like
+        full atlas spectrum in units `sunit`
+    wave : array_like
+        wavelengths in units `wunit`
+    usys : str
+        unit system, one of `si_inu`, `si_ilambda`, `cgs_inu` or `cgs_ilambda`
+    sunit : astropy CompositeUnit object
+        intensity units according to the `usys` setting
+    wunit : astropy Unit object
+        wavelength unit
 
-    Author:
+    Example
+    -------
+    >>> import atlas as S
+    >>> fts = S.atlas()
+    >>> wav, sp, cont = fts.get(6562.,6564., cgs=True, perHz=False)
+
+    :Author:
         Jaime de la Cruz Rodriguez (ISP/SU 2019)
     """
     def __init__(self):
@@ -37,6 +52,27 @@ class atlas:
 
 
     def to(self, usys_to, perHz=True):
+        """
+        Convert atlas intensity data to particular units
+
+        Parameters
+        ----------
+        usys_to : str
+            descriptor setting the unit system to convert to, either `si` or
+            `cgs` (case insensitive)
+        perHz : bool, optional
+            convert to intensity units per Hz (defaults True)
+
+        Example
+        -------
+        >>> import atlas as S
+        >>> fts = S.atlas() # intensity units are J/s/m^2/sr/Hz (SI, per Hz) by default
+        >>> fts.to('cgs', perHz=False) # convert to erg/s/cm^2/sr/Å
+
+        :Author:
+            Gregal Vissers (ISP/SU 2020)
+
+        """
         usys_from = self.usys.lower()
 
         # Determine SI <-> cgs conversion
@@ -72,12 +108,36 @@ class atlas:
         self.cont *= conversion
         self.usys = usys_to + ext
 
-    def get(self, w0, w1, cgs = False, si = False, nograv = False, perHz=True):
+    def get(self, w0, w1, cgs=False, nograv=False, perHz=True):
+        """
+        Extract a subset of the atlas profile
+
+        Parameters
+        ----------
+        w0, w1: float
+            lower and upper boundary of the wavelength range for which to
+            extract the atlas profile
+        cgs : bool, optional
+            return the intensities in cgs units (defaults False, i.e. use SI)
+        nograv : bool, optional
+            account for gravitationl reddening (defaults False)
+        perHz : bool, optional
+            return intensity in units per Hz (defaults True)
+        
+        Example
+        -------
+        See class docstring
+
+        :Authors:
+            Jaime de la Cruz Rodríguez (ISP/SU 2019), Gregal Vissers (ISP/SU
+            2020)
+        """
+
         idx = (np.where((self.wave >= w0) & (self.wave <= w1)))[0]
         
-        if(cgs):
+        if cgs is True:
             self.to('cgs', perHz=perHz)
-        elif(si):
+        else:
             self.to('si', perHz=perHz)
 
         wave = np.copy(self.wave[idx[0]:idx[-1]])

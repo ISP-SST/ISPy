@@ -19,39 +19,51 @@ def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas, mu=1.0,
     Get calibration offsets from fitting `spec_obs` to `spec_atlas`, assuming
     wavelength grids `wave_obs` and `wave_atlas`
 
-    Arguments:
-        wave_obs: 1D array with observed wavelengths. Must be of same size as
-            `spec_obs`.
-        spec_obs: 1D array with observed intensities.
-        wave_atlas: 1D array with wavelengths corresponding to `spec_atlas`.
-        spec_atlas: 1D array with atlas intensity profile (e.g. from
-            `ISpy.spec.atlas`)
+    Parameters
+    ----------
+    wave_obs : array_like
+        1D array with observed wavelengths. Must be of same size as `spec_obs`.
+    spec_obs : array_like
+        1D array with observed intensities.
+    wave_atlas : array_like
+        1D array with wavelengths corresponding to `spec_atlas`.
+    spec_atlas : array_like
+        1D array with atlas intensity profile (e.g. from `ISpy.spec.atlas`)
+    mu : float, optional
+        cosine of heliocentric viewing angle of the observations (defaults 1.0
+        -> disc centre)
+    calib_at_dc : bool, optional
+        calibrate assuming `spec_avg` (or `spec`, if `spec_avg` is
+        None) was taken at disc centre (defaults False).
+    wave_idx : array_like, optional
+        wavelength indices that will get `extra_weight` during while fitting the
+        intensity profile (default None -> all wavelengths get equal weight)
+    extra_weight : float, optional
+        amount of extra weight to give selected wavelength positions as
+        specified by `wave_idx` (default 20)
+    bounds : list of tuples, optional
+        list of tuples [(ifact_low, ifact_upp), (woff_low, woff_upp)] suggesting
+        lower and upper bounds for fitting the intensity factor and wavelength
+        offset (defaults to 1/50th and 50 times the fraction of `spec_atlas` to
+        `spec_obs` for ifact, and ±0.3 for woff)
 
-    Keyword arguments:
-        mu: cosine of heliocentric viewing angle of the observations (defaults
-            1.0 -> disc centre)
-        calib_at_dc: calibrate assuming `spec_avg` (or `spec`, if `spec_avg` is
-            None) was taken at disc centre (defaults False).
-        wave_idx: wavelength indices that will get `extra_weight` during while
-            fitting the intensity profile (default None -> all wavelengths get
-            equal weight)
-        extra_weight: amount of extra weight to give selected wavelength
-            positions as specified by `wave_idx` (default 20)
-        bounds: list of tuples [(ifact_low, ifact_upp), (woff_low, woff_upp)]
-            suggesting lower and upper bounds for fitting the intensity factor
-            and wavelength offset (defaults to 1/50th and 50 times the fraction
-            of `spec_atlas` to `spec_obs` for ifact, and ±0.3 for woff)
+    Returns
+    -------
+    calibration : 2-element array
+        multiplication factor and wavelength offset [ifact, woff] to be applied
+        to `spec_obs` and `wave_obs` respectively.
+    
+    Example
+    -------
+    >>> calibration = get_calibration(wave, spec, wave_atlas, spec_atlas, mu=0.4, calib_at_dc=True)
 
-    Returns:
-        calibration: 2-element array [ifact, woff] with multiplication factor
-        and wavelength offset to be applied to `spec_obs` and `wave_obs`
-        respectively
+    :Authors:
+        Carlos Diaz Baso, Gregal Vissers (ISP/SU 2020)
 
-    Author: Carlos Diaz Baso, Gregal Vissers (ISP/SU 2020)
     """
 
     if wave_idx is None:
-        wave_idx = np.arange(wave.size)
+        wave_idx = np.arange(wave_obs.size)
     else:
         wave_idx = np.atleast_1d(wave_idx)
 
@@ -91,21 +103,30 @@ def convolve_atlas(wave_atlas, spec_atlas, instrument_profile, mode='nearest'):
     Convolve spectral atlas profile with instrument profile (after interpolation
     to the atlas wavelength grid)
 
-    Arguments:
-        wave_atlas: 1D array with wavelengths corresponding to `spec_atlas`.
-        spec_atlas: 1D array with atlas intensity profile (e.g. from
-            `ISpy.spec.atlas`)
-        instrument_profile: 2D array [wave, profile] with wavelength spacing
-            (starting at 0) and instrumental profile to convolve the atlas
-            profile with
+    Parameters
+    ----------
+    wave_atlas : array_like
+        1D array with wavelengths corresponding to `spec_atlas`.
+    spec_atlas : array_like
+        1D array with atlas intensity profile (e.g. from `ISpy.spec.atlas`)
+    instrument_profile : ndarray
+        2D array [wave, profile] with wavelength spacing (starting at 0) and
+        instrumental profile to convolve the atlas profile with
+    mode : str, optional
+        set interpolation in call to `np.interp` (defaults 'nearest')
 
-    Keyword arguments:
-      mode: set interpolation in call to `np.interp` (defaults 'nearest')
+    Returns
+    -------
+    spec_convolved : array_like
+        1D array with convolved profile
 
-    Returns:
-        spec_convolved: 1D array with convolved profile
+    Example
+    -------
+    >>> convolved = calib.convolve_atlas(wave_atlas, spec_atlas, ipr, mode='cubic')
 
-    Author: Gregal Vissers (ISP/SU 2020)
+    :Author: 
+        Gregal Vissers (ISP/SU 2020)
+
     """
 
     wave_ipr_spacing = np.diff(instrument_profile[:,0]).mean()
@@ -129,60 +150,78 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, calib_at_dc=False,
     Calibrate spectrum intensity (in SI or cgs units) and wavelength by
     simultaneously fitting offsets given an atlas profile
 
-    Arguments:
-        wave: 1D array with wavelengths.
-        spec: data (cube) with intensity profile(s) in counts to
-            apply calibration to. May be higher dimension cube (e.g. [nt, ny,
-            nx, nwave, nstokes]). If keyword argument `spec_avg` is None, then
-            `spec` is assumed to be a 1D array of Stokes I intesities of same
-            size as `wave` and will be used to determine the intensity
-            calibration offset factor.
+    Parameters
+    ----------
+    wave : array_like
+        1D array with wavelengths.
+    spec : ndarray
+        data (cube) with intensity profile(s) in counts to apply calibration to.
+        May be higher dimension cube (e.g. [nt, ny, nx, nwave, nstokes]). If
+        keyword argument `spec_avg` is None, then `spec` is assumed to be a 1D
+        array of Stokes I intesities of same size as `wave` and will be used to
+        determine the intensity calibration offset factor.
+    mu : float, optional
+        cosine of heliocentric viewing angle of the observations (defaults 1.0
+        -> disc centre)
+    spec_avg : array_like, optional
+        averaged intensity profile to use for calibration
+        (default None -> use `spec` to calibrate on)
+    calib_at_dc : bool, optional
+        calibrate assuming `spec_avg` (or `spec`, if `spec_avg` is None) was
+        taken at disc centre (defaults False).
+    atlas_range : float, optional
+        get atlas profile with for the range +/- this value (defaults 0.5)
+    wave_idx: array_like, optional
+        wavelength indices that will get `extra_weight` during while fitting the
+        intensity profile (default None -> all wavelengths get equal weight)
+    extra_weight : float, optional
+        amount of extra weight to give selected wavelength positions as
+        specified by `wave_idx` (default 20)
+    bounds : list of tuples, optional
+        [(ifact_low, ifact_upp), (woff_low, woff_upp)] suggesting lower and
+        upper bounds for fitting the intensity factor and wavelength offset
+        (defaults None)
+    instrument_profile : ndarray, optional
+        2D array [wave, profile] with wavelength spacing (starting at 0) and
+        instrumental profile to convolve the atlas profile with
+    calib_wave : bool, optional
+        perform wavelength calibration prior to intensity calibration (default
+        False)
+    cgs : bool, optional
+        output calibration in cgs units (default True)
+    si : bool, optional
+        output calibration in SI units (default False)
+    perHz : bool, optional
+        output calibration per frequency unit (default True)
+    qsdc_calib : bool, optional
+        output calibration as fraction of quiet Sun disc centre continuum
+        intensity (default False). If set, overrides `cgs`, `si` and `perHz`
+    verbose : bool, optional
+        output calibration plot and offset values to command line (defaults
+        False)
 
-    Keyword arguments:
-        mu: cosine of heliocentric viewing angle of the observations (defaults
-            1.0 -> disc centre)
-        spec_avg: averaged intensity profile to use for calibration
-            (default None -> use `spec` to calibrate on)
-        calib_at_dc: calibrate assuming `spec_avg` (or `spec`, if `spec_avg` is
-            None) was taken at disc centre (defaults False).
-        atlas_range: get atlas profile with for the range +/- this value
-            (defaults 0.5)
-        wave_idx: wavelength indices that will get `extra_weight` during while
-            fitting the intensity profile (default None -> all wavelengths get
-            equal weight)
-        extra_weight: amount of extra weight to give selected wavelength
-            positions as specified by `wave_idx` (default 20)
-        bounds: list of tuples [(ifact_low, ifact_upp), (woff_low, woff_upp)]
-            suggesting lower and upper bounds for fitting the intensity factor
-            and wavelength offset (defaults None)
-        instrument_profile: 2D array [wave, profile] with wavelength spacing
-            (starting at 0) and instrumental profile to convolve the atlas
-            profile with
-        calib_wave: perform wavelength calibration prior to intensity
-            calibration (default False)
-        cgs: output calibration in cgs units (default True)
-        si: output calibration in SI units (default False)
-        perHz: output calibration per frequency unit (default True)
-        qsdc_calib: output calibration as fraction of quiet Sun disc centre
-            continuum intensity (default False). If set, overrides `cgs`, `si`
-            and `perHz`
-        verbose: output calibration plot and offset values to command line
-            (defaults False)
+    Returns
+    -------
+    wave : array_like
+        calibrated wavelength array
+    spec : array_like
+        calibrated intensity profile array
+    factor : float
+        offset factor converting data counts to absolute intensity
+    spec_fts : array_like
+        atlas profile at wavelengths given by `wave`. Convolved with
+        instrument profile if instrument_profile is not None.
+    unit : object
+        intensity units
 
-    Returns:
-        wave: calibrated wavelength array
-        spec: calibrated intensity profile array
-        factor: offset factor converting data counts to absolute intensity
-        spec_fts: atlas profile at wavelengths given by `wave`. Convolved with
-            instrument profile if instrument_profile is not None.
-        unit: intensity units
-
-    Example:
-        wave_cal, spec_cal, factor, spec_fts, units = calib.spectrum(ispec,
+    Example
+    -------
+    >>> wave_cal, spec_cal, factor, spec_fts, units = calib.spectrum(ispec,
             wave, cgs=True, calib_wave=True, wave_idx=[0,1,-2,-1])
 
-    Author:
+    :Author:
         Gregal Vissers, Carlos Diaz Baso (ISP/SU 2019-2020)
+
     """
 
     if spec_avg is not None:
@@ -272,22 +311,28 @@ def limbdarkening(wave, mu=1.0, nm=False):
     Return limb-darkening factor given wavelength and viewing angle
     mu=cos(theta)
 
-    Arguments:
-        wave: scalar or 1D array with wavelength(s).
+    Parameters
+    ----------
+    wave : float or array_like
+        scalar or 1D array with wavelength(s).
+    mu : float, optional
+        cosine of heliocentric viewing angle (default 1.0 -> disc centre)
+    nm : bool, optional
+        input wavelength units are nanometers (default False)
 
-    Keyword arguments:
-        mu: cosine of heliocentric viewing angle (default 1.0 -> disc centre)
-        nm: input wavelength units are nanometers (default False)
+    Returns
+    -------
+    factor : float or array_like
+        scaling factor(s) to be applied for given input wavelengths. Has as many
+        elements as `wave`.
 
-    Returns:
-        factor: scaling factor(s) to be applied for given input wavelengths. Has
-        as many elements as `wave`.
+    Example
+    -------
+    >>> factor = limbdarkening(630.25, mu=0.7, nm=True)
 
-    Example:
-        factor = limbdarkening(630.25, mu=0.7, nm=True)
-
-    Author:
+    :Author:
         Gregal Vissers (ISP/SU 2020)
+
     """
 
     this_dir, this_filename = os.path.split(__file__)

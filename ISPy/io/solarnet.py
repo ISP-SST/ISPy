@@ -11,28 +11,49 @@ import sys
 
 # ========================================================================
 def read(filename):
-    """Reads the data of a 'SOLARNET' cube.
+    """
+    Read the data of a 'SOLARNET' FITS file 
 
-    Arguments:
-        filename: name of the data cube
+    Parameters
+    ----------
+    filename : str
+        name of the data cube
 
-    Returns:
-        1D wavelength array in nm.
+    Returns
+    -------
+    data : ndarray
+        multidimensional data array 
 
-    Authors: Carlos Diaz (ISP/SU 2019)
+    Example
+    -------
+    >>> data = read('nb_4846_2020-04-25T11:08:59_scans=0-119_corrected_im.fits')
+    >>> data.shape
+    (30, 4, 41, 1914, 206)
+
+    :Author: 
+        Carlos Diaz Baso (ISP/SU 2019)
     """
     return fits.getdata(filename, ext=0)
 
 
 # ========================================================================
 def write(filename, d):
-    """Reads the data as a normal fits (without proper SOLARNET header)
+    """
+    Write the data as a standard FITS file (without proper SOLARNET header)
 
-    Arguments:
-        filename: name of the data cube
-        d: data on memory
+    Parameters
+    ----------
+    filename : str
+        name of the data cube
+    d : ndarray
+        data in memory
 
-    Authors: Carlos Diaz (ISP/SU 2019)
+    Example
+    -------
+    >>> write('testcube.fits', data)
+
+    :Author: 
+        Carlos Diaz Baso (ISP/SU 2019)
     """
     io = fits.PrimaryHDU(d)
     io.writeto(filename, overwrite=True)
@@ -41,19 +62,26 @@ def write(filename, d):
 
 # ========================================================================
 def get_wav(filename):
-    """Reads the wavelength information of a 'SOLARNET' cube.
+    """
+    Read the wavelength information of a 'SOLARNET' FITS file
 
-    Arguments:
-        filename: name of the data cube
-        - It is assumed that spectral sampling does not change over time
+    Parameters
+    ----------
+    filename : str
+        name of the data cube
 
-    Returns:
-        1D wavelength array in nm.
+    Returns
+    -------
+    wav_output : array_like
+        1D wavelength array. It is assumed that spectral sampling does not
+        change over time.
 
-    Example:
-        wav_array = get_wav(filename)
+    Example
+    -------
+    >>> wav_array = get_wav('nb_4846_2020-04-25T11:08:59_scans=0-119_corrected_im.fits')
 
-    Authors: Carlos Diaz (ISP/SU 2019)
+    :Authors:
+        Carlos Diaz Baso (ISP/SU 2019)
     """
     io = fits.open(filename)
     # Wavelength information for all wavelength points in the first time frame
@@ -63,15 +91,26 @@ def get_wav(filename):
 
 # ========================================================================
 def seconds2string(number):
-    """Converts time in seconds to 'HH:MM:SS' format
+    """
+    Convert time in seconds to 'HH:MM:SS' format
 
-    Arguments:
-        number: value in seconds
+    Parameters
+    -----------
+    number : float
+        value in seconds
 
-    Returns:
-        Time in 'HH:MM:SS' format
+    Returns
+    -------
+    time_string : str
+        time in 'HH:MM:SS' format
 
-    Authors: Carlos Diaz (ISP/SU 2019)
+    Example
+    -------
+    >>> seconds2string(63729.3)
+    '17:42:09.300000'
+
+    :Author:
+        Carlos Diaz Baso (ISP/SU 2019)
     """
     hour = number//3600.
     minute = (number%3600.)//60.
@@ -82,21 +121,31 @@ def seconds2string(number):
 
 # ========================================================================
 def get_time(filename, fulltime=False, utc=False):
-    """Reads the time information of a 'SOLARNET' cube.
+    """
+    Reads the time information of a 'SOLARNET' FITS file
 
-    Arguments:
-        filename: name of the data cube (*im.fits only)
-        fulltime: information at each wavelength point (Default value = False)
-        utc: the output is given in 'HH:MM:SS' format (Default value = False)
+    Parameters
+    ----------
+    filename : str
+        name of the data cube
+    fulltime : bool, optional
+        information at each wavelength point (Default value = False)
+    utc : bool, optional
+        the output is given in 'HH:MM:SS' format (Default value = False)
 
-    Returns:
-        fulltime=False : 1D array with time information at middle wavelength point.
-        fulltime=True : 2D array with time information at each wavelength point.
+    Returns
+    -------
+    time_output : array_like
+        array with time information. If fulltime=False, a 1D array with time at
+        middle wavelength tuning; if fulltime=True, a 2D array with
+        tuning-dependent time information.
 
-    Example:
-        data_time = get_time(filename, fulltime=False, utc=True)
+    Example
+    -------
+    >>> data_time = get_time(filename, fulltime=False, utc=True)
 
-    Authors: Carlos Diaz (ISP/SU 2019)
+    :Author: 
+        Carlos Diaz Baso (ISP/SU 2019)
     """
     io = fits.open(filename)
 
@@ -118,20 +167,27 @@ def get_time(filename, fulltime=False, utc=False):
 
 # ========================================================================
 def get_extent(filename, timeFrame=0):
-    """Reads the coordinates of the corners to use them with imshow/extent
+    """
+    Read the coordinates of the corners to use them with imshow/extent
 
-    Arguments:
-        filename: name of the data cube
-        timeFrame: information at a given time frame (Default value = 0)
+    Parameters
+    filename : str
+        name of the data cube
+    timeFrame : int
+        selected frame to get the coordinates for (Default value = 0)
 
-    Returns:
+    Returns
+    -------
+    extent_output : array_like
         1D array with solar coordinates in arcsec of the corners.
 
-    Example:
-        extent = get_extent(filename)
-        imshow(data, extent=extent)
+    Example
+    -------
+    >>> extent = get_extent(filename)
+    >>> imshow(data, extent=extent)
 
-    Authors: Carlos Diaz (ISP/SU 2019)
+    :Author: 
+        Carlos Diaz Baso (ISP/SU 2019)
     """
     io = fits.open(filename)
     extent_output = [io[1].data[0][0][timeFrame,0,0,0,0],io[1].data[0][0][timeFrame,0,1,1,0],
@@ -141,20 +197,29 @@ def get_extent(filename, timeFrame=0):
 
 # ========================================================================
 def get_coord(filename, pix_x,pix_y,timeFrame=0):
-    """Converts pixels values to solar coordinates
+    """
+    Converts pixel values to solar coordinates
 
-    Arguments:
-        filename: name of the data cube
-        pix_x, pix_y : location to convert
-        timeFrame: information at a given time frame (Default value = 0)
+    Parameters
+    ----------
+    filename : str
+        name of the data cube
+    pix_x, pix_y : int
+        pixel location to convert
+    timeFrame : int
+        selected frame to the coordinates for (Default value = 0)
 
-    Returns:
-        Solar coordinates in arcsec
+    Returns
+    -------
+    xy_output : list
+        solar coordinates in arcsec
 
-    Example:
-        [x_output, y_output] = get_coord(filename, pix_x,pix_y)
+    Example
+    -------
+    >>> [x_output, y_output] = get_coord(filename, pix_x,pix_y)
 
-    Authors: Carlos Diaz (ISP/SU 2019)
+    :Author: 
+        Carlos Diaz Baso (ISP/SU 2019)
     """
     io = fits.open(filename)
 

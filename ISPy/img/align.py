@@ -1,19 +1,28 @@
 
 def align(a, b):        
     """
-    Function align computes the shifts (dy,dx) needed to align image b into a
-    Arguments:
-       a: 2D numpy array of dimensions (ny, nx)
-       b: 2D numpy array of dimensions (ny, nx)
-    Returns:
-       A tuple with the (y,x) shifts in pixel units.
-    
-    Example:
-       a = readimage('bla.fits')
-       b = readimage('ble.fits')
-       dy,dx = align(a,b)
+    Ccompute the shifts (dy,dx) needed to align image b into a
 
-    Ported from IDL by J. de la Cruz Rodriguez (ISP-SU 2015)
+    Parameters
+    ----------
+    a : ndarray
+        2D numpy array of dimensions (ny, nx)
+    b : ndarray
+        2D numpy array of dimensions (ny, nx)
+
+    Returns
+    -------
+    dxy : tuple
+        the (y,x) shifts in pixel units.
+    
+    Example
+    -------
+    >>> a = readimage('bla.fits')
+    >>> b = readimage('ble.fits')
+    >>> dy,dx = align(a,b)
+
+    :Author:
+        Jaime de la Cruz Rodriguez (ISP/SU 2015), ported from IDL
     """
     if(a.shape[0] != b.shape[0] or a.shape[1] != b.shape[1]):
         print("align: ERROR, both images must have the same size")
