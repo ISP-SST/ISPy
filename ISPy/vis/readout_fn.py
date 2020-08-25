@@ -4,21 +4,37 @@ import h5py
 from tqdm import tqdm
 
 def readout_1c_ch(obsf,nx,ny, invf):
-	'''
-	function reads only chromospheric inverted data
+	"""
+        Read chromospheric part of 1-component inferred atmosphere
 
-	inputs: 
-		obsf: observed Stokes maps
-		nx: xsize 
-		ny: ysize
-		invf: inverted maps
-	output: 
-		inv_ch: inverted parameters in 3D array [nx, ny, parameters]
-		synpro: synthetic profiles in 4D array [nx, ny, 4stks, wav]
-		chi2: chisquare map [nx, ny]
-	Example:
-		inv_ch, synpro,chi2 = readout_1c_ch(obsf,nx,ny, invf)
-	'''
+        Parameters
+        ----------
+        obsf : str
+            filename of observed Stokes maps
+        nx : int
+            xsize 
+        ny : int
+            ysize
+        invf : str
+            filename of inverted maps
+
+        Returns
+        -------
+        inv_ch : ndarray
+            inverted parameters in 3D array [nx, ny, parameters]
+        synpro : ndarray
+            synthetic profiles in 4D array [nx, ny, 4stks, wav]
+        chi2 : ndarray
+            chisquare map [nx, ny]
+
+        Examples
+        --------
+        >>> inv_ch, synpro,chi2 = readout_1c_ch(obsf,nx,ny, invf)
+
+        :Author:
+            Rahul Yadav (ISP/SU 2019)
+        """
+
 	fobs=h5py.File(obsf,'r')
 	tpix, nlam, stk = fobs['stokes'].shape
 	fobs.close()
@@ -53,23 +69,43 @@ def readout_1c_ch(obsf,nx,ny, invf):
 	return inv_ch,synpro,chi2
 
 def readout_1c(obsf,nx,ny, invf):
-	'''
-	function reads 1-component of photospheric and chromospheric data 
-	inputs: 
-		obsf: observed Stokes maps
-		nx: xsize 
-		ny: ysize
-		invf: inverted maps
-	output: 
-		inv_ch: chromospheric inverted parameters in 3D array [nx, ny, parameters]
-		inv_ph: photospheric inverted parameters in 4D array [nx, ny, logtau, parameters]
-		logtau: logtau array
-		phff: photospheric filling factor
-		synpro: synthetic profiles in 4D array [nx, ny, 4stks, wav]
-		chi2: chisquare map [nx, ny]
-	Example:
-		inv_ch, inv_ph, synpro, logtau, phff,chi2 = readout_1c_ch(obsf,nx,ny, invf)
-	'''
+	"""
+        Read 1-component of photospheric and chromospheric data 
+        
+        Parameters
+        ----------
+        obsf : str
+            filename of observed Stokes maps
+        nx : int
+            xsize 
+        ny : int
+            ysize
+        invf : str
+            filename of inverted maps
+
+        Returns
+        -------
+        inv_ch : ndarray
+            inverted parameters in 3D array [nx, ny, parameters]
+        inv_ph : ndarray
+            photospheric inverted parameters in 4D array [nx, ny, logtau, parameters]
+        synpro : ndarray
+            synthetic profiles in 4D array [nx, ny, 4stks, wav]
+        logtau : array_like
+            logtau array
+        phff : float
+            photospheric filling factor
+        chi2 : ndarray
+            chisquare map [nx, ny]
+
+        Examples
+        --------
+	>>> inv_ch, inv_ph, synpro, logtau, phff,chi2 = readout_1c_ch(obsf,nx,ny, invf)
+
+        :Author:
+            Rahul Yadav (ISP/SU 2019)
+	"""
+
 	fobs=h5py.File(obsf,'r')
 	tpix, nlam, stk = fobs['stokes'].shape
 	fobs.close()
@@ -114,23 +150,43 @@ def readout_1c(obsf,nx,ny, invf):
 	return inv_ch, inv_ph,synpro, logtau, phff,chi2
 
 def readout_2c(obsf,nx,ny, invf):
-	'''
-	function reads 2-comp of chromospheric and 1-comp of photospheric data
-	inputs: 
-		obsf: observed Stokes maps
-		nx: xsize 
-		ny: ysize
-		invf: inverted maps
-	output: 
-		inv_ch: chromospheric inverted parameters in 4D array [nx, ny, parameters,2]
-		inv_ph: photospheric inverted parameters in 4D array [nx, ny, logtau, parameters]
-		logtau: logtau array
-		phff: photospheric filling factor
-		synpro: synthetic profiles in 4D array [nx, ny, 4stks, wav]
-		chi2: chisquare map [nx, ny]
-	Example:
-		inv_ch, inv_ph,synpro, logtau, phff,chi2 = readout_1c_ch(obsf,nx,ny, invf)
-	'''
+        """
+	Read 2-component of chromospheric and 1-component of photospheric data
+        
+        Parameters
+        ----------
+        obsf : str
+            filename of observed Stokes maps
+        nx : int
+            xsize 
+        ny : int
+            ysize
+        invf : str
+            filename of inverted maps
+
+        Returns
+        -------
+        inv_ch : ndarray
+            inverted parameters in 4D array [nx, ny, parameters, 2]
+        inv_ph : ndarray
+            photospheric inverted parameters in 4D array [nx, ny, logtau, parameters]
+        synpro : ndarray
+            synthetic profiles in 4D array [nx, ny, 4stks, wav]
+        logtau : array_like
+            logtau array
+        phff : float
+            photospheric filling factor
+        chi2 : ndarray
+            chisquare map [nx, ny]
+
+        Examples
+        --------
+        >>> inv_ch, inv_ph,synpro, logtau, phff,chi2 = readout_1c_ch(obsf,nx,ny, invf)
+
+        :Author:
+            Rahul Yadav (ISP/SU 2019)
+	"""
+
 	fobs=h5py.File(obsf,'r')
 	tpix, nlam, stk = fobs['stokes'].shape
 	fobs.close()
