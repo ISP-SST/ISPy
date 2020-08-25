@@ -162,46 +162,80 @@ Alex Pietrow (github:crispy), Carlos Diaz and G. Vissers (ISP/SU 2019)</p>
 <dl class="function">
 <dt id="ISPy.io.lapalma.get">
 <code class="sig-prename descclassname">ISPy.io.lapalma.</code><code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">index</em>, <em class="sig-param">verb=False</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.lapalma.get" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads a 2D image (slice) given a known index from a La Palma cube.</p>
-<dl>
-<dt>Arguments:</dt><dd><p>filename : file to be opened. Has to be .icube or .fcube
-index    : chosen frame, where frame is t*nw*ns + s*nw + w</p>
-<blockquote>
-<div><p>t: time or scan number
+<dd><p>Read a 2D image (slice) given a known index from a La Palma cube.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – file to be opened. Has to be .icube or .fcube</p></li>
+<li><p><strong>index</strong> (<em>int</em>) – chosen frame, where frame is t*nw*ns + s*nw + w
+t: time or scan number
 s: stokes parameter
-w: wavelength step</p>
-</div></blockquote>
-<p>verbose : Verbose model. (Default value = False)</p>
+w: wavelength step</p></li>
+<li><p><strong>verbose</strong> (<em>bool, optional</em>) – Verbose model. (Default value = False)</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><p>2D image</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>image</strong> – 2D image slice</p>
 </dd>
-<dt>Example:</dt><dd><p>data = lp_get(‘cube.fcube’, 0)</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
 </dd>
 </dl>
-<p>Authors: G. Vissers (ITA UiO, 2016), A.G.M. Pietrow (2018), Carlos Diaz (ISP/SU 2019)</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">image</span> <span class="o">=</span> <span class="n">lp_get</span><span class="p">(</span><span class="s1">&#39;cube.fcube&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Authors</dt>
+<dd class="field-odd"><ol class="upperalpha simple" start="7">
+<li><p>Vissers (ITA UiO, 2016), A.G.M. Pietrow (2018), Carlos Diaz (ISP/SU 2019)</p></li>
+</ol>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="ISPy.io.lapalma.head">
 <code class="sig-prename descclassname">ISPy.io.lapalma.</code><code class="sig-name descname">head</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">verbose=True</em>, <em class="sig-param">appendFormat=False</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.lapalma.head" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="simple">
-<dt>Args:</dt><dd><p>name: Name of the file we want to know the header properties.
-verbose: (Default value = True)
-appendFormat: different format to ensure append operation (Default =False)</p>
+<dd><p>Get the header of a legacy ‘La Palma’ cube</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – name of the file</p></li>
+<li><p><strong>verbose</strong> (<em>bool, optional</em>) – print out the header information (Default value = True)</p></li>
+<li><p><strong>appendFormat</strong> (<em>bool, optional</em>) – different format to ensure append operation (Default =False)</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><p>header</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>header</strong> – header information in order (nx, ny, nt, nstokes, dtype, ndims)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
 </dd>
 </dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">h</span> <span class="o">=</span> <span class="n">head</span><span class="p">(</span><span class="s1">&#39;crispex_3950_2016-09-19T09:28:36_scans=11-117_time-corrected_im.fcube&#39;</span><span class="p">)</span>
+<span class="go">(&#39;head:&#39;, &#39;[dtype=float32, ndims=3, nx=1734, ny=1240, nt=3317, nstokes=1] -&gt; crispex_3950_2016-09-19T09:28:36_scans=11-117_time-corrected_im.fcube&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nt</span><span class="p">,</span> <span class="n">ns</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">ndims</span> <span class="o">=</span> <span class="n">head</span><span class="p">(</span><span class="s1">&#39;crispex_3950_2016-09-19T09:28:36_scans=11-117_time-corrected_im.fcube&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">ns</span>
+<span class="go">(1734, 1240, 1)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="function">
 <dt id="ISPy.io.lapalma.mk_header">
 <code class="sig-prename descclassname">ISPy.io.lapalma.</code><code class="sig-name descname">mk_header</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.lapalma.mk_header" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates header for La Palma images.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>image: La Palma cube</p>
+<dd><p>Create a La Palma format header of an image array</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> (<em>ndarray</em>) – 2D or 3D image array in La Palma ordering (nx, ny, nt)</p>
 </dd>
-<dt>Returns:</dt><dd><p>header of the cube</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>header</strong> – header of the cube</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -210,76 +244,121 @@ appendFormat: different format to ensure append operation (Default =False)</p>
 <dt id="ISPy.io.lapalma.put">
 <code class="sig-prename descclassname">ISPy.io.lapalma.</code><code class="sig-name descname">put</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">image</em>, <em class="sig-param">append=True</em>, <em class="sig-param">verbose=False</em>, <em class="sig-param">stokes=True</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.lapalma.put" title="Permalink to this definition">¶</a></dt>
 <dd><p>Append a new cube/slice to a pre-existent La Palma cube.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – name of file with .icube/fcube extention</p></li>
+<li><p><strong>image</strong> (<em>ndarray</em>) – datacube in form of [t,s,w,x,y]</p></li>
+<li><p><strong>append</strong> (<em>bool, optional</em>) – append <cite>image</cite> to an existing file (Default value = True)</p></li>
+<li><p><strong>verbose</strong> (<em>bool, optional</em>) – verbose mode (default False)</p></li>
+<li><p><strong>stokes</strong> (<em>bool, optional</em>) – data has Stokes parameters (default True)</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lp_put</span><span class="p">(</span><span class="s1">&#39;cube.fcube&#39;</span><span class="p">,</span> <span class="n">cube2</span><span class="p">)</span>
+</pre></div>
+</div>
 <dl class="simple">
-<dt>Arguments:</dt><dd><p>filename: name of file with .icube/fcube extention
-image: datacube in form of [t,s,w,x,y]
-append: (Default value = True)</p>
-</dd>
-<dt>Examples:</dt><dd><p>lp_put(‘cube.fcube’, cube2)</p>
-</dd>
 <dt>To do:</dt><dd><p>Insert a slice in a La Palma cube</p>
 </dd>
 </dl>
-<p>Authors: Carlos Diaz,  G. Vissers, A.G.M. Pietrow (ISP/SU 2019)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Authors</dt>
+<dd class="field-odd"><p>Carlos Diaz,  G. Vissers, A.G.M. Pietrow (ISP/SU 2019)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="ISPy.io.lapalma.read">
 <code class="sig-prename descclassname">ISPy.io.lapalma.</code><code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param">cube</em>, <em class="sig-param">spnw=True</em>, <em class="sig-param">ns=4</em>, <em class="sig-param">spformat='_sp'</em>, <em class="sig-param">mode='r'</em>, <em class="sig-param">dtype='float32'</em>, <em class="sig-param">verb=False</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.lapalma.read" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads a cube with La Palma format cube.</p>
-<dl class="simple">
-<dt>Arguments:</dt><dd><p>cube: filename, has to be .icube or .fcube
-spnw: Optional. Specific filename of spectral cube  OR number of wavelength steps (Default value = True)
-ns: number of stokes parameters. (Default value = 4)
-spformat: (Default value = ‘_sp’)
-mode: (Default value = ‘r’)
-dtype: Type of data. Should be ‘float32’ for .fcubes and ‘int16’ for icubes. (Default value = ‘float32’)
-verb: Verbose mode. (Default value = False)</p>
+<dd><p>Read the full cube from a La Palma format file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cube</strong> (<em>str</em>) – filename, has to be .icube or .fcube</p></li>
+<li><p><strong>spnw</strong> (<em>bool, optional</em>) – Specific filename of spectral cube  OR number of wavelength steps (Default value = True)</p></li>
+<li><p><strong>ns</strong> (<em>int, optional</em>) – number of stokes parameters. (Default value = 4)</p></li>
+<li><p><strong>spformat</strong> (<em>str, optional</em>) – filename identifier for the spectral cube (Default value = ‘_sp’)</p></li>
+<li><p><strong>mode</strong> (<em>str, optional</em>) – read mode to be passed on to np.memmap (Default value = ‘r’)</p></li>
+<li><p><strong>dtype</strong> (<em>str, optional</em>) – Type of data. Should be ‘float32’ for .fcubes and ‘int16’ for icubes. (Default value = ‘float32’)</p></li>
+<li><p><strong>verb</strong> (<em>bool, optional</em>) – Verbose mode. (Default value = False)</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><p>5D cube of shape [nt,ns,nw,nx,ny]</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>cube_array</strong> – 5D cube of shape [nt,ns,nw,nx,ny]</p>
 </dd>
-<dt>Examples:</dt><dd><p>import ISPy.io.lapalma as lp
-A) cube = lp.read(‘filename.fcube’) # It will find also ‘filename_sp.fcube’ in the same path
-B) cube = lp.read(‘filename.fcube’ , 8)
-C) cube = lp.read(‘filename.fcube’ , ‘filename_sp.fcube’)</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
 </dd>
 </dl>
-<p>Authors: Alex Pietrow (ISP/SU 2019), Carlos Diaz (ISP/SU 2019)</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cube_a</span> <span class="o">=</span> <span class="n">lp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;filename.fcube&#39;</span><span class="p">)</span> <span class="c1"># It will find also &#39;filename_sp.fcube&#39; in the same path</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cube_b</span> <span class="o">=</span> <span class="n">lp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;filename.fcube&#39;</span> <span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cube_c</span> <span class="o">=</span> <span class="n">lp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;filename.fcube&#39;</span> <span class="p">,</span> <span class="s1">&#39;filename_sp.fcube&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Authors</dt>
+<dd class="field-odd"><p>Alex Pietrow (ISP/SU 2019), Carlos Diaz (ISP/SU 2019)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="ISPy.io.lapalma.write">
 <code class="sig-prename descclassname">ISPy.io.lapalma.</code><code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param">cube_array</em>, <em class="sig-param">name</em>, <em class="sig-param">stokes=True</em>, <em class="sig-param">sp=False</em>, <em class="sig-param">path=''</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.lapalma.write" title="Permalink to this definition">¶</a></dt>
-<dd><p>Saves cube as La Palma format cube.</p>
-<dl class="simple">
-<dt>Arguments:</dt><dd><p>cube_array: datacube in form of [t,s,w,x,y]
-name: name of file with .icube/fcube extention
-stokes: flag for if data has stokes or not. (Default value = True)
-sp: Save spectral cube of shape. (Default value = False)
-path: Filepath where file needs to be saved.(Default value = ‘’)</p>
-</dd>
-<dt>Examples:</dt><dd><p>write(cube_array, ‘cube.fcube’, path=’fits/’)</p>
+<dd><p>Write a data cube in La Palma format to disc</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cube_array</strong> (<em>ndarray</em>) – datacube in form of [t,s,w,x,y]</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – name of file with .icube/fcube extention</p></li>
+<li><p><strong>stokes</strong> (<em>bool, optional</em>) – flag for if data has stokes or not. (Default value = True)</p></li>
+<li><p><strong>sp</strong> (<em>bool, optional</em>) – Save spectral cube of shape. (Default value = False)</p></li>
+<li><p><strong>path</strong> (<em>str, optional</em>) – Filepath where file needs to be saved.(Default value = ‘’)</p></li>
+</ul>
 </dd>
 </dl>
-<p>Authors: Alex Pietrow (ISP/SU 2019), Carlos Diaz (ISP/SU 2019)</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">write</span><span class="p">(</span><span class="n">cube_array</span><span class="p">,</span> <span class="s1">&#39;cube.fcube&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;fits/&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Authors</dt>
+<dd class="field-odd"><p>Alex Pietrow (ISP/SU 2019), Carlos Diaz (ISP/SU 2019)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="ISPy.io.lapalma.writeto">
 <code class="sig-prename descclassname">ISPy.io.lapalma.</code><code class="sig-name descname">writeto</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">image</em>, <em class="sig-param">extraheader=''</em>, <em class="sig-param">dtype=None</em>, <em class="sig-param">verbose=False</em>, <em class="sig-param">append=False</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.lapalma.writeto" title="Permalink to this definition">¶</a></dt>
-<dd><p>Writes on disk a cube using LaPalma format. Backend of “write”
+<dd><p>Write a cube to disk in LaPalma format. Backend of “write”
 From <a class="reference external" href="https://github.com/ITA-Solar/helita/blob/master/helita/io/lp.py">https://github.com/ITA-Solar/helita/blob/master/helita/io/lp.py</a></p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>filename: name of the file
-image: data allocated in memory
-extraheader: (Default value = ‘’)
-dtype: (Default value = None)
-verbose: (Default value = False)
-append: (Default value = False)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – name of the file</p></li>
+<li><p><strong>image</strong> (<em>ndarray</em>) – data allocated in memory</p></li>
+<li><p><strong>extraheader</strong> (<em>str, optional</em>) – extra header information to append to standard header (Default value = ‘’)</p></li>
+<li><p><strong>dtype</strong> (<em>str, optional</em>) – data type of the image (Default value = None)</p></li>
+<li><p><strong>verbose</strong> (<em>bool, optional</em>) – verbose mode (Default value = False)</p></li>
+<li><p><strong>append</strong> (<em>bool, optional</em>) – append <cite>image</cite> to existing file (Default value = False)</p></li>
+</ul>
 </dd>
-<dt>Returns</dt><dd><p>file on disk</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>NoneType</p>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">writeto</span><span class="p">(</span><span class="s1">&#39;path/cube.fcube&#39;</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </div>
@@ -406,107 +485,201 @@ and then comes the raw data.</p>
 <dl class="function">
 <dt id="ISPy.io.solarnet.get_coord">
 <code class="sig-prename descclassname">ISPy.io.solarnet.</code><code class="sig-name descname">get_coord</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">pix_x</em>, <em class="sig-param">pix_y</em>, <em class="sig-param">timeFrame=0</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.solarnet.get_coord" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts pixels values to solar coordinates</p>
-<dl class="simple">
-<dt>Arguments:</dt><dd><p>filename: name of the data cube
-pix_x, pix_y : location to convert
-timeFrame: information at a given time frame (Default value = 0)</p>
+<dd><p>Converts pixel values to solar coordinates</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – name of the data cube</p></li>
+<li><p><strong>pix_x, pix_y</strong> (<em>int</em>) – pixel location to convert</p></li>
+<li><p><strong>timeFrame</strong> (<em>int</em>) – selected frame to the coordinates for (Default value = 0)</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><p>Solar coordinates in arcsec</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>xy_output</strong> – solar coordinates in arcsec</p>
 </dd>
-<dt>Example:</dt><dd><p>[x_output, y_output] = get_coord(filename, pix_x,pix_y)</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
 </dd>
 </dl>
-<p>Authors: Carlos Diaz (ISP/SU 2019)</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">x_output</span><span class="p">,</span> <span class="n">y_output</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_coord</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">pix_x</span><span class="p">,</span><span class="n">pix_y</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Carlos Diaz Baso (ISP/SU 2019)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="ISPy.io.solarnet.get_extent">
 <code class="sig-prename descclassname">ISPy.io.solarnet.</code><code class="sig-name descname">get_extent</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">timeFrame=0</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.solarnet.get_extent" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads the coordinates of the corners to use them with imshow/extent</p>
+<dd><p>Read the coordinates of the corners to use them with imshow/extent</p>
+<p>Parameters
+filename : str</p>
+<blockquote>
+<div><p>name of the data cube</p>
+</div></blockquote>
 <dl class="simple">
-<dt>Arguments:</dt><dd><p>filename: name of the data cube
-timeFrame: information at a given time frame (Default value = 0)</p>
-</dd>
-<dt>Returns:</dt><dd><p>1D array with solar coordinates in arcsec of the corners.</p>
-</dd>
-<dt>Example:</dt><dd><p>extent = get_extent(filename)
-imshow(data, extent=extent)</p>
+<dt>timeFrame<span class="classifier">int</span></dt><dd><p>selected frame to get the coordinates for (Default value = 0)</p>
 </dd>
 </dl>
-<p>Authors: Carlos Diaz (ISP/SU 2019)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>extent_output</strong> – 1D array with solar coordinates in arcsec of the corners.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>array_like</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extent</span> <span class="o">=</span> <span class="n">get_extent</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="n">extent</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Carlos Diaz Baso (ISP/SU 2019)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="ISPy.io.solarnet.get_time">
 <code class="sig-prename descclassname">ISPy.io.solarnet.</code><code class="sig-name descname">get_time</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">fulltime=False</em>, <em class="sig-param">utc=False</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.solarnet.get_time" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads the time information of a ‘SOLARNET’ cube.</p>
-<dl class="simple">
-<dt>Arguments:</dt><dd><p>filename: name of the data cube
-fulltime: information at each wavelength point (Default value = False)
-utc: the output is given in ‘HH:MM:SS’ format (Default value = False)</p>
+<dd><p>Reads the time information of a ‘SOLARNET’ FITS file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – name of the data cube</p></li>
+<li><p><strong>fulltime</strong> (<em>bool, optional</em>) – information at each wavelength point (Default value = False)</p></li>
+<li><p><strong>utc</strong> (<em>bool, optional</em>) – the output is given in ‘HH:MM:SS’ format (Default value = False)</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><p>fulltime=False : 1D array with time information at middle wavelength point.
-fulltime=True : 2D array with time information at each wavelength point.</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>time_output</strong> – array with time information. If fulltime=False, a 1D array with time at
+middle wavelength tuning; if fulltime=True, a 2D array with
+tuning-dependent time information.</p>
 </dd>
-<dt>Example:</dt><dd><p>data_time = get_time(filename, fulltime=False, utc=True)</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array_like</p>
 </dd>
 </dl>
-<p>Authors: Carlos Diaz (ISP/SU 2019)</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data_time</span> <span class="o">=</span> <span class="n">get_time</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">fulltime</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">utc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Carlos Diaz Baso (ISP/SU 2019)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="ISPy.io.solarnet.get_wav">
 <code class="sig-prename descclassname">ISPy.io.solarnet.</code><code class="sig-name descname">get_wav</code><span class="sig-paren">(</span><em class="sig-param">filename</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.solarnet.get_wav" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads the wavelength information of a ‘SOLARNET’ cube.</p>
-<dl class="simple">
-<dt>Arguments:</dt><dd><p>filename: name of the data cube
-- It is assumed that spectral sampling does not change over time</p>
+<dd><p>Read the wavelength information of a ‘SOLARNET’ FITS file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – name of the data cube</p>
 </dd>
-<dt>Returns:</dt><dd><p>1D wavelength array in nm.</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>wav_output</strong> – 1D wavelength array. It is assumed that spectral sampling does not
+change over time.</p>
 </dd>
-<dt>Example:</dt><dd><p>wav_array = get_wav(filename)</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array_like</p>
 </dd>
 </dl>
-<p>Authors: Carlos Diaz (ISP/SU 2019)</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">wav_array</span> <span class="o">=</span> <span class="n">get_wav</span><span class="p">(</span><span class="s1">&#39;nb_4846_2020-04-25T11:08:59_scans=0-119_corrected_im.fits&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Authors</dt>
+<dd class="field-odd"><p>Carlos Diaz Baso (ISP/SU 2019)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="ISPy.io.solarnet.read">
 <code class="sig-prename descclassname">ISPy.io.solarnet.</code><code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param">filename</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.solarnet.read" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads the data of a ‘SOLARNET’ cube.</p>
-<dl class="simple">
-<dt>Arguments:</dt><dd><p>filename: name of the data cube</p>
+<dd><p>Read the data of a ‘SOLARNET’ FITS file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – name of the data cube</p>
 </dd>
-<dt>Returns:</dt><dd><p>1D wavelength array in nm.</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>data</strong> – multidimensional data array</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
 </dd>
 </dl>
-<p>Authors: Carlos Diaz (ISP/SU 2019)</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="s1">&#39;nb_4846_2020-04-25T11:08:59_scans=0-119_corrected_im.fits&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(30, 4, 41, 1914, 206)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Carlos Diaz Baso (ISP/SU 2019)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="ISPy.io.solarnet.seconds2string">
 <code class="sig-prename descclassname">ISPy.io.solarnet.</code><code class="sig-name descname">seconds2string</code><span class="sig-paren">(</span><em class="sig-param">number</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.solarnet.seconds2string" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts time in seconds to ‘HH:MM:SS’ format</p>
-<dl class="simple">
-<dt>Arguments:</dt><dd><p>number: value in seconds</p>
+<dd><p>Convert time in seconds to ‘HH:MM:SS’ format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>number</strong> (<em>float</em>) – value in seconds</p>
 </dd>
-<dt>Returns:</dt><dd><p>Time in ‘HH:MM:SS’ format</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>time_string</strong> – time in ‘HH:MM:SS’ format</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
-<p>Authors: Carlos Diaz (ISP/SU 2019)</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">seconds2string</span><span class="p">(</span><span class="mf">63729.3</span><span class="p">)</span>
+<span class="go">&#39;17:42:09.300000&#39;</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Carlos Diaz Baso (ISP/SU 2019)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="ISPy.io.solarnet.write">
 <code class="sig-prename descclassname">ISPy.io.solarnet.</code><code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">d</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.solarnet.write" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads the data as a normal fits (without proper SOLARNET header)</p>
-<dl class="simple">
-<dt>Arguments:</dt><dd><p>filename: name of the data cube
-d: data on memory</p>
+<dd><p>Write the data as a standard FITS file (without proper SOLARNET header)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – name of the data cube</p></li>
+<li><p><strong>d</strong> (<em>ndarray</em>) – data in memory</p></li>
+</ul>
 </dd>
 </dl>
-<p>Authors: Carlos Diaz (ISP/SU 2019)</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;testcube.fits&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Carlos Diaz Baso (ISP/SU 2019)</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>

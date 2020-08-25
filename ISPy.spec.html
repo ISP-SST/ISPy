@@ -161,42 +161,97 @@
 <em class="property">class </em><code class="sig-prename descclassname">ISPy.spec.atlas.</code><code class="sig-name descname">atlas</code><a class="headerlink" href="#ISPy.spec.atlas.atlas" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Class to load (FTS) spectral atlas</p>
-<dl class="simple">
-<dt>Methods:</dt><dd><p>__init__()
-to(usys_to, perHz=True)
-get(w0, w1, cgs=False, si=False, nograv=False)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>None</strong></p>
 </dd>
-<dt>Example:</dt><dd><p>import atlas as S
-fts = S.atlas()
-wav, sp, cont = fts.get(6562.,6564., cgs=True, perHz=False)</p>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>cont</strong> (<em>array_like</em>) – full atlas continuum intensities in units <cite>sunit</cite></p></li>
+<li><p><strong>spec</strong> (<em>array_like</em>) – full atlas spectrum in units <cite>sunit</cite></p></li>
+<li><p><strong>wave</strong> (<em>array_like</em>) – wavelengths in units <cite>wunit</cite></p></li>
+<li><p><strong>usys</strong> (<em>str</em>) – unit system, one of <cite>si_inu</cite>, <cite>si_ilambda</cite>, <cite>cgs_inu</cite> or <cite>cgs_ilambda</cite></p></li>
+<li><p><strong>sunit</strong> (<em>astropy CompositeUnit object</em>) – intensity units according to the <cite>usys</cite> setting</p></li>
+<li><p><strong>wunit</strong> (<em>astropy Unit object</em>) – wavelength unit</p></li>
+</ul>
 </dd>
-<dt>Author:</dt><dd><p>Jaime de la Cruz Rodriguez (ISP/SU 2019)</p>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">atlas</span> <span class="k">as</span> <span class="nn">S</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fts</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">atlas</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wav</span><span class="p">,</span> <span class="n">sp</span><span class="p">,</span> <span class="n">cont</span> <span class="o">=</span> <span class="n">fts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mf">6562.</span><span class="p">,</span><span class="mf">6564.</span><span class="p">,</span> <span class="n">cgs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">perHz</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Jaime de la Cruz Rodriguez (ISP/SU 2019)</p>
 </dd>
 </dl>
 <p class="rubric">Methods</p>
-<table class="docutils align-default">
+<table class="longtable docutils align-default">
 <colgroup>
-<col style="width: 41%" />
-<col style="width: 59%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><strong>get</strong></p></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ISPy.spec.atlas.atlas.get" title="ISPy.spec.atlas.atlas.get"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get</span></code></a>(self, w0, w1[, cgs, nograv, perHz])</p></td>
+<td><p>Extract a subset of the atlas profile</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>to</strong></p></td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#ISPy.spec.atlas.atlas.to" title="ISPy.spec.atlas.atlas.to"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to</span></code></a>(self, usys_to[, perHz])</p></td>
+<td><p>Convert atlas intensity data to particular units</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="ISPy.spec.atlas.atlas.get">
-<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">w0</em>, <em class="sig-param">w1</em>, <em class="sig-param">cgs=False</em>, <em class="sig-param">si=False</em>, <em class="sig-param">nograv=False</em>, <em class="sig-param">perHz=True</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.atlas.atlas.get" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">w0</em>, <em class="sig-param">w1</em>, <em class="sig-param">cgs=False</em>, <em class="sig-param">nograv=False</em>, <em class="sig-param">perHz=True</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.atlas.atlas.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract a subset of the atlas profile</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>w0, w1</strong> (<em>float</em>) – lower and upper boundary of the wavelength range for which to
+extract the atlas profile</p></li>
+<li><p><strong>cgs</strong> (<em>bool, optional</em>) – return the intensities in cgs units (defaults False, i.e. use SI)</p></li>
+<li><p><strong>nograv</strong> (<em>bool, optional</em>) – account for gravitationl reddening (defaults False)</p></li>
+<li><p><strong>perHz</strong> (<em>bool, optional</em>) – return intensity in units per Hz (defaults True)</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>See class docstring</p>
+<dl class="field-list simple">
+<dt class="field-odd">Authors</dt>
+<dd class="field-odd"><p>Jaime de la Cruz Rodríguez (ISP/SU 2019), Gregal Vissers (ISP/SU
+2020)</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="ISPy.spec.atlas.atlas.to">
 <code class="sig-name descname">to</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">usys_to</em>, <em class="sig-param">perHz=True</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.atlas.atlas.to" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Convert atlas intensity data to particular units</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>usys_to</strong> (<em>str</em>) – descriptor setting the unit system to convert to, either <cite>si</cite> or
+<cite>cgs</cite> (case insensitive)</p></li>
+<li><p><strong>perHz</strong> (<em>bool, optional</em>) – convert to intensity units per Hz (defaults True)</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">atlas</span> <span class="k">as</span> <span class="nn">S</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fts</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">atlas</span><span class="p">()</span> <span class="c1"># intensity units are J/s/m^2/sr/Hz (SI, per Hz) by default</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fts</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;cgs&#39;</span><span class="p">,</span> <span class="n">perHz</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># convert to erg/s/cm^2/sr/Å</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Gregal Vissers (ISP/SU 2020)</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -244,8 +299,7 @@ wavelength grids <cite>wave_obs</cite> and <cite>wave_atlas</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>wave_obs</strong> (<em>array_like</em>) –  1D array with observed wavelengths. Must be of same size as
-<cite>spec_obs</cite>.</p></li>
+<li><p><strong>wave_obs</strong> (<em>array_like</em>) – 1D array with observed wavelengths. Must be of same size as <cite>spec_obs</cite>.</p></li>
 <li><p><strong>spec_obs</strong> (<em>array_like</em>) – 1D array with observed intensities.</p></li>
 <li><p><strong>wave_atlas</strong> (<em>array_like</em>) – 1D array with wavelengths corresponding to <cite>spec_atlas</cite>.</p></li>
 <li><p><strong>spec_atlas</strong> (<em>array_like</em>) – 1D array with atlas intensity profile (e.g. from <cite>ISpy.spec.atlas</cite>)</p></li>
@@ -385,50 +439,131 @@ instrument profile if instrument_profile is not None.</p></li>
 <dl class="function">
 <dt id="ISPy.spec.wfa.cder">
 <code class="sig-prename descclassname">ISPy.spec.wfa.</code><code class="sig-name descname">cder</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.wfa.cder" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Get the finite difference derivative of Stokes I with respect to wavelength</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>array_like</em>) – 1D array with the wavelengths</p></li>
+<li><p><strong>y</strong> (<em>ndarray</em>) – 4D nummpy array (ny, nx, nstokes, nwave) with the observations</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>cder</strong> – 3D array with finite difference derivative of Stokes I</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cd</span> <span class="o">=</span> <span class="n">cder</span><span class="p">(</span><span class="n">wave</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Jaime de la Cruz Rodríguez (ISP/SU 2018)</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="function">
 <dt id="ISPy.spec.wfa.getBhor">
 <code class="sig-prename descclassname">ISPy.spec.wfa.</code><code class="sig-name descname">getBhor</code><span class="sig-paren">(</span><em class="sig-param">w</em>, <em class="sig-param">d</em>, <em class="sig-param">lin</em>, <em class="sig-param">beta=0.0</em>, <em class="sig-param">vdop=0.05</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.wfa.getBhor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the horizontal component of the magnetic field vector
-Arguments:</p>
-<blockquote>
-<div><p>w: 1D numpy array with the wavelength offsets on the observation (can be relative to line-center)
-d: 4D numpy array (ny, nx, nstokes, nwav) with the observations
-line: object from line class (also included) with the atomic data of the transition
-beta: (optional) a regularization factor that selects low-norm solutions. Use wisely.
-vdep: (optional) typical Doppler width of the line. Wavelength points inside +- vdop from line center will be excluded</p>
-</div></blockquote>
-<p>Coded by J. de la Cruz Rodriguez (ISP-SU 2018)</p>
+<dd><p>Compute the horizontal component of the magnetic field vector</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>w</strong> (<em>array_like</em>) – 1D numpy array with the wavelength offsets on the observation (can be relative to line-center)</p></li>
+<li><p><strong>d</strong> (<em>ndarray</em>) – 4D numpy array (ny, nx, nstokes, nwav) with the observations</p></li>
+<li><p><strong>line</strong> (<em>object</em>) – object from wfa.line class with the atomic data of the transition</p></li>
+<li><p><strong>beta</strong> (<em>float, optional</em>) – regularization factor that selects low-norm solutions. Use wisely.</p></li>
+<li><p><strong>vdop</strong> (<em>float, optional</em>) – typical Doppler width of the line. Wavelength points inside +/- vdop
+from line center will be excluded (default 0.05)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Bhor</strong> – 2D array (ny,nx) with the transverse magnetic field</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lin</span> <span class="o">=</span> <span class="n">line</span><span class="p">(</span><span class="mi">6302</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blos</span> <span class="o">=</span> <span class="n">getBhor</span><span class="p">(</span><span class="n">wave</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">lin</span><span class="p">,</span> <span class="n">vdop</span><span class="o">=</span><span class="mf">0.04</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Jaime de la Cruz Rodriguez (ISP/SU 2018)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="ISPy.spec.wfa.getBlos">
 <code class="sig-prename descclassname">ISPy.spec.wfa.</code><code class="sig-name descname">getBlos</code><span class="sig-paren">(</span><em class="sig-param">w</em>, <em class="sig-param">d</em>, <em class="sig-param">line</em>, <em class="sig-param">beta=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.wfa.getBlos" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the line of sight component of the magnetic field vector
-Arguments:</p>
-<blockquote>
-<div><p>w: 1D numpy array with the wavelength offsets on the observation (can be relative to line-center)
-d: 4D numpy array (ny, nx, nstokes, nwav) with the observations
-line: object from line class (also included) with the atomic data of the transition
-beta: (optional) a regularization factor that selects low-norm solutions. Use wisely.</p>
-</div></blockquote>
-<p>Coded by J. de la Cruz Rodriguez (ISP-SU 2018)</p>
+<dd><p>Compute the line-of-sight component of the magnetic field vector</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>w</strong> (<em>array_like</em>) – 1D numpy array with the wavelength offsets on the observation (can be relative to line-center)</p></li>
+<li><p><strong>d</strong> (<em>ndarray</em>) – 4D numpy array (ny, nx, nstokes, nwav) with the observations</p></li>
+<li><p><strong>line</strong> (<em>object</em>) – object from wfa.line class with the atomic data of the transition</p></li>
+<li><p><strong>beta</strong> (<em>float, optional</em>) – regularization factor that selects low-norm solutions (default 0.0). Use wisely.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Blos</strong> – 2D array (ny, nx) with the line-of-sight magnetic field</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lin</span> <span class="o">=</span> <span class="n">line</span><span class="p">(</span><span class="mi">8542</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blos</span> <span class="o">=</span> <span class="n">getBlos</span><span class="p">(</span><span class="n">wave</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">lin</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Jaime de la Cruz Rodriguez (ISP/SU 2018)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="ISPy.spec.wfa.getBlosMask">
 <code class="sig-prename descclassname">ISPy.spec.wfa.</code><code class="sig-name descname">getBlosMask</code><span class="sig-paren">(</span><em class="sig-param">w</em>, <em class="sig-param">d</em>, <em class="sig-param">line</em>, <em class="sig-param">mask</em>, <em class="sig-param">beta=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.wfa.getBlosMask" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the line of sight component of the magnetic field vector, using selected wavelength points of the observation
-Arguments:</p>
-<blockquote>
-<div><p>w: 1D numpy array with the wavelength offsets on the observation (can be relative to line-center)
-d: 4D numpy array (ny, nx, nstokes, nwav) with the observations
-line: object from line class (also included) with the atomic data of the transition
-mask: a tuple/numpy array with the wavlength indexes that should be used to compute Blong
-beta: (optional) a regularization factor that selects low-norm solutions. Use wisely.</p>
-</div></blockquote>
-<p>Coded by J. de la Cruz Rodriguez (ISP-SU 2018)</p>
+<dd><p>Compute the line of sight component of the magnetic field vector, using
+selected wavelength points of the observation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>w</strong> (<em>array_like</em>) – 1D numpy array with the wavelength offsets on the observation (can be relative to line-center)</p></li>
+<li><p><strong>d</strong> (<em>ndarray</em>) – 4D numpy array (ny, nx, nstokes, nwav) with the observations</p></li>
+<li><p><strong>line</strong> (<em>object</em>) – object from wfa.line class (also included) with the atomic data of the transition</p></li>
+<li><p><strong>mask</strong> (<em>tuple</em>) – a tuple/numpy array with the wavlength indices that should be used to compute Blong</p></li>
+<li><p><strong>beta</strong> (<em>float, optional</em>) – regularization factor that selects low-norm solutions (default 0.0). Use wisely.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Blos</strong> – 2D array (ny,nx) with the line-of-sight magnetic field</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lin</span> <span class="o">=</span> <span class="n">line</span><span class="p">(</span><span class="mi">8542</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blos</span> <span class="o">=</span> <span class="n">getBlosMask</span><span class="p">(</span><span class="n">wave</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">lin</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Jaime de la Cruz Rodriguez (ISP/SU 2018)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -440,6 +575,35 @@ beta: (optional) a regularization factor that selects low-norm solutions. Use wi
 <dt id="ISPy.spec.wfa.line">
 <em class="property">class </em><code class="sig-prename descclassname">ISPy.spec.wfa.</code><code class="sig-name descname">line</code><span class="sig-paren">(</span><em class="sig-param">cw=0</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.wfa.line" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>cw</strong> (<em>integer, optional</em>) – wavelength identifier for pre-defined initialisation</p>
+</dd>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>cw</strong> (<em>float</em>) – central wavelength</p></li>
+<li><p><strong>j1</strong> (<em>float</em>) – total angular momentum quantum number of the lower level</p></li>
+<li><p><strong>j2</strong> (<em>float</em>) – total angular momentum quantum number of the upper level</p></li>
+<li><p><strong>g1</strong> (<em>float</em>) – Landé g-factor of the lower level</p></li>
+<li><p><strong>g2</strong> (<em>float</em>) – Landé g-factor of the upper level</p></li>
+<li><p><strong>geff</strong> (<em>float</em>) – effective Landé g-factor</p></li>
+<li><p><strong>Gg</strong> (<em>float</em>) – \bar{G} in Eqs. (9.74cd), (9.76) and (9.77) in Degl’Innocenti &amp; Landolfi
+(2004); a measure of the sensitivity of a given spectral line to the
+Zeeman effect in Q and U.</p></li>
+<li><p><strong>larm</strong> (<em>float</em><em>, </em><em>constant</em>) – Larmor frequency</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lin</span> <span class="o">=</span> <span class="n">line</span><span class="p">(</span><span class="mi">6302</span><span class="p">)</span>
+<span class="go">line::init: cw=6302.4931, geff=2.49, Gg=6.200100000000001</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Jaime de la Cruz Rodríguez (ISP/SU 2018)</p>
+</dd>
+</dl>
 <p class="rubric">Methods</p>
 <table class="longtable docutils align-default">
 <colgroup>
@@ -447,20 +611,37 @@ beta: (optional) a regularization factor that selects low-norm solutions. Use wi
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ISPy.spec.wfa.line.update" title="ISPy.spec.wfa.line.update"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update</span></code></a>(j1, j2, g1, g2, cw)</p></td>
-<td><p>This method updates the atomic data, useful for lines that are not defined in the constructor Example:     lin = line(cw=0)     lin.update(2.5, 1.5, 1.2, 1.33, 8542.091)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ISPy.spec.wfa.line.update" title="ISPy.spec.wfa.line.update"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update</span></code></a>(self, j1, j2, g1, g2, cw)</p></td>
+<td><p>Update the atomic data for lines that are not defined in the constructor</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="ISPy.spec.wfa.line.update">
-<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param">j1</em>, <em class="sig-param">j2</em>, <em class="sig-param">g1</em>, <em class="sig-param">g2</em>, <em class="sig-param">cw</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.wfa.line.update" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method updates the atomic data, useful for lines that are not defined in the constructor
-Example:</p>
-<blockquote>
-<div><p>lin = line(cw=0)
-lin.update(2.5, 1.5, 1.2, 1.33, 8542.091)</p>
-</div></blockquote>
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">j1</em>, <em class="sig-param">j2</em>, <em class="sig-param">g1</em>, <em class="sig-param">g2</em>, <em class="sig-param">cw</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.wfa.line.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the atomic data for lines that are not defined in the constructor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>j1</strong> (<em>float</em>) – total angular momentum quantum number of the lower level</p></li>
+<li><p><strong>j2</strong> (<em>float</em>) – total angular momentum quantum number of the upper level</p></li>
+<li><p><strong>g1</strong> (<em>float</em>) – Landé g-factor of the lower level</p></li>
+<li><p><strong>g2</strong> (<em>float</em>) – Landé g-factor of the upper level</p></li>
+<li><p><strong>cw</strong> (<em>float</em>) – central wavelength of the line</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lin</span> <span class="o">=</span> <span class="n">line</span><span class="p">(</span><span class="n">cw</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lin</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">6173.3340</span><span class="p">)</span>
+<span class="go">line::init: cw=6173.334, geff=2.5, Gg=6.25</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Jaime de la Cruz Rodríguez (ISP/SU 2018)</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

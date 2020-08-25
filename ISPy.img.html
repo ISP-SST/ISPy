@@ -157,21 +157,32 @@
 <dl class="function">
 <dt id="ISPy.img.align.align">
 <code class="sig-prename descclassname">ISPy.img.align.</code><code class="sig-name descname">align</code><span class="sig-paren">(</span><em class="sig-param">a</em>, <em class="sig-param">b</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.align.align" title="Permalink to this definition">¶</a></dt>
-<dd><p>Function align computes the shifts (dy,dx) needed to align image b into a
-Arguments:</p>
-<blockquote>
-<div><p>a: 2D numpy array of dimensions (ny, nx)
-b: 2D numpy array of dimensions (ny, nx)</p>
-</div></blockquote>
-<dl class="simple">
-<dt>Returns:</dt><dd><p>A tuple with the (y,x) shifts in pixel units.</p>
+<dd><p>Ccompute the shifts (dy,dx) needed to align image b into a</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>ndarray</em>) – 2D numpy array of dimensions (ny, nx)</p></li>
+<li><p><strong>b</strong> (<em>ndarray</em>) – 2D numpy array of dimensions (ny, nx)</p></li>
+</ul>
 </dd>
-<dt>Example:</dt><dd><p>a = readimage(‘bla.fits’)
-b = readimage(‘ble.fits’)
-dy,dx = align(a,b)</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>dxy</strong> – the (y,x) shifts in pixel units.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
 </dd>
 </dl>
-<p>Ported from IDL by J. de la Cruz Rodriguez (ISP-SU 2015)</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">readimage</span><span class="p">(</span><span class="s1">&#39;bla.fits&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">readimage</span><span class="p">(</span><span class="s1">&#39;ble.fits&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dy</span><span class="p">,</span><span class="n">dx</span> <span class="o">=</span> <span class="n">align</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Jaime de la Cruz Rodriguez (ISP/SU 2015), ported from IDL</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>

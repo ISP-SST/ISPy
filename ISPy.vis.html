@@ -158,23 +158,35 @@
 <dl class="function">
 <dt id="ISPy.vis.readout_fn.readout_1c">
 <code class="sig-prename descclassname">ISPy.vis.readout_fn.</code><code class="sig-name descname">readout_1c</code><span class="sig-paren">(</span><em class="sig-param">obsf</em>, <em class="sig-param">nx</em>, <em class="sig-param">ny</em>, <em class="sig-param">invf</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.vis.readout_fn.readout_1c" title="Permalink to this definition">¶</a></dt>
-<dd><p>function reads 1-component of photospheric and chromospheric data
-inputs:</p>
-<blockquote>
-<div><p>obsf: observed Stokes maps
-nx: xsize
-ny: ysize
-invf: inverted maps</p>
-</div></blockquote>
-<dl class="simple">
-<dt>output:</dt><dd><p>inv_ch: chromospheric inverted parameters in 3D array [nx, ny, parameters]
-inv_ph: photospheric inverted parameters in 4D array [nx, ny, logtau, parameters]
-logtau: logtau array
-phff: photospheric filling factor
-synpro: synthetic profiles in 4D array [nx, ny, 4stks, wav]
-chi2: chisquare map [nx, ny]</p>
+<dd><p>Read 1-component of photospheric and chromospheric data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obsf</strong> (<em>str</em>) – filename of observed Stokes maps</p></li>
+<li><p><strong>nx</strong> (<em>int</em>) – xsize</p></li>
+<li><p><strong>ny</strong> (<em>int</em>) – ysize</p></li>
+<li><p><strong>invf</strong> (<em>str</em>) – filename of inverted maps</p></li>
+</ul>
 </dd>
-<dt>Example:</dt><dd><p>inv_ch, inv_ph, synpro, logtau, phff,chi2 = readout_1c_ch(obsf,nx,ny, invf)</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>inv_ch</strong> (<em>ndarray</em>) – inverted parameters in 3D array [nx, ny, parameters]</p></li>
+<li><p><strong>inv_ph</strong> (<em>ndarray</em>) – photospheric inverted parameters in 4D array [nx, ny, logtau, parameters]</p></li>
+<li><p><strong>synpro</strong> (<em>ndarray</em>) – synthetic profiles in 4D array [nx, ny, 4stks, wav]</p></li>
+<li><p><strong>logtau</strong> (<em>array_like</em>) – logtau array</p></li>
+<li><p><strong>phff</strong> (<em>float</em>) – photospheric filling factor</p></li>
+<li><p><strong>chi2</strong> (<em>ndarray</em>) – chisquare map [nx, ny]</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">inv_ch</span><span class="p">,</span> <span class="n">inv_ph</span><span class="p">,</span> <span class="n">synpro</span><span class="p">,</span> <span class="n">logtau</span><span class="p">,</span> <span class="n">phff</span><span class="p">,</span><span class="n">chi2</span> <span class="o">=</span> <span class="n">readout_1c_ch</span><span class="p">(</span><span class="n">obsf</span><span class="p">,</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">,</span> <span class="n">invf</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Rahul Yadav (ISP/SU 2019)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -182,18 +194,32 @@ chi2: chisquare map [nx, ny]</p>
 <dl class="function">
 <dt id="ISPy.vis.readout_fn.readout_1c_ch">
 <code class="sig-prename descclassname">ISPy.vis.readout_fn.</code><code class="sig-name descname">readout_1c_ch</code><span class="sig-paren">(</span><em class="sig-param">obsf</em>, <em class="sig-param">nx</em>, <em class="sig-param">ny</em>, <em class="sig-param">invf</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.vis.readout_fn.readout_1c_ch" title="Permalink to this definition">¶</a></dt>
-<dd><p>function reads only chromospheric inverted data</p>
-<dl class="simple">
-<dt>inputs:</dt><dd><p>obsf: observed Stokes maps
-nx: xsize
-ny: ysize
-invf: inverted maps</p>
+<dd><p>Read chromospheric part of 1-component inferred atmosphere</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obsf</strong> (<em>str</em>) – filename of observed Stokes maps</p></li>
+<li><p><strong>nx</strong> (<em>int</em>) – xsize</p></li>
+<li><p><strong>ny</strong> (<em>int</em>) – ysize</p></li>
+<li><p><strong>invf</strong> (<em>str</em>) – filename of inverted maps</p></li>
+</ul>
 </dd>
-<dt>output:</dt><dd><p>inv_ch: inverted parameters in 3D array [nx, ny, parameters]
-synpro: synthetic profiles in 4D array [nx, ny, 4stks, wav]
-chi2: chisquare map [nx, ny]</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>inv_ch</strong> (<em>ndarray</em>) – inverted parameters in 3D array [nx, ny, parameters]</p></li>
+<li><p><strong>synpro</strong> (<em>ndarray</em>) – synthetic profiles in 4D array [nx, ny, 4stks, wav]</p></li>
+<li><p><strong>chi2</strong> (<em>ndarray</em>) – chisquare map [nx, ny]</p></li>
+</ul>
+</p>
 </dd>
-<dt>Example:</dt><dd><p>inv_ch, synpro,chi2 = readout_1c_ch(obsf,nx,ny, invf)</p>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">inv_ch</span><span class="p">,</span> <span class="n">synpro</span><span class="p">,</span><span class="n">chi2</span> <span class="o">=</span> <span class="n">readout_1c_ch</span><span class="p">(</span><span class="n">obsf</span><span class="p">,</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">,</span> <span class="n">invf</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Rahul Yadav (ISP/SU 2019)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -201,23 +227,35 @@ chi2: chisquare map [nx, ny]</p>
 <dl class="function">
 <dt id="ISPy.vis.readout_fn.readout_2c">
 <code class="sig-prename descclassname">ISPy.vis.readout_fn.</code><code class="sig-name descname">readout_2c</code><span class="sig-paren">(</span><em class="sig-param">obsf</em>, <em class="sig-param">nx</em>, <em class="sig-param">ny</em>, <em class="sig-param">invf</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.vis.readout_fn.readout_2c" title="Permalink to this definition">¶</a></dt>
-<dd><p>function reads 2-comp of chromospheric and 1-comp of photospheric data
-inputs:</p>
-<blockquote>
-<div><p>obsf: observed Stokes maps
-nx: xsize
-ny: ysize
-invf: inverted maps</p>
-</div></blockquote>
-<dl class="simple">
-<dt>output:</dt><dd><p>inv_ch: chromospheric inverted parameters in 4D array [nx, ny, parameters,2]
-inv_ph: photospheric inverted parameters in 4D array [nx, ny, logtau, parameters]
-logtau: logtau array
-phff: photospheric filling factor
-synpro: synthetic profiles in 4D array [nx, ny, 4stks, wav]
-chi2: chisquare map [nx, ny]</p>
+<dd><p>Read 2-component of chromospheric and 1-component of photospheric data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obsf</strong> (<em>str</em>) – filename of observed Stokes maps</p></li>
+<li><p><strong>nx</strong> (<em>int</em>) – xsize</p></li>
+<li><p><strong>ny</strong> (<em>int</em>) – ysize</p></li>
+<li><p><strong>invf</strong> (<em>str</em>) – filename of inverted maps</p></li>
+</ul>
 </dd>
-<dt>Example:</dt><dd><p>inv_ch, inv_ph,synpro, logtau, phff,chi2 = readout_1c_ch(obsf,nx,ny, invf)</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>inv_ch</strong> (<em>ndarray</em>) – inverted parameters in 4D array [nx, ny, parameters, 2]</p></li>
+<li><p><strong>inv_ph</strong> (<em>ndarray</em>) – photospheric inverted parameters in 4D array [nx, ny, logtau, parameters]</p></li>
+<li><p><strong>synpro</strong> (<em>ndarray</em>) – synthetic profiles in 4D array [nx, ny, 4stks, wav]</p></li>
+<li><p><strong>logtau</strong> (<em>array_like</em>) – logtau array</p></li>
+<li><p><strong>phff</strong> (<em>float</em>) – photospheric filling factor</p></li>
+<li><p><strong>chi2</strong> (<em>ndarray</em>) – chisquare map [nx, ny]</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">inv_ch</span><span class="p">,</span> <span class="n">inv_ph</span><span class="p">,</span><span class="n">synpro</span><span class="p">,</span> <span class="n">logtau</span><span class="p">,</span> <span class="n">phff</span><span class="p">,</span><span class="n">chi2</span> <span class="o">=</span> <span class="n">readout_1c_ch</span><span class="p">(</span><span class="n">obsf</span><span class="p">,</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">,</span> <span class="n">invf</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Rahul Yadav (ISP/SU 2019)</p>
 </dd>
 </dl>
 </dd></dl>
