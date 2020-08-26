@@ -4,4 +4,4 @@ __pycache__/
 # sphinx build folder
 docs/build
 
-.DS_Store
+*.DS_Store
