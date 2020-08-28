@@ -159,7 +159,7 @@ def head(name, verbose=True, appendFormat=False):
 
 
 # ========================================================================
-def read(cube, spnw=True, ns=4, spformat='_sp', mode='r', dtype='float32', verb=False):
+def read(cube, spnw=True, ns=4, spformat='_sp', mode='r', verb=False):
     """
     Read the full cube from a La Palma format file
 
@@ -175,8 +175,6 @@ def read(cube, spnw=True, ns=4, spformat='_sp', mode='r', dtype='float32', verb=
         filename identifier for the spectral cube (Default value = '_sp')
     mode : str, optional
         read mode to be passed on to np.memmap (Default value = 'r')
-    dtype : str, optional
-        Type of data. Should be 'float32' for .fcubes and 'int16' for icubes. (Default value = 'float32')
     verb : bool, optional
         Verbose mode. (Default value = False)
 
@@ -194,6 +192,7 @@ def read(cube, spnw=True, ns=4, spformat='_sp', mode='r', dtype='float32', verb=
     :Authors: 
         Alex Pietrow (ISP/SU 2019), Carlos Diaz (ISP/SU 2019)
     """
+    dtype = str(head(cube)[4])
     if type(spnw) is str:
         if ns == 4:
             nx, ny, dum, ns, dtype, ndim = head(cube)
