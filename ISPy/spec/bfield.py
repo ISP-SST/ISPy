@@ -79,7 +79,7 @@ def spherical2observer(bvec_in, degrees=False):
 
     return bvec_out
 
-def spherical2cartesian(bvec_in):
+def spherical2cartesian(bvec_in, azim0=0):
     """
     Convert the magnetic field vector in spherical coordinate system B(field,
     inc, azi) to Cartesian coordinates B(x, y, z)
@@ -88,6 +88,9 @@ def spherical2cartesian(bvec_in):
     ----------
     bvec_in : ndarray
         magnetic feld vector of shape (3,), (3, nx) or (3, ny, nx)
+    azim0 : {0, 1, 2, 3}
+        zero-azimith direction convention: +Y (azim0=0), +X (azim0=1), -Y
+        (azim0=2), -X (azim0=3)
 
     Returns
     -------
@@ -95,10 +98,6 @@ def spherical2cartesian(bvec_in):
         magnetic field vector of same shape as `bvec_in`, converted to Cartesian
         coordinates
     
-    Notes
-    -----
-    +Y is assumed to be the zero-azimuth direction 
-
     Examples
     --------
     >>> bxyz = bfield.spherical2cartesian(bvec)
@@ -108,8 +107,25 @@ def spherical2cartesian(bvec_in):
     bvec_out = np.copy(bvec_in)
     if bvec_in[1].max() > np.pi: bvec_in[1] *= DTOR
     if bvec_in[2].max() > 2*np.pi: bvec_in[2] *= DTOR 
-    bvec_out[0] = -bvec_in[0] * np.sin(bvec_in[1]) * np.sin(bvec_in[2])
-    bvec_out[1] = bvec_in[0] * np.sin(bvec_in[1]) * np.cos(bvec_in[2])
+
+    #Zero-azimuth direction
+    if azim0 == 0:
+        azim_x = -np.sin(bvec_in[2])
+        azim_y = np.cos(bvec_in[2])
+    elif azim0 == 1:
+        azim_x = np.cos(bvec_in[2])
+        azim_y = np.sin(bvec_in[2])
+    elif azim0 == 2:
+        azim_x = np.sin(bvec_in[2])
+        azim_y = -np.cos(bvec_in[2])
+    elif azim0 == 3:
+        azim_x = -np.cos(bvec_in[2])
+        azim_y = -np.sin(bvec_in[2])
+    else:
+        raise ValueError('spherical2cartesian: azim0 value invalid')
+
+    bvec_out[0] = bvec_in[0] * np.sin(bvec_in[1]) * azim_x
+    bvec_out[1] = bvec_in[0] * np.sin(bvec_in[1]) * azim_y
     bvec_out[2] = bvec_in[0] * np.cos(bvec_in[1])
     
     return bvec_out
