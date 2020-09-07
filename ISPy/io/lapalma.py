@@ -11,7 +11,7 @@ import sys
 
 
 # ========================================================================
-def head(name, verbose=True, appendFormat=False):
+def head(name, verbose=False, appendFormat=False):
     """
     Get the header of a legacy 'La Palma' cube
 
@@ -67,7 +67,10 @@ def head(name, verbose=True, appendFormat=False):
         elif("ny" in du1[0]):
             ny = int(du1[1].split(',')[0])
         elif("nt" in du1[0]):
-            nt = int(du1[1].split(',')[0])
+            try:
+                nt = int(du1[1].split(',')[0])
+            except:
+                pass # (integer label)
         elif("stokes" in du1[0]):
             du2 = du1[1].split(']')
             nstokes = int(np.size(du2[0].split(',')))
@@ -86,8 +89,8 @@ def head(name, verbose=True, appendFormat=False):
         print((inam, 'Warning, dtype={0} not supported!'.format(dtype)))
 
     if(verbose):
-        print((inam, "[dtype={0}, ndims={1}, nx={2}, ny={3}, nt={4}, nstokes={5}] -> {6}".format(
-            dtype, ndims, nx, ny, nt, nstokes, os.path.basename(name))))
+        print(inam, "[dtype={0}, ndims={1}, nx={2}, ny={3}, nt={4}, nstokes={5}] -> {6}".format(
+            dtype, ndims, nx, ny, nt, nstokes, os.path.basename(name)))
 
     if appendFormat is True:
         # read header and convert to string
@@ -159,7 +162,7 @@ def head(name, verbose=True, appendFormat=False):
 
 
 # ========================================================================
-def read(cube, spnw=True, ns=4, spformat='_sp', mode='r', dtype='float32', verb=False):
+def read(cube, spnw=None, spformat='_sp', verb=False):
     """
     Read the full cube from a La Palma format file
 
@@ -167,14 +170,10 @@ def read(cube, spnw=True, ns=4, spformat='_sp', mode='r', dtype='float32', verb=
     ----------
     cube : str
         filename, has to be .icube or .fcube
-    spnw : bool, optional 
-        Specific filename of spectral cube  OR number of wavelength steps (Default value = True)
-    ns : int, optional
-        number of stokes parameters. (Default value = 4)
+    spnw : str or int, optional 
+        Specific filename of spectral cube OR number of wavelength steps (Default value = None)
     spformat : str, optional
         filename identifier for the spectral cube (Default value = '_sp')
-    mode : str, optional
-        read mode to be passed on to np.memmap (Default value = 'r')
     dtype : str, optional
         Type of data. Should be 'float32' for .fcubes and 'int16' for icubes. (Default value = 'float32')
     verb : bool, optional
@@ -187,58 +186,49 @@ def read(cube, spnw=True, ns=4, spformat='_sp', mode='r', dtype='float32', verb=
 
     Examples
     --------
-    >>> cube_a = lp.read('filename.fcube') # It will find also 'filename_sp.fcube' in the same path
+    >>> cube_a = lp.read('filename.fcube') # It searches for 'filename_sp.fcube' in the same path
     >>> cube_b = lp.read('filename.fcube' , 8)
     >>> cube_c = lp.read('filename.fcube' , 'filename_sp.fcube')
 
     :Authors: 
         Alex Pietrow (ISP/SU 2019), Carlos Diaz (ISP/SU 2019)
     """
-    if type(spnw) is str:
-        if ns == 4:
-            nx, ny, dum, ns, dtype, ndim = head(cube)
-            nw, nt, dum, ns, dtype, ndim = head(spnw)
-            cube_array = np.memmap(cube, shape=(
-                nt, ns, nw, ny, nx), offset=512, dtype=dtype, mode=mode)
-        elif ns == 1:
-            nx, ny, dum, dtype, ndim = head(fil0)
-            nw, nt, dum, dtype, ndim = head(fil1)
-            cube_array = np.memmap(cube, shape=(
-                nt, nw, ny, nx), offset=512, dtype=dtype, mode=mode)
-        else:
-            raise ValueError("Stokes must be 1 or 4")
 
-    elif type(spnw) is bool:
-        cube = cube[:-6]+'{0}.fcube'
-        f1 = cube.format('')
-        f2 = cube.format(spformat)
+    if spnw is None:
+        cube_format = cube[:-6]+'{0}.'+cube[-5:]
+        f1 = cube_format.format('')
+        f2 = cube_format.format(spformat)
         if not os.path.isfile(f2):
             raise ValueError('File '+f2+' was not found. Please '
                 +'include the name of spectral file or wavelength steps.')
+        nx, ny, ndum, ns, dtype, ndim = head(f1, False)
+        nw, nt, ndum, ns, dtype, ndim = head(f2, False)
+        cube_array = np.memmap(f1, shape=(
+            nt, ns, nw, ny, nx), offset=512, dtype=dtype, mode='r')
 
-        if ns == 4:
-            nx, ny, ndum, nstokes, dtype, dum1 = head(f1, verb)
-            nw, nt, ndum, nstokes, dtype, dum1 = head(f2, verb)
-            cube_array = np.memmap(f1, shape=(
-                nt, ns, nw, ny, nx), offset=512, dtype=dtype, mode=mode)
+
+    elif type(spnw) is str:
+        f2 = str(spnw)
+        if not os.path.isfile(f2):
+            raise ValueError('File '+f2+' was not found. Please '
+                +'include the name of spectral file or wavelength steps.')
+        nx, ny, ndum, ns, dtype, ndim = head(f1, False)
+        nw, nt, ndum, ns, dtype, ndim = head(f2, False)
+        cube_array = np.memmap(f1, shape=(
+            nt, ns, nw, ny, nx), offset=512, dtype=dtype, mode='r')
+
 
     elif type(spnw) is int:
-        if ns == 4:
-            hheader = head(cube, verb)
-            nt = int(hheader[2]/spnw/ns)
-            nx = hheader[0]
-            ny = hheader[1]
-            cube_array = np.memmap(cube, shape=(
-                nt, ns, spnw, ny, nx), offset=512, dtype=dtype, mode=mode)
-        elif ns == 1:
-            hheader = head(cube, verb)
-            nt = int(hheader[2]/spnw)
-            nx = hheader[0]
-            ny = hheader[1]
-            cube_array = np.memmap(cube, shape=(
-                nt, spnw, ny, nx), offset=512, dtype=dtype, mode=mode)
-        else:
-            raise ValueError("Stokes must be 1 or 4")
+        nw = int(spnw)
+        nx, ny, hh2, ns, dtype, ndim = head(cube, False)
+        nt = int(hh2/nw/ns)
+        cube_array = np.memmap(cube, shape=(
+            nt, ns, nw, ny, nx), offset=512, dtype=dtype, mode='r')
+
+
+    if(verb):
+        print("[dtype={0}, nx={2}, ny={3}, nt={4}, nstokes={5}, nwav={1}] -> {6}".format(
+            dtype, nw, nx, ny, nt, ns, os.path.basename(cube)))
 
     return cube_array
 
