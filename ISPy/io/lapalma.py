@@ -174,8 +174,6 @@ def read(cube, spnw=None, spformat='_sp', verb=False):
         Specific filename of spectral cube OR number of wavelength steps (Default value = None)
     spformat : str, optional
         filename identifier for the spectral cube (Default value = '_sp')
-    dtype : str, optional
-        Type of data. Should be 'float32' for .fcubes and 'int16' for icubes. (Default value = 'float32')
     verb : bool, optional
         Verbose mode. (Default value = False)
 
