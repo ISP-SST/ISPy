@@ -193,7 +193,6 @@ def read(cube, spnw=None, spformat='_sp', verb=False):
     :Authors: 
         Alex Pietrow (ISP/SU 2019), Carlos Diaz (ISP/SU 2019)
     """
-
     if spnw is None:
         cube_format = cube[:-6]+'{0}.'+cube[-5:]
         f1 = cube_format.format('')
