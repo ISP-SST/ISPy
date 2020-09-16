@@ -182,7 +182,7 @@ def cartesian2spherical(bvec_in, azim0=0, degrees=False):
 
     return bvec_out
 
-def observer2cartesian(bvec_in):
+def observer2cartesian(bvec_in, azim0=0):
     """
     Convert the magnetic field vector in the observer's frame B(lon, hor, azi)
     to Cartesian coordinates B(x, y, z).
@@ -192,6 +192,9 @@ def observer2cartesian(bvec_in):
     ----------
     bvec_in : ndarray
         magnetic feld vector of shape (3,), (3, nx) or (3, ny, nx)
+    azim0 : {0, 1, 2, 3}, optional
+        zero-azimith direction convention: +Y (azim0=0), +X (azim0=1), -Y
+        (azim0=2), -X (azim0=3)
 
     Returns
     -------
@@ -205,9 +208,9 @@ def observer2cartesian(bvec_in):
 
     """
     
-    return spherical2cartesian(observer2spherical(bvec_in))
+    return spherical2cartesian(observer2spherical(bvec_in), azim0=azim0)
 
-def cartesian2observer(bvec_in, degrees=False):
+def cartesian2observer(bvec_in, azim0=0, degrees=False):
     """
     Convert the magnetic field vector in Cartesian coordinates B(x, y, z) to the
     observer's frame B(lon, hor, azi)
@@ -217,6 +220,9 @@ def cartesian2observer(bvec_in, degrees=False):
     ----------
     bvec_in : ndarray
         magnetic feld vector of shape (3,), (3, nx) or (3, ny, nx)
+    azim0 : {0, 1, 2, 3}, optional
+        zero-azimith direction convention: +Y (azim0=0), +X (azim0=1), -Y
+        (azim0=2), -X (azim0=3)
     degrees : bool, optional
         return the azimuth in degrees (default False = radians)
 
@@ -232,5 +238,5 @@ def cartesian2observer(bvec_in, degrees=False):
 
     """
 
-    return spherical2observer(cartesian2spherical(bvec_in), degrees=degrees)
+    return spherical2observer(cartesian2spherical(bvec_in, azim0=azim0), degrees=degrees)
 
