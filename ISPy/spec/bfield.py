@@ -6,7 +6,7 @@ DTOR = u.deg.to('rad')
 def observer2spherical(bvec_in, degrees=False):
     """
     Convert the magnetic field vector in the observer's frame B(lon, hor, azi)
-    to spherical coordinate system B(field, inc, azi)
+    to spherical coordinate system B(tot, inc, azi)
 
     Parameters
     ----------
@@ -47,7 +47,7 @@ def observer2spherical(bvec_in, degrees=False):
 
 def spherical2observer(bvec_in, degrees=False):
     """
-    Convert the magnetic field vector in spherical coordinate system B(field,
+    Convert the magnetic field vector in spherical coordinate system B(tot,
     inc, azi) to the observer's frame B(lon, hor, azi)
     
     Parameters
@@ -81,7 +81,7 @@ def spherical2observer(bvec_in, degrees=False):
 
 def spherical2cartesian(bvec_in, azim0=0):
     """
-    Convert the magnetic field vector in spherical coordinate system B(field,
+    Convert the magnetic field vector in spherical coordinate system B(tot,
     inc, azi) to Cartesian coordinates B(x, y, z)
 
     Parameters
@@ -133,7 +133,7 @@ def spherical2cartesian(bvec_in, azim0=0):
 def cartesian2spherical(bvec_in, azim0=0, degrees=False):
     """
     Convert the magnetic field vector in Cartesian coordinates B(x, y, z) to
-    spherical coordinates B(field, inc, azi)
+    spherical coordinates B(tot, inc, azi)
 
     Parameters
     ----------
