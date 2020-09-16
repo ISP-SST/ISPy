@@ -167,7 +167,7 @@ def cartesian2spherical(bvec_in, azim0=0, degrees=False):
     elif (azim0 == 1) or (azim0 == 3):
         bvec_out[2] = np.arctan(bvec_in[1] / (bvec_in[0]+1e-20))  # +1e-20 to avoid ZeroDivisionError
     else:
-        raise ValueError('spherical2cartesian: azim0 value invalid')
+        raise ValueError('cartesian2spherical: azim0 value invalid')
     
     # Correct for periodicity in solutions, i.e. map azimuth to [0,2pi)
     # Assumes +Y is zero-azimuth direction, increasing counter-clockwise
