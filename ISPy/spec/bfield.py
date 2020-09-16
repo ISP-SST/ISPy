@@ -88,7 +88,7 @@ def spherical2cartesian(bvec_in, azim0=0):
     ----------
     bvec_in : ndarray
         magnetic feld vector of shape (3,), (3, nx) or (3, ny, nx)
-    azim0 : {0, 1, 2, 3}
+    azim0 : {0, 1, 2, 3}, optional
         zero-azimith direction convention: +Y (azim0=0), +X (azim0=1), -Y
         (azim0=2), -X (azim0=3)
 
@@ -130,7 +130,7 @@ def spherical2cartesian(bvec_in, azim0=0):
     
     return bvec_out
 
-def cartesian2spherical(bvec_in, degrees=False):
+def cartesian2spherical(bvec_in, azim0=0, degrees=False):
     """
     Convert the magnetic field vector in Cartesian coordinates B(x, y, z) to
     spherical coordinates B(field, inc, azi)
@@ -139,6 +139,9 @@ def cartesian2spherical(bvec_in, degrees=False):
     ----------
     bvec_in : ndarray
         magnetic feld vector of shape (3,), (3, nx) or (3, ny, nx)
+    azim0 : {0, 1, 2, 3}, optional
+        zero-azimith direction convention: +Y (azim0=0), +X (azim0=1), -Y
+        (azim0=2), -X (azim0=3)
     degrees : bool, optional
         return the inclination and azimuth in degrees (default False = radians)
 
@@ -147,10 +150,6 @@ def cartesian2spherical(bvec_in, degrees=False):
     ndarray
         magnetic field vector of same shape as `bvec_in`, converted to spherical
         coordinates
-    
-    Notes
-    -----
-    +Y is assumed to be the zero-azimuth direction 
     
     Examples
     --------
@@ -161,7 +160,14 @@ def cartesian2spherical(bvec_in, degrees=False):
     bvec_out = np.copy(bvec_in)
     bvec_out[0] = np.sqrt(bvec_in[0]**2 + bvec_in[1]**2 + bvec_in[2]**2)
     bvec_out[1] = np.arccos(bvec_in[2] / bvec_out[0])
-    bvec_out[2] = np.arctan(-1.*bvec_in[0] / (bvec_in[1]+1e-20))  # +1e-20 to avoid ZeroDivisionError
+
+    # Take zero-azimuth direction into account
+    if (azim0 == 0) or (azim0 == 2):
+        bvec_out[2] = np.arctan(-1.*bvec_in[0] / (bvec_in[1]+1e-20))  # +1e-20 to avoid ZeroDivisionError
+    elif (azim0 == 1) or (azim0 == 3):
+        bvec_out[2] = np.arctan(bvec_in[1] / (bvec_in[0]+1e-20))  # +1e-20 to avoid ZeroDivisionError
+    else:
+        raise ValueError('spherical2cartesian: azim0 value invalid')
     
     # Correct for periodicity in solutions, i.e. map azimuth to [0,2pi)
     # Assumes +Y is zero-azimuth direction, increasing counter-clockwise
