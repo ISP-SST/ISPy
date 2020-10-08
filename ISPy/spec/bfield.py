@@ -3,10 +3,10 @@ import astropy.units as u
 
 DTOR = u.deg.to('rad')
 
-def observer2spherical(bvec_in, degrees=False):
+def los2spherical(bvec_in, degrees=False):
     """
-    Convert the magnetic field vector in the observer's frame B(lon, hor, azi)
-    to spherical coordinate system B(tot, inc, azi)
+    Convert the magnetic field vector B(lon, hor, azi) to spherical coordinate
+    system B(tot, inc, azi)
 
     Parameters
     ----------
@@ -28,7 +28,7 @@ def observer2spherical(bvec_in, degrees=False):
     (3, 374, 175)
     >>> bvec[2].min(), bvec[2].max()
     (0.000711255066562444, 179.99998474121094)
-    >>> bsph = bfield.observer2spherical(bvec, degrees=True)
+    >>> bsph = bfield.los2spherical(bvec, degrees=True)
     >>> bsph[2].min(), bsph[2].max()
     (1.2413742733006074e-05, 3.1415923872736844)
 
@@ -45,10 +45,10 @@ def observer2spherical(bvec_in, degrees=False):
 
     return bvec_out
 
-def spherical2observer(bvec_in, degrees=False):
+def spherical2los(bvec_in, degrees=False):
     """
     Convert the magnetic field vector in spherical coordinate system B(tot,
-    inc, azi) to the observer's frame B(lon, hor, azi)
+    inc, azi) to B(lon, hor, azi)
     
     Parameters
     ----------
@@ -61,11 +61,11 @@ def spherical2observer(bvec_in, degrees=False):
     -------
     ndarray
         magnetic field vector of same shape as `bvec_in`, converted to the
-        observer's frame
+        line-of-sight frame 
 
     Examples
     --------
-    >>> bobs = bfield.spherical2observer(bvec)
+    >>> bobs = bfield.spherical2los(bvec)
     
     """
     
@@ -182,11 +182,11 @@ def cartesian2spherical(bvec_in, azim0=0, degrees=False):
 
     return bvec_out
 
-def observer2cartesian(bvec_in, azim0=0):
+def los2cartesian(bvec_in, azim0=0):
     """
-    Convert the magnetic field vector in the observer's frame B(lon, hor, azi)
-    to Cartesian coordinates B(x, y, z).
-    Wrapper function around observer2spherical() and spherical2cartesian().
+    Convert the magnetic field vector B(lon, hor, azi) to Cartesian coordinates
+    B(x, y, z).
+    Wrapper function around los2spherical() and spherical2cartesian().
     
     Parameters
     ----------
@@ -204,17 +204,17 @@ def observer2cartesian(bvec_in, azim0=0):
     
     Examples
     --------
-    >>> bxyz = bfield.observer2cartesian(bvec)
+    >>> bxyz = bfield.los2cartesian(bvec)
 
     """
     
-    return spherical2cartesian(observer2spherical(bvec_in), azim0=azim0)
+    return spherical2cartesian(los2spherical(bvec_in), azim0=azim0)
 
-def cartesian2observer(bvec_in, azim0=0, degrees=False):
+def cartesian2los(bvec_in, azim0=0, degrees=False):
     """
-    Convert the magnetic field vector in Cartesian coordinates B(x, y, z) to the
-    observer's frame B(lon, hor, azi)
-    Wrapper function around cartesian2spherical() and spherical2observer().
+    Convert the magnetic field vector in Cartesian coordinates B(x, y, z) to
+    B(lon, hor, azi)
+    Wrapper function around cartesian2spherical() and spherical2los().
     
     Parameters
     ----------
@@ -230,13 +230,13 @@ def cartesian2observer(bvec_in, azim0=0, degrees=False):
     -------
     ndarray
         magnetic field vector of same shape as `bvec_in`, converted to the
-        observer's frame
+        line-of-sight frame
     
     Examples
     --------
-    >>> bobs = bfield.cartesian2observer(bvec, degrees=True)
+    >>> bobs = bfield.cartesian2los(bvec, degrees=True)
 
     """
 
-    return spherical2observer(cartesian2spherical(bvec_in, azim0=azim0), degrees=degrees)
+    return spherical2los(cartesian2spherical(bvec_in, azim0=azim0), degrees=degrees)
 
