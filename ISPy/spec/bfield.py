@@ -3,10 +3,10 @@ import astropy.units as u
 
 DTOR = u.deg.to('rad')
 
-def los2spherical(bvec_in, degrees=False):
+def cylindrical2spherical(bvec_in, degrees=False):
     """
-    Convert the magnetic field vector B(lon, hor, azi) to spherical coordinate
-    system B(tot, inc, azi)
+    Convert the magnetic field vector in cylindrical decomposition B(lon, hor,
+    azi) to spherical decomposition B(tot, inc, azi)
 
     Parameters
     ----------
@@ -19,7 +19,7 @@ def los2spherical(bvec_in, degrees=False):
     -------
     ndarray
         magnetic field vector of same shape as `bvec_in`, converted to spherical
-        coordinates
+        decomposition
 
     Examples
     --------
@@ -28,7 +28,7 @@ def los2spherical(bvec_in, degrees=False):
     (3, 374, 175)
     >>> bvec[2].min(), bvec[2].max()
     (0.000711255066562444, 179.99998474121094)
-    >>> bsph = bfield.los2spherical(bvec, degrees=True)
+    >>> bsph = bfield.cylindrical2spherical(bvec, degrees=True)
     >>> bsph[2].min(), bsph[2].max()
     (1.2413742733006074e-05, 3.1415923872736844)
 
@@ -45,10 +45,10 @@ def los2spherical(bvec_in, degrees=False):
 
     return bvec_out
 
-def spherical2los(bvec_in, degrees=False):
+def spherical2cylindrical(bvec_in, degrees=False):
     """
-    Convert the magnetic field vector in spherical coordinate system B(tot,
-    inc, azi) to B(lon, hor, azi)
+    Convert the magnetic field vector in spherical decomposition B(tot, inc,
+    azi) to cylindrical decomposition B(lon, hor, azi)
     
     Parameters
     ----------
@@ -61,11 +61,11 @@ def spherical2los(bvec_in, degrees=False):
     -------
     ndarray
         magnetic field vector of same shape as `bvec_in`, converted to the
-        line-of-sight frame 
+        cylindrical decomposition
 
     Examples
     --------
-    >>> bobs = bfield.spherical2los(bvec)
+    >>> bobs = bfield.spherical2cylindrical(bvec)
     
     """
     
@@ -81,8 +81,8 @@ def spherical2los(bvec_in, degrees=False):
 
 def spherical2cartesian(bvec_in, azim0=0):
     """
-    Convert the magnetic field vector in spherical coordinate system B(tot,
-    inc, azi) to Cartesian coordinates B(x, y, z)
+    Convert the magnetic field vector in spherical decomposotion B(tot, inc,
+    azi) to Cartesian decomposition B(x, y, z)
 
     Parameters
     ----------
@@ -96,7 +96,7 @@ def spherical2cartesian(bvec_in, azim0=0):
     -------
     ndarray
         magnetic field vector of same shape as `bvec_in`, converted to Cartesian
-        coordinates
+        decomposition
     
     Examples
     --------
@@ -132,8 +132,8 @@ def spherical2cartesian(bvec_in, azim0=0):
 
 def cartesian2spherical(bvec_in, azim0=0, degrees=False):
     """
-    Convert the magnetic field vector in Cartesian coordinates B(x, y, z) to
-    spherical coordinates B(tot, inc, azi)
+    Convert the magnetic field vector in Cartesian decomposition B(x, y, z) to
+    spherical decomposition B(tot, inc, azi)
 
     Parameters
     ----------
@@ -149,7 +149,7 @@ def cartesian2spherical(bvec_in, azim0=0, degrees=False):
     -------
     ndarray
         magnetic field vector of same shape as `bvec_in`, converted to spherical
-        coordinates
+        decomposition
     
     Examples
     --------
@@ -182,11 +182,11 @@ def cartesian2spherical(bvec_in, azim0=0, degrees=False):
 
     return bvec_out
 
-def los2cartesian(bvec_in, azim0=0):
+def cylindrical2cartesian(bvec_in, azim0=0):
     """
-    Convert the magnetic field vector B(lon, hor, azi) to Cartesian coordinates
-    B(x, y, z).
-    Wrapper function around los2spherical() and spherical2cartesian().
+    Convert the magnetic field vector in cylindrical decomposition B(lon, hor,
+    azi) to Cartesian decomposition B(x, y, z).
+    Wrapper function around cylindrical2spherical() and spherical2cartesian().
     
     Parameters
     ----------
@@ -200,21 +200,21 @@ def los2cartesian(bvec_in, azim0=0):
     -------
     ndarray
         magnetic field vector of same shape as `bvec_in`, converted to Cartesian
-        coordinates
+        decomposition
     
     Examples
     --------
-    >>> bxyz = bfield.los2cartesian(bvec)
+    >>> bxyz = bfield.cylindrical2cartesian(bvec)
 
     """
     
-    return spherical2cartesian(los2spherical(bvec_in), azim0=azim0)
+    return spherical2cartesian(cylindrical2spherical(bvec_in), azim0=azim0)
 
-def cartesian2los(bvec_in, azim0=0, degrees=False):
+def cartesian2cylindrical(bvec_in, azim0=0, degrees=False):
     """
-    Convert the magnetic field vector in Cartesian coordinates B(x, y, z) to
-    B(lon, hor, azi)
-    Wrapper function around cartesian2spherical() and spherical2los().
+    Convert the magnetic field vector in Cartesian decomposition B(x, y, z) to
+    cylindrical decomposition B(lon, hor, azi)
+    Wrapper function around cartesian2spherical() and spherical2cylindrical().
     
     Parameters
     ----------
@@ -230,13 +230,13 @@ def cartesian2los(bvec_in, azim0=0, degrees=False):
     -------
     ndarray
         magnetic field vector of same shape as `bvec_in`, converted to the
-        line-of-sight frame
+        cylindrical decomposition
     
     Examples
     --------
-    >>> bobs = bfield.cartesian2los(bvec, degrees=True)
+    >>> bobs = bfield.cartesian2cylindrical(bvec, degrees=True)
 
     """
 
-    return spherical2los(cartesian2spherical(bvec_in, azim0=azim0), degrees=degrees)
+    return spherical2cylindrical(cartesian2spherical(bvec_in, azim0=azim0), degrees=degrees)
 
