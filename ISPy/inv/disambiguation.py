@@ -1,8 +1,16 @@
 import numpy as np
 
-def field_test(amp=1.0, nx=101//2, ny=101//2):
+def field_test(amp=1.0, nx=50, ny=50):
     """
     Creates a test magnetic field 2D array
+    
+    Parameters
+    ----------
+    amp : float
+        Maximum strength of the magnetic field
+    nx, ny : integer
+        Size of the map in each dimension
+
     """
     x01=0.0; y01=0.0; x02=0.0; y02=0.5; sigma=1.0; amp=1.0
     bz0 = np.zeros((nx,ny))
@@ -14,24 +22,34 @@ def field_test(amp=1.0, nx=101//2, ny=101//2):
 
 
 
-def potencial_extrapolation(Bz, zz=[0.0], pixel=[0.1,0.1]):
+def potential_extrapolation(Bz, zz=[0.0], pixel=[0.1,0.1]):
     """
     Computes a potential extrapolation from the observed vertical field.
     It uses a fast implementation in the Fourier space.
 
-    Arguments:
-       Bz: 2D array of dimensions (ny, nx) in Gauss
-       zz: 1D array of dimensions (nz) in Mm
-       pixel: 1D array of dimensions (2) with the pixel size in arcsec
-    Returns:
+    Parameters
+    ----------
+    Bz : ndarray
+        2D array of dimensions (ny, nx) in Gauss
+    zz : ndarray
+        1D array of dimensions (nz) in Mm
+    pixel : ndarray
+        1D array of dimensions (2) with the pixel size in arcsec
+    
+    Returns
+    -------
+    ndarray
        3D array of dimensions (nx,ny,nz) with the magnetic field vector
     
-    Example:
-       a = readimage('Bz.fits')
-       Bvector = potencial_extrapolation(Bz, zz=[0.0,1.0], pixel=[0.1,0.1])
+    Example
+    --------
+    >>> a = readimage('Bz.fits')
+    >>> Bvector = potential_extrapolation(Bz, zz=[0.0,1.0], pixel=[0.1,0.1])
     
-    Ported from the IDL /ssw/packages/nlfff/idl/FFF.pro (by Yuhong Fan) by Carlos Diaz (ISP-SU 2020)
-    and simplified to the vertical case.
+    :Authors:
+        Ported from the IDL /ssw/packages/nlfff/idl/FFF.pro (by Yuhong Fan) by Carlos Diaz (ISP-SU 2020)
+        and simplified to the vertical case.
+    
     """
 
     # Simplifications to the pure vertical case:
@@ -82,16 +100,23 @@ def potencial_extrapolation(Bz, zz=[0.0], pixel=[0.1,0.1]):
 
 
 
-def acute_angle_map(azimuth,reference,value=90.):
+def get_acute_angle(azimuth,reference,value=90.):
     """
     It outputs the closest azimuth to the reference (adding 180 degrees)
 
-    Arguments:
-       azimuth: 2D array of dimensions (ny, nx) in degrees
-       reference: 2D array of dimensions (ny, nx) in degrees
-       value: float
-    Returns:
-       2D array of dimensions (nx,ny) with the closest azimuth to the reference
+    Parameters
+    ----------
+    azimuth : ndarray
+        2D array of dimensions (ny, nx) in degrees
+    reference : float
+        Reference angle to rotate the azimuth
+    value: float
+        Threshold to be applied to find the closest azimuth
+
+    Returns
+    -------
+    ndarray
+        2D array of dimensions (nx,ny) with the closest azimuth to the reference
     
     """
     index = np.abs(azimuth-reference) > value
@@ -100,19 +125,26 @@ def acute_angle_map(azimuth,reference,value=90.):
     return new_azimuth
 
 
-def smooth_angle_inversion(azimap,value):
+def smooth_azimuth(azimap,value):
     """
     Smoothing of an azimuth map with values in the range [0, pi]
+
+    Parameters
+    ----------
+    azimap : ndarray
+        magnetic field azimuth of shape (1,), (nx) or (ny, nx)
+
+    value: float
+        Standard deviation for Gaussian kernel
+
+
     """
     from scipy.ndimage import gaussian_filter
     termA = np.sin(azimap*2.)
     termB = np.cos(azimap*2.)
     termA = gaussian_filter(termA,value)
     termB = gaussian_filter(termB,value)
-    total = np.zeros_like(azimap)
-    for ii in range(azimap.shape[0]):
-        for jj in range(azimap.shape[1]):
-            total[ii,jj] = np.arctan2(termA[ii,jj],termB[ii,jj])
+    total = np.arctan2(termA,termB)
     total[total <0] = total[total <0] % (2*np.pi)
     return total/2.
 
@@ -129,7 +161,7 @@ if __name__ == '__main__':
         # Potential extrapolation
         #++++++++++++++++++++++++
         Bz = field_test()
-        B = potencial_extrapolation(Bz, zz=[0.0], pixel=[0.1,0.1])
+        B = potential_extrapolation(Bz, zz=[0.0], pixel=[0.1,0.1])
         print(B.shape)
 
         label = ['Bx', 'By', 'Bz']
@@ -151,7 +183,7 @@ if __name__ == '__main__':
         offset = 0. #Extra offset
         azimuth_test = azimuth_test + offset
 
-        new_azimuth = acute_angle_map(azimuth_test,potential_azimuth)
+        new_azimuth = get_acute_angle(azimuth_test,potential_azimuth)
 
 
         plt.imshow(Bz)

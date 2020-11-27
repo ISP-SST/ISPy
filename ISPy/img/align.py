@@ -1,7 +1,7 @@
 
 def align(a, b):        
     """
-    Ccompute the shifts (dy,dx) needed to align image b into a
+    Compute the shifts (dy,dx) needed to align image b into a
 
     Parameters
     ----------
