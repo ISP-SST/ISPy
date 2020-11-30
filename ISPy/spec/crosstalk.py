@@ -21,8 +21,8 @@ def get_projection(u,v):
 # ========================================================================
 def estimate_crosstalk(stokes_map,stokes_toclean, stokes_removefrom, nameoutput=None, interactive=True, 
     npoints=5, verbose=True, sizeave=3, smoothvalue=100):
-    """Given the input cube for each Stokes it outputs an estimation of the crosstalk from Stokes V to Q or U
-    for one time frame. It will not work for Stokes I.
+    """Given the input cube it outputs an estimation of the crosstalk between them 
+    for one time frame.
     
     Parameters
     ----------
@@ -73,12 +73,12 @@ def estimate_crosstalk(stokes_map,stokes_toclean, stokes_removefrom, nameoutput=
     mean_xtalk = np.sum(mapa_coef*weights)/np.sum(weights)
     if verbose is True: print('Average crosstalk (automatic method): {0:2.2f}%'.format(mean_xtalk*100.))
 
-
     if interactive is True:
         
         import matplotlib.pyplot as plt
         fig = plt.figure()
-        plt.imshow(mapa_coef,vmax=0.5,vmin=-0.5,cmap='seismic',origin='lower')
+        maxi = np.min([np.percentile(np.abs(mapa_coef),95),0.5])
+        plt.imshow(mapa_coef,vmax=maxi,vmin=-maxi,cmap='seismic',origin='lower')
         plt.colorbar(); plt.title('Crosstalk {} -> {}'.format(stokes_label[stokes_removefrom],stokes_label[stokes_toclean]))
         if nameoutput is not None: plt.savefig(nameoutput+'_crosstalk_map.pdf', bbox_inches='tight')
 
@@ -107,7 +107,7 @@ def estimate_crosstalk(stokes_map,stokes_toclean, stokes_removefrom, nameoutput=
 
         if nameoutput is not None: 
             fig = plt.figure()
-            plt.imshow(mean_xtalk,vmax=0.5,vmin=-0.5,cmap='seismic',origin='lower')
+            plt.imshow(mean_xtalk,vmax=maxi,vmin=-maxi,cmap='seismic',origin='lower')
             plt.colorbar(); plt.title('Crosstalk {} -> {}'.format(stokes_label[stokes_removefrom],stokes_label[stokes_toclean]))
             plt.savefig(nameoutput+'_crosstalk_estimation.pdf', bbox_inches='tight')
             plt.close(fig)
@@ -125,7 +125,7 @@ if __name__ == "__main__":
     from ISPy.io import solarnet as sl
 
     data_final = 'filename_stokes_corrected_im.fits'
-    data = sl.read(data_final)[:,:,:,100:-100,100:-100]
+    data = sl.read(data_final)#[:,:,:,100:-100,100:-100]
     # print(data.shape)
 
     estimate_crosstalk(data[0,:],stokes_toclean=1,stokes_removefrom=3,nameoutput='Q_test')
