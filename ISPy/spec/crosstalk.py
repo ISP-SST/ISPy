@@ -27,13 +27,13 @@ def estimate_crosstalk(stokes_map,stokes_toclean, stokes_removefrom, nameoutput=
     Parameters
     ----------
     stokes_map : ndarray
-        Description
+        Data cube for one time frame
     stokes_toclean : int
         Stokes index to clean (usually 1 or 2)
     stokes_removefrom : int
         Stokes index to clean (usually 3)
     nameoutput : None, optional
-        Description
+        Name of the output file with the field-dependent crosstalk and figures
     interactive : bool, optional
         Interactive method where the user selects points in the FOV.
     npoints : int, optional
@@ -48,11 +48,11 @@ def estimate_crosstalk(stokes_map,stokes_toclean, stokes_removefrom, nameoutput=
     Returns
     -------
     ndarray
-        Field-dependent crosstalk
+        Field-dependent crosstalk if interactive is True or a the mean value calculated by the automatic method if False
        
     Example
     -------
-    >>> estimate_crosstalk(data[0,:],stokes_toclean=1,stokes_removefrom=3,nameoutput='Q_test')
+    >>> estimate_crosstalk(data[0,:], stokes_toclean=1, stokes_removefrom=3, nameoutput='Q_test')
     
     :Authors: 
         Carlos Diaz (ISP/SU 2019)
@@ -105,7 +105,6 @@ def estimate_crosstalk(stokes_map,stokes_toclean, stokes_removefrom, nameoutput=
         if nameoutput is not None: np.save(nameoutput+'.npy',mean_xtalk)
         if nameoutput is not None: print('Field-dependent crosstalk saved in '+ nameoutput+'.npy')
 
-
         if nameoutput is not None: 
             fig = plt.figure()
             plt.imshow(mean_xtalk,vmax=0.5,vmin=-0.5,cmap='seismic',origin='lower')
@@ -115,27 +114,19 @@ def estimate_crosstalk(stokes_map,stokes_toclean, stokes_removefrom, nameoutput=
 
     if verbose is True: print('Average crosstalk (interactive method): {0:2.2f}%'.format(np.mean(mean_xtalk)*100.))
 
-
     return mean_xtalk
 
 
 
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# ========================================================================
 if __name__ == "__main__":
 
     print('[INFO] Reading dataset')
     from ISPy.io import solarnet as sl
 
-    data_final = '/storage/users/carlos/MASTER/DATOS/nb_6302_2016-09-19T09:30:20_scans=1-43_stokes_corrected_im.fits'
+    data_final = 'filename_stokes_corrected_im.fits'
     data = sl.read(data_final)[:,:,:,100:-100,100:-100]
     # print(data.shape)
 
     estimate_crosstalk(data[0,:],stokes_toclean=1,stokes_removefrom=3,nameoutput='Q_test')
-
-
-
-
-
-
-
 
