@@ -32,17 +32,17 @@ def estimate_crosstalk(stokes_map,stokes_toclean, stokes_removefrom, nameoutput=
         Stokes index to clean (usually 1 or 2)
     stokes_removefrom : int
         Stokes index to clean (usually 3)
-    nameoutput : None, optional
+    nameoutput : None, optional (default: None)
         Name of the output file with the field-dependent crosstalk and figures
-    interactive : bool, optional
+    interactive : bool, optional (default: True)
         Interactive method where the user selects points in the FOV.
-    npoints : int, optional
+    npoints : int, optional (default: 5)
         Number of points to be selected
-    verbose : bool, optional
+    verbose : bool, optional (default: True)
         It prints the average crosstalk calculated with both methods
-    sizeave : int, optional
+    sizeave : int, optional (default: 3)
         Window size to average after clicking
-    smoothvalue : int, optional
+    smoothvalue : int, optional (default: 100)
         Smoothing width of the kernel after extrapolation
     
     Returns
@@ -59,26 +59,24 @@ def estimate_crosstalk(stokes_map,stokes_toclean, stokes_removefrom, nameoutput=
 
     """
     stokes_label = ['I','Q','U','V']
-    mapa_coef = np.zeros((stokes_map.shape[2],stokes_map.shape[3]))
-    weights = np.zeros((stokes_map.shape[2],stokes_map.shape[3]))
-    datos_from = stokes_map[stokes_removefrom,:,:,:]
-    datos_to = stokes_map[stokes_toclean,:,:,:]
+    coefmap = np.zeros((stokes_map.shape[2],stokes_map.shape[3]),dtype=np.float32)
+    weights = np.zeros((stokes_map.shape[2],stokes_map.shape[3]),dtype=np.float32)
     
     for ii in range(stokes_map.shape[2]):
         for jj in range(stokes_map.shape[3]):
-            mapa_coef[ii,jj] = get_projection(stokes_map[stokes_toclean,:,ii,jj]/stokes_map[0,:,ii,jj],
+            coefmap[ii,jj] = get_projection(stokes_map[stokes_toclean,:,ii,jj]/stokes_map[0,:,ii,jj],
                                              stokes_map[stokes_removefrom,:,ii,jj]/stokes_map[0,:,ii,jj])
             weights[ii,jj] = np.max(np.abs(stokes_map[stokes_removefrom,:,ii,jj]))**2. 
 
-    mean_xtalk = np.sum(mapa_coef*weights)/np.sum(weights)
+    mean_xtalk = np.sum(coefmap*weights)/np.sum(weights)
     if verbose is True: print('Average crosstalk (automatic method): {0:2.2f}%'.format(mean_xtalk*100.))
 
     if interactive is True:
         
         import matplotlib.pyplot as plt
         fig = plt.figure()
-        maxi = np.min([np.percentile(np.abs(mapa_coef),95),0.5])
-        plt.imshow(mapa_coef,vmax=maxi,vmin=-maxi,cmap='seismic',origin='lower')
+        maxi = np.min([np.percentile(np.abs(coefmap),95),0.5])
+        plt.imshow(coefmap,vmax=maxi,vmin=-maxi,cmap='seismic',origin='lower')
         plt.colorbar(); plt.title('Crosstalk {} -> {}'.format(stokes_label[stokes_removefrom],stokes_label[stokes_toclean]))
         if nameoutput is not None: plt.savefig(nameoutput+'_crosstalk_map.pdf', bbox_inches='tight')
 
@@ -86,7 +84,7 @@ def estimate_crosstalk(stokes_map,stokes_toclean, stokes_removefrom, nameoutput=
         points = plt.ginput(npoints, timeout=30, show_clicks=True)
         values = []
         for ii in range(len(points)):
-            mean_points = np.mean( mapa_coef[int(points[ii][1])-sizeave:int(points[ii][1])+sizeave+1 ,
+            mean_points = np.mean( coefmap[int(points[ii][1])-sizeave:int(points[ii][1])+sizeave+1 ,
                                     int(points[ii][0])-sizeave:int(points[ii][0])+sizeave+1] )
             values.append(mean_points)
         points = np.array(points)
@@ -96,7 +94,7 @@ def estimate_crosstalk(stokes_map,stokes_toclean, stokes_removefrom, nameoutput=
 
         # Interpolation and smoothing
         from scipy.interpolate import griddata
-        grid_x, grid_y = np.meshgrid(np.arange(mapa_coef.shape[1]), np.arange(mapa_coef.shape[0]))
+        grid_x, grid_y = np.meshgrid(np.arange(coefmap.shape[1]), np.arange(coefmap.shape[0]))
         grid_z0 = griddata(points, values, (grid_x, grid_y), method='nearest')
         newmap = grid_z0
         from scipy import ndimage
