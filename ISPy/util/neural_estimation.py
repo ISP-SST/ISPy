@@ -204,8 +204,6 @@ def network1D(nx, ny, nd, nq, activation='relu', n_filters=64, l2_reg=1e-7):
         return x
 
     inputs = Input(shape=(nx, ny, nd))  # depth goes last in TensorFlow
-    # noise = 1e-5.  # The noise is introduce when we create the dataset
-    # x = GaussianNoise(noise)(inputs)
     nd4 = int(nd/4)
 
     # TEMP
@@ -329,7 +327,6 @@ class deep_network(object):
         out[0, :, :, 4, :], out[0, :, :, 5, :] = fromBQBU2BTAZI_cube(out[0, :, :, 4, :], out[0, :, :, 5, :])
         out = np.reshape(out, (input_validation.shape[0], self.nx, self.ny, 54))
 
-        # np.save('prediction.npy', out)
         return out
 
 
@@ -341,7 +338,7 @@ class neural_estimator(object):
 
     Example
     -------
-    >>> from ISPy.spec import neural_estimation
+    >>> from ISPy.util import neural_estimation
     >>> import sparsetools as sp
 
     # Reading data in STiC format:
@@ -444,8 +441,6 @@ class neural_estimator(object):
             List of logtau values included in the training
         """
         self.logtau = np.array(logtau_train_list)
-        # model_train_list = sorted(model_train_list)
-        # stokes_train_list = sorted(stokes_train_list)
 
         stokelist, cubelist = [], []
         for simu in range(len(model_train_list)):
@@ -474,9 +469,8 @@ class neural_estimator(object):
         self.cubelist = cubelist
         self.stokelist = stokelist
         self.nl = len(stokes)
-        # m.write('modelin_IN.nc')
-        # np.save('cubelist.npy', cubelist)
 
+        
     def training(self, name='network1', option='start', nepochs=20, extranoise=5e-4,
               learning_rate=1e-4, batch_size=100, datasize=10, samplesize=20):
         """Training of the neural network
