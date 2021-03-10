@@ -108,7 +108,7 @@ def vector_transformation(peff,latitude_out,longitude_out, B0,field_x_cea,
 
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-def remapping2cea(dict_header, field_x, field_y, field_z, deltal = 0.03):
+def remap2cea(dict_header, field_x, field_y, field_z, deltal = 0.03):
     """Map projection of the original input into the cylindical equal area system (CEA).
 
     Parameters
@@ -241,7 +241,7 @@ def bvec2cea(dict_header, field_x, field_y, field_z):
     """
 
     # Map projetion
-    peff, lat_it, lon_it,latc, field_x_int, field_y_int, field_z_int = remapping2cea(dict_header, field_x, field_y, field_z)
+    peff, lat_it, lon_it,latc, field_x_int, field_y_int, field_z_int = remap2cea(dict_header, field_x, field_y, field_z)
     # Vector transformation
     field_x_h, field_y_h, field_z_h = vector_transformation(peff,lat_it,lon_it,latc, field_x_int, field_y_int, field_z_int, lat_in_rad=True)
 
