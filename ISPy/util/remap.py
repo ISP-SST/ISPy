@@ -1,8 +1,7 @@
 import numpy as np
 from astropy.io import fits
 import astropy.units as u
-import interpolate2d
-
+from ISPy.img import interpolate2d
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 def sphere2img(lat, lon, latc, lonc, xcenter, ycenter, rsun, peff):
@@ -20,8 +19,9 @@ def sphere2img(lat, lon, latc, lonc, xcenter, ycenter, rsun, peff):
         Center coordinates in the image
     rsun : float
         Solar radius in pixels
-    peff : [type]
-        p-angle (CW rotation on the image nneded for the solar north to be +eta)
+    peff : float
+        p-angle: the position angle between the geocentric north pole and the solar 
+        rotational north pole measured eastward from geocentric north.
 
     Returns
     -------
@@ -62,7 +62,7 @@ def sphere2img(lat, lon, latc, lonc, xcenter, ycenter, rsun, peff):
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 def vector_transformation(peff,latitude_out,longitude_out, B0,field_x_cea,
-        field_y_cea, field_z_cea, bvec2cea=False):
+        field_y_cea, field_z_cea, lat_in_rad=False):
     """
     Magnetic field transformation matrix (see Allen Gary & Hagyard 1990)
     [Eq 7 in https://arxiv.org/pdf/1309.2392.pdf]
@@ -72,7 +72,7 @@ def vector_transformation(peff,latitude_out,longitude_out, B0,field_x_cea,
     nlon_out = len(longitude_out)
 
     PP = peff
-    if bvec2cea is False:
+    if lat_in_rad is False:
         BB = latitude_out[None, 0:nlat_out] * np.pi / 180.0
         LL = longitude_out[0:nlon_out, None] * np.pi / 180.0
     else:
@@ -108,16 +108,24 @@ def vector_transformation(peff,latitude_out,longitude_out, B0,field_x_cea,
 
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-def remapping2cea(fitsfile, field_x, field_y, field_z):
+def remapping2cea(dict_header, field_x, field_y, field_z, deltal = 0.03):
     """Map projection of the original input into the cylindical equal area system (CEA).
-    It can also remap other physical quantities.
 
     Parameters
     ----------
-    fitsfile : Header Data Unit
-        Fitsfile used to extract information from the header
+    dict_header : dictionary
+        Header with information of the observation. It works with a SDO header
+        or it can be created from other data. It should include:
+        dict_header = {'CRLT_OBS':float, 'RSUN_OBS':float, 'crota2':float, 'CDELT1':float, 
+        'crpix1':float, 'crpix2':float, 'LATDTMAX':float, 'LATDTMAX':float 'LATDTMAX':float,
+        'LONDTMAX':float, 'LATDTMIN':float, 'LONDTMIN':float, 'naxis1':float, 'naxis2':float}
+        They should follow the same definition as given for SDO data:
+        https://www.lmsal.com/sdodocs/doc?cmd=dcur&proj_num=SDOD0019&file_type=pdf
+
     field_x, field_y, field_z: array
         2D array with the magnetic field in cartesian coordinates
+    deltal : float
+        Heliographic degrees in the rotated coordinate system. SHARP CEA pixels are 0.03
 
     Returns
     -------
@@ -129,44 +137,41 @@ def remapping2cea(fitsfile, field_x, field_y, field_z):
 
     """
     # Latitude at disk center [rad]
-    latc = fitsfile.header['CRLT_OBS']*np.pi/180.
+    latc = dict_header['CRLT_OBS']*np.pi/180.
     B0 = np.copy(latc)
     # Longitude at disk center [rad]. The output is in Carrington coordinates. We use central meridian
     lonc = 0.0
     L0 = 0.0
-    rsun = fitsfile.header['RSUN_OBS']
+    rsun = dict_header['RSUN_OBS']
 
     # Position angle of rotation axis
-    peff = -1.0*fitsfile.header['crota2'] * np.pi / 180.0
-    dx_arcsec = fitsfile.header['CDELT1']
+    peff = -1.0*dict_header['crota2'] * np.pi / 180.0
+    dx_arcsec = dict_header['CDELT1']
     rsun_px = rsun / dx_arcsec
 
     # Plate locations of the image center, in units of the image radius, 
     # and measured from the corner. The SHARP CEA pixels have a linear dimension 
     # in the x-direction of 0.03 heliographic degrees in the rotated coordinate system
-    dl = 0.03
-    xcenter = fitsfile.header['crpix1']-1 # FITS start indexing at 1, not 0
-    ycenter = fitsfile.header['crpix2']-1 # FITS start indexing at 1, not 0
-    nlat_out = np.round((fitsfile.header['LATDTMAX'] - fitsfile.header['LATDTMIN'])/dl)
-    nlon_out = np.round((fitsfile.header['LONDTMAX'] - fitsfile.header['LONDTMIN'])/dl) # lon_max => LONDTMAX
+    dl = deltal
+    xcenter = dict_header['crpix1']-1 # FITS start indexing at 1, not 0
+    ycenter = dict_header['crpix2']-1 # FITS start indexing at 1, not 0
+    nlat_out = np.round((dict_header['LATDTMAX'] - dict_header['LATDTMIN'])/dl)
+    nlon_out = np.round((dict_header['LONDTMAX'] - dict_header['LONDTMIN'])/dl) # lon_max => LONDTMAX
     nrebin = 1
     nlat_out = int(np.round(nlat_out/nrebin)*nrebin)
     nlon_out = int(np.round(nlon_out/nrebin)*nrebin)
     nx_out = nlon_out
     ny_out = nlat_out
 
-    latitude_out = np.arange(nlat_out)*dl + fitsfile.header['LATDTMIN']
-    longitude_out = np.arange(nlon_out)*dl + fitsfile.header['LONDTMIN']
+    latitude_out = np.arange(nlat_out)*dl + dict_header['LATDTMIN']
+    longitude_out = np.arange(nlon_out)*dl + dict_header['LONDTMIN']
     lon_out = longitude_out[:, None] * np.pi / 180.0
     lat_out = lonc + latitude_out[None, :] * np.pi / 180.0
 
-    lon_center = (fitsfile.header['LONDTMAX'] + fitsfile.header['LONDTMIN']) / 2. * np.pi/180.0
-    lat_center = (fitsfile.header['LATDTMAX'] + fitsfile.header['LATDTMIN']) / 2. * np.pi/180.0
+    lon_center = (dict_header['LONDTMAX'] + dict_header['LONDTMIN']) / 2. * np.pi/180.0
+    lat_center = (dict_header['LATDTMAX'] + dict_header['LATDTMIN']) / 2. * np.pi/180.0
     # print(lat_cesnter,latitude_out,f[1].header['LATDTMIN'],f[1].header['LATDTMAX'])
 
-    # The SHARP CEA pixels have a linear dimension 
-    # in the x-direction of 0.03 heliographic degrees in the rotated coordinate system
-    dl = 0.03
     x_out = (np.arange(nx_out)-(nx_out-1)/2.)*dl 
     y_out = (np.arange(ny_out)-(ny_out-1)/2.)*dl 
 
@@ -181,8 +186,8 @@ def remapping2cea(fitsfile, field_x, field_y, field_z):
     # Heliographic coordinate to CCD coordinate
     xi, eta = sphere2img(lat_it, lon_it, latc, lonc, xcenter, ycenter, rsun_px, peff)
     
-    x = np.arange(fitsfile.header['naxis1'])
-    y = np.arange(fitsfile.header['naxis2'])
+    x = np.arange(dict_header['naxis1'])
+    y = np.arange(dict_header['naxis2'])
 
     # Interpolation (or sampling)
     xi_eta = np.concatenate([xi.flatten()[:, None], eta.flatten()[:, None]], axis=1)
@@ -197,17 +202,23 @@ def remapping2cea(fitsfile, field_x, field_y, field_z):
 
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-def bvec2cea(fitsfile, field_x, field_y, field_z):
+def bvec2cea(dict_header, field_x, field_y, field_z):
     """Transformation to Cylindrical equal area projection (CEA) from CCD
     detector as it is donde with SHARPs according to Xudong Sun (2018).
-    Currently only works for SDO data.
 
     Parameters
     ----------
-    fitsfile : Header Data Unit
-        Fitsfile used to extract information from the header
     field_x, field_y, field_z: array
         2D array with the magnetic field in cartesian coordinates
+    dict_header : dictionary
+        Header with information of the observation. It works with a SDO header
+        or it can be created from other data. It should include:
+        dict_header = {'CRLT_OBS':float, 'RSUN_OBS':float, 'crota2':float, 'CDELT1':float, 
+        'crpix1':float, 'crpix2':float, 'LATDTMAX':float, 'LATDTMAX':float 'LATDTMAX':float,
+        'LONDTMAX':float, 'LATDTMIN':float, 'LONDTMIN':float, 'naxis1':float, 'naxis2':float}
+        They should follow the same definition as given for SDO data:
+        https://www.lmsal.com/sdodocs/doc?cmd=dcur&proj_num=SDOD0019&file_type=pdf
+
 
     Returns
     -------
@@ -222,7 +233,7 @@ def bvec2cea(fitsfile, field_x, field_y, field_z):
     >>> field_y = field_hor * np.cos(azimuth * np.pi / 180.0)
     >>> field_x = -field_hor * np.sin(azimuth * np.pi / 180.0)
 
-    >>> field_x_h2, field_y_h2, field_z_h2 = tsf.bvec2cea(f[1], field_x, field_y, field_z) 
+    >>> field_x_h2, field_y_h2, field_z_h2 = bvec2cea(file.header, field_x, field_y, field_z) 
 
     :Authors: 
         Carlos Diaz (ISP/SU 2020), Gregal Vissers (ISP/SU 2020)
@@ -230,8 +241,8 @@ def bvec2cea(fitsfile, field_x, field_y, field_z):
     """
 
     # Map projetion
-    peff, lat_it, lon_it,latc, field_x_int, field_y_int, field_z_int = remapping2cea(fitsfile, field_x, field_y, field_z)
+    peff, lat_it, lon_it,latc, field_x_int, field_y_int, field_z_int = remapping2cea(dict_header, field_x, field_y, field_z)
     # Vector transformation
-    field_x_h, field_y_h, field_z_h = vector_transformation(peff,lat_it,lon_it,latc, field_x_int, field_y_int, field_z_int, bvec2cea=True)
+    field_x_h, field_y_h, field_z_h = vector_transformation(peff,lat_it,lon_it,latc, field_x_int, field_y_int, field_z_int, lat_in_rad=True)
 
     return field_x_h, field_y_h, field_z_h
