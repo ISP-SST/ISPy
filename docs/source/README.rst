@@ -31,3 +31,5 @@ ISPy depends on the following external packages, that should be straightforward 
 * ``astropy``
 * ``matplotlib``
 * ``ipdb``
+
+If a Python module is needed for ANA f0 files you can clone and install it from this repository: https://github.com/cdiazbas/pyana

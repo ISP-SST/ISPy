@@ -2,8 +2,9 @@ import numpy as np
 import warnings
 warnings.filterwarnings("ignore")
 
+
 # ====================================================================
-def fromBTAZI2BQBU(Bt,azi):
+def BTAZI2BQBU(Bt,azi):
     """Transformation from transverse field and azimuth to BQ and BU
     according to https://arxiv.org/abs/1904.03714
 
@@ -19,7 +20,7 @@ def fromBTAZI2BQBU(Bt,azi):
     return BQ,BU
 
 # ====================================================================
-def fromBQBU2BTAZI(BQ,BU):
+def BQBU2BTAZI(BQ,BU):
     """Transformation from BQ and BU to transverse field and azimuth
     according to https://arxiv.org/abs/1904.03714
 
@@ -50,7 +51,7 @@ def fromBQBU2BTAZI(BQ,BU):
     return azi_r, Bt_r
 
 # ====================================================================
-def fromBTAZI2BQBU_cube(model_Bho, model_azi):
+def BTAZI2BQBU_cube(model_Bho, model_azi):
     """ Transformation from transverse field and azimuth to BQ and BU
     for a 2D cube array.
     """
@@ -59,11 +60,11 @@ def fromBTAZI2BQBU_cube(model_Bho, model_azi):
     for x in range(model_Bho.shape[0]):
         for y in range(model_Bho.shape[1]):
             for ii in range(model_Bho.shape[2]):
-                model_BQ[x,y,ii], model_BU[x,y,ii] = fromBTAZI2BQBU(model_Bho[x,y,ii],model_azi[x,y,ii])
+                model_BQ[x,y,ii], model_BU[x,y,ii] = BTAZI2BQBU(model_Bho[x,y,ii],model_azi[x,y,ii])
     return model_BQ, model_BU
 
 # ====================================================================
-def fromBQBU2BTAZI_cube(model_BQ, model_BU):
+def BQBU2BTAZI_cube(model_BQ, model_BU):
     """Transformation from BQ and BU to transverse field and azimuth
     for a 2D cube array.
     """
@@ -72,39 +73,9 @@ def fromBQBU2BTAZI_cube(model_BQ, model_BU):
     for x in range(model_Bho.shape[0]):
         for y in range(model_Bho.shape[1]):
             for ii in range(model_Bho.shape[2]):
-                model_Bazi[x,y,ii], model_Bho[x,y,ii] = fromBQBU2BTAZI(model_BQ[x,y,ii],model_BU[x,y,ii])
+                model_Bazi[x,y,ii], model_Bho[x,y,ii] = BQBU2BTAZI(model_BQ[x,y,ii],model_BU[x,y,ii])
     return model_Bho, model_Bazi
 
-
-# ====================================================================
-from matplotlib.colors import Normalize
-class MidpointNormalize(Normalize):
-    def __init__(self, vmin=None, vmax=None, midpoint=None, clip=False):
-        self.midpoint = midpoint
-        Normalize.__init__(self, vmin, vmax, clip)
-    def __call__(self, value, clip=None):
-        x, y = [self.vmin, self.midpoint, self.vmax], [0, 0.5, 1]
-        return np.ma.masked_array(np.interp(value, x, y))
-
-# ====================================================================
-import matplotlib.colors as mcolors
-def make_colormap(seq):
-    seq = [(None,) * 3, 0.0] + list(seq) + [1.0, (None,) * 3]
-    cdict = {'red': [], 'green': [], 'blue': []}
-    for i, item in enumerate(seq):
-        if isinstance(item, float):
-            r1, g1, b1 = seq[i - 1]
-            r2, g2, b2 = seq[i + 1]
-            cdict['red'].append([item, r1, r2])
-            cdict['green'].append([item, g1, g2])
-            cdict['blue'].append([item, b1, b2])
-    return mcolors.LinearSegmentedColormap('CustomMap', cdict)
-
-# ====================================================================
-# Some definitions of colormaps
-c = mcolors.ColorConverter().to_rgb
-vcolormap = make_colormap([c('darkred'),c('oldlace'),0.5, c('lightcyan'),c('midnightblue')])
-phimap = make_colormap([c('white'), c('tomato'), 0.33, c('tomato'), c('deepskyblue'), 0.66, c('deepskyblue'),c('white')])
 
 
 if __name__ == '__main__':
@@ -112,8 +83,8 @@ if __name__ == '__main__':
     Bt = 100.
     azi = 80.* (np.pi/180.)
     print(Bt,azi)
-    fromBTAZI2BQBU(Bt,azi)
-    fromBQBU2BTAZI(BQ,BU)
+    BTAZI2BQBU(Bt,azi)
+    BQBU2BTAZI(BQ,BU)
 
 
 

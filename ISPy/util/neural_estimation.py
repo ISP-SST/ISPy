@@ -37,19 +37,16 @@ except ImportError:
     sys.exit()
 
 
-# ==================================================================================
-def rotate(cubo, angle_index):
-    # Rotate cubes a multiple of 90 degrees.
-    nnqq = cubo.shape[2]
-    ncubo = np.copy(cubo)
-    for ii in range(nnqq):
-        ncubo[:, :, ii] = np.rot90(cubo[:, :, ii], angle_index)
-    return ncubo
+from ISPy.util import gentools
 
 
 # ==================================================================================
 class DataGenerator(Sequence):
-    'Generates data for Keras'
+    """Generates data for training a neural network from a STiC model 
+
+    :Authors: 
+        Carlos Diaz (ISP/SU 2020)
+    """
 
     def __init__(self, datasize, dx, batch_size, logtau, stokelist, cubelist, noise):
         'Initialization'
@@ -86,7 +83,6 @@ class DataGenerator(Sequence):
         # Regularization
         jitterOption = True
         mulitplyJitter = 2
-        propnoise = 2e-2
         mynoisecube = 1e-2
 
         input_train = np.zeros((self.batch_size, dx, dx, int(nl)))
@@ -103,7 +99,7 @@ class DataGenerator(Sequence):
             ministokes = stokes[:,ypos:ypos + dx, xpos:xpos + dx] 
 
             lenq = cube.shape[0]
-            minicubo = np.zeros((lenq, ministokes.shape[1], ministokes.shape[2]))
+            minicube = np.zeros((lenq, ministokes.shape[1], ministokes.shape[2]))
 
             for iq in range(lenq):
                 jitterX = random.randint(-1 * mulitplyJitter, +1 * mulitplyJitter)
@@ -112,78 +108,33 @@ class DataGenerator(Sequence):
                     jitterY, jitterX = 0, 0
 
                 import scipy.ndimage as nd
-                minicubo[iq, :, :] = nd.shift(cube[iq, ypos:ypos + dx, xpos:xpos + dx],
+                minicube[iq, :, :] = nd.shift(cube[iq, ypos:ypos + dx, xpos:xpos + dx],
                                               (jitterY, jitterX), mode='nearest')
 
             # Extra noise
-            minicubo = minicubo[:] + minicubo * np.random.normal(0., mynoisecube,(cube.shape[0], dx, dx))
-            # ministokes = ministokes[:] + ministokes * np.random.normal(0., propnoise,(stokes.shape[0], dx, dx))
+            minicube = minicube[:] + minicube * np.random.normal(0., mynoisecube,(cube.shape[0], dx, dx))
             ministokes = ministokes[:] + np.random.normal(0.,self.noise,(stokes.shape[0],dx,dx))
 
+            from ISPy.util.azimuth import BTAZI2BQBU_cube
+            minicube[ni * 4:5 * ni, :, :], minicube[ni * 5:6 * ni, :, :] = BTAZI2BQBU_cube(
+                minicube[ni * 4:5 * ni, :, :], minicube[ni * 5:6 * ni, :, :])
 
-            from azimuth import fromBTAZI2BQBU_cube
-            minicubo[ni * 4:5 * ni, :, :], minicubo[ni * 5:6 * ni, :, :] = fromBTAZI2BQBU_cube(
-                minicubo[ni * 4:5 * ni, :, :], minicubo[ni * 5:6 * ni, :, :])
-
-            input_train[j, :, :, :] = rotate(np.swapaxes(ministokes, 0, 2), rota)
-            output_train[j, :, :, :] = rotate(np.swapaxes(minicubo, 0, 2), rota)
+            input_train[j, :, :, :] = gentools.rotate_cube(np.swapaxes(ministokes, 0, 2), rota)
+            output_train[j, :, :, :] = gentools.rotate_cube(np.swapaxes(minicube, 0, 2), rota)
 
         return input_train, output_train
 
 
-# ==================================================================================
-def add_colorbar(im, aspect=20, pad_fraction=0.5, **kwargs):
-    """Add a vertical color bar to an image plot
-    """
-    from mpl_toolkits import axes_grid1
-    from matplotlib.pyplot import gca, sca
-    divider = axes_grid1.make_axes_locatable(im.axes)
-    width = axes_grid1.axes_size.AxesY(im.axes, aspect=1./aspect)
-    pad = axes_grid1.axes_size.Fraction(pad_fraction, width)
-    current_ax = gca()
-    cax = divider.append_axes("right", size=width, pad=pad)
-    sca(current_ax)
-    return im.axes.figure.colorbar(im, cax=cax, **kwargs)
-
-
-
-# ==================================================================================
-def findclose(value, array):
-    """Finds the index of the closest value in array
-
-    Parameters
-    ----------
-    value : float
-        value we want to find
-    array : ndarray
-        array with values where we want to search
-
-    """
-    return np.argmin(np.abs(value - array))
-
-
-# ==================================================================================
-def findindex(array1, array2):
-    """Outputs an array with the indices of the closes element in array2 for each 
-    element in array1
-
-    Parameters
-    ----------
-    array1 : ndarray
-        Array with values that we want to find
-    array2 : ndarray
-        Array with values  where we want to search
-
-    """
-    index_array = np.ones_like(array1)
-    for kk in array1:
-        index_array[kk] = findclose(kk, array2)
-    return index_array
 
 
 # ==================================================================================
 def network1D(nx, ny, nd, nq, activation='relu', n_filters=64, l2_reg=1e-7):
-    """ Neural network architecture """
+    """ Neural network architecture 
+    
+    :Authors: 
+        Carlos Diaz (ISP/SU 2020)
+
+    """
 
     def minires(inputs, n_filters, kernel=1):
         x = Conv2D(int(n_filters), (kernel, kernel), padding='valid',
@@ -248,6 +199,8 @@ class deep_network(object):
     """Deep neural network class: it defines the network, load the weigths, does the 
     training and the predictions. 
 
+    :Authors: 
+        Carlos Diaz (ISP/SU 2020)
 
     """
     def __init__(self, root, logtau, nl):
@@ -321,10 +274,10 @@ class deep_network(object):
         print("[INFO] Prediction took: {0:3.2} seconds".format(end - start))
 
         print("[INFO] Azimuth inverse transformation")
-        from azimuth import fromBQBU2BTAZI_cube
+        from ISPy.util.azimuth import BQBU2BTAZI_cube
         # Inverse transformation
         out = np.reshape(out, (input_validation.shape[0], self.nx, self.ny, 6, 9))
-        out[0, :, :, 4, :], out[0, :, :, 5, :] = fromBQBU2BTAZI_cube(out[0, :, :, 4, :], out[0, :, :, 5, :])
+        out[0, :, :, 4, :], out[0, :, :, 5, :] = BQBU2BTAZI_cube(out[0, :, :, 4, :], out[0, :, :, 5, :])
         out = np.reshape(out, (input_validation.shape[0], self.nx, self.ny, 54))
 
         return out
@@ -338,7 +291,7 @@ class neural_estimator(object):
 
     Example
     -------
-    >>> from ISPy.util import neural_estimation
+    >>> from ISPy.util import neural_estimation as nst
     >>> import sparsetools as sp
 
     # Reading data in STiC format:
@@ -348,11 +301,12 @@ class neural_estimator(object):
 
     # Initializing the neural network
     >>> myestimator = nst.neural_estimator()
-    >>> myestimator.train(name='network1',option='start',nepochs=10,model_train_list,stokes_train_list,logtau)
+    >>> myestimator.train(name='network1',option='start',nepochs=40,model_train_list,stokes_train_list,logtau)
+    >>> myestimator.quickplot(filename ='testplot.pdf')
 
     >>> dataprediction = 'newprofiles.nc'
     >>> original_logtau = sp.model(model_train_list[0],0,0,0).ltau[0,0,0,:]
-    >>> myestimator.prediction(name='network1',dataprediction,logtau,original_logtau,"model_output.nc")
+    >>> myestimator.predict(name='network1',dataprediction,logtau,original_logtau,"model_output.nc")
     
     :Authors: 
         Carlos Diaz (ISP/SU 2020)
@@ -365,8 +319,8 @@ class neural_estimator(object):
         self.logtau = 0
         self.nl = None
 
-    def predict(self, name, inputdata, logtau, original_logtau, nameoutput='model_neuralnetwork.nc'):
-        """[summary]
+    def predict(self, name, inputdata, logtau, original_logtau, nameoutput='model_neuralnetwork.nc', pgastop = 1.0):
+        """It uses a pre-trained neural network with new observed data
 
         Parameters
         ----------
@@ -419,7 +373,7 @@ class neural_estimator(object):
                 m.ltau[0, iy, ix, :] = original_logtau
                 m.temp[0, iy, ix, :] = temp * 1e3
                 m.vlos[0, iy, ix, :] = vlos * 1e5
-                m.pgas[0, iy, ix, :] = 1.0
+                m.pgas[0, iy, ix, :] = pgastop
                 m.vturb[0, iy, ix, :] = vturb * 1e5
                 m.Bln[0, iy, ix, :] = Bln * 1e3
                 m.Bho[0, iy, ix, :] = Bho * 1e3
@@ -428,7 +382,7 @@ class neural_estimator(object):
         # Write the model
         m.write(nameoutput)
 
-    def prepare_train(self, model_train_list, stokes_train_list, logtau_train_list):
+    def create_dataset(self, model_train_list, stokes_train_list, logtau_train_list):
         """Creates a dataset for training
 
         Parameters
@@ -439,6 +393,7 @@ class neural_estimator(object):
             List of observed or synthetic profiles for training
         logtau_train_list : list
             List of logtau values included in the training
+
         """
         self.logtau = np.array(logtau_train_list)
 
@@ -447,7 +402,7 @@ class neural_estimator(object):
             m = sp.model(model_train_list[simu])
             s = sp.profile(stokes_train_list[simu])
             idx = np.where(s.weights[:, 0] < 1.0)[0]
-            indices = sorted(findindex(self.logtau, m.ltau[0, 0, 0, :]))
+            indices = sorted(gentools.findindex(self.logtau, m.ltau[0, 0, 0, :]))
             ni = len(indices)
 
             # Physical parameters
@@ -471,9 +426,9 @@ class neural_estimator(object):
         self.nl = len(stokes)
 
         
-    def training(self, name='network1', option='start', nepochs=20, extranoise=5e-4,
+    def prepare_training(self, name='network1', option='start', nepochs=20, extranoise=5e-4,
               learning_rate=1e-4, batch_size=100, datasize=10, samplesize=20):
-        """Training of the neural network
+        """It defines the network and start the training.
 
         Parameters
         ----------
@@ -493,6 +448,8 @@ class neural_estimator(object):
             Size of the dataset created for training, by default 10
         samplesize : int, optional
             Size of each FOV created for training, by default 20
+        
+ 
         """
 
         self.name = name
@@ -526,7 +483,7 @@ class neural_estimator(object):
 
     def train(self, name='network1', option='start', nepochs=20, model_train_list=None, stokes_train_list=None,
             logtau_train_list=None, extranoise=6e-4, learning_rate=1e-4, batch_size=100, datasize=100, samplesize=20):
-        """Prepares and train the neural network
+        """Train the neural network
 
         Parameters
         ----------
@@ -568,12 +525,12 @@ class neural_estimator(object):
         """
 
 
-        self.prepare_train(model_train_list, stokes_train_list, logtau_train_list)
-        self.training(name, option, nepochs, extranoise, learning_rate, batch_size, datasize, samplesize)
+        self.create_dataset(model_train_list, stokes_train_list, logtau_train_list)
+        self.prepare_training(name, option, nepochs, extranoise, learning_rate, batch_size, datasize, samplesize)
 
 
 
-    def quickplot(self,indexlist=[3,7]):
+    def quickplot(self,indexlist=[3,7],filename ='testplot.pdf'):
         """Quick figure with the comparison between the training dataset and
         the prediction of the network.
 
@@ -584,7 +541,7 @@ class neural_estimator(object):
         """
         print('[INFO] Running quick plot')
         import matplotlib.pyplot as plt
-        from azimuth import phimap
+        from ISPy.util.plottools import phimap, add_colorbar
 
         stokelist = np.array(self.stokelist)[0:1,:]
         prediction = self.deepl.read_and_predict(stokelist)
@@ -599,33 +556,33 @@ class neural_estimator(object):
 
         listnvari = [0,2,1,3,4,5]
         cmapvari = ['magma', 'viridis', 'seismic', 'RdGy', 'PRGn', phimap]
+        phylabel = ['Temp', r'$v_{turb}$',r'$v_{los}$',r'$B_{long}$',r'$B_{perp}$',r'Azi']
         limitsmax = [8.,7.,+5,+5,+10,+10,+1,+1,+1,+1,np.pi,np.pi]
         limitsmin = [4.5,5,-0,-0,-10,-10,-1,-1,-1,-1,0,0]
         normalizecte = [1.0,1.0,1.0,1.0,1.0,np.pi/180.]
 
-        # plt.figure(figsize=(30,10))
         fig, axs = plt.subplots(figsize=(9,10), nrows=len(listnvari), ncols=4, sharex=True, sharey=True)
         for ii in range(len(listnvari)):
             ii2 = int(ii*2)
             ii21 = ii2 + 1
 
             indiplot = indexlist[0]
-            axs[ii,0].set_title(r'NN - temp log$\tau$={}'.format(newtau[indiplot]))
+            axs[ii,0].set_title(r'NN - '+phylabel[ii]+r' log$\tau$={}'.format(newtau[indiplot]))
             axs[ii,0].imshow(prediction[:,:,listnvari[ii],indiplot].T*normalizecte[ii],cmap=cmapvari[ii],
             origin='lower',vmin=limitsmin[ii2],vmax=limitsmax[ii2])
-            axs[ii,1].set_title(r'STiC - temp log$\tau$={}'.format(newtau[indiplot]))
+            axs[ii,1].set_title(r'STiC - '+phylabel[ii]+r' log$\tau$={}'.format(newtau[indiplot]))
             im = axs[ii,1].imshow(cubelist[:,:,listnvari[ii],indiplot].T,cmap=cmapvari[ii],
             origin='lower',vmin=limitsmin[ii2],vmax=limitsmax[ii2])
             cb = add_colorbar(im, aspect=30)
 
             indiplot = indexlist[1]
-            axs[ii,2].set_title(r'NN - temp log$\tau$={}'.format(newtau[indiplot]))
+            axs[ii,2].set_title(r'NN - '+phylabel[ii]+r' log$\tau$={}'.format(newtau[indiplot]))
             axs[ii,2].imshow(prediction[:,:,listnvari[ii],indiplot].T*normalizecte[ii],cmap=cmapvari[ii],
             origin='lower',vmin=limitsmin[ii21],vmax=limitsmax[ii21])
-            axs[ii,3].set_title(r'STiC - temp log$\tau$={}'.format(newtau[indiplot]))
+            axs[ii,3].set_title(r'STiC - '+phylabel[ii]+r' log$\tau$={}'.format(newtau[indiplot]))
             im = axs[ii,3].imshow(cubelist[:,:,listnvari[ii],indiplot].T,cmap=cmapvari[ii],
             origin='lower',vmin=limitsmin[ii21],vmax=limitsmax[ii21])
             cb = add_colorbar(im, aspect=30)
 
         plt.tight_layout()
-        plt.savefig('testplot.pdf', bbox_inches='tight')
+        plt.savefig(filename, bbox_inches='tight')

@@ -29,7 +29,7 @@ class atlas:
 
     Example
     -------
-    >>> import atlas as S
+    >>> from ISPy.spec import atlas as S
     >>> fts = S.atlas()
     >>> wav, sp, cont = fts.get(6562.,6564., cgs=True, perHz=False)
 
@@ -65,9 +65,9 @@ class atlas:
 
         Example
         -------
-        >>> import atlas as S
+        >>> from ISPy.spec import atlas as S
         >>> fts = S.atlas() # intensity units are J/s/m^2/sr/Hz (SI, per Hz) by default
-        >>> fts.to('cgs', perHz=False) # convert to erg/s/cm^2/sr/Å
+        >>> fts.to('cgs', perHz=False) # convert to erg/s/cm^2/sr/A
 
         :Author:
             Gregal Vissers (ISP/SU 2020)
@@ -129,7 +129,7 @@ class atlas:
         See class docstring
 
         :Authors:
-            Jaime de la Cruz Rodríguez (ISP/SU 2019), Gregal Vissers (ISP/SU
+            Jaime de la Cruz Rodriguez (ISP/SU 2019), Gregal Vissers (ISP/SU
             2020)
         """
 
