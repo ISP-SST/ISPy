@@ -184,6 +184,7 @@ def read(cube, spnw=None, spformat='_sp', verb=False):
 
     Examples
     --------
+    >>> from ISPy.io import lapalma as lp
     >>> cube_a = lp.read('filename.fcube') # It searches for 'filename_sp.fcube' in the same path
     >>> cube_b = lp.read('filename.fcube' , 8)
     >>> cube_c = lp.read('filename.fcube' , 'filename_sp.fcube')
@@ -273,8 +274,8 @@ def mk_header(image):
 def writeto(filename, image, extraheader='', dtype=None, verbose=False,
             append=False):
     """
-    Write a cube to disk in LaPalma format. Backend of "write"
-    From https://github.com/ITA-Solar/helita/blob/master/helita/io/lp.py
+    Submodule of "write". It writes a cube to disk in LaPalma format.
+    Partially from https://github.com/ITA-Solar/helita/blob/master/helita/io/lp.py
 
     Parameters
     ----------
@@ -297,7 +298,7 @@ def writeto(filename, image, extraheader='', dtype=None, verbose=False,
 
     Examples
     --------
-    >>> writeto('path/cube.fcube', image, append=True)
+    writeto('path/cube.fcube', image, append=True)
     """
     
     if not os.path.isfile(filename):
@@ -374,7 +375,8 @@ def write(cube_array, name, stokes=True, sp=False, path=''):
 
     Examples
     --------
-    >>> write(cube_array, 'cube.fcube', path='fits/')
+    >>> from ISPy.io import lapalma as lp
+    >>> lp.write(cube_array, 'cube.fcube', path='fits/')
 
     :Authors: 
         Alex Pietrow (ISP/SU 2019), Carlos Diaz (ISP/SU 2019)

@@ -26,7 +26,8 @@ def read(filename):
 
     Example
     -------
-    >>> data = read('nb_4846_2020-04-25T11:08:59_scans=0-119_corrected_im.fits')
+    >>> from ISPy.io import solarnet
+    >>> data = solarnet.read('filename.fits')
     >>> data.shape
     (30, 4, 41, 1914, 206)
 
@@ -50,7 +51,8 @@ def write(filename, d):
 
     Example
     -------
-    >>> write('testcube.fits', data)
+    >>> from ISPy.io import solarnet
+    >>> solarnet.write('filename.fits', data)
 
     :Author: 
         Carlos Diaz Baso (ISP/SU 2019)
@@ -78,7 +80,8 @@ def get_wav(filename):
 
     Example
     -------
-    >>> wav_array = get_wav('nb_4846_2020-04-25T11:08:59_scans=0-119_corrected_im.fits')
+    >>> from ISPy.io import solarnet
+    >>> wav_array = solarnet.get_wav('filename.fits')
 
     :Authors:
         Carlos Diaz Baso (ISP/SU 2019)
@@ -106,7 +109,8 @@ def seconds2string(number):
 
     Example
     -------
-    >>> seconds2string(63729.3)
+    >>> from ISPy.io import solarnet
+    >>> solarnet.seconds2string(63729.3)
     '17:42:09.300000'
 
     :Author:
@@ -142,7 +146,8 @@ def get_time(filename, fulltime=False, utc=False):
 
     Example
     -------
-    >>> data_time = get_time(filename, fulltime=False, utc=True)
+    >>> from ISPy.io import solarnet
+    >>> data_time = solarnet.get_time(filename, fulltime=False, utc=True)
 
     :Author: 
         Carlos Diaz Baso (ISP/SU 2019)
@@ -183,8 +188,9 @@ def get_extent(filename, timeFrame=0):
 
     Example
     -------
-    >>> extent = get_extent(filename)
-    >>> imshow(data, extent=extent)
+    >>> from ISPy.io import solarnet
+    >>> extent = solarnet.get_extent(filename)
+    >>> plt.imshow(data, extent=extent)
 
     :Author: 
         Carlos Diaz Baso (ISP/SU 2019)
@@ -216,7 +222,8 @@ def get_coord(filename, pix_x,pix_y,timeFrame=0):
 
     Example
     -------
-    >>> [x_output, y_output] = get_coord(filename, pix_x,pix_y)
+    >>> from ISPy.io import solarnet
+    >>> [x_output, y_output] = solarnet.get_coord(filename, pix_x,pix_y)
 
     :Author: 
         Carlos Diaz Baso (ISP/SU 2019)

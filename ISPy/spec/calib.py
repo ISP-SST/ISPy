@@ -1,6 +1,5 @@
  # -*- coding: utf-8 -*-
 import os
-
 import numpy as np
 import astropy.table 
 from scipy.interpolate import interp1d
@@ -10,8 +9,8 @@ from astropy.io import fits
 from astropy.table import Table
 from astropy import units as u
 import matplotlib.pyplot as plt
-
 from ISPy.spec import atlas
+
 
 def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas, mu=1.0,
         calib_at_dc=False, wave_idx=None, extra_weight=20., bounds=None):
@@ -58,7 +57,7 @@ def get_calibration(wave_obs, spec_obs, wave_atlas, spec_atlas, mu=1.0,
     >>> calibration = get_calibration(wave, spec, wave_atlas, spec_atlas, mu=0.4, calib_at_dc=True)
 
     :Authors:
-        Carlos Diaz Baso, Gregal Vissers (ISP/SU 2020)
+        Carlos Diaz (ISP/SU 2020), Gregal Vissers (ISP/SU 2020)
 
     """
 
@@ -216,11 +215,11 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, calib_at_dc=False,
 
     Example
     -------
-    >>> wave_cal, spec_cal, factor, spec_fts, units = calib.spectrum(ispec,
-            wave, cgs=True, calib_wave=True, wave_idx=[0,1,-2,-1])
+    >>> wave_cal, spec_cal, factor, spec_fts, units = calib.spectrum(wave, ispec,
+            cgs=True, calib_wave=True, wave_idx=[0,1,-2,-1])
 
     :Author:
-        Gregal Vissers, Carlos Diaz Baso (ISP/SU 2019-2020)
+        Gregal Vissers, Carlos Diaz (ISP/SU 2019-2020)
 
     """
 
@@ -236,7 +235,7 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, calib_at_dc=False,
     fts = atlas.atlas()
     atlas_range = np.abs(atlas_range)
     wave_fts, spec_fts_dc, cont_fts = fts.get(wave[0]-atlas_range,
-            wave[-1]+atlas_range, cgs=cgs, si=si, perHz=perHz)
+            wave[-1]+atlas_range, cgs=cgs, perHz=perHz)
 
     # Apply instrument profile if provided
     if instrument_profile is not None:

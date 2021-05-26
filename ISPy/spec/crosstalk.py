@@ -1,6 +1,5 @@
 import numpy as np
 
-
 # ========================================================================
 def get_projection(u,v):
     """It outputs the scalar projection using the inner product of the vectors.
@@ -123,8 +122,7 @@ if __name__ == "__main__":
     from ISPy.io import solarnet as sl
 
     data_final = 'filename_stokes_corrected_im.fits'
-    data = sl.read(data_final)#[:,:,:,100:-100,100:-100]
-    # print(data.shape)
+    data = sl.read(data_final)
 
     estimate_crosstalk(data[0,:],stokes_toclean=1,stokes_removefrom=3,nameoutput='Q_test')
 
