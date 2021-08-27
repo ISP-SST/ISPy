@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -80,6 +80,8 @@
 <li><a class="reference internal" href="#">ISPy.img package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#module-ISPy.img.align">ISPy.img.align module</a></li>
+<li><a class="reference internal" href="#module-ISPy.img.denoising">ISPy.img.denoising module</a></li>
+<li><a class="reference internal" href="#module-ISPy.img.interpolate2d">ISPy.img.interpolate2d module</a></li>
 <li><a class="reference internal" href="#module-ISPy.img">Module contents</a></li>
 </ul>
 </li>
@@ -157,7 +159,7 @@
 <dl class="function">
 <dt id="ISPy.img.align.align">
 <code class="sig-prename descclassname">ISPy.img.align.</code><code class="sig-name descname">align</code><span class="sig-paren">(</span><em class="sig-param">a</em>, <em class="sig-param">b</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.align.align" title="Permalink to this definition">¶</a></dt>
-<dd><p>Ccompute the shifts (dy,dx) needed to align image b into a</p>
+<dd><p>Compute the shifts (dy,dx) needed to align image b into a</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -173,7 +175,7 @@
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">readimage</span><span class="p">(</span><span class="s1">&#39;bla.fits&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">readimage</span><span class="p">(</span><span class="s1">&#39;bla.fits&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">readimage</span><span class="p">(</span><span class="s1">&#39;ble.fits&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dy</span><span class="p">,</span><span class="n">dx</span> <span class="o">=</span> <span class="n">align</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
 </pre></div>
@@ -181,6 +183,293 @@
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
 <dd class="field-odd"><p>Jaime de la Cruz Rodriguez (ISP/SU 2015), ported from IDL</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-ISPy.img.denoising">
+<span id="ispy-img-denoising-module"></span><h2>ISPy.img.denoising module<a class="headerlink" href="#module-ISPy.img.denoising" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ISPy.img.denoising.ReflectionPadding2D">
+<em class="property">class </em><code class="sig-prename descclassname">ISPy.img.denoising.</code><code class="sig-name descname">ReflectionPadding2D</code><span class="sig-paren">(</span><em class="sig-param">padding=(1</em>, <em class="sig-param">1)</em>, <em class="sig-param">data_format=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.denoising.ReflectionPadding2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">keras.engine.topology.Layer</span></code></p>
+<p>Reflection-padding layer for 2D input (e.g. picture).
+This layer can add rows and columns or zeros
+at the top, bottom, left and right side of an image tensor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>built</strong></dt><dd></dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">input</span></code></dt><dd><p>Retrieves the input tensor(s) of a layer.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">input_mask</span></code></dt><dd><p>Retrieves the input mask tensor(s) of a layer.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">input_shape</span></code></dt><dd><p>Retrieves the input shape tuple(s) of a layer.</p>
+</dd>
+<dt><strong>losses</strong></dt><dd></dd>
+<dt><strong>non_trainable_weights</strong></dt><dd></dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">output</span></code></dt><dd><p>Retrieves the output tensor(s) of a layer.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_mask</span></code></dt><dd><p>Retrieves the output mask tensor(s) of a layer.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_shape</span></code></dt><dd><p>Retrieves the output shape tuple(s) of a layer.</p>
+</dd>
+<dt><strong>trainable_weights</strong></dt><dd></dd>
+<dt><strong>updates</strong></dt><dd></dd>
+<dt><strong>weights</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(inputs, **kwargs)</p></td>
+<td><p>Wrapper around self.call(), for handling internal references.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_loss</span></code>(losses[, inputs])</p></td>
+<td><p>Adds losses to the layer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_update</span></code>(updates[, inputs])</p></td>
+<td><p>Adds updates to the layer.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_weight</span></code>(name, shape[, dtype, …])</p></td>
+<td><p>Adds a weight variable to the layer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">assert_input_compatibility</span></code>(inputs)</p></td>
+<td><p>Checks compatibility between the layer and provided inputs.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">build</span></code>(input_shape)</p></td>
+<td><p>Creates the layer weights.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ISPy.img.denoising.ReflectionPadding2D.call" title="ISPy.img.denoising.ReflectionPadding2D.call"><code class="xref py py-obj docutils literal notranslate"><span class="pre">call</span></code></a>(inputs)</p></td>
+<td><p>This is where the layer’s logic lives.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_mask</span></code>(inputs[, mask])</p></td>
+<td><p>Computes an output mask tensor.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ISPy.img.denoising.ReflectionPadding2D.compute_output_shape" title="ISPy.img.denoising.ReflectionPadding2D.compute_output_shape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_output_shape</span></code></a>(input_shape)</p></td>
+<td><p>Computes the output shape of the layer.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">count_params</span></code>()</p></td>
+<td><p>Counts the total number of scalars composing the weights.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_config</span></code>(config)</p></td>
+<td><p>Creates a layer from its config.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ISPy.img.denoising.ReflectionPadding2D.get_config" title="ISPy.img.denoising.ReflectionPadding2D.get_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_config</span></code></a>()</p></td>
+<td><p>Returns the config of the layer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_input_at</span></code>(node_index)</p></td>
+<td><p>Retrieves the input tensor(s) of a layer at a given node.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_input_mask_at</span></code>(node_index)</p></td>
+<td><p>Retrieves the input mask tensor(s) of a layer at a given node.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_input_shape_at</span></code>(node_index)</p></td>
+<td><p>Retrieves the input shape(s) of a layer at a given node.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_output_at</span></code>(node_index)</p></td>
+<td><p>Retrieves the output tensor(s) of a layer at a given node.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_output_mask_at</span></code>(node_index)</p></td>
+<td><p>Retrieves the output mask tensor(s) of a layer at a given node.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_output_shape_at</span></code>(node_index)</p></td>
+<td><p>Retrieves the output shape(s) of a layer at a given node.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_weights</span></code>()</p></td>
+<td><p>Returns the current weights of the layer.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_weights</span></code>(weights)</p></td>
+<td><p>Sets the weights of the layer, from Numpy arrays.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 66%" />
+<col style="width: 34%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>get_losses_for</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>get_updates_for</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="ISPy.img.denoising.ReflectionPadding2D.call">
+<code class="sig-name descname">call</code><span class="sig-paren">(</span><em class="sig-param">inputs</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.denoising.ReflectionPadding2D.call" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is where the layer’s logic lives.</p>
+<dl class="simple">
+<dt># Arguments</dt><dd><p>inputs: Input tensor, or list/tuple of input tensors.
+<a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs: Additional keyword arguments.</p>
+</dd>
+<dt># Returns</dt><dd><p>A tensor or list/tuple of tensors.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ISPy.img.denoising.ReflectionPadding2D.compute_output_shape">
+<code class="sig-name descname">compute_output_shape</code><span class="sig-paren">(</span><em class="sig-param">input_shape</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.denoising.ReflectionPadding2D.compute_output_shape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the output shape of the layer.</p>
+<p>Assumes that the layer will be built
+to match that input shape provided.</p>
+<dl class="simple">
+<dt># Arguments</dt><dd><dl class="simple">
+<dt>input_shape: Shape tuple (tuple of integers)</dt><dd><p>or list of shape tuples (one per output tensor of the layer).
+Shape tuples can include None for free dimensions,
+instead of an integer.</p>
+</dd>
+</dl>
+</dd>
+<dt># Returns</dt><dd><p>An input shape tuple.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ISPy.img.denoising.ReflectionPadding2D.get_config">
+<code class="sig-name descname">get_config</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.denoising.ReflectionPadding2D.get_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the config of the layer.</p>
+<p>A layer config is a Python dictionary (serializable)
+containing the configuration of a layer.
+The same layer can be reinstantiated later
+(without its trained weights) from this configuration.</p>
+<p>The config of a layer does not include connectivity
+information, nor the layer class name. These are handled
+by <cite>Container</cite> (one layer of abstraction above).</p>
+<dl class="simple">
+<dt># Returns</dt><dd><p>Python dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="ISPy.img.denoising.deep_network">
+<em class="property">class </em><code class="sig-prename descclassname">ISPy.img.denoising.</code><code class="sig-name descname">deep_network</code><a class="headerlink" href="#ISPy.img.denoising.deep_network" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 64%" />
+<col style="width: 36%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>define_network</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>predict</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="ISPy.img.denoising.deep_network.define_network">
+<code class="sig-name descname">define_network</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.denoising.deep_network.define_network" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ISPy.img.denoising.deep_network.predict">
+<code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param">numerotime</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.denoising.deep_network.predict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="ISPy.img.denoising.neural_network">
+<code class="sig-prename descclassname">ISPy.img.denoising.</code><code class="sig-name descname">neural_network</code><span class="sig-paren">(</span><em class="sig-param">input_data</em>, <em class="sig-param">niterations=2</em>, <em class="sig-param">scale=None</em>, <em class="sig-param">plotOption=False</em>, <em class="sig-param">test_Option=False</em>, <em class="sig-param">split=False</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.denoising.neural_network" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the denoising neural network algorithm developed in the paper <a class="reference external" href="https://arxiv.org/abs/1908.02815">https://arxiv.org/abs/1908.02815</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_data</strong> (<em>5D ndarray</em>) – data cube</p></li>
+<li><p><strong>niterations</strong> (<em>int, optional</em>) – number of times the neural network, cleaning the residuals</p></li>
+<li><p><strong>scale</strong> (<em>float, optional</em>) – normalization to match training values. The std of the normalized data has to be around 1e-3</p></li>
+<li><p><strong>plotOption</strong> (<em>bool, optional</em>) – some plots to check the quality of the denoising.</p></li>
+<li><p><strong>test_Option</strong> (<em>bool, optional</em>) – crop the input data to perform a quick check.</p></li>
+<li><p><strong>split</strong> (<em>bool, optional</em>) – run the network splitting the data into multiple partitions (for big files)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>cube_array</strong> – 5D cube of shape [nt,ns,nw,nx,ny] after performing the denoising.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.img</span> <span class="k">import</span> <span class="n">denoising</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="k">import</span> <span class="n">solarnet</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Reading data:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data_input</span> <span class="o">=</span> <span class="n">solarnet</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;filename.fits&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ouput_name</span> <span class="o">=</span> <span class="s1">&#39;test.fits&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output_file</span> <span class="o">=</span> <span class="n">denoising</span><span class="o">.</span><span class="n">neural_network</span><span class="p">(</span><span class="n">data_input</span><span class="p">,</span> <span class="n">niterations</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">scale</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">plotOption</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">test_Option</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">solarnet</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ouput_name</span><span class="p">,</span> <span class="n">output_file</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Authors</dt>
+<dd class="field-odd"><p>Carlos Diaz (ISP/SU 2019)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="ISPy.img.denoising.predict_image">
+<code class="sig-prename descclassname">ISPy.img.denoising.</code><code class="sig-name descname">predict_image</code><span class="sig-paren">(</span><em class="sig-param">model</em>, <em class="sig-param">image</em>, <em class="sig-param">numerotime</em>, <em class="sig-param">split</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.denoising.predict_image" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ISPy.img.denoising.spatial_reflection_2d_padding">
+<code class="sig-prename descclassname">ISPy.img.denoising.</code><code class="sig-name descname">spatial_reflection_2d_padding</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">padding=((1</em>, <em class="sig-param">1)</em>, <em class="sig-param">(1</em>, <em class="sig-param">1))</em>, <em class="sig-param">data_format=None</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.denoising.spatial_reflection_2d_padding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pads the 2nd and 3rd dimensions of a 4D tensor.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ISPy.img.denoising.unet">
+<code class="sig-prename descclassname">ISPy.img.denoising.</code><code class="sig-name descname">unet</code><span class="sig-paren">(</span><em class="sig-param">start_ch=32</em>, <em class="sig-param">depth=2</em>, <em class="sig-param">activation='relu'</em>, <em class="sig-param">input_channel_num=1</em>, <em class="sig-param">out_ch=1</em>, <em class="sig-param">inc_rate=2.0</em>, <em class="sig-param">dropout=0.0</em>, <em class="sig-param">batchnorm=False</em>, <em class="sig-param">maxpool=True</em>, <em class="sig-param">upconv=True</em>, <em class="sig-param">residual=False</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.denoising.unet" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-ISPy.img.interpolate2d">
+<span id="ispy-img-interpolate2d-module"></span><h2>ISPy.img.interpolate2d module<a class="headerlink" href="#module-ISPy.img.interpolate2d" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="ISPy.img.interpolate2d.check_inputs">
+<code class="sig-prename descclassname">ISPy.img.interpolate2d.</code><code class="sig-name descname">check_inputs</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">Z</em>, <em class="sig-param">points</em>, <em class="sig-param">mode</em>, <em class="sig-param">bounds_error</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.interpolate2d.check_inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check inputs for interpolate2d function</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ISPy.img.interpolate2d.interpolate2d">
+<code class="sig-prename descclassname">ISPy.img.interpolate2d.</code><code class="sig-name descname">interpolate2d</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">Z</em>, <em class="sig-param">points</em>, <em class="sig-param">mode='linear'</em>, <em class="sig-param">bounds_error=False</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.interpolate2d.interpolate2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>2D interpolation routine: it outputs an array with same length
+as points with interpolated values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>array</em>) – x-coordinates of the mesh on which to interpolate</p></li>
+<li><p><strong>y</strong> (<em>array</em>) – y-coordinates of the mesh on which to interpolate</p></li>
+<li><p><strong>Z</strong> (<em>array</em>) – 2D array of values for each x, y pair</p></li>
+<li><p><strong>points</strong> (<em>array</em>) – Nx2 array of coordinates where interpolated values are sought</p></li>
+<li><p><strong>mode</strong> (<em>str, optional</em>) – Determines the interpolation order, by default ‘linear’</p></li>
+<li><p><strong>bounds_error</strong> (<em>bool, optional</em>) – Boolean flag. If True an exception will be raised when interpolated
+values are requested outside the domain of the input data, by default False</p></li>
+<li><p><em>Authors:</em> – Modified from the SAFE library:
+<a class="reference external" href="https://github.com/inasafe/python-safe/safe/engine/interpolation2d.py">https://github.com/inasafe/python-safe/safe/engine/interpolation2d.py</a></p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>

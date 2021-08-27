@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -78,6 +78,8 @@
               <!-- Local TOC -->
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#">ISPy.inv package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-ISPy.inv.disambiguation">ISPy.inv.disambiguation module</a></li>
 <li><a class="reference internal" href="#module-ISPy.inv">Module contents</a></li>
 </ul>
 </li>
@@ -147,6 +149,94 @@
             
   <div class="section" id="ispy-inv-package">
 <h1>ISPy.inv package<a class="headerlink" href="#ispy-inv-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-ISPy.inv.disambiguation">
+<span id="ispy-inv-disambiguation-module"></span><h2>ISPy.inv.disambiguation module<a class="headerlink" href="#module-ISPy.inv.disambiguation" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="ISPy.inv.disambiguation.field_test">
+<code class="sig-prename descclassname">ISPy.inv.disambiguation.</code><code class="sig-name descname">field_test</code><span class="sig-paren">(</span><em class="sig-param">amp=1.0</em>, <em class="sig-param">nx=50</em>, <em class="sig-param">ny=50</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.inv.disambiguation.field_test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a test magnetic field 2D array</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>amp</strong> (<em>float</em>) – Maximum strength of the magnetic field</p></li>
+<li><p><strong>nx, ny</strong> (<em>integer</em>) – Size of the map in each dimension</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="ISPy.inv.disambiguation.get_acute_angle">
+<code class="sig-prename descclassname">ISPy.inv.disambiguation.</code><code class="sig-name descname">get_acute_angle</code><span class="sig-paren">(</span><em class="sig-param">azimuth</em>, <em class="sig-param">reference</em>, <em class="sig-param">value=90.0</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.inv.disambiguation.get_acute_angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>It outputs the closest azimuth to the reference (adding 180 degrees)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>azimuth</strong> (<em>ndarray</em>) – 2D array of dimensions (ny, nx) in degrees</p></li>
+<li><p><strong>reference</strong> (<em>float</em>) – Reference angle to rotate the azimuth</p></li>
+<li><p><strong>value</strong> (<em>float</em>) – Threshold to be applied to find the closest azimuth</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>2D array of dimensions (nx,ny) with the closest azimuth to the reference</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="ISPy.inv.disambiguation.potential_extrapolation">
+<code class="sig-prename descclassname">ISPy.inv.disambiguation.</code><code class="sig-name descname">potential_extrapolation</code><span class="sig-paren">(</span><em class="sig-param">Bz, zz=[0.0], pixel=[0.1, 0.1]</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.inv.disambiguation.potential_extrapolation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes a potential extrapolation from the observed vertical field.
+It uses a fast implementation in the Fourier space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Bz</strong> (<em>ndarray</em>) – 2D array of dimensions (ny, nx) in Gauss</p></li>
+<li><p><strong>zz</strong> (<em>ndarray</em>) – 1D array of dimensions (nz) in Mm</p></li>
+<li><p><strong>pixel</strong> (<em>ndarray</em>) – 1D array of dimensions (2) with the pixel size in arcsec</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>3D array of dimensions (nx,ny,nz) with the magnetic field vector</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">readimage</span><span class="p">(</span><span class="s1">&#39;Bz.fits&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Bvector</span> <span class="o">=</span> <span class="n">potential_extrapolation</span><span class="p">(</span><span class="n">Bz</span><span class="p">,</span> <span class="n">zz</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">],</span> <span class="n">pixel</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">])</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Authors</dt>
+<dd class="field-odd"><p>Ported from the IDL /ssw/packages/nlfff/idl/FFF.pro (by Yuhong Fan) by Carlos Diaz (ISP-SU 2020)
+and simplified to the vertical case.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="ISPy.inv.disambiguation.smooth_azimuth">
+<code class="sig-prename descclassname">ISPy.inv.disambiguation.</code><code class="sig-name descname">smooth_azimuth</code><span class="sig-paren">(</span><em class="sig-param">azimap</em>, <em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.inv.disambiguation.smooth_azimuth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Smoothing of an azimuth map with values in the range [0, pi]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>azimap</strong> (<em>ndarray</em>) – magnetic field azimuth of shape (1,), (nx) or (ny, nx)</p></li>
+<li><p><strong>value</strong> (<em>float</em>) – Standard deviation for Gaussian kernel</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
 <div class="section" id="module-ISPy.inv">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-ISPy.inv" title="Permalink to this headline">¶</a></h2>
 <p>Tools and scripts for pre- and post-processing inversion input/output.</p>

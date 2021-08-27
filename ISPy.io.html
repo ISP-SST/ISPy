@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -182,7 +182,7 @@ w: wavelength step</p></li>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">image</span> <span class="o">=</span> <span class="n">lp_get</span><span class="p">(</span><span class="s1">&#39;cube.fcube&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">image</span> <span class="o">=</span> <span class="n">lp_get</span><span class="p">(</span><span class="s1">&#39;cube.fcube&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -196,7 +196,7 @@ w: wavelength step</p></li>
 
 <dl class="function">
 <dt id="ISPy.io.lapalma.head">
-<code class="sig-prename descclassname">ISPy.io.lapalma.</code><code class="sig-name descname">head</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">verbose=True</em>, <em class="sig-param">appendFormat=False</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.lapalma.head" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">ISPy.io.lapalma.</code><code class="sig-name descname">head</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">verbose=False</em>, <em class="sig-param">appendFormat=False</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.lapalma.head" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the header of a legacy ‘La Palma’ cube</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -214,7 +214,7 @@ w: wavelength step</p></li>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">h</span> <span class="o">=</span> <span class="n">head</span><span class="p">(</span><span class="s1">&#39;crispex_3950_2016-09-19T09:28:36_scans=11-117_time-corrected_im.fcube&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">h</span> <span class="o">=</span> <span class="n">head</span><span class="p">(</span><span class="s1">&#39;crispex_3950_2016-09-19T09:28:36_scans=11-117_time-corrected_im.fcube&#39;</span><span class="p">)</span>
 <span class="go">(&#39;head:&#39;, &#39;[dtype=float32, ndims=3, nx=1734, ny=1240, nt=3317, nstokes=1] -&gt; crispex_3950_2016-09-19T09:28:36_scans=11-117_time-corrected_im.fcube&#39;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nt</span><span class="p">,</span> <span class="n">ns</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">ndims</span> <span class="o">=</span> <span class="n">head</span><span class="p">(</span><span class="s1">&#39;crispex_3950_2016-09-19T09:28:36_scans=11-117_time-corrected_im.fcube&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">ns</span>
@@ -256,7 +256,7 @@ w: wavelength step</p></li>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lp_put</span><span class="p">(</span><span class="s1">&#39;cube.fcube&#39;</span><span class="p">,</span> <span class="n">cube2</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lp_put</span><span class="p">(</span><span class="s1">&#39;cube.fcube&#39;</span><span class="p">,</span> <span class="n">cube2</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="simple">
@@ -272,17 +272,14 @@ w: wavelength step</p></li>
 
 <dl class="function">
 <dt id="ISPy.io.lapalma.read">
-<code class="sig-prename descclassname">ISPy.io.lapalma.</code><code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param">cube</em>, <em class="sig-param">spnw=True</em>, <em class="sig-param">ns=4</em>, <em class="sig-param">spformat='_sp'</em>, <em class="sig-param">mode='r'</em>, <em class="sig-param">dtype='float32'</em>, <em class="sig-param">verb=False</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.lapalma.read" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">ISPy.io.lapalma.</code><code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param">cube</em>, <em class="sig-param">spnw=None</em>, <em class="sig-param">spformat='_sp'</em>, <em class="sig-param">verb=False</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.lapalma.read" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read the full cube from a La Palma format file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>cube</strong> (<em>str</em>) – filename, has to be .icube or .fcube</p></li>
-<li><p><strong>spnw</strong> (<em>bool, optional</em>) – Specific filename of spectral cube  OR number of wavelength steps (Default value = True)</p></li>
-<li><p><strong>ns</strong> (<em>int, optional</em>) – number of stokes parameters. (Default value = 4)</p></li>
+<li><p><strong>spnw</strong> (<em>str or int, optional</em>) – Specific filename of spectral cube OR number of wavelength steps (Default value = None)</p></li>
 <li><p><strong>spformat</strong> (<em>str, optional</em>) – filename identifier for the spectral cube (Default value = ‘_sp’)</p></li>
-<li><p><strong>mode</strong> (<em>str, optional</em>) – read mode to be passed on to np.memmap (Default value = ‘r’)</p></li>
-<li><p><strong>dtype</strong> (<em>str, optional</em>) – Type of data. Should be ‘float32’ for .fcubes and ‘int16’ for icubes. (Default value = ‘float32’)</p></li>
 <li><p><strong>verb</strong> (<em>bool, optional</em>) – Verbose mode. (Default value = False)</p></li>
 </ul>
 </dd>
@@ -294,7 +291,8 @@ w: wavelength step</p></li>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cube_a</span> <span class="o">=</span> <span class="n">lp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;filename.fcube&#39;</span><span class="p">)</span> <span class="c1"># It will find also &#39;filename_sp.fcube&#39; in the same path</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="k">import</span> <span class="n">lapalma</span> <span class="k">as</span> <span class="n">lp</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cube_a</span> <span class="o">=</span> <span class="n">lp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;filename.fcube&#39;</span><span class="p">)</span> <span class="c1"># It searches for &#39;filename_sp.fcube&#39; in the same path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cube_b</span> <span class="o">=</span> <span class="n">lp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;filename.fcube&#39;</span> <span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cube_c</span> <span class="o">=</span> <span class="n">lp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;filename.fcube&#39;</span> <span class="p">,</span> <span class="s1">&#39;filename_sp.fcube&#39;</span><span class="p">)</span>
 </pre></div>
@@ -322,7 +320,8 @@ w: wavelength step</p></li>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">write</span><span class="p">(</span><span class="n">cube_array</span><span class="p">,</span> <span class="s1">&#39;cube.fcube&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;fits/&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="k">import</span> <span class="n">lapalma</span> <span class="k">as</span> <span class="n">lp</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">cube_array</span><span class="p">,</span> <span class="s1">&#39;cube.fcube&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;fits/&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -335,8 +334,8 @@ w: wavelength step</p></li>
 <dl class="function">
 <dt id="ISPy.io.lapalma.writeto">
 <code class="sig-prename descclassname">ISPy.io.lapalma.</code><code class="sig-name descname">writeto</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">image</em>, <em class="sig-param">extraheader=''</em>, <em class="sig-param">dtype=None</em>, <em class="sig-param">verbose=False</em>, <em class="sig-param">append=False</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.lapalma.writeto" title="Permalink to this definition">¶</a></dt>
-<dd><p>Write a cube to disk in LaPalma format. Backend of “write”
-From <a class="reference external" href="https://github.com/ITA-Solar/helita/blob/master/helita/io/lp.py">https://github.com/ITA-Solar/helita/blob/master/helita/io/lp.py</a></p>
+<dd><p>Submodule of “write”. It writes a cube to disk in LaPalma format.
+Partially from <a class="reference external" href="https://github.com/ITA-Solar/helita/blob/master/helita/io/lp.py">https://github.com/ITA-Solar/helita/blob/master/helita/io/lp.py</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -356,9 +355,7 @@ From <a class="reference external" href="https://github.com/ITA-Solar/helita/blo
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">writeto</span><span class="p">(</span><span class="s1">&#39;path/cube.fcube&#39;</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
+<p>writeto(‘path/cube.fcube’, image, append=True)</p>
 </dd></dl>
 
 </div>
@@ -406,32 +403,32 @@ and then comes the raw data.</p>
 </table>
 <dl class="method">
 <dt id="ISPy.io.pyio.bio.create_empty_variable">
-<code class="sig-name descname">create_empty_variable</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">vname</em>, <em class="sig-param">dim</em>, <em class="sig-param">dtype</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.pyio.bio.create_empty_variable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">create_empty_variable</code><span class="sig-paren">(</span><em class="sig-param">vname</em>, <em class="sig-param">dim</em>, <em class="sig-param">dtype</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.pyio.bio.create_empty_variable" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="ISPy.io.pyio.bio.get_data_tree">
-<code class="sig-name descname">get_data_tree</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.pyio.bio.get_data_tree" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_data_tree</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.pyio.bio.get_data_tree" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="ISPy.io.pyio.bio.map_variable">
-<code class="sig-name descname">map_variable</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">vname</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.pyio.bio.map_variable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">map_variable</code><span class="sig-paren">(</span><em class="sig-param">vname</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.pyio.bio.map_variable" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="ISPy.io.pyio.bio.read_variable">
-<code class="sig-name descname">read_variable</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">vname</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.pyio.bio.read_variable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">read_variable</code><span class="sig-paren">(</span><em class="sig-param">vname</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.pyio.bio.read_variable" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="ISPy.io.pyio.bio.variable_exists">
-<code class="sig-name descname">variable_exists</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">vname</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.pyio.bio.variable_exists" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">variable_exists</code><span class="sig-paren">(</span><em class="sig-param">vname</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.pyio.bio.variable_exists" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="ISPy.io.pyio.bio.write_variable">
-<code class="sig-name descname">write_variable</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">vname</em>, <em class="sig-param">d</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.pyio.bio.write_variable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">write_variable</code><span class="sig-paren">(</span><em class="sig-param">vname</em>, <em class="sig-param">d</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.pyio.bio.write_variable" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -502,7 +499,8 @@ and then comes the raw data.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">x_output</span><span class="p">,</span> <span class="n">y_output</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_coord</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">pix_x</span><span class="p">,</span><span class="n">pix_y</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="k">import</span> <span class="n">solarnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">x_output</span><span class="p">,</span> <span class="n">y_output</span><span class="p">]</span> <span class="o">=</span> <span class="n">solarnet</span><span class="o">.</span><span class="n">get_coord</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">pix_x</span><span class="p">,</span><span class="n">pix_y</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -534,8 +532,9 @@ filename : str</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">extent</span> <span class="o">=</span> <span class="n">get_extent</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="n">extent</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="k">import</span> <span class="n">solarnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">extent</span> <span class="o">=</span> <span class="n">solarnet</span><span class="o">.</span><span class="n">get_extent</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="n">extent</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -567,7 +566,8 @@ tuning-dependent time information.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data_time</span> <span class="o">=</span> <span class="n">get_time</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">fulltime</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">utc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="k">import</span> <span class="n">solarnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data_time</span> <span class="o">=</span> <span class="n">solarnet</span><span class="o">.</span><span class="n">get_time</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">fulltime</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">utc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -594,7 +594,8 @@ change over time.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">wav_array</span> <span class="o">=</span> <span class="n">get_wav</span><span class="p">(</span><span class="s1">&#39;nb_4846_2020-04-25T11:08:59_scans=0-119_corrected_im.fits&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="k">import</span> <span class="n">solarnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wav_array</span> <span class="o">=</span> <span class="n">solarnet</span><span class="o">.</span><span class="n">get_wav</span><span class="p">(</span><span class="s1">&#39;filename.fits&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -620,7 +621,8 @@ change over time.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="s1">&#39;nb_4846_2020-04-25T11:08:59_scans=0-119_corrected_im.fits&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="k">import</span> <span class="n">solarnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">solarnet</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;filename.fits&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(30, 4, 41, 1914, 206)</span>
 </pre></div>
@@ -648,7 +650,8 @@ change over time.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">seconds2string</span><span class="p">(</span><span class="mf">63729.3</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="k">import</span> <span class="n">solarnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">solarnet</span><span class="o">.</span><span class="n">seconds2string</span><span class="p">(</span><span class="mf">63729.3</span><span class="p">)</span>
 <span class="go">&#39;17:42:09.300000&#39;</span>
 </pre></div>
 </div>
@@ -672,7 +675,8 @@ change over time.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;testcube.fits&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="k">import</span> <span class="n">solarnet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">solarnet</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;filename.fits&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
