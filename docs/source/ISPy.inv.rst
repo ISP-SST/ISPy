@@ -1,6 +1,18 @@
 ISPy.inv package
 ================
 
+Submodules
+----------
+
+ISPy.inv.disambiguation module
+------------------------------
+
+.. automodule:: ISPy.inv.disambiguation
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
 Module contents
 ---------------
 

@@ -4,10 +4,34 @@ ISPy.util package
 Submodules
 ----------
 
+ISPy.util.azimuth module
+------------------------
+
+.. automodule:: ISPy.util.azimuth
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ISPy.util.find module
 ---------------------
 
 .. automodule:: ISPy.util.find
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ISPy.util.gentools module
+-------------------------
+
+.. automodule:: ISPy.util.gentools
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ISPy.util.neural\_estimation module
+-----------------------------------
+
+.. automodule:: ISPy.util.neural_estimation
    :members:
    :undoc-members:
    :show-inheritance:
@@ -20,10 +44,26 @@ ISPy.util.obs module
    :undoc-members:
    :show-inheritance:
 
+ISPy.util.plottools module
+--------------------------
+
+.. automodule:: ISPy.util.plottools
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ISPy.util.rebin module
 ----------------------
 
 .. automodule:: ISPy.util.rebin
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ISPy.util.remap module
+----------------------
+
+.. automodule:: ISPy.util.remap
    :members:
    :undoc-members:
    :show-inheritance:
