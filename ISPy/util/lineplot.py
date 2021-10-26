@@ -1,3 +1,5 @@
+#!/bin/env python
+# -*- coding: utf-8 -*-
 
 import matplotlib.pyplot as plt
 import scipy.io as sc
@@ -176,9 +178,9 @@ def plotline(line,scan,name=None,center=0,nframes=8,fps=35., instrument='CRISP',
     plt.clf()
     plt.plot(w_atlas, intensity_atlas_convolved)
     plt.scatter(w_atlas[points], intensity_atlas_convolved[points])
-    plt.title(str(line)+'\n t='+str(int(np.round(len(points)*nframes/fps)))+' s')
-    plt.xlabel(r'Wavelength $\AA$')
-    plt.ylabel(r'Intensity [erg/s/cm$^2$/sr/A]')
+    plt.title(str(line)+' Å\n t='+str(int(np.round(len(points)*nframes/fps)))+' s')
+    plt.xlabel(r'Wavelength Å')
+    plt.ylabel(r'Intensity [erg/s/cm$^2$/sr/Å]')
     plt.tight_layout()
     plt.plot()
     if name:
