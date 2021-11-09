@@ -7,7 +7,7 @@ University](https://www.su.se)), covering SST data processing and alignment, rad
 transfer calculations and inversion pre- and post-processing, among others. Read the [documentation](https://ISP-SST.github.io/ISPy/) for getting details on how to use the code.
 
 ## Citing ISPy
-If you have used ISPy in your research, then we would appreciate it if you could cite the following publication in the manuscript to acknowledge the work done on ISPy.  
+If you have used ISPy in your research, then we would appreciate it if you could cite the following reference to acknowledge the work done on ISPy.  
 
 [Diaz Baso et al. (2021)](https://ui.adsabs.harvard.edu/abs/2021zndo...5608441D/abstract).
 
