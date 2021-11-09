@@ -6,6 +6,9 @@ Physics](https://www.isf.astro.su.se/) ([Stockholm
 University](https://www.su.se)), covering SST data processing and alignment, radiative
 transfer calculations and inversion pre- and post-processing, among others. Read the [documentation](https://ISP-SST.github.io/ISPy/) for getting details on how to use the code.
 
+## Installation
+ISPy can be installed via pip by using the following command 'pip install ISPy-solar'.
+
 ## Citing ISPy
 If you have used ISPy in your research, then we would appreciate it if you could cite the following reference to acknowledge the work done on ISPy.  
 
