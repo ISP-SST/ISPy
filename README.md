@@ -10,7 +10,6 @@ transfer calculations and inversion pre- and post-processing, among others. Read
 ISPy can be installed via pip by using the following command 'pip install ISPy-solar'.
 
 ## Citing ISPy
-If you have used ISPy in your research, then we would appreciate it if you could cite the following reference to acknowledge the work done on ISPy.  
-
-[Diaz Baso et al. (2021)](https://ui.adsabs.harvard.edu/abs/2021zndo...5608441D/abstract).
+If you have used ISPy in your research, then we would appreciate it if you could cite the following reference to acknowledge the work done on ISPy uing [
+NASA/ADS](https://ui.adsabs.harvard.edu/abs/2021zndo...5608441D/abstract) or [Zenodo](https://doi.org/10.5281/zenodo.5608440).
 
