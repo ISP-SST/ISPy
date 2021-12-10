@@ -14,7 +14,7 @@ python setup.py install
 ```
 or via pip by using the following command:
 ```
-pip install ISPy-solar
+pip install git+https://github.com/ISP-SST/ISPy
 ```
 
 ## Citing ISPy
