@@ -20,6 +20,7 @@ jobs:
         pip install sphinx Pallets-Sphinx-Themes
         pip install sphinx-rtd-theme
         pip install numpydoc numpy Cython
+        pip install git+https://github.com/ISP-SST/ISPy
         pwd
 
     - name: Build
