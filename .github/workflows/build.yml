@@ -15,12 +15,12 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: Building documentation
+    - name: Installing dependencies
       run: |
         pip install sphinx Pallets-Sphinx-Themes
         pip install sphinx-rtd-theme
         pip install numpydoc
-        ls -l
+        python setup.py install
         pwd
 
     - name: Build
