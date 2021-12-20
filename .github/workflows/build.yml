@@ -18,7 +18,10 @@ jobs:
     - name: Building documentation
       run: |
         pip install sphinx Pallets-Sphinx-Themes
-    
+        pip install sphinx-rtd-theme
+        ls -l
+        pwd
+
     - name: Build
       run: bash docs/compile.sh
       
@@ -27,4 +30,4 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs/build/html/
+        publish_dir: docs/build/html/
