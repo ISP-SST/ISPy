@@ -71,4 +71,4 @@ html_theme_options = {
 html_static_path = []
 
 # -- Extension configuration -------------------------------------------------
-autodoc_mock_imports = ['sunpy','readout_fn','ISPy']
+autodoc_mock_imports = ['sunpy','readout_fn']
