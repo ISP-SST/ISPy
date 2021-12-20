@@ -19,7 +19,7 @@ jobs:
       run: |
         pip install sphinx Pallets-Sphinx-Themes
         pip install sphinx-rtd-theme
-        pip install numpydoc, numpy, Cython
+        pip install numpydoc numpy Cython
         python setup.py install
         pwd
 
