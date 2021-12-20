@@ -20,6 +20,7 @@ jobs:
         pip install sphinx Pallets-Sphinx-Themes
         pip install sphinx-rtd-theme
         pip install numpydoc
+        pip install numpy
         python setup.py install
         pwd
 
