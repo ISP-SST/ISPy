@@ -14,8 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    
+    - name: Building documentation
+      run: |
+        pip install sphinx Pallets-Sphinx-Themes
+    
     - name: Build
       run: bash docs/compile.sh
+      
     - name: Deploy
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
       uses: peaceiris/actions-gh-pages@v3
