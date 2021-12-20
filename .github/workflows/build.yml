@@ -20,7 +20,7 @@ jobs:
       run: |
         pip install git+https://github.com/sphinx-doc/sphinx
         pip install sphinx-rtd-theme Pallets-Sphinx-Themes
-        pip install numpydoc numpy Cython astropy matplotlib scipy
+        pip install numpydoc numpy Cython astropy matplotlib scipy h5py ipdb tensorflow keras
         pip install git+https://github.com/ISP-SST/ISPy
         pwd
 
