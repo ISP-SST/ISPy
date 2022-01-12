@@ -13,30 +13,24 @@ with warnings.catch_warnings():
 # To deactivate warnings: https://github.com/tensorflow/tensorflow/issues/7778
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
-try:
-    import keras.backend.tensorflow_backend as ktf
-    from keras.callbacks import Callback, ModelCheckpoint
-    from keras.layers import Input, Conv2D, add, Activation
-    from keras.layers import Lambda
-    from keras.layers.advanced_activations import ELU
-    from keras.layers.merge import concatenate
-    from keras.models import Model
-    from keras.optimizers import Adam
-    from keras.regularizers import l2
-    from keras.utils.data_utils import Sequence
-    # sess = tf.Session(config=tf.ConfigProto(log_device_placement=True,allow_soft_placement=True))
 
-except ImportError:
-    print('Please install keras and tensorflow to continue.')
-    sys.exit()
+# No more available
+# import keras.backend.tensorflow_backend as ktf
+from keras.callbacks import Callback, ModelCheckpoint
+from keras.layers import Input, Conv2D, add, Activation
+from keras.layers import Lambda
+from keras.layers.advanced_activations import ELU
+from keras.layers.merge import concatenate
+from keras.models import Model
 
-try:
-    import sparsetools as sp
-except ImportError:
-    print('Please install sparsetools to continue.')
-    sys.exit()
+# https://github.com/tensorflow/tensorflow/issues/23728
+# from keras.optimizers import Adam
+from tensorflow.keras.optimizers import Adam
 
+from keras.regularizers import l2
+from keras.utils.data_utils import Sequence
 
+import sparsetools as sp
 from ISPy.util import gentools
 
 

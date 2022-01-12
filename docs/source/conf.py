@@ -19,11 +19,11 @@ sys.path.insert(0, os.path.abspath('../..'))
 # -- Project information -----------------------------------------------------
 
 project = 'ISPy'
-copyright = '2020, ISP'
+copyright = '2021, ISP'
 author = 'Institute for Solar Physics - Stockholm University'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1'
+release = '0.2'
 
 
 # -- General configuration ---------------------------------------------------
@@ -50,6 +50,8 @@ templates_path = ['_templates']
 exclude_patterns = ['ISPy.examples*','modules.rst','bin*','setup*']
 
 
+numpydoc_show_class_members = False 
+
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
@@ -71,4 +73,4 @@ html_static_path = ['_static']
 
 
 # -- Extension configuration -------------------------------------------------
-autodoc_mock_imports = ['sunpy','readout_fn']
+autodoc_mock_imports = ['sunpy','readout_fn','sparsetools']

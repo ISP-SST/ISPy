@@ -8,17 +8,16 @@ with warnings.catch_warnings():
 # To deactivate warnings: https://github.com/tensorflow/tensorflow/issues/7778
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
-try:
-    import keras.backend.tensorflow_backend as ktf
-    from keras.layers import Input, Conv2D, UpSampling2D, Concatenate, MaxPooling2D
-    from keras.models import Model
-    from keras.engine.topology import Layer
-    from keras.engine import InputSpec
-    from keras.utils import conv_utils
-    import tensorflow as tf
-except ImportError:
-    print('Please install keras and tensorflow to continue.')
-    sys.exit()
+# import keras.backend.tensorflow_backend as ktf
+from keras.layers import Input, Conv2D, UpSampling2D, Concatenate, MaxPooling2D
+from keras.models import Model
+
+from tensorflow.keras.layers import Layer # from keras.engine.topology import Layer
+from tensorflow.keras.layers import InputSpec # from keras.engine import InputSpec
+
+from keras.utils import conv_utils
+import tensorflow as tf
+
 
 # ==================================================================================
 def spatial_reflection_2d_padding(x, padding=((1, 1), (1, 1)), data_format=None):
@@ -363,5 +362,5 @@ def neural_network(input_data, niterations=2, scale=None, plotOption=False, test
 
     # To avoid the TF_DeleteStatus message:
     # https://github.com/tensorflow/tensorflow/issues/3388
-    ktf.clear_session()
+    # ktf.clear_session()
     return new_output
