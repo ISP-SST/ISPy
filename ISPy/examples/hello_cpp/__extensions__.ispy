@@ -22,7 +22,6 @@ _hello_mod = Extension(
     export_symbols       = [], # symbols to be exported from a shared extension
     depends              = [], # files that the extension depends on
     language             = '', # 'c', 'c++' or 'objc', normally auto-detected
-    optional             = False
     # Optional extensions allow the build to continue even when they fail
     )
 
