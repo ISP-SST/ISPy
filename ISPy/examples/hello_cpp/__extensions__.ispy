@@ -17,12 +17,10 @@ _hello_mod = Extension(
     runtime_library_dirs = [],
     extra_objects        = [], # extra files to link with
     extra_compile_args   = [], # e.g. '-ggdb -O0'
-    extra_c_compile_args = [], # e.g. '-ggdb -O0'
     extra_link_args      = [],
     export_symbols       = [], # symbols to be exported from a shared extension
     depends              = [], # files that the extension depends on
     language             = '', # 'c', 'c++' or 'objc', normally auto-detected
-    # Optional extensions allow the build to continue even when they fail
     )
 
 ext_modules = [_hello_mod]
