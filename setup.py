@@ -8,6 +8,7 @@ from distutils.core import Command
 import shutil
 from glob import glob
 import shlex
+from warnings import warn
 
 from bin.generate_module_list import generate_module_list
 from bin.version import *
@@ -18,10 +19,11 @@ dir_setup = os.path.dirname(os.path.realpath(__file__))
 def generate_cython():
 	cwd = os.path.abspath(os.path.dirname(__file__))
 	print("Cythonizing sources")
+	success = True
 	for d in generate_module_list():
             p = subprocess.call([sys.executable, os.path.join(cwd, 'bin', 'cythonize.py'), os.path.join(*'{0}'.format(d).split('.'))], cwd=cwd)
-            if p != 0:
-                raise RuntimeError("Running cythonize failed!")
+	    success = success and (p==0)
+        return success
 
 class clean(Command):
     """
@@ -75,10 +77,11 @@ def setup_package():
     # Rewrite the version file everytime
     write_version_py()
 
+    cython_success = True
     if not "--nocython" in sys.argv:
         if "--cythonize" in sys.argv or os.path.exists(".git"):
             if not "clean" in sys.argv:
-                generate_cython()
+                cython_success = generate_cython()
         if "--cythonize" in sys.argv:
             sys.argv.remove("--cythonize")
     else:
@@ -136,6 +139,9 @@ def setup_package():
 	    'clean' : clean
 	}
     )
+
+    if not cython_success:
+        warn('Failed to run cython, some modules might be unavailable. Use --nocython option to ignore this warning.')
 
 if __name__ == '__main__':
     setup_package()
