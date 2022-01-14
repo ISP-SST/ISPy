@@ -8,6 +8,7 @@ from distutils.core import Command
 import shutil
 from glob import glob
 import shlex
+from warnings import warn
 
 from bin.generate_module_list import generate_module_list
 from bin.version import *
@@ -16,12 +17,16 @@ from bin.version import *
 dir_setup = os.path.dirname(os.path.realpath(__file__))
 
 def generate_cython():
-	cwd = os.path.abspath(os.path.dirname(__file__))
-	print("Cythonizing sources")
-	for d in generate_module_list():
-            p = subprocess.call([sys.executable, os.path.join(cwd, 'bin', 'cythonize.py'), os.path.join(*'{0}'.format(d).split('.'))], cwd=cwd)
-            if p != 0:
-                raise RuntimeError("Running cythonize failed!")
+    cwd = os.path.abspath(os.path.dirname(__file__))
+    print("Cythonizing sources")
+    ret = {}
+    for d in generate_module_list():
+        p = subprocess.call([sys.executable, os.path.join(cwd, 'bin', 'cythonize.py'), os.path.join(*'{0}'.format(d).split('.'))], cwd=cwd)
+        # Don't stop on fail
+        # if p != 0:
+        #     raise RuntimeError("Running cythonize failed!")
+        ret[d] = p
+    return ret
 
 class clean(Command):
     """
@@ -75,10 +80,12 @@ def setup_package():
     # Rewrite the version file everytime
     write_version_py()
 
+    cython_success = True
+    cython_ret = {}
     if not "--nocython" in sys.argv:
         if "--cythonize" in sys.argv or os.path.exists(".git"):
             if not "clean" in sys.argv:
-                generate_cython()
+                cython_ret = generate_cython()
         if "--cythonize" in sys.argv:
             sys.argv.remove("--cythonize")
     else:
@@ -90,6 +97,11 @@ def setup_package():
     # Find and prepare extension modules
     ext_modules  = []
     for m in generate_module_list(with_ext=True):
+        # Ignore modules that were not properly cythonized
+        if m in cython_ret:
+            if cython_ret[m] != 0:
+                cython_success = False
+                continue
         modpath = os.path.join(*m.split('.'))
         loc = {}
         with open(os.path.join(modpath, '__extensions__.ispy')) as extfile:
@@ -136,6 +148,9 @@ def setup_package():
 	    'clean' : clean
 	}
     )
+
+    if not cython_success:
+        warn('Error while running cython detected, some modules might be unavailable.')
 
 if __name__ == '__main__':
     setup_package()
