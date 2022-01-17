@@ -8,20 +8,27 @@ from distutils.core import Command
 import shutil
 from glob import glob
 import shlex
+from warnings import warn
+from pathlib import Path
+import subprocess
 
 from bin.generate_module_list import generate_module_list
 from bin.version import *
 
 # This directory
 dir_setup = os.path.dirname(os.path.realpath(__file__))
+dir_work  = os.getcwd()
 
-def generate_cython():
-	cwd = os.path.abspath(os.path.dirname(__file__))
-	print("Cythonizing sources")
-	for d in generate_module_list():
-            p = subprocess.call([sys.executable, os.path.join(cwd, 'bin', 'cythonize.py'), os.path.join(*'{0}'.format(d).split('.'))], cwd=cwd)
-            if p != 0:
-                raise RuntimeError("Running cythonize failed!")
+def generate_cython(stop_at_error=False):
+    cwd = os.path.abspath(os.path.dirname(__file__))
+    print("Cythonizing sources")
+    ret = {}
+    for d in generate_module_list(os.getcwd()):
+        p = subprocess.call([sys.executable, os.path.join(cwd, 'bin', 'cythonize.py'), os.path.join(*'{0}'.format(d).split('.'))], cwd=cwd)
+        if p != 0 and stop_at_error:
+            raise RuntimeError("Running cythonize failed!")
+        ret[d] = p
+    return ret
 
 class clean(Command):
     """
@@ -41,7 +48,7 @@ class clean(Command):
         curr_dir = os.getcwd()
 
         patterns = ["*~", ".*~", "*.so"]
-        for root, dirs, files in os.walk(dir_setup):
+        for root, dirs, files in os.walk(dir_work):
             for file in files:
                 if file.endswith('.pyc'):
                     os.remove(os.path.join(root, file))
@@ -75,22 +82,39 @@ def setup_package():
     # Rewrite the version file everytime
     write_version_py()
 
+    build_ext = False
+    cython_success = True
+    cython_ret = {}
     if not "--nocython" in sys.argv:
-        if "--cythonize" in sys.argv or os.path.exists(".git"):
+        if "--cythonize" in sys.argv or subprocess.call(['git', 'rev-parse']) is 0 and ("--with-extensions" in sys.argv or "build_ext" in sys.argv):
             if not "clean" in sys.argv:
-                generate_cython()
+                cython_ret = generate_cython("--cythonize" in sys.argv)
         if "--cythonize" in sys.argv:
             sys.argv.remove("--cythonize")
     else:
             sys.argv.remove("--nocython")
+    if "--with-extensions" in sys.argv:
+        build_ext = True
+        sys.argv.remove("--with-extensions")
+    if "build_ext" in sys.argv:
+        build_ext = True
 
-    with open("README.md", "r") as fh:
+    with open(str(Path(__file__).parent.joinpath("README.md")), "r") as fh:
         long_description = fh.read()
 
     # Find and prepare extension modules
     ext_modules  = []
-    for m in generate_module_list(with_ext=True):
-        modpath = os.path.join(*m.split('.'))
+    if build_ext:
+        mlist = generate_module_list(os.getcwd(), with_ext=True)
+    else:
+        mlist = []
+    for m in mlist:
+        # Ignore modules that were not properly cythonized
+        if m in cython_ret:
+            if cython_ret[m] != 0:
+                cython_success = False
+                continue
+        modpath = str(Path(__file__).parent.joinpath(os.path.join(*m.split('.'))))
         loc = {}
         with open(os.path.join(modpath, '__extensions__.ispy')) as extfile:
             exec(extfile.read(), loc)
@@ -105,7 +129,7 @@ def setup_package():
 
     # Gather package data from all modules
     package_data = {}
-    for m in generate_module_list():
+    for m in generate_module_list(os.getcwd()):
         package_data[m] = []
         packdatfile = os.path.join(*(m.split('.')+['package_data']))
         if os.path.isfile(packdatfile):
@@ -122,7 +146,7 @@ def setup_package():
         long_description              = long_description,
         long_description_content_type = "text/markdown",
         url                           = "https://github.com/ISP-SST/ISPy",
-        packages                      = generate_module_list(),
+        packages                      = generate_module_list(os.getcwd()),
         package_data                  = package_data,
         include_package_data          = True,
         classifiers                   = [
@@ -136,6 +160,9 @@ def setup_package():
 	    'clean' : clean
 	}
     )
+
+    if not cython_success:
+        warn('Error while running cython detected, some modules might be unavailable.')
 
 if __name__ == '__main__':
     setup_package()

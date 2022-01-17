@@ -5,6 +5,7 @@ from numpy.distutils.core import Extension
 
 # Documentation:
 # https://docs.python.org/3/distutils/apiref.html#distutils.core.Extension
+# https://numpy.org/doc/stable/reference/generated/numpy.distutils.core.Extension.html
 
 _helloworld_mod = Extension(
     name                   = '_helloworld',

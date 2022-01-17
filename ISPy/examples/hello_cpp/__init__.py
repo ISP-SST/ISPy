@@ -12,4 +12,7 @@ This module implements the function `hello', a simple hello-world, and the
 class Hello, with its printMessage function.
 """
 
-from _helloworld import *
+try:
+    from _helloworld import *
+except:
+    raise ImportError("Could not load the `{0}' extension, check that it was properly compiled (or reinstall with the `--with-extensions' parameter)".format(__name__))

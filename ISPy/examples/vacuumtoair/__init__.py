@@ -10,4 +10,7 @@ extracted from the rh radiative transfer code and adapted to be
 self-contained.
 """
 
-from _vacuumtoair import *
+try:
+    from _vacuumtoair import *
+except:
+    raise ImportError("Could not load the `{0}' extension, check that it was properly compiled (or reinstall with the `--with-extensions' parameter)".format(__name__))

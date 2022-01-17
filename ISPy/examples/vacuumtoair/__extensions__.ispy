@@ -1,11 +1,12 @@
 #!/bin/env python
 # -*- coding:utf-8 -*-
 
-from distutils.core import Extension
+from numpy.distutils.core import Extension
 import numpy
 
 # Documentation:
 # https://docs.python.org/3/distutils/apiref.html#distutils.core.Extension
+# https://numpy.org/doc/stable/reference/generated/numpy.distutils.core.Extension.html
 
 _vacuumtoair_mod = Extension(
     '_vacuumtoair',
@@ -22,8 +23,6 @@ _vacuumtoair_mod = Extension(
     export_symbols       = [], # symbols to be exported from a shared extension
     depends              = [], # files that the extension depends on
     language             = '', # 'c', 'c++' or 'objc', normally auto-detected
-    optional             = False
-    # Optional extensions allow the build to continue even when they fail
     )
 
 ext_modules = [_vacuumtoair_mod]
