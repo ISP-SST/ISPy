@@ -19,15 +19,14 @@ from bin.version import *
 dir_setup = os.path.dirname(os.path.realpath(__file__))
 dir_work  = os.getcwd()
 
-def generate_cython():
+def generate_cython(stop_at_error=False):
     cwd = os.path.abspath(os.path.dirname(__file__))
     print("Cythonizing sources")
     ret = {}
     for d in generate_module_list(os.getcwd()):
         p = subprocess.call([sys.executable, os.path.join(cwd, 'bin', 'cythonize.py'), os.path.join(*'{0}'.format(d).split('.'))], cwd=cwd)
-        # Don't stop on fail
-        # if p != 0:
-        #     raise RuntimeError("Running cythonize failed!")
+        if p != 0 and stop_at_error:
+            raise RuntimeError("Running cythonize failed!")
         ret[d] = p
     return ret
 
@@ -88,7 +87,7 @@ def setup_package():
     if not "--nocython" in sys.argv:
         if "--cythonize" in sys.argv or subprocess.call(['git', 'rev-parse']) is 0 and len(sys.argv) > 1:
             if not "clean" in sys.argv:
-                cython_ret = generate_cython()
+                cython_ret = generate_cython("--cythonize" in sys.argv)
         if "--cythonize" in sys.argv:
             sys.argv.remove("--cythonize")
     else:
