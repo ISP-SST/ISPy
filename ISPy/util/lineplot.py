@@ -22,7 +22,7 @@ def find_nearest(array, array2, k=1):
     return arr
 
 
-def SST_scan_time(nlambda, nstates, nframes, nprefilter=1, fps=35):
+def SST_scan_time(nlambda, nstates, nframes, nprefilter=1, fps=36.5):
     """
     Calculate the length of one scan based on observational parameters.
     
@@ -39,7 +39,7 @@ def SST_scan_time(nlambda, nstates, nframes, nprefilter=1, fps=35):
     nprefilter : float, optional
         Number of prefilters used
     fps : float, optional
-        Frames per second. Default = 35
+        Frames per second. Default = 36.5 (CRISP), 80 (CHROMIS; to 70 if asked)
         
     Returns
     -------
