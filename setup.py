@@ -82,23 +82,33 @@ def setup_package():
     # Rewrite the version file everytime
     write_version_py()
 
+    build_ext = False
     cython_success = True
     cython_ret = {}
     if not "--nocython" in sys.argv:
-        if "--cythonize" in sys.argv or subprocess.call(['git', 'rev-parse']) is 0 and len(sys.argv) > 1:
+        if "--cythonize" in sys.argv or subprocess.call(['git', 'rev-parse']) is 0 and ("--with-extensions" in sys.argv or "build_ext" in sys.argv):
             if not "clean" in sys.argv:
                 cython_ret = generate_cython("--cythonize" in sys.argv)
         if "--cythonize" in sys.argv:
             sys.argv.remove("--cythonize")
     else:
             sys.argv.remove("--nocython")
+    if "--with-extensions" in sys.argv:
+        build_ext = True
+        sys.argv.remove("--with-extensions")
+    if "build_ext" in sys.argv:
+        build_ext = True
 
     with open(str(Path(__file__).parent.joinpath("README.md")), "r") as fh:
         long_description = fh.read()
 
     # Find and prepare extension modules
     ext_modules  = []
-    for m in generate_module_list(os.getcwd(), with_ext=True):
+    if build_ext:
+        mlist = generate_module_list(os.getcwd(), with_ext=True)
+    else:
+        mlist = []
+    for m in mlist:
         # Ignore modules that were not properly cythonized
         if m in cython_ret:
             if cython_ret[m] != 0:
