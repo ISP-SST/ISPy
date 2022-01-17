@@ -4,22 +4,24 @@
 import os
 import subprocess
 from distutils.version import StrictVersion
+from pathlib import Path
+
+def _minimal_ext_cmd(cmd):
+    # construct minimal environment
+    env = {}
+    for k in ['SYSTEMROOT', 'PATH', 'HOME']:
+        v = os.environ.get(k)
+        if v is not None:
+            env[k] = v
+    # LANGUAGE is used on win32
+    env['LANGUAGE'] = 'C'
+    env['LANG'] = 'C'
+    env['LC_ALL'] = 'C'
+    out = subprocess.check_output(cmd, stderr=subprocess.STDOUT, env=env)
+    return out
 
 # Return the git revision as a string
 def git_version():
-    def _minimal_ext_cmd(cmd):
-        # construct minimal environment
-        env = {}
-        for k in ['SYSTEMROOT', 'PATH', 'HOME']:
-            v = os.environ.get(k)
-            if v is not None:
-                env[k] = v
-        # LANGUAGE is used on win32
-        env['LANGUAGE'] = 'C'
-        env['LANG'] = 'C'
-        env['LC_ALL'] = 'C'
-        out = subprocess.check_output(cmd, stderr=subprocess.STDOUT, env=env)
-        return out
 
     try:
         out = _minimal_ext_cmd(['git', 'rev-parse', 'HEAD'])
@@ -52,13 +54,13 @@ def get_version_info():
     # Adding the git rev number needs to be done inside write_version_py(),
     # otherwise the import of ISPy.version messes up the build under Python 3.
     ISRELEASED = False
-    if os.path.exists('.git'):
+    if subprocess.call(['git', 'rev-parse']) is 0:
         GIT_REVISION, VERSION = git_version()
         if VERSION is None:
             VERSION = 'dev-' + GIT_REVISION[:7]
         else:
             ISRELEASED = True
-    elif os.path.exists('ISPy/version.py'):
+    elif Path(__file__).parents[1].joinpath('ISPy','version.py').exists():
         # must be a source distribution, use existing version file
         try:
             from numpy.version import git_revision as GIT_REVISION
@@ -77,7 +79,7 @@ def get_version_info():
 
     return VERSION, GIT_REVISION, ISRELEASED
 
-def write_version_py(filename='ISPy/version.py'):
+def write_version_py(filename=str(Path(__file__).parents[1].joinpath('ISPy','version.py'))):
     cnt = """
 # THIS FILE IS GENERATED FROM ISPY SETUP.PY
 #

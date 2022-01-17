@@ -9,18 +9,21 @@ import shutil
 from glob import glob
 import shlex
 from warnings import warn
+from pathlib import Path
+import subprocess
 
 from bin.generate_module_list import generate_module_list
 from bin.version import *
 
 # This directory
 dir_setup = os.path.dirname(os.path.realpath(__file__))
+dir_work  = os.getcwd()
 
 def generate_cython():
     cwd = os.path.abspath(os.path.dirname(__file__))
     print("Cythonizing sources")
     ret = {}
-    for d in generate_module_list():
+    for d in generate_module_list(os.getcwd()):
         p = subprocess.call([sys.executable, os.path.join(cwd, 'bin', 'cythonize.py'), os.path.join(*'{0}'.format(d).split('.'))], cwd=cwd)
         # Don't stop on fail
         # if p != 0:
@@ -46,7 +49,7 @@ class clean(Command):
         curr_dir = os.getcwd()
 
         patterns = ["*~", ".*~", "*.so"]
-        for root, dirs, files in os.walk(dir_setup):
+        for root, dirs, files in os.walk(dir_work):
             for file in files:
                 if file.endswith('.pyc'):
                     os.remove(os.path.join(root, file))
@@ -83,7 +86,7 @@ def setup_package():
     cython_success = True
     cython_ret = {}
     if not "--nocython" in sys.argv:
-        if "--cythonize" in sys.argv or os.path.exists(".git"):
+        if "--cythonize" in sys.argv or subprocess.call(['git', 'rev-parse']) is 0 and len(sys.argv) > 1:
             if not "clean" in sys.argv:
                 cython_ret = generate_cython()
         if "--cythonize" in sys.argv:
@@ -91,18 +94,18 @@ def setup_package():
     else:
             sys.argv.remove("--nocython")
 
-    with open("README.md", "r") as fh:
+    with open(str(Path(__file__).parent.joinpath("README.md")), "r") as fh:
         long_description = fh.read()
 
     # Find and prepare extension modules
     ext_modules  = []
-    for m in generate_module_list(with_ext=True):
+    for m in generate_module_list(os.getcwd(), with_ext=True):
         # Ignore modules that were not properly cythonized
         if m in cython_ret:
             if cython_ret[m] != 0:
                 cython_success = False
                 continue
-        modpath = os.path.join(*m.split('.'))
+        modpath = str(Path(__file__).parent.joinpath(os.path.join(*m.split('.'))))
         loc = {}
         with open(os.path.join(modpath, '__extensions__.ispy')) as extfile:
             exec(extfile.read(), loc)
@@ -117,7 +120,7 @@ def setup_package():
 
     # Gather package data from all modules
     package_data = {}
-    for m in generate_module_list():
+    for m in generate_module_list(os.getcwd()):
         package_data[m] = []
         packdatfile = os.path.join(*(m.split('.')+['package_data']))
         if os.path.isfile(packdatfile):
@@ -134,7 +137,7 @@ def setup_package():
         long_description              = long_description,
         long_description_content_type = "text/markdown",
         url                           = "https://github.com/ISP-SST/ISPy",
-        packages                      = generate_module_list(),
+        packages                      = generate_module_list(os.getcwd()),
         package_data                  = package_data,
         include_package_data          = True,
         classifiers                   = [
