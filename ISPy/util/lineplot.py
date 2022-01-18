@@ -62,14 +62,14 @@ def SST_scan_time(nlambda, nstates, nframes, nprefilter=1, fps=36.5):
     if nprefilter > 1:
         
         #2 frames lost for every shift in lambda
-        nframes = ( nlambda * ( nstates + 2 ) ) + 10 * nprefilter
-        t       = nframes/fps
+        ntot = ( nlambda * (nframes*nstates + 2) ) + 10 * nprefilter
+        t       = ntot/fps
         
     else:
         
         #2 frames lost for every shift in lambda
-        nframes = nlambda * ( nstates + 2 )
-        t       = nframes/fps
+        ntot = ( nlambda * (nframes*nstates + 2) ) + 2
+        t       = ntot/fps
 
     return t
     
