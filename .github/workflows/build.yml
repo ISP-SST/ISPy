@@ -1,0 +1,33 @@
+# https://gist.github.com/domenic/ec8b0fc8ab45f39403dd
+# pip install sphinx 
+
+name: Build
+on:
+  pull_request:
+    branches:
+    - master
+  push:
+    branches:
+    - master
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Installing dependencies
+      run: |
+        pip install git+https://github.com/sphinx-doc/sphinx
+        pip install sphinx-rtd-theme Pallets-Sphinx-Themes
+        pip install numpydoc numpy Cython astropy matplotlib scipy h5py ipdb tensorflow keras tqdm
+
+    - name: Build
+      run: bash docs/compile.sh
+      
+    - name: Deploy
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: docs/build/html/
