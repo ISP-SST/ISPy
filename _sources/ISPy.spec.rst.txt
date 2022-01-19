@@ -28,6 +28,22 @@ ISPy.spec.calib module
    :undoc-members:
    :show-inheritance:
 
+ISPy.spec.chromis module
+------------------------
+
+.. automodule:: ISPy.spec.chromis
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ISPy.spec.crisp module
+----------------------
+
+.. automodule:: ISPy.spec.crisp
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ISPy.spec.crosstalk module
 --------------------------
 
@@ -43,7 +59,6 @@ ISPy.spec.wfa module
    :members:
    :undoc-members:
    :show-inheritance:
-
 
 Module contents
 ---------------

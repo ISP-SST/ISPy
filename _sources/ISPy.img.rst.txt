@@ -28,7 +28,6 @@ ISPy.img.interpolate2d module
    :undoc-members:
    :show-inheritance:
 
-
 Module contents
 ---------------
 

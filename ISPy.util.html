@@ -1,62 +1,34 @@
-
-
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>ISPy.util package &mdash; ISPy 0.1 documentation</title>
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ISPy.util package &mdash; ISPy 0.2 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
-  
-  
-  
-
-  
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ISPy.vis package" href="ISPy.vis.html" />
+    <link rel="prev" title="ISPy.spec package" href="ISPy.spec.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="index.html" class="icon icon-home"> ISPy
-          
-
-          
           </a>
-
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -64,106 +36,50 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">ISPy.util package</a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-ISPy.util.azimuth">ISPy.util.azimuth module</a></li>
-<li><a class="reference internal" href="#module-ISPy.util.find">ISPy.util.find module</a></li>
-<li><a class="reference internal" href="#module-ISPy.util.gentools">ISPy.util.gentools module</a></li>
-<li><a class="reference internal" href="#ispy-util-neural-estimation-module">ISPy.util.neural_estimation module</a></li>
-<li><a class="reference internal" href="#module-ISPy.util.obs">ISPy.util.obs module</a></li>
-<li><a class="reference internal" href="#module-ISPy.util.plottools">ISPy.util.plottools module</a></li>
-<li><a class="reference internal" href="#module-ISPy.util.rebin">ISPy.util.rebin module</a></li>
-<li><a class="reference internal" href="#module-ISPy.util.remap">ISPy.util.remap module</a></li>
-<li><a class="reference internal" href="#module-ISPy.util">Module contents</a></li>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="ISPy.html">ISPy package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="ISPy.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ISPy.html#module-ISPy">Module contents</a></li>
 </ul>
 </li>
 </ul>
-</div>
-            
-          
+
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">ISPy</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html">Docs</a> &raquo;</li>
-        
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="ISPy.html">ISPy package</a> &raquo;</li>
       <li>ISPy.util package</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="_sources/ISPy.util.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="ispy-util-package">
-<h1>ISPy.util package<a class="headerlink" href="#ispy-util-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-ISPy.util.azimuth">
-<span id="ispy-util-azimuth-module"></span><h2>ISPy.util.azimuth module<a class="headerlink" href="#module-ISPy.util.azimuth" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="ISPy.util.azimuth.BQBU2BTAZI">
-<code class="sig-prename descclassname">ISPy.util.azimuth.</code><code class="sig-name descname">BQBU2BTAZI</code><span class="sig-paren">(</span><em class="sig-param">BQ</em>, <em class="sig-param">BU</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.azimuth.BQBU2BTAZI" title="Permalink to this definition">¶</a></dt>
+             
+  <section id="ispy-util-package">
+<h1>ISPy.util package<a class="headerlink" href="#ispy-util-package" title="Permalink to this headline"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-ISPy.util.azimuth">
+<span id="ispy-util-azimuth-module"></span><h2>ISPy.util.azimuth module<a class="headerlink" href="#module-ISPy.util.azimuth" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.azimuth.BQBU2BTAZI">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.azimuth.</span></span><span class="sig-name descname"><span class="pre">BQBU2BTAZI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">BQ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BU</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.azimuth.BQBU2BTAZI" title="Permalink to this definition"></a></dt>
 <dd><p>Transformation from BQ and BU to transverse field and azimuth
 according to <a class="reference external" href="https://arxiv.org/abs/1904.03714">https://arxiv.org/abs/1904.03714</a></p>
 <dl class="field-list simple">
@@ -173,16 +89,16 @@ according to <a class="reference external" href="https://arxiv.org/abs/1904.0371
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="ISPy.util.azimuth.BQBU2BTAZI_cube">
-<code class="sig-prename descclassname">ISPy.util.azimuth.</code><code class="sig-name descname">BQBU2BTAZI_cube</code><span class="sig-paren">(</span><em class="sig-param">model_BQ</em>, <em class="sig-param">model_BU</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.azimuth.BQBU2BTAZI_cube" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.azimuth.BQBU2BTAZI_cube">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.azimuth.</span></span><span class="sig-name descname"><span class="pre">BQBU2BTAZI_cube</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_BQ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_BU</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.azimuth.BQBU2BTAZI_cube" title="Permalink to this definition"></a></dt>
 <dd><p>Transformation from BQ and BU to transverse field and azimuth
 for a 2D cube array.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="ISPy.util.azimuth.BTAZI2BQBU">
-<code class="sig-prename descclassname">ISPy.util.azimuth.</code><code class="sig-name descname">BTAZI2BQBU</code><span class="sig-paren">(</span><em class="sig-param">Bt</em>, <em class="sig-param">azi</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.azimuth.BTAZI2BQBU" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.azimuth.BTAZI2BQBU">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.azimuth.</span></span><span class="sig-name descname"><span class="pre">BTAZI2BQBU</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Bt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">azi</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.azimuth.BTAZI2BQBU" title="Permalink to this definition"></a></dt>
 <dd><p>Transformation from transverse field and azimuth to BQ and BU
 according to <a class="reference external" href="https://arxiv.org/abs/1904.03714">https://arxiv.org/abs/1904.03714</a></p>
 <dl class="field-list simple">
@@ -192,26 +108,86 @@ according to <a class="reference external" href="https://arxiv.org/abs/1904.0371
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="ISPy.util.azimuth.BTAZI2BQBU_cube">
-<code class="sig-prename descclassname">ISPy.util.azimuth.</code><code class="sig-name descname">BTAZI2BQBU_cube</code><span class="sig-paren">(</span><em class="sig-param">model_Bho</em>, <em class="sig-param">model_azi</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.azimuth.BTAZI2BQBU_cube" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.azimuth.BTAZI2BQBU_cube">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.azimuth.</span></span><span class="sig-name descname"><span class="pre">BTAZI2BQBU_cube</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_Bho</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_azi</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.azimuth.BTAZI2BQBU_cube" title="Permalink to this definition"></a></dt>
 <dd><p>Transformation from transverse field and azimuth to BQ and BU
 for a 2D cube array.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="module-ISPy.util.find">
-<span id="ispy-util-find-module"></span><h2>ISPy.util.find module<a class="headerlink" href="#module-ISPy.util.find" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-ISPy.util.cubeshow">
+<span id="ispy-util-cubeshow-module"></span><h2>ISPy.util.cubeshow module<a class="headerlink" href="#module-ISPy.util.cubeshow" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.cubeshow.animate_cube">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.cubeshow.</span></span><span class="sig-name descname"><span class="pre">animate_cube</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cube_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">75</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gray'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.cubeshow.animate_cube" title="Permalink to this definition"></a></dt>
+<dd><p>Animates a python cube for quick visualisation and saves mp4.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cube_array</strong> (<em>3D array[t,x,y]</em>) – The array to be animated.</p></li>
+<li><p><strong>name</strong> (<em>bool, optional</em>) – name of file to save, must end with .mp4. Will not save if not used. Default = None</p></li>
+<li><p><strong>show</strong> (<em>bool, optional</em>) – Wheather or not to display animation. Default = True.</p></li>
+<li><p><strong>cut</strong> (<em>int, optional</em>) – trims pixels off of the images edge to remove edge detector effects. Default = True as 0 returns empty array.</p></li>
+<li><p><strong>mn</strong> (<em>float, optional</em>) – mean value to used for contrast. Default=0</p></li>
+<li><p><strong>sd</strong> (<em>float, optional</em>) – Std value to used for contrast. Default=0</p></li>
+<li><p><strong>interval</strong> (<em>int, optional</em>) – #of ms between each frame. Default=75</p></li>
+<li><p><strong>cmap</strong> (<em>str, optional</em>) – colormap used for animation. Default=’gray’</p></li>
+<li><p><strong>fps</strong> (<em>float, optional</em>) – frames per second. Default = 20</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Video file if name is given.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>from ISPy.util import cubeshow as cs</p>
+<p>a = np.random.random([90,100,100])
+cs.animate_cube(a, ‘video.mp4’,cut=20,interval=100)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Authors</dt>
+<dd class="field-odd"><p>Alex Pietrow (ISP-SU 2021)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.cubeshow.plotall">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.cubeshow.</span></span><span class="sig-name descname"><span class="pre">plotall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cube_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fignum</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([4,</span> <span class="pre">6])</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Title'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.cubeshow.plotall" title="Permalink to this definition"></a></dt>
+<dd><p>Plot a 3D cube into a subplot array</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cube_array</strong> (<em>3D array[t,x,y]</em>) – The array to be animated.</p></li>
+<li><p><strong>fignum</strong> (<em>2D array</em>) – Number of subplots. Default = np.array([4,6])</p></li>
+<li><p><strong>title</strong> (<em>str, optional</em>) – Title of plot, defealt=’Title’</p></li>
+<li><p><strong>save</strong> (<em>bool, optional</em>) – Saves output to file named after title. Default = False</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>a = np.random.random([9,100,100])
+plotall(a, fignum=np.array([3,3]), title=’test’,save=1)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Authors</dt>
+<dd class="field-odd"><p>Alex Pietrow (ISP-SU 2021)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-ISPy.util.find">
+<span id="ispy-util-find-module"></span><h2>ISPy.util.find module<a class="headerlink" href="#module-ISPy.util.find" title="Permalink to this headline"></a></h2>
 <p>Convenience wrappers around glob.glob() to list common file types.</p>
-<dl class="function">
-<dt id="ISPy.util.find.cube">
-<code class="sig-prename descclassname">ISPy.util.find.</code><code class="sig-name descname">cube</code><span class="sig-paren">(</span><em class="sig-param">path='./'</em>, <em class="sig-param">pattern=''</em>, <em class="sig-param">verbose=True</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.find.cube" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.find.cube">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.find.</span></span><span class="sig-name descname"><span class="pre">cube</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.find.cube" title="Permalink to this definition"></a></dt>
 <dd><p>Convenience wrapper around find.files to get <a href="#id1"><span class="problematic" id="id2">*</span></a>.cube files</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="ISPy.util.find.files">
-<code class="sig-prename descclassname">ISPy.util.find.</code><code class="sig-name descname">files</code><span class="sig-paren">(</span><em class="sig-param">extension</em>, <em class="sig-param">path='./'</em>, <em class="sig-param">pattern=''</em>, <em class="sig-param">verbose=True</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.find.files" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.find.files">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.find.</span></span><span class="sig-name descname"><span class="pre">files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">extension</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.find.files" title="Permalink to this definition"></a></dt>
 <dd><p>Find files with certain pattern and extension in specified path.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -230,7 +206,7 @@ for a 2D cube array.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">find</span><span class="o">.</span><span class="n">files</span><span class="p">(</span><span class="s1">&#39;fits&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;~/Desktop&#39;</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="s1">&#39;aia304&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">find</span><span class="o">.</span><span class="n">files</span><span class="p">(</span><span class="s1">&#39;fits&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;~/Desktop&#39;</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="s1">&#39;aia304&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -240,30 +216,30 @@ for a 2D cube array.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="ISPy.util.find.fits">
-<code class="sig-prename descclassname">ISPy.util.find.</code><code class="sig-name descname">fits</code><span class="sig-paren">(</span><em class="sig-param">path='./'</em>, <em class="sig-param">pattern=''</em>, <em class="sig-param">verbose=True</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.find.fits" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.find.fits">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.find.</span></span><span class="sig-name descname"><span class="pre">fits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.find.fits" title="Permalink to this definition"></a></dt>
 <dd><p>Convenience wrapper around find.files to get <a href="#id3"><span class="problematic" id="id4">*</span></a>.fits files</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="ISPy.util.find.idlsave">
-<code class="sig-prename descclassname">ISPy.util.find.</code><code class="sig-name descname">idlsave</code><span class="sig-paren">(</span><em class="sig-param">path='./'</em>, <em class="sig-param">pattern=''</em>, <em class="sig-param">verbose=True</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.find.idlsave" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.find.idlsave">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.find.</span></span><span class="sig-name descname"><span class="pre">idlsave</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.find.idlsave" title="Permalink to this definition"></a></dt>
 <dd><p>Convenience wrapper around find.files to get <a href="#id5"><span class="problematic" id="id6">*</span></a>.idlsave files</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="ISPy.util.find.nc">
-<code class="sig-prename descclassname">ISPy.util.find.</code><code class="sig-name descname">nc</code><span class="sig-paren">(</span><em class="sig-param">path='./'</em>, <em class="sig-param">pattern=''</em>, <em class="sig-param">verbose=True</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.find.nc" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.find.nc">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.find.</span></span><span class="sig-name descname"><span class="pre">nc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.find.nc" title="Permalink to this definition"></a></dt>
 <dd><p>Convenience wrapper around find.files to get <a href="#id7"><span class="problematic" id="id8">*</span></a>.nc files</p>
 </dd></dl>
 
-</div>
-<div class="section" id="module-ISPy.util.gentools">
-<span id="ispy-util-gentools-module"></span><h2>ISPy.util.gentools module<a class="headerlink" href="#module-ISPy.util.gentools" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="ISPy.util.gentools.findclose">
-<code class="sig-prename descclassname">ISPy.util.gentools.</code><code class="sig-name descname">findclose</code><span class="sig-paren">(</span><em class="sig-param">value</em>, <em class="sig-param">array</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.gentools.findclose" title="Permalink to this definition">¶</a></dt>
+</section>
+<section id="module-ISPy.util.gentools">
+<span id="ispy-util-gentools-module"></span><h2>ISPy.util.gentools module<a class="headerlink" href="#module-ISPy.util.gentools" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.gentools.findclose">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.gentools.</span></span><span class="sig-name descname"><span class="pre">findclose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.gentools.findclose" title="Permalink to this definition"></a></dt>
 <dd><p>Finds the index of the closest value in array</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -276,9 +252,9 @@ for a 2D cube array.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="ISPy.util.gentools.findindex">
-<code class="sig-prename descclassname">ISPy.util.gentools.</code><code class="sig-name descname">findindex</code><span class="sig-paren">(</span><em class="sig-param">array1</em>, <em class="sig-param">array2</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.gentools.findindex" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.gentools.findindex">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.gentools.</span></span><span class="sig-name descname"><span class="pre">findindex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">array2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.gentools.findindex" title="Permalink to this definition"></a></dt>
 <dd><p>Outputs an array with the indices of the closes element in array2 for each
 element in array1</p>
 <dl class="field-list simple">
@@ -292,9 +268,9 @@ element in array1</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="ISPy.util.gentools.rotate_cube">
-<code class="sig-prename descclassname">ISPy.util.gentools.</code><code class="sig-name descname">rotate_cube</code><span class="sig-paren">(</span><em class="sig-param">cube</em>, <em class="sig-param">angle_index</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.gentools.rotate_cube" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.gentools.rotate_cube">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.gentools.</span></span><span class="sig-name descname"><span class="pre">rotate_cube</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle_index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.gentools.rotate_cube" title="Permalink to this definition"></a></dt>
 <dd><p>Rotate a cube with dim=[x,y,z] a multiple of 90 degrees in plane x,y</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -307,16 +283,286 @@ element in array1</p>
 </dl>
 </dd></dl>
 
+</section>
+<section id="module-ISPy.util.lineplot">
+<span id="ispy-util-lineplot-module"></span><h2>ISPy.util.lineplot module<a class="headerlink" href="#module-ISPy.util.lineplot" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.lineplot.SST_scan_time">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.lineplot.</span></span><span class="sig-name descname"><span class="pre">SST_scan_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nlambda</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nstates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nframes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nprefilter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">36.5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.lineplot.SST_scan_time" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate the length of one scan based on observational parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nlambda</strong> (<em>float</em>) – Amount of wavelength points in scan all lines combined
+Multiply number of points by 4 if line has polerimetry.</p></li>
+<li><p><strong>nstates</strong> (<em>float</em>) – Number of polarization states. Should be 1 or 4.</p></li>
+<li><p><strong>nframes</strong> (<em>float</em>) – Number of frames per state</p></li>
+<li><p><strong>nprefilter</strong> (<em>float, optional</em>) – Number of prefilters used</p></li>
+<li><p><strong>fps</strong> (<em>float, optional</em>) – Frames per second. Default = 36.5 (CRISP), 80 (CHROMIS; to 70 if asked)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Scan duration in seconds</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>t</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Duration for observation of a line with 28 points + continuum
+with 6 states and polarization.</p>
+<p>from ISPy.util import lineplot as lp
+t = lp.SST_scan_time(29,4,6,2,35)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Authors</dt>
+<dd class="field-odd"><p>Alex Pietrow (ISP-SU 2021), based on private communication between Alex and Pit.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.lineplot.find_nearest">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.lineplot.</span></span><span class="sig-name descname"><span class="pre">find_nearest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">array2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.lineplot.find_nearest" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.lineplot.plotline">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.lineplot.</span></span><span class="sig-name descname"><span class="pre">plotline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nframes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">35.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instrument</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'CRISP'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.lineplot.plotline" title="Permalink to this definition"></a></dt>
+<dd><p>Visualize observing program per line.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>line</strong> (<em>float</em>) – line center in Angstrom</p></li>
+<li><p><strong>scan</strong> (<em>array</em>) – Numpy array with values observed, centered around line center in Angstrom</p></li>
+<li><p><strong>name</strong> (<em>str, optional</em>) – filename and title. If set to zero, file will not be shown.</p></li>
+<li><p><strong>center</strong> (<em>float, optional</em>) – Force line center to value provided in line.
+Defealt = False, which will center the line at the minimum value.</p></li>
+<li><p><strong>nframes</strong> (<em>float, optional</em>) – Number of frames per state. Default = 8</p></li>
+<li><p><strong>fps</strong> (<em>float, optional</em>) – frames per second. Default = 35</p></li>
+<li><p><strong>instrument</strong> (<em>str</em>) – Set instrument to ‘CRISP’ or ‘CHROMIS’</p></li>
+<li><p><strong>width</strong> (<em>float</em>) – Half spectral range in Angstrom.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>from ISPy.util import lineplot as lp
+import numpy as np</p>
+<p>#Crisp line
+line = 6563 #A
+dl = 62/2
+scan = np.append(np.append(np.arange(-1*dl*65, -1*dl*20, dl*5), np.arange(-1*dl*20,dl*20,dl)),np.arange(dl*20, dl*70, dl*5))
+lp.plotline(line,scan/1000.,str(line)+’.png’, width=2.5)</p>
+<p>#Chromis line
+line = 3934
+dl = 120/2
+scan = np.arange(-1*dl*20,dl*20,dl)
+lp.plotline(line,scan/1000.,str(line)+’.png’,instrument=’CHROMIS’, width=2)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Authors</dt>
+<dd class="field-odd"><p>Alex Pietrow (ISP-SU 2021)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-ISPy.util.neural_estimation">
+<span id="ispy-util-neural-estimation-module"></span><h2>ISPy.util.neural_estimation module<a class="headerlink" href="#module-ISPy.util.neural_estimation" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ISPy.util.neural_estimation.DataGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ISPy.util.neural_estimation.</span></span><span class="sig-name descname"><span class="pre">DataGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datasize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logtau</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stokelist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cubelist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.neural_estimation.DataGenerator" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">keras.utils.data_utils.Sequence</span></code></p>
+<p>Generates data for training a neural network from a STiC model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Authors</dt>
+<dd class="field-odd"><p>Carlos Diaz (ISP/SU 2020)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ISPy.util.neural_estimation.deep_network">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ISPy.util.neural_estimation.</span></span><span class="sig-name descname"><span class="pre">deep_network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logtau</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nl</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.neural_estimation.deep_network" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Deep neural network class: it defines the network, load the weigths, does the
+training and the predictions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Authors</dt>
+<dd class="field-odd"><p>Carlos Diaz (ISP/SU 2020)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ISPy.util.neural_estimation.deep_network.define_network">
+<span class="sig-name descname"><span class="pre">define_network</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.neural_estimation.deep_network.define_network" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ISPy.util.neural_estimation.deep_network.read_and_predict">
+<span class="sig-name descname"><span class="pre">read_and_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputdata</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.neural_estimation.deep_network.read_and_predict" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ISPy.util.neural_estimation.deep_network.read_network">
+<span class="sig-name descname"><span class="pre">read_network</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.neural_estimation.deep_network.read_network" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ISPy.util.neural_estimation.deep_network.train">
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_iterations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stokelist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cubelist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extranoise</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datasize</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.neural_estimation.deep_network.train" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.neural_estimation.network1D">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.neural_estimation.</span></span><span class="sig-name descname"><span class="pre">network1D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ny</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_filters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l2_reg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-07</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.neural_estimation.network1D" title="Permalink to this definition"></a></dt>
+<dd><p>Neural network architecture</p>
+<dl class="field-list simple">
+<dt class="field-odd">Authors</dt>
+<dd class="field-odd"><p>Carlos Diaz (ISP/SU 2020)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ISPy.util.neural_estimation.neural_estimator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ISPy.util.neural_estimation.</span></span><span class="sig-name descname"><span class="pre">neural_estimator</span></span><a class="headerlink" href="#ISPy.util.neural_estimation.neural_estimator" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Creates a small neural network that can be trained with STiC results
+to perform faster inversions on new data. Note: data index np.where(o.weights[:, 0] &lt; 1.0)[0]</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.util</span> <span class="k">import</span> <span class="n">neural_estimation</span> <span class="k">as</span> <span class="n">nst</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">sparsetools</span> <span class="k">as</span> <span class="nn">sp</span>
+</pre></div>
 </div>
-<div class="section" id="ispy-util-neural-estimation-module">
-<h2>ISPy.util.neural_estimation module<a class="headerlink" href="#ispy-util-neural-estimation-module" title="Permalink to this headline">¶</a></h2>
+<p># Reading data in STiC format:
+&gt;&gt;&gt; model_train_list = [‘model.nc’]
+&gt;&gt;&gt; stokes_train_list = [‘profiles.nc’]
+&gt;&gt;&gt; logtau = [-7,-6,-5,-4,-3,-2,-1, 0, 1]</p>
+<p># Initializing the neural network
+&gt;&gt;&gt; myestimator = nst.neural_estimator()
+&gt;&gt;&gt; myestimator.train(name=’network1’,option=’start’,nepochs=40,model_train_list,stokes_train_list,logtau)
+&gt;&gt;&gt; myestimator.quickplot(filename =’testplot.pdf’)</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dataprediction</span> <span class="o">=</span> <span class="s1">&#39;newprofiles.nc&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">original_logtau</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">model_train_list</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">ltau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myestimator</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;network1&#39;</span><span class="p">,</span><span class="n">dataprediction</span><span class="p">,</span><span class="n">logtau</span><span class="p">,</span><span class="n">original_logtau</span><span class="p">,</span><span class="s2">&quot;model_output.nc&quot;</span><span class="p">)</span>
+</pre></div>
 </div>
-<div class="section" id="module-ISPy.util.obs">
-<span id="ispy-util-obs-module"></span><h2>ISPy.util.obs module<a class="headerlink" href="#module-ISPy.util.obs" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="ISPy.util.obs.viewangle">
-<code class="sig-prename descclassname">ISPy.util.obs.</code><code class="sig-name descname">viewangle</code><span class="sig-paren">(</span><em class="sig-param">xy</em>, <em class="sig-param">date=None</em>, <em class="sig-param">heliographic=False</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.obs.viewangle" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the viewing angle theta (and mu=cos(theta)) given a set of solar
+<dl class="field-list simple">
+<dt class="field-odd">Authors</dt>
+<dd class="field-odd"><p>Carlos Diaz (ISP/SU 2020)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ISPy.util.neural_estimation.neural_estimator.create_dataset">
+<span class="sig-name descname"><span class="pre">create_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_train_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stokes_train_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logtau_train_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.neural_estimation.neural_estimator.create_dataset" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a dataset for training</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model_train_list</strong> (<em>list of strings</em>) – List of models in STiC format used for training</p></li>
+<li><p><strong>stokes_train_list</strong> (<em>list of strings</em>) – List of observed or synthetic profiles for training</p></li>
+<li><p><strong>logtau_train_list</strong> (<em>list</em>) – List of logtau values included in the training</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ISPy.util.neural_estimation.neural_estimator.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logtau</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">original_logtau</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nameoutput</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'model_neuralnetwork.nc'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pgastop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.neural_estimation.neural_estimator.predict" title="Permalink to this definition"></a></dt>
+<dd><p>It uses a pre-trained neural network with new observed data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str, optional</em>) – name of the network, by default ‘network1’</p></li>
+<li><p><strong>inputdata</strong> (<em>ncfile</em>) – input file in STiC format</p></li>
+<li><p><strong>logtau</strong> (<em>list</em>) – logtau scale used to train the network</p></li>
+<li><p><strong>original_logtau</strong> (<em>list</em>) – Final stratification of the model to do the interpolation</p></li>
+<li><p><strong>nameoutput</strong> (<em>str, optional</em>) – name of the output model, by default ‘model_neuralnetwork.nc’</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dataprediction</span> <span class="o">=</span> <span class="s1">&#39;newprofiles.nc&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">original_logtau</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">model_train_list</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">ltau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myestimator</span><span class="o">.</span><span class="n">prediction</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;network1&#39;</span><span class="p">,</span><span class="n">dataprediction</span><span class="p">,</span><span class="n">logtau</span><span class="p">,</span><span class="n">original_logtau</span><span class="p">,</span><span class="s2">&quot;model_output.nc&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ISPy.util.neural_estimation.neural_estimator.prepare_training">
+<span class="sig-name descname"><span class="pre">prepare_training</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'network1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">option</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'start'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nepochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extranoise</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0005</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datasize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samplesize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.neural_estimation.neural_estimator.prepare_training" title="Permalink to this definition"></a></dt>
+<dd><p>It defines the network and start the training.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str, optional</em>) – name of the network, by default ‘network1’</p></li>
+<li><p><strong>option</strong> (<em>str, optional</em>) – start or continue the previous training, by default ‘start’</p></li>
+<li><p><strong>nepochs</strong> (<em>int, optional</em>) – Number of epochs, by default 20</p></li>
+<li><p><strong>extranoise</strong> (<em>[type], optional</em>) – Extra noise level in Stokes profiles, by default 5e-4</p></li>
+<li><p><strong>learning_rate</strong> (<em>[type], optional</em>) – Learning rate used in Adam optimizer, by default 1e-4</p></li>
+<li><p><strong>batch_size</strong> (<em>int, optional</em>) – Size of each batch, by default 100</p></li>
+<li><p><strong>datasize</strong> (<em>int, optional</em>) – Size of the dataset created for training, by default 10</p></li>
+<li><p><strong>samplesize</strong> (<em>int, optional</em>) – Size of each FOV created for training, by default 20</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ISPy.util.neural_estimation.neural_estimator.quickplot">
+<span class="sig-name descname"><span class="pre">quickplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indexlist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[3,</span> <span class="pre">7]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'testplot.pdf'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.neural_estimation.neural_estimator.quickplot" title="Permalink to this definition"></a></dt>
+<dd><p>Quick figure with the comparison between the training dataset and
+the prediction of the network.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>indexlist</strong> (<em>list, optional</em>) – List of logtau to plot, by default [3,7]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ISPy.util.neural_estimation.neural_estimator.train">
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'network1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">option</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'start'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nepochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_train_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stokes_train_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logtau_train_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extranoise</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0006</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datasize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samplesize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.neural_estimation.neural_estimator.train" title="Permalink to this definition"></a></dt>
+<dd><p>Train the neural network</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str, optional</em>) – name of the network, by default ‘network1’</p></li>
+<li><p><strong>option</strong> (<em>str, optional</em>) – start or continue the previous training, by default ‘start’</p></li>
+<li><p><strong>nepochs</strong> (<em>int, optional</em>) – Number of epochs, by default 20</p></li>
+<li><p><strong>model_train_list</strong> (<em>list of strings</em>) – List of models in STiC format used for training</p></li>
+<li><p><strong>stokes_train_list</strong> (<em>list of strings</em>) – List of observed or synthetic profiles for training</p></li>
+<li><p><strong>logtau_train_list</strong> (<em>list</em>) – List of logtau values included in the training</p></li>
+<li><p><strong>extranoise</strong> (<em>[type], optional</em>) – Extra noise level in Stokes profiles, by default 5e-4</p></li>
+<li><p><strong>learning_rate</strong> (<em>[type], optional</em>) – Learning rate used in Adam optimizer, by default 1e-4</p></li>
+<li><p><strong>batch_size</strong> (<em>int, optional</em>) – Size of each batch, by default 100</p></li>
+<li><p><strong>datasize</strong> (<em>int, optional</em>) – Size of the dataset created for training, by default 10</p></li>
+<li><p><strong>samplesize</strong> (<em>int, optional</em>) – Size of each FOV created for training, by default 20</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p># Reading data in STiC format:
+&gt;&gt;&gt; model_train_list = [‘model.nc’]
+&gt;&gt;&gt; stokes_train_list = [‘profiles.nc’]
+&gt;&gt;&gt; logtau = [-7,-6,-5,-4,-3,-2,-1, 0, 1]</p>
+<p># Initializing the neural network
+&gt;&gt;&gt; myestimator = nst.neural_estimator()
+&gt;&gt;&gt; myestimator.train(name=’network1’,option=’start’,nepochs=10,model_train_list,stokes_train_list,logtau)
+&gt;&gt;&gt; myestimator.quickplot()</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ISPy.util.obs">
+<span id="ispy-util-obs-module"></span><h2>ISPy.util.obs module<a class="headerlink" href="#module-ISPy.util.obs" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.obs.viewangle">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.obs.</span></span><span class="sig-name descname"><span class="pre">viewangle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heliographic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.obs.viewangle" title="Permalink to this definition"></a></dt>
+<dd><p>Return the viewing angle theta (and mu = cos(theta)) given a set of solar
 coordinates in the helioprojective or heliographic Stonyhurst system</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -336,8 +582,9 @@ helioprojective, in degrees if heliographic)</p></li>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">viewangle</span><span class="p">([</span><span class="mi">240</span><span class="p">,</span><span class="o">-</span><span class="mi">380</span><span class="p">],</span> <span class="n">date</span><span class="o">=</span><span class="s1">&#39;2017-08-02&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">viewangle</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span><span class="o">-</span><span class="mi">50</span><span class="p">],</span> <span class="n">date</span><span class="o">=</span><span class="s1">&#39;2019-01-12&#39;</span><span class="p">,</span> <span class="n">heliographic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># S50 W30</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.util</span> <span class="k">import</span> <span class="n">obs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">obs</span><span class="o">.</span><span class="n">viewangle</span><span class="p">([</span><span class="mi">240</span><span class="p">,</span><span class="o">-</span><span class="mi">380</span><span class="p">],</span> <span class="n">date</span><span class="o">=</span><span class="s1">&#39;2017-08-02&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">obs</span><span class="o">.</span><span class="n">viewangle</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span><span class="o">-</span><span class="mi">50</span><span class="p">],</span> <span class="n">date</span><span class="o">=</span><span class="s1">&#39;2019-01-12&#39;</span><span class="p">,</span> <span class="n">heliographic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># S50 W30</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -347,67 +594,32 @@ helioprojective, in degrees if heliographic)</p></li>
 </dl>
 </dd></dl>
 
-</div>
-<div class="section" id="module-ISPy.util.plottools">
-<span id="ispy-util-plottools-module"></span><h2>ISPy.util.plottools module<a class="headerlink" href="#module-ISPy.util.plottools" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="ISPy.util.plottools.MidpointNormalize">
-<em class="property">class </em><code class="sig-prename descclassname">ISPy.util.plottools.</code><code class="sig-name descname">MidpointNormalize</code><span class="sig-paren">(</span><em class="sig-param">vmin=None</em>, <em class="sig-param">vmax=None</em>, <em class="sig-param">midpoint=None</em>, <em class="sig-param">clip=False</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.plottools.MidpointNormalize" title="Permalink to this definition">¶</a></dt>
+</section>
+<section id="module-ISPy.util.plottools">
+<span id="ispy-util-plottools-module"></span><h2>ISPy.util.plottools module<a class="headerlink" href="#module-ISPy.util.plottools" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ISPy.util.plottools.MidpointNormalize">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ISPy.util.plottools.</span></span><span class="sig-name descname"><span class="pre">MidpointNormalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">midpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.plottools.MidpointNormalize" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.colors.Normalize</span></code></p>
-<p class="rubric">Methods</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(value[, clip])</p></td>
-<td><p>Normalize <em>value</em> data in the <code class="docutils literal notranslate"><span class="pre">[vmin,</span> <span class="pre">vmax]</span></code> interval into the <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">1.0]</span></code> interval and return it.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">autoscale</span></code>(A)</p></td>
-<td><p>Set <em>vmin</em>, <em>vmax</em> to min, max of <em>A</em>.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">autoscale_None</span></code>(A)</p></td>
-<td><p>autoscale only None-valued vmin or vmax.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">process_value</span></code>(value)</p></td>
-<td><p>Homogenize the input <em>value</em> for easy and efficient normalization.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">scaled</span></code>()</p></td>
-<td><p>return true if vmin and vmax set</p></td>
-</tr>
-</tbody>
-</table>
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 52%" />
-<col style="width: 48%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><strong>inverse</strong></p></td>
-<td></td>
-</tr>
-</tbody>
-</table>
 </dd></dl>
 
-<dl class="function">
-<dt id="ISPy.util.plottools.add_colorbar">
-<code class="sig-prename descclassname">ISPy.util.plottools.</code><code class="sig-name descname">add_colorbar</code><span class="sig-paren">(</span><em class="sig-param">im</em>, <em class="sig-param">aspect=20</em>, <em class="sig-param">pad_fraction=0.5</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.plottools.add_colorbar" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.plottools.add_colorbar">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.plottools.</span></span><span class="sig-name descname"><span class="pre">add_colorbar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aspect</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_fraction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.plottools.add_colorbar" title="Permalink to this definition"></a></dt>
 <dd><p>Add a vertical color bar to an image plot</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="ISPy.util.plottools.make_colormap">
-<code class="sig-prename descclassname">ISPy.util.plottools.</code><code class="sig-name descname">make_colormap</code><span class="sig-paren">(</span><em class="sig-param">seq</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.plottools.make_colormap" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.plottools.make_colormap">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.plottools.</span></span><span class="sig-name descname"><span class="pre">make_colormap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seq</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.plottools.make_colormap" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-</div>
-<div class="section" id="module-ISPy.util.rebin">
-<span id="ispy-util-rebin-module"></span><h2>ISPy.util.rebin module<a class="headerlink" href="#module-ISPy.util.rebin" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="ISPy.util.rebin.avg1D">
-<code class="sig-prename descclassname">ISPy.util.rebin.</code><code class="sig-name descname">avg1D</code><span class="sig-paren">(</span><em class="sig-param">xdata</em>, <em class="sig-param">ydata</em>, <em class="sig-param">nbin</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.rebin.avg1D" title="Permalink to this definition">¶</a></dt>
+</section>
+<section id="module-ISPy.util.rebin">
+<span id="ispy-util-rebin-module"></span><h2>ISPy.util.rebin module<a class="headerlink" href="#module-ISPy.util.rebin" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.rebin.avg1D">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.rebin.</span></span><span class="sig-name descname"><span class="pre">avg1D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ydata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbin</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.rebin.avg1D" title="Permalink to this definition"></a></dt>
 <dd><p>Rebin 1D arrays into <cite>nbin</cite> bins by averaging</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -425,7 +637,7 @@ helioprojective, in degrees if heliographic)</p></li>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">xbin</span><span class="p">,</span> <span class="n">ybin</span> <span class="o">=</span> <span class="n">avg1D</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="n">ydata</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">xbin</span><span class="p">,</span> <span class="n">ybin</span> <span class="o">=</span> <span class="n">avg1D</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="n">ydata</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -435,9 +647,9 @@ helioprojective, in degrees if heliographic)</p></li>
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="ISPy.util.rebin.avg2D">
-<code class="sig-prename descclassname">ISPy.util.rebin.</code><code class="sig-name descname">avg2D</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">nbin</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.rebin.avg2D" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.rebin.avg2D">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.rebin.</span></span><span class="sig-name descname"><span class="pre">avg2D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbin</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.rebin.avg2D" title="Permalink to this definition"></a></dt>
 <dd><p>Rebin a 2D array into <cite>nbin</cite> bins by averaging</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -454,7 +666,7 @@ helioprojective, in degrees if heliographic)</p></li>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">databin</span> <span class="o">=</span> <span class="n">avg2D</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">databin</span> <span class="o">=</span> <span class="n">avg2D</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -464,12 +676,12 @@ helioprojective, in degrees if heliographic)</p></li>
 </dl>
 </dd></dl>
 
-</div>
-<div class="section" id="module-ISPy.util.remap">
-<span id="ispy-util-remap-module"></span><h2>ISPy.util.remap module<a class="headerlink" href="#module-ISPy.util.remap" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="ISPy.util.remap.bvec2cea">
-<code class="sig-prename descclassname">ISPy.util.remap.</code><code class="sig-name descname">bvec2cea</code><span class="sig-paren">(</span><em class="sig-param">dict_header</em>, <em class="sig-param">field_x</em>, <em class="sig-param">field_y</em>, <em class="sig-param">field_z</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.remap.bvec2cea" title="Permalink to this definition">¶</a></dt>
+</section>
+<section id="module-ISPy.util.remap">
+<span id="ispy-util-remap-module"></span><h2>ISPy.util.remap module<a class="headerlink" href="#module-ISPy.util.remap" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.remap.bvec2cea">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.remap.</span></span><span class="sig-name descname"><span class="pre">bvec2cea</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_header</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_z</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.remap.bvec2cea" title="Permalink to this definition"></a></dt>
 <dd><p>Transformation to Cylindrical equal area projection (CEA) from CCD
 detector as it is donde with SHARPs according to Xudong Sun (2018).</p>
 <dl class="field-list simple">
@@ -494,13 +706,13 @@ in cylindrical equal are projection.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">field_z</span> <span class="o">=</span> <span class="n">field</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">inclination</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">180.0</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">field_z</span> <span class="o">=</span> <span class="n">field</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">inclination</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">180.0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">field_hor</span> <span class="o">=</span> <span class="n">field</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">inclination</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">180.0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">field_y</span> <span class="o">=</span> <span class="n">field_hor</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">azimuth</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">180.0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">field_x</span> <span class="o">=</span> <span class="o">-</span><span class="n">field_hor</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">azimuth</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">180.0</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">field_x_h2</span><span class="p">,</span> <span class="n">field_y_h2</span><span class="p">,</span> <span class="n">field_z_h2</span> <span class="o">=</span> <span class="n">bvec2cea</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">header</span><span class="p">,</span> <span class="n">field_x</span><span class="p">,</span> <span class="n">field_y</span><span class="p">,</span> <span class="n">field_z</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">field_x_h2</span><span class="p">,</span> <span class="n">field_y_h2</span><span class="p">,</span> <span class="n">field_z_h2</span> <span class="o">=</span> <span class="n">bvec2cea</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">header</span><span class="p">,</span> <span class="n">field_x</span><span class="p">,</span> <span class="n">field_y</span><span class="p">,</span> <span class="n">field_z</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -510,9 +722,9 @@ in cylindrical equal are projection.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="ISPy.util.remap.remap2cea">
-<code class="sig-prename descclassname">ISPy.util.remap.</code><code class="sig-name descname">remap2cea</code><span class="sig-paren">(</span><em class="sig-param">dict_header</em>, <em class="sig-param">field_x</em>, <em class="sig-param">field_y</em>, <em class="sig-param">field_z</em>, <em class="sig-param">deltal=0.03</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.remap.remap2cea" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.remap.remap2cea">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.remap.</span></span><span class="sig-name descname"><span class="pre">remap2cea</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_header</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deltal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.03</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.remap.remap2cea" title="Permalink to this definition"></a></dt>
 <dd><p>Map projection of the original input into the cylindical equal area system (CEA).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -538,9 +750,9 @@ They should follow the same definition as given for SDO data:
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="ISPy.util.remap.sphere2img">
-<code class="sig-prename descclassname">ISPy.util.remap.</code><code class="sig-name descname">sphere2img</code><span class="sig-paren">(</span><em class="sig-param">lat</em>, <em class="sig-param">lon</em>, <em class="sig-param">latc</em>, <em class="sig-param">lonc</em>, <em class="sig-param">xcenter</em>, <em class="sig-param">ycenter</em>, <em class="sig-param">rsun</em>, <em class="sig-param">peff</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.remap.sphere2img" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.remap.sphere2img">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.remap.</span></span><span class="sig-name descname"><span class="pre">sphere2img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lonc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xcenter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ycenter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rsun</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">peff</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.remap.sphere2img" title="Permalink to this definition"></a></dt>
 <dd><p>Conversion between Heliographic coordinates to CCD coordinates.
 Ported from sphere2img written in IDL : Adapted from Cartography.c by Rick Bogart,
 by Xudong Sun [Eq 5&amp;6 in <a class="reference external" href="https://arxiv.org/pdf/1309.2392.pdf">https://arxiv.org/pdf/1309.2392.pdf</a>]</p>
@@ -564,58 +776,49 @@ rotational north pole measured eastward from geocentric north.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="ISPy.util.remap.vector_transformation">
-<code class="sig-prename descclassname">ISPy.util.remap.</code><code class="sig-name descname">vector_transformation</code><span class="sig-paren">(</span><em class="sig-param">peff</em>, <em class="sig-param">latitude_out</em>, <em class="sig-param">longitude_out</em>, <em class="sig-param">B0</em>, <em class="sig-param">field_x_cea</em>, <em class="sig-param">field_y_cea</em>, <em class="sig-param">field_z_cea</em>, <em class="sig-param">lat_in_rad=False</em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.remap.vector_transformation" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.remap.vector_transformation">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.remap.</span></span><span class="sig-name descname"><span class="pre">vector_transformation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">peff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latitude_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_x_cea</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_y_cea</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_z_cea</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat_in_rad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.remap.vector_transformation" title="Permalink to this definition"></a></dt>
 <dd><p>Magnetic field transformation matrix (see Allen Gary &amp; Hagyard 1990)
 [Eq 7 in <a class="reference external" href="https://arxiv.org/pdf/1309.2392.pdf">https://arxiv.org/pdf/1309.2392.pdf</a>]</p>
 </dd></dl>
 
-</div>
-<div class="section" id="module-ISPy.util">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-ISPy.util" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-ISPy.util">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-ISPy.util" title="Permalink to this headline"></a></h2>
 <p>Tools and scripts for miscellaneous utilities (e.g., math, file crawler).</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ISPy.spec.html" class="btn btn-neutral float-left" title="ISPy.spec package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ISPy.vis.html" class="btn btn-neutral float-right" title="ISPy.vis package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2020, ISP
-
-    </p>
+    <p>&#169; Copyright 2021, ISP.</p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

@@ -20,6 +20,14 @@ ISPy.io.pyio module
    :undoc-members:
    :show-inheritance:
 
+ISPy.io.sn module
+-----------------
+
+.. automodule:: ISPy.io.sn
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ISPy.io.solarnet module
 -----------------------
 
@@ -27,7 +35,6 @@ ISPy.io.solarnet module
    :members:
    :undoc-members:
    :show-inheritance:
-
 
 Module contents
 ---------------

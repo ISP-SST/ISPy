@@ -20,7 +20,6 @@ ISPy.vis.show\_hazel module
    :undoc-members:
    :show-inheritance:
 
-
 Module contents
 ---------------
 

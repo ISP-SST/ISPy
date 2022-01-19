@@ -12,6 +12,14 @@ ISPy.util.azimuth module
    :undoc-members:
    :show-inheritance:
 
+ISPy.util.cubeshow module
+-------------------------
+
+.. automodule:: ISPy.util.cubeshow
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ISPy.util.find module
 ---------------------
 
@@ -24,6 +32,14 @@ ISPy.util.gentools module
 -------------------------
 
 .. automodule:: ISPy.util.gentools
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ISPy.util.lineplot module
+-------------------------
+
+.. automodule:: ISPy.util.lineplot
    :members:
    :undoc-members:
    :show-inheritance:
@@ -67,7 +83,6 @@ ISPy.util.remap module
    :members:
    :undoc-members:
    :show-inheritance:
-
 
 Module contents
 ---------------
