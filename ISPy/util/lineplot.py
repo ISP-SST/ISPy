@@ -21,6 +21,12 @@ def find_nearest(array, array2, k=1):
         arr[i] = np.int(np.argsort(abs(array - array2[i]))[:k])
     return arr
 
+def line_resolution(line, instrument='CRISP')
+    if instrument == 'CRISP':
+       return fpi.crisp(line).getwidth()  
+    else:
+       print('No CHROMIS support yet')
+
 
 def SST_scan_time(nlambda, nstates, nframes, nprefilter=1, fps=36.5):
     """
