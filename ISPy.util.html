@@ -284,86 +284,8 @@ element in array1</p>
 </dd></dl>
 
 </section>
-<section id="module-ISPy.util.lineplot">
-<span id="ispy-util-lineplot-module"></span><h2>ISPy.util.lineplot module<a class="headerlink" href="#module-ISPy.util.lineplot" title="Permalink to this headline"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="ISPy.util.lineplot.SST_scan_time">
-<span class="sig-prename descclassname"><span class="pre">ISPy.util.lineplot.</span></span><span class="sig-name descname"><span class="pre">SST_scan_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nlambda</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nstates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nframes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nprefilter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">36.5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.lineplot.SST_scan_time" title="Permalink to this definition"></a></dt>
-<dd><p>Calculate the length of one scan based on observational parameters.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>nlambda</strong> (<em>float</em>) – Amount of wavelength points in scan all lines combined
-Multiply number of points by 4 if line has polerimetry.</p></li>
-<li><p><strong>nstates</strong> (<em>float</em>) – Number of polarization states. Should be 1 or 4.</p></li>
-<li><p><strong>nframes</strong> (<em>float</em>) – Number of frames per state</p></li>
-<li><p><strong>nprefilter</strong> (<em>float, optional</em>) – Number of prefilters used</p></li>
-<li><p><strong>fps</strong> (<em>float, optional</em>) – Frames per second. Default = 36.5 (CRISP), 80 (CHROMIS; to 70 if asked)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Scan duration in seconds</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>t</p>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<p>Duration for observation of a line with 28 points + continuum
-with 6 states and polarization.</p>
-<p>from ISPy.util import lineplot as lp
-t = lp.SST_scan_time(29,4,6,2,35)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Authors</dt>
-<dd class="field-odd"><p>Alex Pietrow (ISP-SU 2021), based on private communication between Alex and Pit.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ISPy.util.lineplot.find_nearest">
-<span class="sig-prename descclassname"><span class="pre">ISPy.util.lineplot.</span></span><span class="sig-name descname"><span class="pre">find_nearest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">array2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.lineplot.find_nearest" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ISPy.util.lineplot.plotline">
-<span class="sig-prename descclassname"><span class="pre">ISPy.util.lineplot.</span></span><span class="sig-name descname"><span class="pre">plotline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nframes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">35.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instrument</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'CRISP'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.lineplot.plotline" title="Permalink to this definition"></a></dt>
-<dd><p>Visualize observing program per line.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>line</strong> (<em>float</em>) – line center in Angstrom</p></li>
-<li><p><strong>scan</strong> (<em>array</em>) – Numpy array with values observed, centered around line center in Angstrom</p></li>
-<li><p><strong>name</strong> (<em>str, optional</em>) – filename and title. If set to zero, file will not be shown.</p></li>
-<li><p><strong>center</strong> (<em>float, optional</em>) – Force line center to value provided in line.
-Defealt = False, which will center the line at the minimum value.</p></li>
-<li><p><strong>nframes</strong> (<em>float, optional</em>) – Number of frames per state. Default = 8</p></li>
-<li><p><strong>fps</strong> (<em>float, optional</em>) – frames per second. Default = 35</p></li>
-<li><p><strong>instrument</strong> (<em>str</em>) – Set instrument to ‘CRISP’ or ‘CHROMIS’</p></li>
-<li><p><strong>width</strong> (<em>float</em>) – Half spectral range in Angstrom.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<p>from ISPy.util import lineplot as lp
-import numpy as np</p>
-<p>#Crisp line
-line = 6563 #A
-dl = 62/2
-scan = np.append(np.append(np.arange(-1*dl*65, -1*dl*20, dl*5), np.arange(-1*dl*20,dl*20,dl)),np.arange(dl*20, dl*70, dl*5))
-lp.plotline(line,scan/1000.,str(line)+’.png’, width=2.5)</p>
-<p>#Chromis line
-line = 3934
-dl = 120/2
-scan = np.arange(-1*dl*20,dl*20,dl)
-lp.plotline(line,scan/1000.,str(line)+’.png’,instrument=’CHROMIS’, width=2)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Authors</dt>
-<dd class="field-odd"><p>Alex Pietrow (ISP-SU 2021)</p>
-</dd>
-</dl>
-</dd></dl>
-
+<section id="ispy-util-lineplot-module">
+<h2>ISPy.util.lineplot module<a class="headerlink" href="#ispy-util-lineplot-module" title="Permalink to this headline"></a></h2>
 </section>
 <section id="module-ISPy.util.neural_estimation">
 <span id="ispy-util-neural-estimation-module"></span><h2>ISPy.util.neural_estimation module<a class="headerlink" href="#module-ISPy.util.neural_estimation" title="Permalink to this headline"></a></h2>
