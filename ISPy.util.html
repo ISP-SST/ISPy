@@ -483,7 +483,7 @@ the prediction of the network.</p>
 <span id="ispy-util-obs-module"></span><h2>ISPy.util.obs module<a class="headerlink" href="#module-ISPy.util.obs" title="Permalink to this headline"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="ISPy.util.obs.viewangle">
-<span class="sig-prename descclassname"><span class="pre">ISPy.util.obs.</span></span><span class="sig-name descname"><span class="pre">viewangle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heliographic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.obs.viewangle" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.obs.</span></span><span class="sig-name descname"><span class="pre">viewangle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heliographic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_sun</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">960.469</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.obs.viewangle" title="Permalink to this definition"></a></dt>
 <dd><p>Return the viewing angle theta (and mu = cos(theta)) given a set of solar
 coordinates in the helioprojective or heliographic Stonyhurst system</p>
 <dl class="field-list simple">
@@ -494,6 +494,7 @@ helioprojective, in degrees if heliographic)</p></li>
 <li><p><strong>date</strong> (<em>str, optional</em>) – date for which to get the viewing angle (default: today’s date)</p></li>
 <li><p><strong>heliographic</strong> (<em>bool, optional</em>) – switch to indicate input coordinates are heliographic Stonyhurst
 (default False, i.e. coordinates are helioprojective)</p></li>
+<li><p><strong>r_sun</strong> (<em>float, optional</em>) – Define solar radius in arcseconds. Defeault is average radius (960.469)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
