@@ -12,7 +12,7 @@ except:
     print("[ISPy INFO] Install the sunpy package for an accurate implementation.")
 
 
-def viewangle(xy, date=None, heliographic=False):
+def viewangle(xy, date=None, heliographic=False, r_sun=960.469):
     """
     Return the viewing angle theta (and mu = cos(theta)) given a set of solar
     coordinates in the helioprojective or heliographic Stonyhurst system
@@ -27,6 +27,8 @@ def viewangle(xy, date=None, heliographic=False):
     heliographic : bool, optional
         switch to indicate input coordinates are heliographic Stonyhurst
         (default False, i.e. coordinates are helioprojective)
+    r_sun : float, optional
+        Define solar radius in arcseconds. Defeault is average radius (960.469)
 
     Returns
     -------
@@ -55,8 +57,6 @@ def viewangle(xy, date=None, heliographic=False):
             xy = [xy_hpc.Tx.value, xy_hpc.Ty.value]
 
         r_sun = sun.angular_radius(date).value
-    else:
-        r_sun = 960.469 # Average radius in arcsec
     
     rho = np.sqrt(xy[0]**2 + xy[1]**2)
     if (rho > r_sun):
