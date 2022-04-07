@@ -14,6 +14,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -71,12 +72,12 @@
            <div itemprop="articleBody">
              
   <section id="ispy-spec-package">
-<h1>ISPy.spec package<a class="headerlink" href="#ispy-spec-package" title="Permalink to this headline"></a></h1>
+<h1>ISPy.spec package<a class="headerlink" href="#ispy-spec-package" title="Permalink to this heading"></a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
 </section>
 <section id="module-ISPy.spec.atlas">
-<span id="ispy-spec-atlas-module"></span><h2>ISPy.spec.atlas module<a class="headerlink" href="#module-ISPy.spec.atlas" title="Permalink to this headline"></a></h2>
+<span id="ispy-spec-atlas-module"></span><h2>ISPy.spec.atlas module<a class="headerlink" href="#module-ISPy.spec.atlas" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="ISPy.spec.atlas.atlas">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ISPy.spec.atlas.</span></span><span class="sig-name descname"><span class="pre">atlas</span></span><a class="headerlink" href="#ISPy.spec.atlas.atlas" title="Permalink to this definition"></a></dt>
@@ -88,12 +89,12 @@
 </dd>
 <dt class="field-even">Variables</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>~atlas.cont</strong> (<em>array_like</em>) – full atlas continuum intensities in units <cite>sunit</cite></p></li>
-<li><p><strong>~atlas.spec</strong> (<em>array_like</em>) – full atlas spectrum in units <cite>sunit</cite></p></li>
-<li><p><strong>~atlas.wave</strong> (<em>array_like</em>) – wavelengths in units <cite>wunit</cite></p></li>
-<li><p><strong>~atlas.usys</strong> (<em>str</em>) – unit system, one of <cite>si_inu</cite>, <cite>si_ilambda</cite>, <cite>cgs_inu</cite> or <cite>cgs_ilambda</cite></p></li>
-<li><p><strong>~atlas.sunit</strong> (<em>astropy CompositeUnit object</em>) – intensity units according to the <cite>usys</cite> setting</p></li>
-<li><p><strong>~atlas.wunit</strong> (<em>astropy Unit object</em>) – wavelength unit</p></li>
+<li><p><strong>cont</strong> (<em>array_like</em>) – full atlas continuum intensities in units <cite>sunit</cite></p></li>
+<li><p><strong>spec</strong> (<em>array_like</em>) – full atlas spectrum in units <cite>sunit</cite></p></li>
+<li><p><strong>wave</strong> (<em>array_like</em>) – wavelengths in units <cite>wunit</cite></p></li>
+<li><p><strong>usys</strong> (<em>str</em>) – unit system, one of <cite>si_inu</cite>, <cite>si_ilambda</cite>, <cite>cgs_inu</cite> or <cite>cgs_ilambda</cite></p></li>
+<li><p><strong>sunit</strong> (<em>astropy CompositeUnit object</em>) – intensity units according to the <cite>usys</cite> setting</p></li>
+<li><p><strong>wunit</strong> (<em>astropy Unit object</em>) – wavelength unit</p></li>
 </ul>
 </dd>
 </dl>
@@ -163,7 +164,7 @@ extract the atlas profile</p></li>
 
 </section>
 <section id="module-ISPy.spec.bfield">
-<span id="ispy-spec-bfield-module"></span><h2>ISPy.spec.bfield module<a class="headerlink" href="#module-ISPy.spec.bfield" title="Permalink to this headline"></a></h2>
+<span id="ispy-spec-bfield-module"></span><h2>ISPy.spec.bfield module<a class="headerlink" href="#module-ISPy.spec.bfield" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="ISPy.spec.bfield.cartesian2cylindrical">
 <span class="sig-prename descclassname"><span class="pre">ISPy.spec.bfield.</span></span><span class="sig-name descname"><span class="pre">cartesian2cylindrical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bvec_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">azim0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degrees</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.bfield.cartesian2cylindrical" title="Permalink to this definition"></a></dt>
@@ -337,7 +338,7 @@ cylindrical decomposition</p>
 
 </section>
 <section id="module-ISPy.spec.calib">
-<span id="ispy-spec-calib-module"></span><h2>ISPy.spec.calib module<a class="headerlink" href="#module-ISPy.spec.calib" title="Permalink to this headline"></a></h2>
+<span id="ispy-spec-calib-module"></span><h2>ISPy.spec.calib module<a class="headerlink" href="#module-ISPy.spec.calib" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="ISPy.spec.calib.convolve_atlas">
 <span class="sig-prename descclassname"><span class="pre">ISPy.spec.calib.</span></span><span class="sig-name descname"><span class="pre">convolve_atlas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wave_atlas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spec_atlas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instrument_profile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nearest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.calib.convolve_atlas" title="Permalink to this definition"></a></dt>
@@ -450,7 +451,7 @@ elements as <cite>wave</cite>.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ISPy.spec.calib.spectrum">
-<span class="sig-prename descclassname"><span class="pre">ISPy.spec.calib.</span></span><span class="sig-name descname"><span class="pre">spectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wave</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spec_avg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calib_at_dc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atlas_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wave_idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instrument_profile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calib_wave</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cgs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">si</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">perHz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qsdc_calib</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.calib.spectrum" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">ISPy.spec.calib.</span></span><span class="sig-name descname"><span class="pre">spectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wave</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spec_avg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calib_at_dc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atlas_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wave_idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instrument_profile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calib_wave</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cgs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">si</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">perHz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qsdc_calib</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ret_atlas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.calib.spectrum" title="Permalink to this definition"></a></dt>
 <dd><p>Calibrate spectrum intensity (in SI or cgs units) and wavelength by
 simultaneously fitting offsets given an atlas profile</p>
 <dl class="field-list simple">
@@ -485,6 +486,7 @@ False)</p></li>
 <li><p><strong>perHz</strong> (<em>bool, optional</em>) – output calibration per frequency unit (default True)</p></li>
 <li><p><strong>qsdc_calib</strong> (<em>bool, optional</em>) – output calibration as fraction of quiet Sun disc centre continuum
 intensity (default False). If set, overrides <cite>cgs</cite>, <cite>si</cite> and <cite>perHz</cite></p></li>
+<li><p><strong>ret_atlas</strong> (<em>bool, optional</em>) – Return atlas intensity and wavelengths in original resolution</p></li>
 <li><p><strong>verbose</strong> (<em>bool, optional</em>) – output calibration plot and offset values to command line (defaults
 False)</p></li>
 </ul>
@@ -515,7 +517,7 @@ instrument profile if instrument_profile is not None.</p></li>
 
 </section>
 <section id="module-ISPy.spec.chromis">
-<span id="ispy-spec-chromis-module"></span><h2>ISPy.spec.chromis module<a class="headerlink" href="#module-ISPy.spec.chromis" title="Permalink to this headline"></a></h2>
+<span id="ispy-spec-chromis-module"></span><h2>ISPy.spec.chromis module<a class="headerlink" href="#module-ISPy.spec.chromis" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="ISPy.spec.chromis.dual_fpi">
 <span class="sig-prename descclassname"><span class="pre">ISPy.spec.chromis.</span></span><span class="sig-name descname"><span class="pre">dual_fpi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wav</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">erh</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">erl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.chromis.dual_fpi" title="Permalink to this definition"></a></dt>
@@ -523,7 +525,7 @@ instrument profile if instrument_profile is not None.</p></li>
 
 </section>
 <section id="module-ISPy.spec.crisp">
-<span id="ispy-spec-crisp-module"></span><h2>ISPy.spec.crisp module<a class="headerlink" href="#module-ISPy.spec.crisp" title="Permalink to this headline"></a></h2>
+<span id="ispy-spec-crisp-module"></span><h2>ISPy.spec.crisp module<a class="headerlink" href="#module-ISPy.spec.crisp" title="Permalink to this heading"></a></h2>
 <p>CRISP class: Generates a theoretical CRISP tranmission profile based on different approximations.
 Author: Jaime de la Cruz Rodriguez (USP-SU 2015)
 Dependencies: crisp_ref.txt</p>
@@ -581,7 +583,7 @@ tr = fpi.dual_fpi_conv(tw) # includes the convergence of the beam at f165.</p>
 
 </section>
 <section id="module-ISPy.spec.crosstalk">
-<span id="ispy-spec-crosstalk-module"></span><h2>ISPy.spec.crosstalk module<a class="headerlink" href="#module-ISPy.spec.crosstalk" title="Permalink to this headline"></a></h2>
+<span id="ispy-spec-crosstalk-module"></span><h2>ISPy.spec.crosstalk module<a class="headerlink" href="#module-ISPy.spec.crosstalk" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="ISPy.spec.crosstalk.estimate_crosstalk">
 <span class="sig-prename descclassname"><span class="pre">ISPy.spec.crosstalk.</span></span><span class="sig-name descname"><span class="pre">estimate_crosstalk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stokes_map</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stokes_toclean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stokes_removefrom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nameoutput</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interactive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">npoints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sizeave</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smoothvalue</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.crosstalk.estimate_crosstalk" title="Permalink to this definition"></a></dt>
@@ -638,7 +640,7 @@ for one time frame.</p>
 
 </section>
 <section id="module-ISPy.spec.wfa">
-<span id="ispy-spec-wfa-module"></span><h2>ISPy.spec.wfa module<a class="headerlink" href="#module-ISPy.spec.wfa" title="Permalink to this headline"></a></h2>
+<span id="ispy-spec-wfa-module"></span><h2>ISPy.spec.wfa module<a class="headerlink" href="#module-ISPy.spec.wfa" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="ISPy.spec.wfa.cder">
 <span class="sig-prename descclassname"><span class="pre">ISPy.spec.wfa.</span></span><span class="sig-name descname"><span class="pre">cder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.spec.wfa.cder" title="Permalink to this definition"></a></dt>
@@ -784,16 +786,16 @@ selected wavelength points of the observation</p>
 </dd>
 <dt class="field-even">Variables</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>~line.cw</strong> (<em>float</em>) – central wavelength</p></li>
-<li><p><strong>~line.j1</strong> (<em>float</em>) – total angular momentum quantum number of the lower level</p></li>
-<li><p><strong>~line.j2</strong> (<em>float</em>) – total angular momentum quantum number of the upper level</p></li>
-<li><p><strong>~line.g1</strong> (<em>float</em>) – Landé g-factor of the lower level</p></li>
-<li><p><strong>~line.g2</strong> (<em>float</em>) – Landé g-factor of the upper level</p></li>
-<li><p><strong>~line.geff</strong> (<em>float</em>) – effective Landé g-factor</p></li>
-<li><p><strong>~line.Gg</strong> (<em>float</em>) – \bar{G} in Eqs. (9.74cd), (9.76) and (9.77) in Degl’Innocenti &amp; Landolfi
+<li><p><strong>cw</strong> (<em>float</em>) – central wavelength</p></li>
+<li><p><strong>j1</strong> (<em>float</em>) – total angular momentum quantum number of the lower level</p></li>
+<li><p><strong>j2</strong> (<em>float</em>) – total angular momentum quantum number of the upper level</p></li>
+<li><p><strong>g1</strong> (<em>float</em>) – Landé g-factor of the lower level</p></li>
+<li><p><strong>g2</strong> (<em>float</em>) – Landé g-factor of the upper level</p></li>
+<li><p><strong>geff</strong> (<em>float</em>) – effective Landé g-factor</p></li>
+<li><p><strong>Gg</strong> (<em>float</em>) – \bar{G} in Eqs. (9.74cd), (9.76) and (9.77) in Degl’Innocenti &amp; Landolfi
 (2004); a measure of the sensitivity of a given spectral line to the
 Zeeman effect in Q and U.</p></li>
-<li><p><strong>~line.larm</strong> (<em>float</em><em>, </em><em>constant</em>) – Larmor frequency</p></li>
+<li><p><strong>larm</strong> (<em>float</em><em>, </em><em>constant</em>) – Larmor frequency</p></li>
 </ul>
 </dd>
 </dl>
@@ -839,7 +841,7 @@ Zeeman effect in Q and U.</p></li>
 
 </section>
 <section id="module-ISPy.spec">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-ISPy.spec" title="Permalink to this headline"></a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-ISPy.spec" title="Permalink to this heading"></a></h2>
 <p>Tools and scripts for spectral calibration, cleaning and fitting.</p>
 </section>
 </section>

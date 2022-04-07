@@ -14,6 +14,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -71,12 +72,12 @@
            <div itemprop="articleBody">
              
   <section id="ispy-img-package">
-<h1>ISPy.img package<a class="headerlink" href="#ispy-img-package" title="Permalink to this headline"></a></h1>
+<h1>ISPy.img package<a class="headerlink" href="#ispy-img-package" title="Permalink to this heading"></a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
 </section>
 <section id="module-ISPy.img.align">
-<span id="ispy-img-align-module"></span><h2>ISPy.img.align module<a class="headerlink" href="#module-ISPy.img.align" title="Permalink to this headline"></a></h2>
+<span id="ispy-img-align-module"></span><h2>ISPy.img.align module<a class="headerlink" href="#module-ISPy.img.align" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="ISPy.img.align.align">
 <span class="sig-prename descclassname"><span class="pre">ISPy.img.align.</span></span><span class="sig-name descname"><span class="pre">align</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.align.align" title="Permalink to this definition"></a></dt>
@@ -110,11 +111,11 @@
 
 </section>
 <section id="module-ISPy.img.denoising">
-<span id="ispy-img-denoising-module"></span><h2>ISPy.img.denoising module<a class="headerlink" href="#module-ISPy.img.denoising" title="Permalink to this headline"></a></h2>
+<span id="ispy-img-denoising-module"></span><h2>ISPy.img.denoising module<a class="headerlink" href="#module-ISPy.img.denoising" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="ISPy.img.denoising.ReflectionPadding2D">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ISPy.img.denoising.</span></span><span class="sig-name descname"><span class="pre">ReflectionPadding2D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.denoising.ReflectionPadding2D" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">keras.engine.base_layer.Layer</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></p>
 <p>Reflection-padding layer for 2D input (e.g. picture).
 This layer can add rows and columns or zeros
 at the top, bottom, left and right side of an image tensor.</p>
@@ -122,10 +123,10 @@ at the top, bottom, left and right side of an image tensor.</p>
 <dt class="sig sig-object py" id="ISPy.img.denoising.ReflectionPadding2D.call">
 <span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.denoising.ReflectionPadding2D.call" title="Permalink to this definition"></a></dt>
 <dd><p>This is where the layer’s logic lives.</p>
-<p>Note here that <cite>call()</cite> method in <cite>tf.keras</cite> is little bit different
-from <cite>keras</cite> API. In <cite>keras</cite> API, you can pass support masking for
-layers as additional arguments. Whereas <cite>tf.keras</cite> has <cite>compute_mask()</cite>
-method to support masking.</p>
+<p>The <cite>call()</cite> method may not create state (except in its first invocation,
+wrapping the creation of variables or other resources in <cite>tf.init_scope()</cite>).
+It is recommended to create state in <cite>__init__()</cite>, or the <cite>build()</cite> method
+that is called automatically before <cite>call()</cite> executes the first time.</p>
 <dl>
 <dt>Args:</dt><dd><dl>
 <dt>inputs: Input tensor, or dict/list/tuple of input tensors.</dt><dd><p>The first positional <cite>inputs</cite> argument is subject to special rules:
@@ -176,9 +177,9 @@ layer with masking support).</p></li>
 <dt class="sig sig-object py" id="ISPy.img.denoising.ReflectionPadding2D.compute_output_shape">
 <span class="sig-name descname"><span class="pre">compute_output_shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shape</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.denoising.ReflectionPadding2D.compute_output_shape" title="Permalink to this definition"></a></dt>
 <dd><p>Computes the output shape of the layer.</p>
-<p>If the layer has not been built, this method will call <cite>build</cite> on the
-layer. This assumes that the layer will later be used with inputs that
-match the input shape provided here.</p>
+<p>This method will cause the layer’s state to be built, if that has not
+happened before. This requires that the layer will later be used with
+inputs that match the input shape provided here.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><dl class="simple">
 <dt>input_shape: Shape tuple (tuple of integers)</dt><dd><p>or list of shape tuples (one per output tensor of the layer).
@@ -289,7 +290,7 @@ if they want to modify it.</p>
 
 </section>
 <section id="module-ISPy.img.interpolate2d">
-<span id="ispy-img-interpolate2d-module"></span><h2>ISPy.img.interpolate2d module<a class="headerlink" href="#module-ISPy.img.interpolate2d" title="Permalink to this headline"></a></h2>
+<span id="ispy-img-interpolate2d-module"></span><h2>ISPy.img.interpolate2d module<a class="headerlink" href="#module-ISPy.img.interpolate2d" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="ISPy.img.interpolate2d.check_inputs">
 <span class="sig-prename descclassname"><span class="pre">ISPy.img.interpolate2d.</span></span><span class="sig-name descname"><span class="pre">check_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds_error</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.interpolate2d.check_inputs" title="Permalink to this definition"></a></dt>
@@ -320,7 +321,7 @@ values are requested outside the domain of the input data, by default False</p><
 
 </section>
 <section id="module-ISPy.img">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-ISPy.img" title="Permalink to this headline"></a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-ISPy.img" title="Permalink to this heading"></a></h2>
 <p>Tools and scripts to process, align and clean 2D images.</p>
 </section>
 </section>
