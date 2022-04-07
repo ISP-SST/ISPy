@@ -221,7 +221,7 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, calib_at_dc=False,
             cgs=True, calib_wave=True, wave_idx=[0,1,-2,-1])
 
     :Author:
-        Gregal Vissers, Carlos Diaz (ISP/SU 2019-2020)
+        Gregal Vissers, Carlos Diaz (ISP/SU 2019-2020), Alex Pietrow (ISP/SU 2022)
 
     """
 
@@ -305,7 +305,7 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, calib_at_dc=False,
         plt.show()
 
     if ret_atlas:
-        return wave, spec, calibration, spec_fts_sel, sunit, wave_fts, spec_fts_dc/plot_scale_factor 
+        return wave, spec, calibration, spec_fts_sel, sunit, wave_fts, spec_fts/plot_scale_factor 
     else:
         return wave, spec, calibration, spec_fts_sel, sunit
 
