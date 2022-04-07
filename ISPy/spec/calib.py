@@ -144,7 +144,7 @@ def convolve_atlas(wave_atlas, spec_atlas, instrument_profile, mode='nearest'):
 def spectrum(wave, spec, mu=1.0, spec_avg=None, calib_at_dc=False,
         atlas_range=0.5, wave_idx=None, extra_weight=20., bounds=None,
         instrument_profile=None, calib_wave=False, cgs=True, si=False,
-        perHz=True, qsdc_calib=False, verbose=False):
+        perHz=True, qsdc_calib=False, ret_atlas=False, verbose=False):
     """
     Calibrate spectrum intensity (in SI or cgs units) and wavelength by
     simultaneously fitting offsets given an atlas profile
@@ -195,6 +195,8 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, calib_at_dc=False,
     qsdc_calib : bool, optional
         output calibration as fraction of quiet Sun disc centre continuum
         intensity (default False). If set, overrides `cgs`, `si` and `perHz`
+    ret_atlas : bool, optional
+        Return atlas intensity and wavelengths in original resolution
     verbose : bool, optional
         output calibration plot and offset values to command line (defaults
         False)
@@ -302,7 +304,10 @@ def spectrum(wave, spec, mu=1.0, spec_avg=None, calib_at_dc=False,
         ax.set_title('ISPy: calib.spectrum() results')
         plt.show()
 
-    return wave, spec, calibration, spec_fts_sel, sunit
+    if ret_atlas:
+        return wave, spec, calibration, spec_fts_sel, sunit, wave_fts, spec_fts_dc/plot_scale_factor 
+    else:
+        return wave, spec, calibration, spec_fts_sel, sunit
 
 
 def limbdarkening(wave, mu=1.0, nm=False):
