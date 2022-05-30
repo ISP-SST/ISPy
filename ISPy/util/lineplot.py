@@ -189,12 +189,14 @@ def plotline(line,scan,name=None,center=0,nframes=8,fps=35., instrument='CRISP',
     plt.ylabel(r'Intensity [erg/s/cm$^2$/sr/Å]')
     plt.tight_layout()
     plt.plot()
+    
+    
     if name:
         plt.savefig(name)
     else:
         plt.show()
     
-    
+    return w_atlas, intensity_atlas_convolved
     
 
 
