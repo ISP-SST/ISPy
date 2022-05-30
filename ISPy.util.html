@@ -285,200 +285,94 @@ element in array1</p>
 </dd></dl>
 
 </section>
-<section id="ispy-util-lineplot-module">
-<h2>ISPy.util.lineplot module<a class="headerlink" href="#ispy-util-lineplot-module" title="Permalink to this heading"></a></h2>
-</section>
-<section id="module-ISPy.util.neural_estimation">
-<span id="ispy-util-neural-estimation-module"></span><h2>ISPy.util.neural_estimation module<a class="headerlink" href="#module-ISPy.util.neural_estimation" title="Permalink to this heading"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="ISPy.util.neural_estimation.DataGenerator">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ISPy.util.neural_estimation.</span></span><span class="sig-name descname"><span class="pre">DataGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datasize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logtau</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stokelist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cubelist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.neural_estimation.DataGenerator" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></p>
-<p>Generates data for training a neural network from a STiC model</p>
+<section id="module-ISPy.util.lineplot">
+<span id="ispy-util-lineplot-module"></span><h2>ISPy.util.lineplot module<a class="headerlink" href="#module-ISPy.util.lineplot" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.lineplot.SST_scan_time">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.lineplot.</span></span><span class="sig-name descname"><span class="pre">SST_scan_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nlambda</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nstates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nframes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nprefilter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">36.5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.lineplot.SST_scan_time" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate the length of one scan based on observational parameters.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Authors</dt>
-<dd class="field-odd"><p>Carlos Diaz (ISP/SU 2020)</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nlambda</strong> (<em>float</em>) – Amount of wavelength points in scan all lines combined
+Multiply number of points by 4 if line has polerimetry.</p></li>
+<li><p><strong>nstates</strong> (<em>float</em>) – Number of polarization states. Should be 1 or 4.</p></li>
+<li><p><strong>nframes</strong> (<em>float</em>) – Number of frames per state</p></li>
+<li><p><strong>nprefilter</strong> (<em>float, optional</em>) – Number of prefilters used</p></li>
+<li><p><strong>fps</strong> (<em>float, optional</em>) – Frames per second. Default = 36.5 (CRISP), 80 (CHROMIS; to 70 if asked)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Scan duration in seconds</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>t</p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="ISPy.util.neural_estimation.deep_network">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ISPy.util.neural_estimation.</span></span><span class="sig-name descname"><span class="pre">deep_network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logtau</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nl</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.neural_estimation.deep_network" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Deep neural network class: it defines the network, load the weigths, does the
-training and the predictions.</p>
+<p class="rubric">Example</p>
+<p>Duration for observation of a line with 28 points + continuum
+with 6 states and polarization.</p>
+<p>from ISPy.util import lineplot as lp
+t = lp.SST_scan_time(29,4,6,2,35)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Authors</dt>
-<dd class="field-odd"><p>Carlos Diaz (ISP/SU 2020)</p>
+<dd class="field-odd"><p>Alex Pietrow (ISP-SU 2021), based on private communication between Alex and Pit.</p>
 </dd>
 </dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="ISPy.util.neural_estimation.deep_network.define_network">
-<span class="sig-name descname"><span class="pre">define_network</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.neural_estimation.deep_network.define_network" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ISPy.util.neural_estimation.deep_network.read_and_predict">
-<span class="sig-name descname"><span class="pre">read_and_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputdata</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.neural_estimation.deep_network.read_and_predict" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ISPy.util.neural_estimation.deep_network.read_network">
-<span class="sig-name descname"><span class="pre">read_network</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.neural_estimation.deep_network.read_network" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ISPy.util.neural_estimation.deep_network.train">
-<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_iterations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stokelist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cubelist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extranoise</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datasize</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.neural_estimation.deep_network.train" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="ISPy.util.neural_estimation.network1D">
-<span class="sig-prename descclassname"><span class="pre">ISPy.util.neural_estimation.</span></span><span class="sig-name descname"><span class="pre">network1D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ny</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_filters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l2_reg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-07</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.neural_estimation.network1D" title="Permalink to this definition"></a></dt>
-<dd><p>Neural network architecture</p>
+<dt class="sig sig-object py" id="ISPy.util.lineplot.find_nearest">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.lineplot.</span></span><span class="sig-name descname"><span class="pre">find_nearest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">array2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.lineplot.find_nearest" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.lineplot.line_resolution">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.lineplot.</span></span><span class="sig-name descname"><span class="pre">line_resolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instrument</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'CRISP'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.lineplot.line_resolution" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ISPy.util.lineplot.plotline">
+<span class="sig-prename descclassname"><span class="pre">ISPy.util.lineplot.</span></span><span class="sig-name descname"><span class="pre">plotline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nframes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">35.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instrument</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'CRISP'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.lineplot.plotline" title="Permalink to this definition"></a></dt>
+<dd><p>Visualize observing program per line.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>line</strong> (<em>float</em>) – line center in Angstrom</p></li>
+<li><p><strong>scan</strong> (<em>array</em>) – Numpy array with values observed, centered around line center in Angstrom</p></li>
+<li><p><strong>name</strong> (<em>str, optional</em>) – filename and title. If set to zero, file will not be shown.</p></li>
+<li><p><strong>center</strong> (<em>float, optional</em>) – Force line center to value provided in line.
+Defealt = False, which will center the line at the minimum value.</p></li>
+<li><p><strong>nframes</strong> (<em>float, optional</em>) – Number of frames per state. Default = 8</p></li>
+<li><p><strong>fps</strong> (<em>float, optional</em>) – frames per second. Default = 35</p></li>
+<li><p><strong>instrument</strong> (<em>str</em>) – Set instrument to ‘CRISP’ or ‘CHROMIS’</p></li>
+<li><p><strong>width</strong> (<em>float</em>) – Half spectral range in Angstrom.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>from ISPy.util import lineplot as lp
+import numpy as np</p>
+<p>#Crisp line
+line = 6563 #A
+dl = 62/2
+scan = np.append(np.append(np.arange(-1*dl*65, -1*dl*20, dl*5), np.arange(-1*dl*20,dl*20,dl)),np.arange(dl*20, dl*70, dl*5))
+lp.plotline(line,scan/1000.,str(line)+’.png’, width=2.5)</p>
+<p>#Chromis line
+line = 3934
+dl = 120/2
+scan = np.arange(-1*dl*20,dl*20,dl)
+lp.plotline(line,scan/1000.,str(line)+’.png’,instrument=’CHROMIS’, width=2)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Authors</dt>
-<dd class="field-odd"><p>Carlos Diaz (ISP/SU 2020)</p>
+<dd class="field-odd"><p>Alex Pietrow (ISP-SU 2021)</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="py class">
-<dt class="sig sig-object py" id="ISPy.util.neural_estimation.neural_estimator">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ISPy.util.neural_estimation.</span></span><span class="sig-name descname"><span class="pre">neural_estimator</span></span><a class="headerlink" href="#ISPy.util.neural_estimation.neural_estimator" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Creates a small neural network that can be trained with STiC results
-to perform faster inversions on new data. Note: data index np.where(o.weights[:, 0] &lt; 1.0)[0]</p>
-<p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.util</span> <span class="k">import</span> <span class="n">neural_estimation</span> <span class="k">as</span> <span class="n">nst</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">sparsetools</span> <span class="k">as</span> <span class="nn">sp</span>
-</pre></div>
-</div>
-<p># Reading data in STiC format:
-&gt;&gt;&gt; model_train_list = [‘model.nc’]
-&gt;&gt;&gt; stokes_train_list = [‘profiles.nc’]
-&gt;&gt;&gt; logtau = [-7,-6,-5,-4,-3,-2,-1, 0, 1]</p>
-<p># Initializing the neural network
-&gt;&gt;&gt; myestimator = nst.neural_estimator()
-&gt;&gt;&gt; myestimator.train(name=’network1’,option=’start’,nepochs=40,model_train_list,stokes_train_list,logtau)
-&gt;&gt;&gt; myestimator.quickplot(filename =’testplot.pdf’)</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dataprediction</span> <span class="o">=</span> <span class="s1">&#39;newprofiles.nc&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">original_logtau</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">model_train_list</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">ltau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,:]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">myestimator</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;network1&#39;</span><span class="p">,</span><span class="n">dataprediction</span><span class="p">,</span><span class="n">logtau</span><span class="p">,</span><span class="n">original_logtau</span><span class="p">,</span><span class="s2">&quot;model_output.nc&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Authors</dt>
-<dd class="field-odd"><p>Carlos Diaz (ISP/SU 2020)</p>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="ISPy.util.neural_estimation.neural_estimator.create_dataset">
-<span class="sig-name descname"><span class="pre">create_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_train_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stokes_train_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logtau_train_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.neural_estimation.neural_estimator.create_dataset" title="Permalink to this definition"></a></dt>
-<dd><p>Creates a dataset for training</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>model_train_list</strong> (<em>list of strings</em>) – List of models in STiC format used for training</p></li>
-<li><p><strong>stokes_train_list</strong> (<em>list of strings</em>) – List of observed or synthetic profiles for training</p></li>
-<li><p><strong>logtau_train_list</strong> (<em>list</em>) – List of logtau values included in the training</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ISPy.util.neural_estimation.neural_estimator.predict">
-<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logtau</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">original_logtau</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nameoutput</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'model_neuralnetwork.nc'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pgastop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.neural_estimation.neural_estimator.predict" title="Permalink to this definition"></a></dt>
-<dd><p>It uses a pre-trained neural network with new observed data</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<em>str, optional</em>) – name of the network, by default ‘network1’</p></li>
-<li><p><strong>inputdata</strong> (<em>ncfile</em>) – input file in STiC format</p></li>
-<li><p><strong>logtau</strong> (<em>list</em>) – logtau scale used to train the network</p></li>
-<li><p><strong>original_logtau</strong> (<em>list</em>) – Final stratification of the model to do the interpolation</p></li>
-<li><p><strong>nameoutput</strong> (<em>str, optional</em>) – name of the output model, by default ‘model_neuralnetwork.nc’</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dataprediction</span> <span class="o">=</span> <span class="s1">&#39;newprofiles.nc&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">original_logtau</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">model_train_list</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">ltau</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,:]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">myestimator</span><span class="o">.</span><span class="n">prediction</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;network1&#39;</span><span class="p">,</span><span class="n">dataprediction</span><span class="p">,</span><span class="n">logtau</span><span class="p">,</span><span class="n">original_logtau</span><span class="p">,</span><span class="s2">&quot;model_output.nc&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ISPy.util.neural_estimation.neural_estimator.prepare_training">
-<span class="sig-name descname"><span class="pre">prepare_training</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'network1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">option</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'start'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nepochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extranoise</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0005</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datasize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samplesize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.neural_estimation.neural_estimator.prepare_training" title="Permalink to this definition"></a></dt>
-<dd><p>It defines the network and start the training.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<em>str, optional</em>) – name of the network, by default ‘network1’</p></li>
-<li><p><strong>option</strong> (<em>str, optional</em>) – start or continue the previous training, by default ‘start’</p></li>
-<li><p><strong>nepochs</strong> (<em>int, optional</em>) – Number of epochs, by default 20</p></li>
-<li><p><strong>extranoise</strong> (<em>[type], optional</em>) – Extra noise level in Stokes profiles, by default 5e-4</p></li>
-<li><p><strong>learning_rate</strong> (<em>[type], optional</em>) – Learning rate used in Adam optimizer, by default 1e-4</p></li>
-<li><p><strong>batch_size</strong> (<em>int, optional</em>) – Size of each batch, by default 100</p></li>
-<li><p><strong>datasize</strong> (<em>int, optional</em>) – Size of the dataset created for training, by default 10</p></li>
-<li><p><strong>samplesize</strong> (<em>int, optional</em>) – Size of each FOV created for training, by default 20</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ISPy.util.neural_estimation.neural_estimator.quickplot">
-<span class="sig-name descname"><span class="pre">quickplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indexlist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[3,</span> <span class="pre">7]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'testplot.pdf'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.neural_estimation.neural_estimator.quickplot" title="Permalink to this definition"></a></dt>
-<dd><p>Quick figure with the comparison between the training dataset and
-the prediction of the network.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>indexlist</strong> (<em>list, optional</em>) – List of logtau to plot, by default [3,7]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ISPy.util.neural_estimation.neural_estimator.train">
-<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'network1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">option</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'start'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nepochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_train_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stokes_train_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logtau_train_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extranoise</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0006</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datasize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samplesize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.util.neural_estimation.neural_estimator.train" title="Permalink to this definition"></a></dt>
-<dd><p>Train the neural network</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<em>str, optional</em>) – name of the network, by default ‘network1’</p></li>
-<li><p><strong>option</strong> (<em>str, optional</em>) – start or continue the previous training, by default ‘start’</p></li>
-<li><p><strong>nepochs</strong> (<em>int, optional</em>) – Number of epochs, by default 20</p></li>
-<li><p><strong>model_train_list</strong> (<em>list of strings</em>) – List of models in STiC format used for training</p></li>
-<li><p><strong>stokes_train_list</strong> (<em>list of strings</em>) – List of observed or synthetic profiles for training</p></li>
-<li><p><strong>logtau_train_list</strong> (<em>list</em>) – List of logtau values included in the training</p></li>
-<li><p><strong>extranoise</strong> (<em>[type], optional</em>) – Extra noise level in Stokes profiles, by default 5e-4</p></li>
-<li><p><strong>learning_rate</strong> (<em>[type], optional</em>) – Learning rate used in Adam optimizer, by default 1e-4</p></li>
-<li><p><strong>batch_size</strong> (<em>int, optional</em>) – Size of each batch, by default 100</p></li>
-<li><p><strong>datasize</strong> (<em>int, optional</em>) – Size of the dataset created for training, by default 10</p></li>
-<li><p><strong>samplesize</strong> (<em>int, optional</em>) – Size of each FOV created for training, by default 20</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<p># Reading data in STiC format:
-&gt;&gt;&gt; model_train_list = [‘model.nc’]
-&gt;&gt;&gt; stokes_train_list = [‘profiles.nc’]
-&gt;&gt;&gt; logtau = [-7,-6,-5,-4,-3,-2,-1, 0, 1]</p>
-<p># Initializing the neural network
-&gt;&gt;&gt; myestimator = nst.neural_estimator()
-&gt;&gt;&gt; myestimator.train(name=’network1’,option=’start’,nepochs=10,model_train_list,stokes_train_list,logtau)
-&gt;&gt;&gt; myestimator.quickplot()</p>
-</dd></dl>
-
-</dd></dl>
-
+</section>
+<section id="ispy-util-neural-estimation-module">
+<h2>ISPy.util.neural_estimation module<a class="headerlink" href="#ispy-util-neural-estimation-module" title="Permalink to this heading"></a></h2>
 </section>
 <section id="module-ISPy.util.obs">
 <span id="ispy-util-obs-module"></span><h2>ISPy.util.obs module<a class="headerlink" href="#module-ISPy.util.obs" title="Permalink to this heading"></a></h2>
