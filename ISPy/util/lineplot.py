@@ -18,7 +18,7 @@ def find_nearest(array, array2, k=1):
     array = np.asarray(array)
     arr = np.zeros_like(array2)
     for i in range(len(array2)):
-        arr[i] = np.int(np.argsort(abs(array - array2[i]))[:k])
+        arr[i] = int(np.argsort(abs(array - array2[i]))[:k])
     return arr
 
 def line_resolution(line, instrument='CRISP'):
