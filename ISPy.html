@@ -16,6 +16,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -59,8 +60,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>ISPy package</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">ISPy package</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/ISPy.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -82,24 +83,94 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="ISPy.img.html">ISPy.img package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="ISPy.img.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ISPy.img.html#module-ISPy.img.align">ISPy.img.align module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ISPy.img.html#module-ISPy.img.denoising">ISPy.img.denoising module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ISPy.img.html#module-ISPy.img.interpolate2d">ISPy.img.interpolate2d module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ISPy.img.html#module-ISPy.img.align">ISPy.img.align module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.img.html#ISPy.img.align.align"><code class="docutils literal notranslate"><span class="pre">align()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ISPy.img.html#module-ISPy.img.denoising">ISPy.img.denoising module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.img.html#ISPy.img.denoising.ReflectionPadding2D"><code class="docutils literal notranslate"><span class="pre">ReflectionPadding2D</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ISPy.img.html#ISPy.img.denoising.ReflectionPadding2D.call"><code class="docutils literal notranslate"><span class="pre">ReflectionPadding2D.call()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ISPy.img.html#ISPy.img.denoising.ReflectionPadding2D.compute_output_shape"><code class="docutils literal notranslate"><span class="pre">ReflectionPadding2D.compute_output_shape()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ISPy.img.html#ISPy.img.denoising.ReflectionPadding2D.get_config"><code class="docutils literal notranslate"><span class="pre">ReflectionPadding2D.get_config()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.img.html#ISPy.img.denoising.deep_network"><code class="docutils literal notranslate"><span class="pre">deep_network</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ISPy.img.html#ISPy.img.denoising.deep_network.define_network"><code class="docutils literal notranslate"><span class="pre">deep_network.define_network()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ISPy.img.html#ISPy.img.denoising.deep_network.predict"><code class="docutils literal notranslate"><span class="pre">deep_network.predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.img.html#ISPy.img.denoising.neural_network"><code class="docutils literal notranslate"><span class="pre">neural_network()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.img.html#ISPy.img.denoising.predict_image"><code class="docutils literal notranslate"><span class="pre">predict_image()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.img.html#ISPy.img.denoising.spatial_reflection_2d_padding"><code class="docutils literal notranslate"><span class="pre">spatial_reflection_2d_padding()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.img.html#ISPy.img.denoising.unet"><code class="docutils literal notranslate"><span class="pre">unet()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ISPy.img.html#module-ISPy.img.interpolate2d">ISPy.img.interpolate2d module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.img.html#ISPy.img.interpolate2d.check_inputs"><code class="docutils literal notranslate"><span class="pre">check_inputs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.img.html#ISPy.img.interpolate2d.interpolate2d"><code class="docutils literal notranslate"><span class="pre">interpolate2d()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="ISPy.img.html#module-ISPy.img">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="ISPy.inv.html">ISPy.inv package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="ISPy.inv.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ISPy.inv.html#module-ISPy.inv.disambiguation">ISPy.inv.disambiguation module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ISPy.inv.html#module-ISPy.inv.disambiguation">ISPy.inv.disambiguation module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.inv.html#ISPy.inv.disambiguation.field_test"><code class="docutils literal notranslate"><span class="pre">field_test()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.inv.html#ISPy.inv.disambiguation.get_acute_angle"><code class="docutils literal notranslate"><span class="pre">get_acute_angle()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.inv.html#ISPy.inv.disambiguation.potential_extrapolation"><code class="docutils literal notranslate"><span class="pre">potential_extrapolation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.inv.html#ISPy.inv.disambiguation.smooth_azimuth"><code class="docutils literal notranslate"><span class="pre">smooth_azimuth()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="ISPy.inv.html#module-ISPy.inv">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="ISPy.io.html">ISPy.io package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="ISPy.io.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ISPy.io.html#module-ISPy.io.lapalma">ISPy.io.lapalma module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ISPy.io.html#module-ISPy.io.pyio">ISPy.io.pyio module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ISPy.io.html#module-ISPy.io.sn">ISPy.io.sn module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ISPy.io.html#module-ISPy.io.solarnet">ISPy.io.solarnet module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ISPy.io.html#module-ISPy.io.lapalma">ISPy.io.lapalma module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.io.html#ISPy.io.lapalma.get"><code class="docutils literal notranslate"><span class="pre">get()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.io.html#ISPy.io.lapalma.head"><code class="docutils literal notranslate"><span class="pre">head()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.io.html#ISPy.io.lapalma.mk_header"><code class="docutils literal notranslate"><span class="pre">mk_header()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.io.html#ISPy.io.lapalma.put"><code class="docutils literal notranslate"><span class="pre">put()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.io.html#ISPy.io.lapalma.read"><code class="docutils literal notranslate"><span class="pre">read()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.io.html#ISPy.io.lapalma.write"><code class="docutils literal notranslate"><span class="pre">write()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.io.html#ISPy.io.lapalma.writeto"><code class="docutils literal notranslate"><span class="pre">writeto()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ISPy.io.html#module-ISPy.io.pyio">ISPy.io.pyio module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.io.html#ISPy.io.pyio.bio"><code class="docutils literal notranslate"><span class="pre">bio</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ISPy.io.html#ISPy.io.pyio.bio.create_empty_variable"><code class="docutils literal notranslate"><span class="pre">bio.create_empty_variable()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ISPy.io.html#ISPy.io.pyio.bio.get_data_tree"><code class="docutils literal notranslate"><span class="pre">bio.get_data_tree()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ISPy.io.html#ISPy.io.pyio.bio.map_variable"><code class="docutils literal notranslate"><span class="pre">bio.map_variable()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ISPy.io.html#ISPy.io.pyio.bio.read_variable"><code class="docutils literal notranslate"><span class="pre">bio.read_variable()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ISPy.io.html#ISPy.io.pyio.bio.variable_exists"><code class="docutils literal notranslate"><span class="pre">bio.variable_exists()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ISPy.io.html#ISPy.io.pyio.bio.write_variable"><code class="docutils literal notranslate"><span class="pre">bio.write_variable()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.io.html#ISPy.io.pyio.container"><code class="docutils literal notranslate"><span class="pre">container</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.io.html#ISPy.io.pyio.create_header"><code class="docutils literal notranslate"><span class="pre">create_header()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.io.html#ISPy.io.pyio.file_exists"><code class="docutils literal notranslate"><span class="pre">file_exists()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.io.html#ISPy.io.pyio.get_header_size"><code class="docutils literal notranslate"><span class="pre">get_header_size()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.io.html#ISPy.io.pyio.number2dtype"><code class="docutils literal notranslate"><span class="pre">number2dtype()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.io.html#ISPy.io.pyio.number2size"><code class="docutils literal notranslate"><span class="pre">number2size()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.io.html#ISPy.io.pyio.type2number"><code class="docutils literal notranslate"><span class="pre">type2number()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.io.html#ISPy.io.pyio.unpack_header"><code class="docutils literal notranslate"><span class="pre">unpack_header()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ISPy.io.html#module-ISPy.io.sn">ISPy.io.sn module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.io.html#ISPy.io.sn.sstdata"><code class="docutils literal notranslate"><span class="pre">sstdata</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ISPy.io.html#module-ISPy.io.solarnet">ISPy.io.solarnet module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.io.html#ISPy.io.solarnet.get_coord"><code class="docutils literal notranslate"><span class="pre">get_coord()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.io.html#ISPy.io.solarnet.get_extent"><code class="docutils literal notranslate"><span class="pre">get_extent()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.io.html#ISPy.io.solarnet.get_time"><code class="docutils literal notranslate"><span class="pre">get_time()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.io.html#ISPy.io.solarnet.get_wav"><code class="docutils literal notranslate"><span class="pre">get_wav()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.io.html#ISPy.io.solarnet.read"><code class="docutils literal notranslate"><span class="pre">read()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.io.html#ISPy.io.solarnet.seconds2string"><code class="docutils literal notranslate"><span class="pre">seconds2string()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.io.html#ISPy.io.solarnet.write"><code class="docutils literal notranslate"><span class="pre">write()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="ISPy.io.html#module-ISPy.io">Module contents</a></li>
 </ul>
 </li>
@@ -113,35 +184,142 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="ISPy.spec.html">ISPy.spec package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="ISPy.spec.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ISPy.spec.html#module-ISPy.spec.atlas">ISPy.spec.atlas module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ISPy.spec.html#module-ISPy.spec.bfield">ISPy.spec.bfield module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ISPy.spec.html#module-ISPy.spec.calib">ISPy.spec.calib module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ISPy.spec.html#module-ISPy.spec.chromis">ISPy.spec.chromis module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ISPy.spec.html#module-ISPy.spec.crisp">ISPy.spec.crisp module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ISPy.spec.html#module-ISPy.spec.crosstalk">ISPy.spec.crosstalk module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ISPy.spec.html#module-ISPy.spec.wfa">ISPy.spec.wfa module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ISPy.spec.html#module-ISPy.spec.atlas">ISPy.spec.atlas module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.atlas.atlas"><code class="docutils literal notranslate"><span class="pre">atlas</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.atlas.atlas.get"><code class="docutils literal notranslate"><span class="pre">atlas.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.atlas.atlas.to"><code class="docutils literal notranslate"><span class="pre">atlas.to()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ISPy.spec.html#module-ISPy.spec.bfield">ISPy.spec.bfield module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.bfield.cartesian2cylindrical"><code class="docutils literal notranslate"><span class="pre">cartesian2cylindrical()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.bfield.cartesian2spherical"><code class="docutils literal notranslate"><span class="pre">cartesian2spherical()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.bfield.cylindrical2cartesian"><code class="docutils literal notranslate"><span class="pre">cylindrical2cartesian()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.bfield.cylindrical2spherical"><code class="docutils literal notranslate"><span class="pre">cylindrical2spherical()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.bfield.spherical2cartesian"><code class="docutils literal notranslate"><span class="pre">spherical2cartesian()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.bfield.spherical2cylindrical"><code class="docutils literal notranslate"><span class="pre">spherical2cylindrical()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ISPy.spec.html#module-ISPy.spec.calib">ISPy.spec.calib module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.calib.convolve_atlas"><code class="docutils literal notranslate"><span class="pre">convolve_atlas()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.calib.get_calibration"><code class="docutils literal notranslate"><span class="pre">get_calibration()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.calib.limbdarkening"><code class="docutils literal notranslate"><span class="pre">limbdarkening()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.calib.spectrum"><code class="docutils literal notranslate"><span class="pre">spectrum()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ISPy.spec.html#module-ISPy.spec.chromis">ISPy.spec.chromis module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.chromis.dual_fpi"><code class="docutils literal notranslate"><span class="pre">dual_fpi()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ISPy.spec.html#module-ISPy.spec.crisp">ISPy.spec.crisp module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.crisp.crisp"><code class="docutils literal notranslate"><span class="pre">crisp</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.crisp.crisp.dual_fpi"><code class="docutils literal notranslate"><span class="pre">crisp.dual_fpi()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.crisp.crisp.dual_fpi_ch"><code class="docutils literal notranslate"><span class="pre">crisp.dual_fpi_ch()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.crisp.crisp.dual_fpi_conv"><code class="docutils literal notranslate"><span class="pre">crisp.dual_fpi_conv()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.crisp.crisp.getwidth"><code class="docutils literal notranslate"><span class="pre">crisp.getwidth()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.crisp.crisp.np"><code class="docutils literal notranslate"><span class="pre">crisp.np</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.crisp.crisp.read_reflectivity"><code class="docutils literal notranslate"><span class="pre">crisp.read_reflectivity()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.crisp.double2time"><code class="docutils literal notranslate"><span class="pre">double2time()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.crisp.time2double"><code class="docutils literal notranslate"><span class="pre">time2double()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ISPy.spec.html#module-ISPy.spec.crosstalk">ISPy.spec.crosstalk module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.crosstalk.estimate_crosstalk"><code class="docutils literal notranslate"><span class="pre">estimate_crosstalk()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.crosstalk.get_projection"><code class="docutils literal notranslate"><span class="pre">get_projection()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ISPy.spec.html#module-ISPy.spec.wfa">ISPy.spec.wfa module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.wfa.cder"><code class="docutils literal notranslate"><span class="pre">cder()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.wfa.getBhor"><code class="docutils literal notranslate"><span class="pre">getBhor()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.wfa.getBlos"><code class="docutils literal notranslate"><span class="pre">getBlos()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.wfa.getBlosMask"><code class="docutils literal notranslate"><span class="pre">getBlosMask()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.wfa.getBlosProf"><code class="docutils literal notranslate"><span class="pre">getBlosProf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.wfa.line"><code class="docutils literal notranslate"><span class="pre">line</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ISPy.spec.html#ISPy.spec.wfa.line.update"><code class="docutils literal notranslate"><span class="pre">line.update()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="ISPy.spec.html#module-ISPy.spec">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="ISPy.util.html">ISPy.util package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="ISPy.util.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ISPy.util.html#module-ISPy.util.azimuth">ISPy.util.azimuth module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ISPy.util.html#module-ISPy.util.cubeshow">ISPy.util.cubeshow module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ISPy.util.html#module-ISPy.util.find">ISPy.util.find module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ISPy.util.html#module-ISPy.util.gentools">ISPy.util.gentools module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ISPy.util.html#module-ISPy.util.lineplot">ISPy.util.lineplot module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ISPy.util.html#module-ISPy.util.azimuth">ISPy.util.azimuth module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.util.html#ISPy.util.azimuth.BQBU2BTAZI"><code class="docutils literal notranslate"><span class="pre">BQBU2BTAZI()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.util.html#ISPy.util.azimuth.BQBU2BTAZI_cube"><code class="docutils literal notranslate"><span class="pre">BQBU2BTAZI_cube()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.util.html#ISPy.util.azimuth.BTAZI2BQBU"><code class="docutils literal notranslate"><span class="pre">BTAZI2BQBU()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.util.html#ISPy.util.azimuth.BTAZI2BQBU_cube"><code class="docutils literal notranslate"><span class="pre">BTAZI2BQBU_cube()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ISPy.util.html#module-ISPy.util.cubeshow">ISPy.util.cubeshow module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.util.html#ISPy.util.cubeshow.animate_cube"><code class="docutils literal notranslate"><span class="pre">animate_cube()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.util.html#ISPy.util.cubeshow.plotall"><code class="docutils literal notranslate"><span class="pre">plotall()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ISPy.util.html#module-ISPy.util.find">ISPy.util.find module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.util.html#ISPy.util.find.cube"><code class="docutils literal notranslate"><span class="pre">cube()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.util.html#ISPy.util.find.files"><code class="docutils literal notranslate"><span class="pre">files()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.util.html#ISPy.util.find.fits"><code class="docutils literal notranslate"><span class="pre">fits()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.util.html#ISPy.util.find.idlsave"><code class="docutils literal notranslate"><span class="pre">idlsave()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.util.html#ISPy.util.find.nc"><code class="docutils literal notranslate"><span class="pre">nc()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ISPy.util.html#module-ISPy.util.gentools">ISPy.util.gentools module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.util.html#ISPy.util.gentools.findclose"><code class="docutils literal notranslate"><span class="pre">findclose()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.util.html#ISPy.util.gentools.findindex"><code class="docutils literal notranslate"><span class="pre">findindex()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.util.html#ISPy.util.gentools.rotate_cube"><code class="docutils literal notranslate"><span class="pre">rotate_cube()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ISPy.util.html#module-ISPy.util.lineplot">ISPy.util.lineplot module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.util.html#ISPy.util.lineplot.SST_scan_time"><code class="docutils literal notranslate"><span class="pre">SST_scan_time()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.util.html#ISPy.util.lineplot.find_nearest"><code class="docutils literal notranslate"><span class="pre">find_nearest()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.util.html#ISPy.util.lineplot.line_resolution"><code class="docutils literal notranslate"><span class="pre">line_resolution()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.util.html#ISPy.util.lineplot.plotline"><code class="docutils literal notranslate"><span class="pre">plotline()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="ISPy.util.html#ispy-util-neural-estimation-module">ISPy.util.neural_estimation module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ISPy.util.html#module-ISPy.util.obs">ISPy.util.obs module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ISPy.util.html#module-ISPy.util.plottools">ISPy.util.plottools module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ISPy.util.html#module-ISPy.util.rebin">ISPy.util.rebin module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ISPy.util.html#module-ISPy.util.remap">ISPy.util.remap module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ISPy.util.html#module-ISPy.util.obs">ISPy.util.obs module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.util.html#ISPy.util.obs.viewangle"><code class="docutils literal notranslate"><span class="pre">viewangle()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ISPy.util.html#module-ISPy.util.plottools">ISPy.util.plottools module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.util.html#ISPy.util.plottools.MidpointNormalize"><code class="docutils literal notranslate"><span class="pre">MidpointNormalize</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.util.html#ISPy.util.plottools.add_colorbar"><code class="docutils literal notranslate"><span class="pre">add_colorbar()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.util.html#ISPy.util.plottools.make_colormap"><code class="docutils literal notranslate"><span class="pre">make_colormap()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ISPy.util.html#module-ISPy.util.rebin">ISPy.util.rebin module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.util.html#ISPy.util.rebin.avg1D"><code class="docutils literal notranslate"><span class="pre">avg1D()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.util.html#ISPy.util.rebin.avg2D"><code class="docutils literal notranslate"><span class="pre">avg2D()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ISPy.util.html#module-ISPy.util.remap">ISPy.util.remap module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.util.html#ISPy.util.remap.bvec2cea"><code class="docutils literal notranslate"><span class="pre">bvec2cea()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.util.html#ISPy.util.remap.remap2cea"><code class="docutils literal notranslate"><span class="pre">remap2cea()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.util.html#ISPy.util.remap.sphere2img"><code class="docutils literal notranslate"><span class="pre">sphere2img()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.util.html#ISPy.util.remap.vector_transformation"><code class="docutils literal notranslate"><span class="pre">vector_transformation()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="ISPy.util.html#module-ISPy.util">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="ISPy.vis.html">ISPy.vis package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="ISPy.vis.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ISPy.vis.html#module-ISPy.vis.readout_fn">ISPy.vis.readout_fn module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ISPy.vis.html#module-ISPy.vis.show_hazel">ISPy.vis.show_hazel module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ISPy.vis.html#module-ISPy.vis.readout_fn">ISPy.vis.readout_fn module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.vis.html#ISPy.vis.readout_fn.readout_1c"><code class="docutils literal notranslate"><span class="pre">readout_1c()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.vis.html#ISPy.vis.readout_fn.readout_1c_ch"><code class="docutils literal notranslate"><span class="pre">readout_1c_ch()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.vis.html#ISPy.vis.readout_fn.readout_2c"><code class="docutils literal notranslate"><span class="pre">readout_2c()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ISPy.vis.html#module-ISPy.vis.show_hazel">ISPy.vis.show_hazel module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.vis.html#ISPy.vis.show_hazel.onclick"><code class="docutils literal notranslate"><span class="pre">onclick()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ISPy.vis.html#ISPy.vis.show_hazel.xyplot"><code class="docutils literal notranslate"><span class="pre">xyplot()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="ISPy.vis.html#module-ISPy.vis">Module contents</a></li>
 </ul>
 </li>

@@ -16,6 +16,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -59,9 +60,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="ISPy.html">ISPy package</a> &raquo;</li>
-      <li>ISPy.img package</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="ISPy.html">ISPy package</a></li>
+      <li class="breadcrumb-item active">ISPy.img package</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/ISPy.img.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -123,10 +124,14 @@ at the top, bottom, left and right side of an image tensor.</p>
 <dt class="sig sig-object py" id="ISPy.img.denoising.ReflectionPadding2D.call">
 <span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.denoising.ReflectionPadding2D.call" title="Permalink to this definition"></a></dt>
 <dd><p>This is where the layer’s logic lives.</p>
-<p>The <cite>call()</cite> method may not create state (except in its first invocation,
-wrapping the creation of variables or other resources in <cite>tf.init_scope()</cite>).
-It is recommended to create state in <cite>__init__()</cite>, or the <cite>build()</cite> method
-that is called automatically before <cite>call()</cite> executes the first time.</p>
+<p>The <cite>call()</cite> method may not create state (except in its first
+invocation, wrapping the creation of variables or other resources in
+<cite>tf.init_scope()</cite>).  It is recommended to create state, including
+<cite>tf.Variable</cite> instances and nested <cite>Layer</cite> instances,</p>
+<blockquote>
+<div><p>in <cite>__init__()</cite>, or in the <cite>build()</cite> method that is</p>
+</div></blockquote>
+<p>called automatically before <cite>call()</cite> executes for the first time.</p>
 <dl>
 <dt>Args:</dt><dd><dl>
 <dt>inputs: Input tensor, or dict/list/tuple of input tensors.</dt><dd><p>The first positional <cite>inputs</cite> argument is subject to special rules:
@@ -136,7 +141,8 @@ that is called automatically before <cite>call()</cite> executes the first time.
 of a keyword argument.</p>
 </div></blockquote>
 <ul class="simple">
-<li><p>NumPy array or Python scalar values in <cite>inputs</cite> get cast as tensors.</p></li>
+<li><p>NumPy array or Python scalar values in <cite>inputs</cite> get cast as
+tensors.</p></li>
 <li><p>Keras mask metadata is only collected from <cite>inputs</cite>.</p></li>
 <li><p>Layers are built (<cite>build(input_shape)</cite> method)
 using shape info from <cite>inputs</cite> only.</p></li>
@@ -144,7 +150,8 @@ using shape info from <cite>inputs</cite> only.</p></li>
 <li><p>Mixed precision input casting is only applied to <cite>inputs</cite>.
 If a layer has tensor arguments in <cite>*args</cite> or <cite>**kwargs</cite>, their
 casting behavior in mixed precision should be handled manually.</p></li>
-<li><p>The SavedModel input specification is generated using <cite>inputs</cite> only.</p></li>
+<li><p>The SavedModel input specification is generated using <cite>inputs</cite>
+only.</p></li>
 <li><p>Integration with various ecosystem packages like TFMOT, TFLite,
 TF.js, etc is only supported for <cite>inputs</cite> and not for tensors in
 positional and keyword arguments.</p></li>
@@ -160,10 +167,10 @@ The following optional keyword arguments are reserved:
 </div></blockquote>
 <ul class="simple">
 <li><p><cite>mask</cite>: Boolean input mask. If the layer’s <cite>call()</cite> method takes a
-<cite>mask</cite> argument, its default value will be set to the mask generated
-for <cite>inputs</cite> by the previous layer (if <cite>input</cite> did come from a layer
-that generated a corresponding mask, i.e. if it came from a Keras
-layer with masking support).</p></li>
+<cite>mask</cite> argument, its default value will be set to the mask
+generated for <cite>inputs</cite> by the previous layer (if <cite>input</cite> did come
+from a layer that generated a corresponding mask, i.e. if it came
+from a Keras layer with masking support).</p></li>
 </ul>
 </dd>
 </dl>
@@ -182,13 +189,15 @@ happened before. This requires that the layer will later be used with
 inputs that match the input shape provided here.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><dl class="simple">
-<dt>input_shape: Shape tuple (tuple of integers)</dt><dd><p>or list of shape tuples (one per output tensor of the layer).
+<dt>input_shape: Shape tuple (tuple of integers) or <cite>tf.TensorShape</cite>,</dt><dd><p>or structure of shape tuples / <cite>tf.TensorShape</cite> instances
+(one per output tensor of the layer).
 Shape tuples can include None for free dimensions,
 instead of an integer.</p>
 </dd>
 </dl>
 </dd>
-<dt>Returns:</dt><dd><p>An input shape tuple.</p>
+<dt>Returns:</dt><dd><p>A <cite>tf.TensorShape</cite> instance
+or structure of <cite>tf.TensorShape</cite> instances.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -204,9 +213,9 @@ The same layer can be reinstantiated later
 <p>The config of a layer does not include connectivity
 information, nor the layer class name. These are handled
 by <cite>Network</cite> (one layer of abstraction above).</p>
-<p>Note that <cite>get_config()</cite> does not guarantee to return a fresh copy of dict
-every time it is called. The callers should make a copy of the returned dict
-if they want to modify it.</p>
+<p>Note that <cite>get_config()</cite> does not guarantee to return a fresh copy of
+dict every time it is called. The callers should make a copy of the
+returned dict if they want to modify it.</p>
 <dl class="simple">
 <dt>Returns:</dt><dd><p>Python dictionary.</p>
 </dd>
@@ -254,8 +263,8 @@ if they want to modify it.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.img</span> <span class="k">import</span> <span class="n">denoising</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="k">import</span> <span class="n">solarnet</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.img</span> <span class="kn">import</span> <span class="n">denoising</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="kn">import</span> <span class="n">solarnet</span>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Reading data:</span>

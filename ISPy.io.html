@@ -16,6 +16,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -59,9 +60,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="ISPy.html">ISPy package</a> &raquo;</li>
-      <li>ISPy.io package</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="ISPy.html">ISPy package</a></li>
+      <li class="breadcrumb-item active">ISPy.io package</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/ISPy.io.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -213,7 +214,7 @@ w: wavelength step</p></li>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="k">import</span> <span class="n">lapalma</span> <span class="k">as</span> <span class="n">lp</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="kn">import</span> <span class="n">lapalma</span> <span class="k">as</span> <span class="n">lp</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cube_a</span> <span class="o">=</span> <span class="n">lp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;filename.fcube&#39;</span><span class="p">)</span> <span class="c1"># It searches for &#39;filename_sp.fcube&#39; in the same path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cube_b</span> <span class="o">=</span> <span class="n">lp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;filename.fcube&#39;</span> <span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cube_c</span> <span class="o">=</span> <span class="n">lp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;filename.fcube&#39;</span> <span class="p">,</span> <span class="s1">&#39;filename_sp.fcube&#39;</span><span class="p">)</span>
@@ -242,7 +243,7 @@ w: wavelength step</p></li>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="k">import</span> <span class="n">lapalma</span> <span class="k">as</span> <span class="n">lp</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="kn">import</span> <span class="n">lapalma</span> <span class="k">as</span> <span class="n">lp</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">cube_array</span><span class="p">,</span> <span class="s1">&#39;cube.fcube&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;fits/&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -405,7 +406,7 @@ to the SOLARNET standard.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="k">import</span> <span class="n">solarnet</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="kn">import</span> <span class="n">solarnet</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">x_output</span><span class="p">,</span> <span class="n">y_output</span><span class="p">]</span> <span class="o">=</span> <span class="n">solarnet</span><span class="o">.</span><span class="n">get_coord</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">pix_x</span><span class="p">,</span><span class="n">pix_y</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -438,7 +439,7 @@ filename : str</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="k">import</span> <span class="n">solarnet</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="kn">import</span> <span class="n">solarnet</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">extent</span> <span class="o">=</span> <span class="n">solarnet</span><span class="o">.</span><span class="n">get_extent</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="n">extent</span><span class="p">)</span>
 </pre></div>
@@ -472,7 +473,7 @@ tuning-dependent time information.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="k">import</span> <span class="n">solarnet</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="kn">import</span> <span class="n">solarnet</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data_time</span> <span class="o">=</span> <span class="n">solarnet</span><span class="o">.</span><span class="n">get_time</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">fulltime</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">utc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -500,7 +501,7 @@ change over time.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="k">import</span> <span class="n">solarnet</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="kn">import</span> <span class="n">solarnet</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">wav_array</span> <span class="o">=</span> <span class="n">solarnet</span><span class="o">.</span><span class="n">get_wav</span><span class="p">(</span><span class="s1">&#39;filename.fits&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -527,7 +528,7 @@ change over time.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="k">import</span> <span class="n">solarnet</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="kn">import</span> <span class="n">solarnet</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">solarnet</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;filename.fits&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(30, 4, 41, 1914, 206)</span>
@@ -556,7 +557,7 @@ change over time.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="k">import</span> <span class="n">solarnet</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="kn">import</span> <span class="n">solarnet</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">solarnet</span><span class="o">.</span><span class="n">seconds2string</span><span class="p">(</span><span class="mf">63729.3</span><span class="p">)</span>
 <span class="go">&#39;17:42:09.300000&#39;</span>
 </pre></div>
@@ -581,7 +582,7 @@ change over time.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="k">import</span> <span class="n">solarnet</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="kn">import</span> <span class="n">solarnet</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">solarnet</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;filename.fits&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
