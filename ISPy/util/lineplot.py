@@ -142,7 +142,7 @@ def plotline(line,scan,name=None,center=0,nframes=8,fps=35., instrument='CRISP',
         w_atlas_central = np.argmin(intensity_atlas) #find line center
         cw = lambda_atlas[np.argmin(intensity_atlas)]
     else:
-        cen = len(lambda_atlas)/2
+        cen = int(len(lambda_atlas)/2)
         w_atlas_central = np.argmin(intensity_atlas[cen-50:cen+50]) + cen -50 #find line center
         cw = lambda_atlas[np.argmin(intensity_atlas[cen-50:cen+50])]
         
