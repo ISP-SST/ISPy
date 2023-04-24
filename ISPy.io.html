@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ISPy.io package &mdash; ISPy 0.2 documentation</title>
@@ -11,10 +11,9 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -29,11 +28,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> ISPy
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ISPy
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -60,7 +63,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="ISPy.html">ISPy package</a></li>
       <li class="breadcrumb-item active">ISPy.io package</li>
       <li class="wy-breadcrumbs-aside">
@@ -87,7 +90,7 @@ Alex Pietrow (github:crispy), Carlos Diaz and G. Vissers (ISP/SU 2019)</p>
 <span class="sig-prename descclassname"><span class="pre">ISPy.io.lapalma.</span></span><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.lapalma.get" title="Permalink to this definition"></a></dt>
 <dd><p>Read a 2D image (slice) given a known index from a La Palma cube.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>filename</strong> (<em>str</em>) – file to be opened. Has to be .icube or .fcube</p></li>
 <li><p><strong>index</strong> (<em>int</em>) – chosen frame, where frame is t*nw*ns + s*nw + w
@@ -97,10 +100,10 @@ w: wavelength step</p></li>
 <li><p><strong>verbose</strong> (<em>bool, optional</em>) – Verbose model. (Default value = False)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>image</strong> – 2D image slice</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>ndarray</p>
 </dd>
 </dl>
@@ -109,7 +112,7 @@ w: wavelength step</p></li>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Authors</dt>
+<dt class="field-odd">Authors<span class="colon">:</span></dt>
 <dd class="field-odd"><ol class="upperalpha simple" start="7">
 <li><p>Vissers (ITA UiO, 2016), A.G.M. Pietrow (2018), Carlos Diaz (ISP/SU 2019)</p></li>
 </ol>
@@ -122,17 +125,17 @@ w: wavelength step</p></li>
 <span class="sig-prename descclassname"><span class="pre">ISPy.io.lapalma.</span></span><span class="sig-name descname"><span class="pre">head</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">appendFormat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.lapalma.head" title="Permalink to this definition"></a></dt>
 <dd><p>Get the header of a legacy ‘La Palma’ cube</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<em>str</em>) – name of the file</p></li>
 <li><p><strong>verbose</strong> (<em>bool, optional</em>) – print out the header information (Default value = True)</p></li>
 <li><p><strong>appendFormat</strong> (<em>bool, optional</em>) – different format to ensure append operation (Default =False)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>header</strong> – header information in order (nx, ny, nt, nstokes, dtype, ndims)</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>tuple</p>
 </dd>
 </dl>
@@ -151,13 +154,13 @@ w: wavelength step</p></li>
 <span class="sig-prename descclassname"><span class="pre">ISPy.io.lapalma.</span></span><span class="sig-name descname"><span class="pre">mk_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.lapalma.mk_header" title="Permalink to this definition"></a></dt>
 <dd><p>Create a La Palma format header of an image array</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>image</strong> (<em>ndarray</em>) – 2D or 3D image array in La Palma ordering (nx, ny, nt)</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>header</strong> – header of the cube</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -168,7 +171,7 @@ w: wavelength step</p></li>
 <span class="sig-prename descclassname"><span class="pre">ISPy.io.lapalma.</span></span><span class="sig-name descname"><span class="pre">put</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">append</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stokes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.lapalma.put" title="Permalink to this definition"></a></dt>
 <dd><p>Append a new cube/slice to a pre-existent La Palma cube.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>filename</strong> (<em>str</em>) – name of file with .icube/fcube extention</p></li>
 <li><p><strong>image</strong> (<em>ndarray</em>) – datacube in form of [t,s,w,x,y]</p></li>
@@ -187,7 +190,7 @@ w: wavelength step</p></li>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Authors</dt>
+<dt class="field-odd">Authors<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Carlos Diaz,  G. Vissers, A.G.M. Pietrow (ISP/SU 2019)</p>
 </dd>
 </dl>
@@ -198,7 +201,7 @@ w: wavelength step</p></li>
 <span class="sig-prename descclassname"><span class="pre">ISPy.io.lapalma.</span></span><span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spnw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spformat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_sp'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.lapalma.read" title="Permalink to this definition"></a></dt>
 <dd><p>Read the full cube from a La Palma format file</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>cube</strong> (<em>str</em>) – filename, has to be .icube or .fcube</p></li>
 <li><p><strong>spnw</strong> (<em>str or int, optional</em>) – Specific filename of spectral cube OR number of wavelength steps (Default value = None)</p></li>
@@ -206,10 +209,10 @@ w: wavelength step</p></li>
 <li><p><strong>verb</strong> (<em>bool, optional</em>) – Verbose mode. (Default value = False)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>cube_array</strong> – 5D cube of shape [nt,ns,nw,nx,ny]</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>ndarray</p>
 </dd>
 </dl>
@@ -221,7 +224,7 @@ w: wavelength step</p></li>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Authors</dt>
+<dt class="field-odd">Authors<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Alex Pietrow (ISP/SU 2019), Carlos Diaz (ISP/SU 2019)</p>
 </dd>
 </dl>
@@ -232,7 +235,7 @@ w: wavelength step</p></li>
 <span class="sig-prename descclassname"><span class="pre">ISPy.io.lapalma.</span></span><span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cube_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stokes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.lapalma.write" title="Permalink to this definition"></a></dt>
 <dd><p>Write a data cube in La Palma format to disc</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>cube_array</strong> (<em>ndarray</em>) – datacube in form of [t,s,w,x,y]</p></li>
 <li><p><strong>name</strong> (<em>str</em>) – name of file with .icube/fcube extention</p></li>
@@ -248,7 +251,7 @@ w: wavelength step</p></li>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Authors</dt>
+<dt class="field-odd">Authors<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Alex Pietrow (ISP/SU 2019), Carlos Diaz (ISP/SU 2019)</p>
 </dd>
 </dl>
@@ -260,7 +263,7 @@ w: wavelength step</p></li>
 <dd><p>Submodule of “write”. It writes a cube to disk in LaPalma format.
 Partially from <a class="reference external" href="https://github.com/ITA-Solar/helita/blob/master/helita/io/lp.py">https://github.com/ITA-Solar/helita/blob/master/helita/io/lp.py</a></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>filename</strong> (<em>str</em>) – name of the file</p></li>
 <li><p><strong>image</strong> (<em>ndarray</em>) – data allocated in memory</p></li>
@@ -270,7 +273,7 @@ Partially from <a class="reference external" href="https://github.com/ITA-Solar/
 <li><p><strong>append</strong> (<em>bool, optional</em>) – append <cite>image</cite> to existing file (Default value = False)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>NoneType</p>
 </dd>
 </dl>
@@ -391,17 +394,17 @@ to the SOLARNET standard.</p>
 <span class="sig-prename descclassname"><span class="pre">ISPy.io.solarnet.</span></span><span class="sig-name descname"><span class="pre">get_coord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pix_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pix_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeFrame</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.solarnet.get_coord" title="Permalink to this definition"></a></dt>
 <dd><p>Converts pixel values to solar coordinates</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>filename</strong> (<em>str</em>) – name of the data cube</p></li>
 <li><p><strong>pix_x, pix_y</strong> (<em>int</em>) – pixel location to convert</p></li>
 <li><p><strong>timeFrame</strong> (<em>int</em>) – selected frame to the coordinates for (Default value = 0)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>xy_output</strong> – solar coordinates in arcsec</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list</p>
 </dd>
 </dl>
@@ -411,7 +414,7 @@ to the SOLARNET standard.</p>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Author</dt>
+<dt class="field-odd">Author<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Carlos Diaz Baso (ISP/SU 2019)</p>
 </dd>
 </dl>
@@ -431,10 +434,10 @@ filename : str</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>extent_output</strong> – 1D array with solar coordinates in arcsec of the corners.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>array_like</p>
 </dd>
 </dl>
@@ -445,7 +448,7 @@ filename : str</p>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Author</dt>
+<dt class="field-odd">Author<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Carlos Diaz Baso (ISP/SU 2019)</p>
 </dd>
 </dl>
@@ -456,19 +459,19 @@ filename : str</p>
 <span class="sig-prename descclassname"><span class="pre">ISPy.io.solarnet.</span></span><span class="sig-name descname"><span class="pre">get_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fulltime</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">utc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.solarnet.get_time" title="Permalink to this definition"></a></dt>
 <dd><p>Reads the time information of a ‘SOLARNET’ FITS file</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>filename</strong> (<em>str</em>) – name of the data cube</p></li>
 <li><p><strong>fulltime</strong> (<em>bool, optional</em>) – information at each wavelength point (Default value = False)</p></li>
 <li><p><strong>utc</strong> (<em>bool, optional</em>) – the output is given in ‘HH:MM:SS’ format (Default value = False)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>time_output</strong> – array with time information. If fulltime=False, a 1D array with time at
 middle wavelength tuning; if fulltime=True, a 2D array with
 tuning-dependent time information.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>array_like</p>
 </dd>
 </dl>
@@ -478,7 +481,7 @@ tuning-dependent time information.</p>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Author</dt>
+<dt class="field-odd">Author<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Carlos Diaz Baso (ISP/SU 2019)</p>
 </dd>
 </dl>
@@ -489,14 +492,14 @@ tuning-dependent time information.</p>
 <span class="sig-prename descclassname"><span class="pre">ISPy.io.solarnet.</span></span><span class="sig-name descname"><span class="pre">get_wav</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.solarnet.get_wav" title="Permalink to this definition"></a></dt>
 <dd><p>Read the wavelength information of a ‘SOLARNET’ FITS file</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – name of the data cube</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>wav_output</strong> – 1D wavelength array. It is assumed that spectral sampling does not
 change over time.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>array_like</p>
 </dd>
 </dl>
@@ -506,7 +509,7 @@ change over time.</p>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Authors</dt>
+<dt class="field-odd">Authors<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Carlos Diaz Baso (ISP/SU 2019)</p>
 </dd>
 </dl>
@@ -517,13 +520,13 @@ change over time.</p>
 <span class="sig-prename descclassname"><span class="pre">ISPy.io.solarnet.</span></span><span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.solarnet.read" title="Permalink to this definition"></a></dt>
 <dd><p>Read the data of a ‘SOLARNET’ FITS file</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – name of the data cube</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>data</strong> – multidimensional data array</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>ndarray</p>
 </dd>
 </dl>
@@ -535,7 +538,7 @@ change over time.</p>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Author</dt>
+<dt class="field-odd">Author<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Carlos Diaz Baso (ISP/SU 2019)</p>
 </dd>
 </dl>
@@ -546,13 +549,13 @@ change over time.</p>
 <span class="sig-prename descclassname"><span class="pre">ISPy.io.solarnet.</span></span><span class="sig-name descname"><span class="pre">seconds2string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.solarnet.seconds2string" title="Permalink to this definition"></a></dt>
 <dd><p>Convert time in seconds to ‘HH:MM:SS’ format</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>number</strong> (<em>float</em>) – value in seconds</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>time_string</strong> – time in ‘HH:MM:SS’ format</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -563,7 +566,7 @@ change over time.</p>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Author</dt>
+<dt class="field-odd">Author<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Carlos Diaz Baso (ISP/SU 2019)</p>
 </dd>
 </dl>
@@ -574,7 +577,7 @@ change over time.</p>
 <span class="sig-prename descclassname"><span class="pre">ISPy.io.solarnet.</span></span><span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.io.solarnet.write" title="Permalink to this definition"></a></dt>
 <dd><p>Write the data as a standard FITS file (without proper SOLARNET header)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>filename</strong> (<em>str</em>) – name of the data cube</p></li>
 <li><p><strong>d</strong> (<em>ndarray</em>) – data in memory</p></li>
@@ -587,7 +590,7 @@ change over time.</p>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Author</dt>
+<dt class="field-odd">Author<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Carlos Diaz Baso (ISP/SU 2019)</p>
 </dd>
 </dl>

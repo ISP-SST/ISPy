@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ISPy.vis package &mdash; ISPy 0.2 documentation</title>
@@ -11,10 +11,9 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -28,11 +27,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> ISPy
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ISPy
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -59,7 +62,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="ISPy.html">ISPy package</a></li>
       <li class="breadcrumb-item active">ISPy.vis package</li>
       <li class="wy-breadcrumbs-aside">
@@ -83,7 +86,7 @@
 <span class="sig-prename descclassname"><span class="pre">ISPy.vis.readout_fn.</span></span><span class="sig-name descname"><span class="pre">readout_1c</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obsf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ny</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.vis.readout_fn.readout_1c" title="Permalink to this definition"></a></dt>
 <dd><p>Read 1-component of photospheric and chromospheric data</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>obsf</strong> (<em>str</em>) – filename of observed Stokes maps</p></li>
 <li><p><strong>nx</strong> (<em>int</em>) – xsize</p></li>
@@ -91,7 +94,7 @@
 <li><p><strong>invf</strong> (<em>str</em>) – filename of inverted maps</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p><strong>inv_ch</strong> (<em>ndarray</em>) – inverted parameters in 3D array [nx, ny, parameters]</p></li>
 <li><p><strong>inv_ph</strong> (<em>ndarray</em>) – photospheric inverted parameters in 4D array [nx, ny, logtau, parameters]</p></li>
@@ -108,7 +111,7 @@
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Author</dt>
+<dt class="field-odd">Author<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Rahul Yadav (ISP/SU 2019)</p>
 </dd>
 </dl>
@@ -119,7 +122,7 @@
 <span class="sig-prename descclassname"><span class="pre">ISPy.vis.readout_fn.</span></span><span class="sig-name descname"><span class="pre">readout_1c_ch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obsf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ny</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.vis.readout_fn.readout_1c_ch" title="Permalink to this definition"></a></dt>
 <dd><p>Read chromospheric part of 1-component inferred atmosphere</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>obsf</strong> (<em>str</em>) – filename of observed Stokes maps</p></li>
 <li><p><strong>nx</strong> (<em>int</em>) – xsize</p></li>
@@ -127,7 +130,7 @@
 <li><p><strong>invf</strong> (<em>str</em>) – filename of inverted maps</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p><strong>inv_ch</strong> (<em>ndarray</em>) – inverted parameters in 3D array [nx, ny, parameters]</p></li>
 <li><p><strong>synpro</strong> (<em>ndarray</em>) – synthetic profiles in 4D array [nx, ny, 4stks, wav]</p></li>
@@ -141,7 +144,7 @@
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Author</dt>
+<dt class="field-odd">Author<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Rahul Yadav (ISP/SU 2019)</p>
 </dd>
 </dl>
@@ -152,7 +155,7 @@
 <span class="sig-prename descclassname"><span class="pre">ISPy.vis.readout_fn.</span></span><span class="sig-name descname"><span class="pre">readout_2c</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obsf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ny</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.vis.readout_fn.readout_2c" title="Permalink to this definition"></a></dt>
 <dd><p>Read 2-component of chromospheric and 1-component of photospheric data</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>obsf</strong> (<em>str</em>) – filename of observed Stokes maps</p></li>
 <li><p><strong>nx</strong> (<em>int</em>) – xsize</p></li>
@@ -160,7 +163,7 @@
 <li><p><strong>invf</strong> (<em>str</em>) – filename of inverted maps</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p><strong>inv_ch</strong> (<em>ndarray</em>) – inverted parameters in 4D array [nx, ny, parameters, 2]</p></li>
 <li><p><strong>inv_ph</strong> (<em>ndarray</em>) – photospheric inverted parameters in 4D array [nx, ny, logtau, parameters]</p></li>
@@ -177,7 +180,7 @@
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Author</dt>
+<dt class="field-odd">Author<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Rahul Yadav (ISP/SU 2019)</p>
 </dd>
 </dl>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ISPy.img package &mdash; ISPy 0.2 documentation</title>
@@ -11,10 +11,9 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -29,11 +28,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> ISPy
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ISPy
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -60,7 +63,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="ISPy.html">ISPy package</a></li>
       <li class="breadcrumb-item active">ISPy.img package</li>
       <li class="wy-breadcrumbs-aside">
@@ -84,16 +87,16 @@
 <span class="sig-prename descclassname"><span class="pre">ISPy.img.align.</span></span><span class="sig-name descname"><span class="pre">align</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.align.align" title="Permalink to this definition"></a></dt>
 <dd><p>Compute the shifts (dy,dx) needed to align image b into a</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>a</strong> (<em>ndarray</em>) – 2D numpy array of dimensions (ny, nx)</p></li>
 <li><p><strong>b</strong> (<em>ndarray</em>) – 2D numpy array of dimensions (ny, nx)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>dxy</strong> – the (y,x) shifts in pixel units.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>tuple</p>
 </dd>
 </dl>
@@ -104,7 +107,7 @@
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Author</dt>
+<dt class="field-odd">Author<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Jaime de la Cruz Rodriguez (ISP/SU 2015), ported from IDL</p>
 </dd>
 </dl>
@@ -245,7 +248,7 @@ returned dict if they want to modify it.</p>
 <span class="sig-prename descclassname"><span class="pre">ISPy.img.denoising.</span></span><span class="sig-name descname"><span class="pre">neural_network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">niterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotOption</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_Option</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">split</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.denoising.neural_network" title="Permalink to this definition"></a></dt>
 <dd><p>Run the denoising neural network algorithm developed in the paper <a class="reference external" href="https://arxiv.org/abs/1908.02815">https://arxiv.org/abs/1908.02815</a></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>input_data</strong> (<em>5D ndarray</em>) – data cube</p></li>
 <li><p><strong>niterations</strong> (<em>int, optional</em>) – number of times the neural network, cleaning the residuals</p></li>
@@ -255,10 +258,10 @@ returned dict if they want to modify it.</p>
 <li><p><strong>split</strong> (<em>bool, optional</em>) – run the network splitting the data into multiple partitions (for big files)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>cube_array</strong> – 5D cube of shape [nt,ns,nw,nx,ny] after performing the denoising.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>ndarray</p>
 </dd>
 </dl>
@@ -275,7 +278,7 @@ returned dict if they want to modify it.</p>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Authors</dt>
+<dt class="field-odd">Authors<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Carlos Diaz (ISP/SU 2019)</p>
 </dd>
 </dl>
@@ -312,7 +315,7 @@ returned dict if they want to modify it.</p>
 <dd><p>2D interpolation routine: it outputs an array with same length
 as points with interpolated values.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>x</strong> (<em>array</em>) – x-coordinates of the mesh on which to interpolate</p></li>
 <li><p><strong>y</strong> (<em>array</em>) – y-coordinates of the mesh on which to interpolate</p></li>
