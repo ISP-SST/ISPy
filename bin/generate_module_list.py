@@ -61,7 +61,7 @@ def generate_module_list(wdir, with_cython=False, with_ext=False):
         for y in glob(str(Path(__file__).parents[1].absolute().joinpath(x))):
             ok_cython = True
             ok_ext = True
-            if len(glob(join(dirname(y),'*.pyx'))) is 0:
+            if len(glob(join(dirname(y),'*.pyx'))) == 0:
                 ok_cython = not with_cython
             if not isfile(join(dirname(y),'__extensions__.ispy')):
                 ok_ext = not with_ext

@@ -21,7 +21,7 @@ def _minimal_ext_cmd(cmd):
     return out
 
 # Return the git revision as a string
-def git_version():
+def git_version(): # This function is not valid under PEP440
 
     try:
         out = _minimal_ext_cmd(['git', 'rev-parse', 'HEAD'])
@@ -50,11 +50,14 @@ def git_version():
 
     return GIT_REVISION, GIT_VERSION_TAG
 
-def get_version_info():
+
+
+
+def get_version_info(): # This function is not valid under PEP440
     # Adding the git rev number needs to be done inside write_version_py(),
     # otherwise the import of ISPy.version messes up the build under Python 3.
     ISRELEASED = False
-    if subprocess.call(['git', 'rev-parse']) is 0:
+    if subprocess.call(['git', 'rev-parse']) == 0:
         GIT_REVISION, VERSION = git_version()
         if VERSION is None:
             VERSION = 'dev-' + GIT_REVISION[:7]
@@ -79,6 +82,9 @@ def get_version_info():
 
     return VERSION, GIT_REVISION, ISRELEASED
 
+
+
+# This function is not valid under PEP440
 def write_version_py(filename=str(Path(__file__).parents[1].joinpath('ISPy','version.py'))):
     cnt = """
 # THIS FILE IS GENERATED FROM ISPY SETUP.PY
@@ -100,3 +106,27 @@ release = %(isrelease)s
                        'isrelease': str(ISRELEASED)})
     finally:
         a.close()
+
+
+
+
+
+# Adding an alternative way compatible with PEP440:
+def get_pep440version_info():
+    # This version of the function uses the format {tag_name}.dev{num_commits}+{commit_hash} to
+    # indicate that the version number is a development version, with {tag_name} indicating the
+    # name of the latest tag, {num_commits} representing the number of commits since the tag, and
+    # {commit_hash} representing the abbreviated commit hash.
+    git_describe_output = subprocess.check_output(['git', 'describe', '--tags']).decode('utf-8').strip()
+    
+    # Split the output string
+    parts = git_describe_output.split('-')
+    if len(parts) == 1:
+        # No additional commits since the last tag, so this is a release version
+        return parts[0]
+    else:
+        # There are additional commits since the last tag, creating a development version
+        tag_name, num_commits, commit_hash = parts
+        commit_hash = commit_hash[1:]  # Remove the 'g' prefix from the commit hash
+        return f"{tag_name}.dev{num_commits}+{commit_hash}"
+    
