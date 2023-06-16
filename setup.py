@@ -80,7 +80,7 @@ class clean(Command):
 
 def setup_package():
     # Rewrite the version file everytime
-    write_version_py()
+    # write_version_py()
 
     build_ext = False
     cython_success = True
@@ -139,8 +139,7 @@ def setup_package():
 
     setup(
         name                          = "ISPy",
-        # version                       = get_version_info()[0],
-        version                       = '0.2.0',
+        version                       = get_pep440version_info(),
         author                        = "ISP-SST",
         author_email                  = "hillberg@astro.su.se",
         description                   = "Commonly used tools at the ISP",
