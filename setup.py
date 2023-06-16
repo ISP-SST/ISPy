@@ -86,7 +86,7 @@ def setup_package():
     cython_success = True
     cython_ret = {}
     if not "--nocython" in sys.argv:
-        if "--cythonize" in sys.argv or subprocess.call(['git', 'rev-parse']) is 0 and ("--with-extensions" in sys.argv or "build_ext" in sys.argv):
+        if "--cythonize" in sys.argv or subprocess.call(['git', 'rev-parse']) == 0 and ("--with-extensions" in sys.argv or "build_ext" in sys.argv):
             if not "clean" in sys.argv:
                 cython_ret = generate_cython("--cythonize" in sys.argv)
         if "--cythonize" in sys.argv:
@@ -139,7 +139,8 @@ def setup_package():
 
     setup(
         name                          = "ISPy",
-        version                       = get_version_info()[0],
+        # version                       = get_version_info()[0],
+        version                       = '0.2.0',
         author                        = "ISP-SST",
         author_email                  = "hillberg@astro.su.se",
         description                   = "Commonly used tools at the ISP",

@@ -54,7 +54,7 @@ def get_version_info():
     # Adding the git rev number needs to be done inside write_version_py(),
     # otherwise the import of ISPy.version messes up the build under Python 3.
     ISRELEASED = False
-    if subprocess.call(['git', 'rev-parse']) is 0:
+    if subprocess.call(['git', 'rev-parse']) == 0:
         GIT_REVISION, VERSION = git_version()
         if VERSION is None:
             VERSION = 'dev-' + GIT_REVISION[:7]
