@@ -1,21 +1,23 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ISPy.img package &mdash; ISPy 0.2 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="_static/jquery.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=10f1778b"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -76,15 +78,15 @@
            <div itemprop="articleBody">
              
   <section id="ispy-img-package">
-<h1>ISPy.img package<a class="headerlink" href="#ispy-img-package" title="Permalink to this heading"></a></h1>
+<h1>ISPy.img package<a class="headerlink" href="#ispy-img-package" title="Link to this heading"></a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
 </section>
 <section id="module-ISPy.img.align">
-<span id="ispy-img-align-module"></span><h2>ISPy.img.align module<a class="headerlink" href="#module-ISPy.img.align" title="Permalink to this heading"></a></h2>
+<span id="ispy-img-align-module"></span><h2>ISPy.img.align module<a class="headerlink" href="#module-ISPy.img.align" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="ISPy.img.align.align">
-<span class="sig-prename descclassname"><span class="pre">ISPy.img.align.</span></span><span class="sig-name descname"><span class="pre">align</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.align.align" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">ISPy.img.align.</span></span><span class="sig-name descname"><span class="pre">align</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.align.align" title="Link to this definition"></a></dt>
 <dd><p>Compute the shifts (dy,dx) needed to align image b into a</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -114,204 +116,20 @@
 </dd></dl>
 
 </section>
-<section id="module-ISPy.img.denoising">
-<span id="ispy-img-denoising-module"></span><h2>ISPy.img.denoising module<a class="headerlink" href="#module-ISPy.img.denoising" title="Permalink to this heading"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="ISPy.img.denoising.ReflectionPadding2D">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ISPy.img.denoising.</span></span><span class="sig-name descname"><span class="pre">ReflectionPadding2D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.denoising.ReflectionPadding2D" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></p>
-<p>Reflection-padding layer for 2D input (e.g. picture).
-This layer can add rows and columns or zeros
-at the top, bottom, left and right side of an image tensor.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="ISPy.img.denoising.ReflectionPadding2D.call">
-<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.denoising.ReflectionPadding2D.call" title="Permalink to this definition"></a></dt>
-<dd><p>This is where the layer’s logic lives.</p>
-<p>The <cite>call()</cite> method may not create state (except in its first
-invocation, wrapping the creation of variables or other resources in
-<cite>tf.init_scope()</cite>).  It is recommended to create state, including
-<cite>tf.Variable</cite> instances and nested <cite>Layer</cite> instances,</p>
-<blockquote>
-<div><p>in <cite>__init__()</cite>, or in the <cite>build()</cite> method that is</p>
-</div></blockquote>
-<p>called automatically before <cite>call()</cite> executes for the first time.</p>
-<dl>
-<dt>Args:</dt><dd><dl>
-<dt>inputs: Input tensor, or dict/list/tuple of input tensors.</dt><dd><p>The first positional <cite>inputs</cite> argument is subject to special rules:
-- <cite>inputs</cite> must be explicitly passed. A layer cannot have zero</p>
-<blockquote>
-<div><p>arguments, and <cite>inputs</cite> cannot be provided via the default value
-of a keyword argument.</p>
-</div></blockquote>
-<ul class="simple">
-<li><p>NumPy array or Python scalar values in <cite>inputs</cite> get cast as
-tensors.</p></li>
-<li><p>Keras mask metadata is only collected from <cite>inputs</cite>.</p></li>
-<li><p>Layers are built (<cite>build(input_shape)</cite> method)
-using shape info from <cite>inputs</cite> only.</p></li>
-<li><p><cite>input_spec</cite> compatibility is only checked against <cite>inputs</cite>.</p></li>
-<li><p>Mixed precision input casting is only applied to <cite>inputs</cite>.
-If a layer has tensor arguments in <cite>*args</cite> or <cite>**kwargs</cite>, their
-casting behavior in mixed precision should be handled manually.</p></li>
-<li><p>The SavedModel input specification is generated using <cite>inputs</cite>
-only.</p></li>
-<li><p>Integration with various ecosystem packages like TFMOT, TFLite,
-TF.js, etc is only supported for <cite>inputs</cite> and not for tensors in
-positional and keyword arguments.</p></li>
-</ul>
-</dd>
-<dt><a href="#id1"><span class="problematic" id="id2">*</span></a>args: Additional positional arguments. May contain tensors, although</dt><dd><p>this is not recommended, for the reasons above.</p>
-</dd>
-<dt><a href="#id3"><span class="problematic" id="id4">**</span></a>kwargs: Additional keyword arguments. May contain tensors, although</dt><dd><p>this is not recommended, for the reasons above.
-The following optional keyword arguments are reserved:
-- <cite>training</cite>: Boolean scalar tensor of Python boolean indicating</p>
-<blockquote>
-<div><p>whether the <cite>call</cite> is meant for training or inference.</p>
-</div></blockquote>
-<ul class="simple">
-<li><p><cite>mask</cite>: Boolean input mask. If the layer’s <cite>call()</cite> method takes a
-<cite>mask</cite> argument, its default value will be set to the mask
-generated for <cite>inputs</cite> by the previous layer (if <cite>input</cite> did come
-from a layer that generated a corresponding mask, i.e. if it came
-from a Keras layer with masking support).</p></li>
-</ul>
-</dd>
-</dl>
-</dd>
-<dt>Returns:</dt><dd><p>A tensor or list/tuple of tensors.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ISPy.img.denoising.ReflectionPadding2D.compute_output_shape">
-<span class="sig-name descname"><span class="pre">compute_output_shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shape</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.denoising.ReflectionPadding2D.compute_output_shape" title="Permalink to this definition"></a></dt>
-<dd><p>Computes the output shape of the layer.</p>
-<p>This method will cause the layer’s state to be built, if that has not
-happened before. This requires that the layer will later be used with
-inputs that match the input shape provided here.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><dl class="simple">
-<dt>input_shape: Shape tuple (tuple of integers) or <cite>tf.TensorShape</cite>,</dt><dd><p>or structure of shape tuples / <cite>tf.TensorShape</cite> instances
-(one per output tensor of the layer).
-Shape tuples can include None for free dimensions,
-instead of an integer.</p>
-</dd>
-</dl>
-</dd>
-<dt>Returns:</dt><dd><p>A <cite>tf.TensorShape</cite> instance
-or structure of <cite>tf.TensorShape</cite> instances.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ISPy.img.denoising.ReflectionPadding2D.get_config">
-<span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.denoising.ReflectionPadding2D.get_config" title="Permalink to this definition"></a></dt>
-<dd><p>Returns the config of the layer.</p>
-<p>A layer config is a Python dictionary (serializable)
-containing the configuration of a layer.
-The same layer can be reinstantiated later
-(without its trained weights) from this configuration.</p>
-<p>The config of a layer does not include connectivity
-information, nor the layer class name. These are handled
-by <cite>Network</cite> (one layer of abstraction above).</p>
-<p>Note that <cite>get_config()</cite> does not guarantee to return a fresh copy of
-dict every time it is called. The callers should make a copy of the
-returned dict if they want to modify it.</p>
-<dl class="simple">
-<dt>Returns:</dt><dd><p>Python dictionary.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="ISPy.img.denoising.deep_network">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ISPy.img.denoising.</span></span><span class="sig-name descname"><span class="pre">deep_network</span></span><a class="headerlink" href="#ISPy.img.denoising.deep_network" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="ISPy.img.denoising.deep_network.define_network">
-<span class="sig-name descname"><span class="pre">define_network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.denoising.deep_network.define_network" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ISPy.img.denoising.deep_network.predict">
-<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">numerotime</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.denoising.deep_network.predict" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ISPy.img.denoising.neural_network">
-<span class="sig-prename descclassname"><span class="pre">ISPy.img.denoising.</span></span><span class="sig-name descname"><span class="pre">neural_network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">niterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotOption</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_Option</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">split</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.denoising.neural_network" title="Permalink to this definition"></a></dt>
-<dd><p>Run the denoising neural network algorithm developed in the paper <a class="reference external" href="https://arxiv.org/abs/1908.02815">https://arxiv.org/abs/1908.02815</a></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>input_data</strong> (<em>5D ndarray</em>) – data cube</p></li>
-<li><p><strong>niterations</strong> (<em>int, optional</em>) – number of times the neural network, cleaning the residuals</p></li>
-<li><p><strong>scale</strong> (<em>float, optional</em>) – normalization to match training values. The std of the normalized data has to be around 1e-3</p></li>
-<li><p><strong>plotOption</strong> (<em>bool, optional</em>) – some plots to check the quality of the denoising.</p></li>
-<li><p><strong>test_Option</strong> (<em>bool, optional</em>) – crop the input data to perform a quick check.</p></li>
-<li><p><strong>split</strong> (<em>bool, optional</em>) – run the network splitting the data into multiple partitions (for big files)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>cube_array</strong> – 5D cube of shape [nt,ns,nw,nx,ny] after performing the denoising.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ndarray</p>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.img</span> <span class="kn">import</span> <span class="n">denoising</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ISPy.io</span> <span class="kn">import</span> <span class="n">solarnet</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Reading data:</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data_input</span> <span class="o">=</span> <span class="n">solarnet</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;filename.fits&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ouput_name</span> <span class="o">=</span> <span class="s1">&#39;test.fits&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">output_file</span> <span class="o">=</span> <span class="n">denoising</span><span class="o">.</span><span class="n">neural_network</span><span class="p">(</span><span class="n">data_input</span><span class="p">,</span> <span class="n">niterations</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">scale</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">plotOption</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">test_Option</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">solarnet</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ouput_name</span><span class="p">,</span> <span class="n">output_file</span><span class="p">)</span>
-</pre></div>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Authors<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Carlos Diaz (ISP/SU 2019)</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ISPy.img.denoising.predict_image">
-<span class="sig-prename descclassname"><span class="pre">ISPy.img.denoising.</span></span><span class="sig-name descname"><span class="pre">predict_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numerotime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">split</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.denoising.predict_image" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ISPy.img.denoising.spatial_reflection_2d_padding">
-<span class="sig-prename descclassname"><span class="pre">ISPy.img.denoising.</span></span><span class="sig-name descname"><span class="pre">spatial_reflection_2d_padding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">((1,</span> <span class="pre">1),</span> <span class="pre">(1,</span> <span class="pre">1))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.denoising.spatial_reflection_2d_padding" title="Permalink to this definition"></a></dt>
-<dd><p>Pads the 2nd and 3rd dimensions of a 4D tensor.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ISPy.img.denoising.unet">
-<span class="sig-prename descclassname"><span class="pre">ISPy.img.denoising.</span></span><span class="sig-name descname"><span class="pre">unet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_ch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_channel_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_ch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inc_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batchnorm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxpool</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upconv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.denoising.unet" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
+<section id="ispy-img-denoising-module">
+<h2>ISPy.img.denoising module<a class="headerlink" href="#ispy-img-denoising-module" title="Link to this heading"></a></h2>
 </section>
 <section id="module-ISPy.img.interpolate2d">
-<span id="ispy-img-interpolate2d-module"></span><h2>ISPy.img.interpolate2d module<a class="headerlink" href="#module-ISPy.img.interpolate2d" title="Permalink to this heading"></a></h2>
+<span id="ispy-img-interpolate2d-module"></span><h2>ISPy.img.interpolate2d module<a class="headerlink" href="#module-ISPy.img.interpolate2d" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="ISPy.img.interpolate2d.check_inputs">
-<span class="sig-prename descclassname"><span class="pre">ISPy.img.interpolate2d.</span></span><span class="sig-name descname"><span class="pre">check_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds_error</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.interpolate2d.check_inputs" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">ISPy.img.interpolate2d.</span></span><span class="sig-name descname"><span class="pre">check_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds_error</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.interpolate2d.check_inputs" title="Link to this definition"></a></dt>
 <dd><p>Check inputs for interpolate2d function</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ISPy.img.interpolate2d.interpolate2d">
-<span class="sig-prename descclassname"><span class="pre">ISPy.img.interpolate2d.</span></span><span class="sig-name descname"><span class="pre">interpolate2d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.interpolate2d.interpolate2d" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">ISPy.img.interpolate2d.</span></span><span class="sig-name descname"><span class="pre">interpolate2d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ISPy.img.interpolate2d.interpolate2d" title="Link to this definition"></a></dt>
 <dd><p>2D interpolation routine: it outputs an array with same length
 as points with interpolated values.</p>
 <dl class="field-list simple">
@@ -333,7 +151,7 @@ values are requested outside the domain of the input data, by default False</p><
 
 </section>
 <section id="module-ISPy.img">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-ISPy.img" title="Permalink to this heading"></a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-ISPy.img" title="Link to this heading"></a></h2>
 <p>Tools and scripts to process, align and clean 2D images.</p>
 </section>
 </section>
