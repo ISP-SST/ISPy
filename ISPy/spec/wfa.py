@@ -253,6 +253,8 @@ def getBhor(w, d, lin, beta = 0.0, vdop = 0.05):
     -------
     Bhor : ndarray
         2D array (ny,nx) with the transverse magnetic field
+    phiB : ndarray
+        2D array (ny,nx) with the azimuth
 
     Example
     -------
@@ -276,4 +278,5 @@ def getBhor(w, d, lin, beta = 0.0, vdop = 0.05):
     U_term = (d[:,:,2,:] * der).sum(axis=2)
 
     Bhor = ((c*(Q_term**2 + U_term**2)**0.5) / (cc * (der*der).sum(axis=2) + beta))**0.5
-    return Bhor
+    phiB = 0.5 * torch.arctan2(U_term,Q_term)
+    return Bhor, phiB
