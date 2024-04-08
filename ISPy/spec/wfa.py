@@ -280,5 +280,12 @@ def getBhor(w, d, lin, beta = 0.0, vdop = 0.05):
     U_term = (d[:,:,2,:] * der).sum(axis=2)
 
     Bhor = ((c*(Q_term**2 + U_term**2)**0.5) / (cc * (der*der).sum(axis=2) + beta))**0.5
-    phiB = 0.5 * torch.arctan2(U_term,Q_term)
+
+    #calculate azimuth
+    U_term_tensor = torch.from_numpy(U_term)
+    Q_term_tensor = torch.from_numpy(Q_term)
+
+    # Now, you can call torch.arctan2 with the tensors
+    phiB = 0.5 * torch.arctan2(U_term_tensor, Q_term_tensor)
+
     return Bhor, phiB
