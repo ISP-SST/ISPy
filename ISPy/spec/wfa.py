@@ -1,4 +1,5 @@
 import numpy as np
+import torch
 
 def cder(x, y):
     """
@@ -259,10 +260,11 @@ def getBhor(w, d, lin, beta = 0.0, vdop = 0.05):
     Example
     -------
     >>> lin = line(6302)
-    >>> blos = getBhor(wave, data, lin, vdop=0.04)
+    >>> blos, phiB = getBhor(wave, data, lin, vdop=0.04)
 
     :Author:
         Jaime de la Cruz Rodriguez (ISP/SU 2018)
+        Carlos Diaz Baso (UiO) & Alex Pietrow (AIP) 2024
     """
 
     c = 0.75 * (lin.larm * lin.cw**2)**2 * lin.Gg; cc=c*c
