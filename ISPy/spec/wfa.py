@@ -91,8 +91,14 @@ class line:
             self.j1 = 2.0; self.j2 = 2.0; self.g1 = 1.84; self.g2 = 1.50; self.cw = 6301.4995
         elif(cw == 6302):
             self.j1 = 1.0; self.j2 = 0.0; self.g1 = 2.49; self.g2 = 0.0; self.cw = 6302.4931
+        elif(cw == 6173):
+            self.j1 = 0.0; self.j2 = 1.0; self.g1 = 0; self.g2 = 2.5; self.cw = 6173.334
         elif(cw == 8468):
             self.j1 = 1.0; self.j2 = 1.0; self.g1 = 2.50; self.g2 = 2.49; self.cw = 8468.4059
+        elif(cw == 10839): #Ca
+            self.j1 = 2.0; self.j2 = 2.0; self.g1 = 1.50; self.g2 = 1.50; self.cw = 10838.970
+        elif(cw == 10827): #Si
+            self.j1 = 2.0; self.j2 = 2.0; self.g1 = 0; self.g2 = 0; self.cw = 10827.089
         else:
             print("line::init: Warning, line not implemented")
             self.j1 = 0.0; self.j2 = 0.0; self.g1 = 0.0; self.g2 = 0.0; self.cw = 0.0
