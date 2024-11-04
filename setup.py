@@ -2,8 +2,7 @@ import os
 import sys
 import subprocess
 import numpy
-#from setuptools import find_packages
-from numpy.distutils.core import setup
+from setuptools import setup
 from distutils.core import Command
 import shutil
 from glob import glob
@@ -14,6 +13,11 @@ import subprocess
 
 from bin.generate_module_list import generate_module_list
 from bin.version import *
+
+# Avoid warnings:
+import warnings
+warnings.filterwarnings("ignore")
+
 
 # This directory
 dir_setup = os.path.dirname(os.path.realpath(__file__))
@@ -29,6 +33,31 @@ def generate_cython(stop_at_error=False):
             raise RuntimeError("Running cythonize failed!")
         ret[d] = p
     return ret
+
+import pkg_resources
+class uninstall(Command):
+    """
+    Uninstalls the package.
+    """
+    description = "Uninstall the package"
+    user_options = []
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        # Find existing installations:
+        dist = pkg_resources.get_distribution("ISPy")
+        if dist is None:
+            print("No existing installation found.")
+            return
+        
+        # Remove the package:
+        subprocess.call([sys.executable, "-m", "pip", "uninstall", "ISPy", "-y"])
+        
 
 class clean(Command):
     """
@@ -157,7 +186,8 @@ def setup_package():
         python_requires               = '>=2.7',
         ext_modules                   = ext_modules,
 	cmdclass                      = {
-	    'clean' : clean
+	    'clean' : clean,
+        'uninstall' : uninstall
 	}
     )
 
