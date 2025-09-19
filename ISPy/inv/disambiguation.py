@@ -88,7 +88,7 @@ def potential_extrapolation(Bz, zz=[0.0], pixel=[0.1,0.1]):
         iphihat = iphihat0*np.exp(-k*zz[iz])
         fbx = (k*kx-alpha*ky)*iphihat
         fby = (k*ky+alpha*kx)*iphihat
-        fbz = np.complex(0.,1.)*(kz2)*iphihat
+        fbz = complex(0.,1.)*(kz2)*iphihat
         B[:,:,iz,0] = np.flipud(np.fliplr(np.real(np.fft.fft2(fbx,axes=(-1, -2))) +eps))
         B[:,:,iz,1] = np.flipud(np.fliplr(np.real(np.fft.fft2(fby,axes=(-1, -2))) +eps))
         B[:,:,iz,2] = np.flipud(np.fliplr(np.real(np.fft.fft2(fbz,axes=(-1, -2))) +eps))
