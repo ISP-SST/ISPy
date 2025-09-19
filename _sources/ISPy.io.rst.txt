@@ -9,37 +9,37 @@ ISPy.io.lapalma module
 
 .. automodule:: ISPy.io.lapalma
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 ISPy.io.pyio module
 -------------------
 
 .. automodule:: ISPy.io.pyio
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 ISPy.io.sn module
 -----------------
 
 .. automodule:: ISPy.io.sn
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 ISPy.io.solarnet module
 -----------------------
 
 .. automodule:: ISPy.io.solarnet
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Module contents
 ---------------
 
 .. automodule:: ISPy.io
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:

@@ -9,29 +9,29 @@ ISPy.img.align module
 
 .. automodule:: ISPy.img.align
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 ISPy.img.denoising module
 -------------------------
 
 .. automodule:: ISPy.img.denoising
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 ISPy.img.interpolate2d module
 -----------------------------
 
 .. automodule:: ISPy.img.interpolate2d
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Module contents
 ---------------
 
 .. automodule:: ISPy.img
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:

@@ -9,13 +9,13 @@ ISPy.inv.disambiguation module
 
 .. automodule:: ISPy.inv.disambiguation
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Module contents
 ---------------
 
 .. automodule:: ISPy.inv
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:

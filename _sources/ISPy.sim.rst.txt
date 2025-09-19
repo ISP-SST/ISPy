@@ -6,5 +6,5 @@ Module contents
 
 .. automodule:: ISPy.sim
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
